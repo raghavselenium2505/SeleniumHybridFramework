@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="20" total="26" passed="6">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="409984" started-at="2023-03-01T02:58:57Z" finished-at="2023-03-01T03:05:47Z">
+    <groups>
+    </groups>
+    <test name="UserCreation_Functionality" duration-ms="409984" started-at="2023-03-01T02:58:57Z" finished-at="2023-03-01T03:05:47Z">
+      <class name="com.web.testcases.UserCreation">
+        <test-method status="PASS" signature="ReportGeneration()[pri:0, instance:com.web.testcases.UserCreation@6093dd95]" name="ReportGeneration" is-config="true" duration-ms="228" started-at="2023-03-01T08:28:56Z" finished-at="2023-03-01T08:28:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ReportGeneration -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.web.testcases.UserCreation@6093dd95]" name="setUp" is-config="true" duration-ms="8563" started-at="2023-03-01T08:28:57Z" finished-at="2023-03-01T08:29:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="User()[pri:0, instance:com.web.testcases.UserCreation@6093dd95]" name="User" duration-ms="396" started-at="2023-03-01T08:29:05Z" finished-at="2023-03-01T08:29:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- User -->
+        <test-method status="PASS" signature="flushTest()[pri:0, instance:com.web.testcases.UserCreation@6093dd95]" name="flushTest" is-config="true" duration-ms="0" started-at="2023-03-01T08:35:47Z" finished-at="2023-03-01T08:35:47Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- flushTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.web.testcases.UserCreation@6093dd95]" name="tearDown" is-config="true" duration-ms="522" started-at="2023-03-01T08:35:47Z" finished-at="2023-03-01T08:35:47Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.web.testcases.UserCreation -->
+      <class name="com.web.testcases.UserSetting">
+        <test-method status="PASS" signature="UserSettings()[pri:0, instance:com.web.testcases.UserSetting@4883b407]" name="UserSettings" duration-ms="17" started-at="2023-03-01T08:29:06Z" finished-at="2023-03-01T08:29:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- UserSettings -->
+      </class> <!-- com.web.testcases.UserSetting -->
+      <class name="com.web.testcases.OrganizationDelete">
+        <test-method status="PASS" signature="User()[pri:0, instance:com.web.testcases.OrganizationDelete@1794d431]" name="User" duration-ms="33811" started-at="2023-03-01T08:35:13Z" finished-at="2023-03-01T08:35:47Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- User -->
+      </class> <!-- com.web.testcases.OrganizationDelete -->
+      <class name="com.web.testcases.OrganizationCreation">
+        <test-method status="PASS" signature="User()[pri:0, instance:com.web.testcases.OrganizationCreation@39c0f4a]" name="User" duration-ms="367126" started-at="2023-03-01T08:29:06Z" finished-at="2023-03-01T08:35:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- User -->
+      </class> <!-- com.web.testcases.OrganizationCreation -->
+      <class name="com.web.testcases.UserEdit">
+        <test-method status="PASS" signature="editUser()[pri:0, instance:com.web.testcases.UserEdit@5622fdf]" name="editUser" duration-ms="29" started-at="2023-03-01T08:29:06Z" finished-at="2023-03-01T08:29:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editUser -->
+      </class> <!-- com.web.testcases.UserEdit -->
+      <class name="com.web.testcases.UserDelete">
+        <test-method status="PASS" signature="deleteUser()[pri:0, instance:com.web.testcases.UserDelete@7d9d1a19]" name="deleteUser" duration-ms="14" started-at="2023-03-01T08:29:06Z" finished-at="2023-03-01T08:29:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteUser -->
+      </class> <!-- com.web.testcases.UserDelete -->
+    </test> <!-- UserCreation_Functionality -->
+  </suite> <!-- Default suite -->
+</testng-results>
