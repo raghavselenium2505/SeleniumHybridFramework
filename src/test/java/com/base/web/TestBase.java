@@ -46,8 +46,7 @@ import org.testng.annotations.BeforeTest;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import com.testcase.Pages.HomePage;
-import com.testcase.Pages.LoginPage;
+
 
 public class TestBase {
 	public static WebDriver driver;
@@ -56,8 +55,6 @@ public class TestBase {
 	public static Properties Report = new Properties();
 	public static Properties Excel = new Properties();
 	public static Properties JiraProp = new Properties();
-	public static LoginPage login = new LoginPage(driver);
-	public static HomePage home = new HomePage(driver);
 
 	public static FileInputStream fis;
 	public static String browser;
