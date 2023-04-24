@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [LabelsButtonCheck]" guice-stage="DEVELOPMENT">
+  <test name="LabelsButtonCheck(failed)">
+    <classes>
+      <class name="com.web.testcases.TC001">
+        <methods>
+          <include name="setUp"/>
+          <include name="loginAsManager"/>
+          <include name="tearDown"/>
+          <include name="afterManager"/>
+        </methods>
+      </class> <!-- com.web.testcases.TC001 -->
+    </classes>
+  </test> <!-- LabelsButtonCheck(failed) -->
+</suite> <!-- Failed suite [LabelsButtonCheck] -->

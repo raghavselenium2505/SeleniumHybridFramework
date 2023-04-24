@@ -1,0 +1,34 @@
+2022-12-15 07:27:17,312 - devpinoyLogger -DEBUG - Config properties file loaded
+2022-12-15 07:27:17,316 - devpinoyLogger -DEBUG - Email file loaded !!!
+2022-12-15 07:27:17,317 - devpinoyLogger -DEBUG - Excel file loaded !!!
+2022-12-15 07:27:17,317 - devpinoyLogger -DEBUG - Jira file  loaded !!!
+2022-12-15 07:27:19,877 - devpinoyLogger -INFO - browser launchededge
+2022-12-15 07:27:26,400 - devpinoyLogger -INFO - browser launched edgeNavigated to : https://navigo-dev-client.latentbridge.com/auth/sign-in
+2022-12-15 07:27:26,531 - devpinoyLogger -INFO - browser maximaized 
+2022-12-15 07:27:26,833 - devpinoyLogger -INFO - ProjectName loggedAUT
+2022-12-15 07:27:28,969 - devpinoyLogger -INFO - SummaryloginAsManager1 Failed in Automation Testing
+2022-12-15 07:27:28,970 - devpinoyLogger -INFO - DescriptionFailure Reason from Automation Testing second time
+
+Returned value cannot be converted to WebElement: {stacktrace=Backtrace:
+	Microsoft::Applications::Events::EventProperties::SetProperty [0x00007FF7E5DF91A2+14306]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5D80962+842818]
+	(No symbol) [0x00007FF7E5A31BF3]
+	(No symbol) [0x00007FF7E5A65F38]
+	(No symbol) [0x00007FF7E5A67AE4]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5CCFDF8+119000]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5CBD4D6+42934]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5CC06EC+55756]
+	(No symbol) [0x00007FF7E5B37923]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5D8841A+874234]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5D8D514+894964]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5D8D66C+895308]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5D9678E+932462]
+	BaseThreadInitThunk [0x00007FFA5B51244D+29]
+	RtlUserThreadStart [0x00007FFA5BE8DFB8+40]
+, error=invalid session id, message=invalid session id}
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'LAPTOP-8HQPNJSF', ip: '192.168.0.107', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver
+
+2022-12-15 07:27:31,209 - devpinoyLogger -INFO - New issue created in Jira with ID: AUT-38
+2022-12-15 07:27:31,209 - devpinoyLogger -INFO - New issue URL is :https://jiraseleapi.atlassian.net//browse/AUT-38

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ExcelReportLog</title>
+<style type="text/css">
+<!--
+body, table {font-family: arial,sans-serif; font-size: x-small;}
+th {background: #336699; color: #FFFFFF; text-align: left;}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" topmargin="6" leftmargin="6">
+<hr size="1" noshade>
+Log session start time Thu Dec 15 07:27:17 IST 2022<br>
+<br>
+<table cellspacing="0" cellpadding="4" border="1" bordercolor="#224466" width="100%">
+<tr>
+<th>Time</th>
+<th>Thread</th>
+<th>Level</th>
+<th>Category</th>
+<th>File:Line</th>
+<th>Message</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:128</td>
+<td title="Message">Config properties file loaded</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:141</td>
+<td title="Message">Email file loaded !!!</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:154</td>
+<td title="Message">Excel file loaded !!!</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:166</td>
+<td title="Message">Jira file  loaded !!!</td>
+</tr>
+
+<tr>
+<td>2565</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:195</td>
+<td title="Message">browser launchededge</td>
+</tr>
+
+<tr>
+<td>9088</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:202</td>
+<td title="Message">browser launched edgeNavigated to : https://navigo-dev-client.latentbridge.com/auth/sign-in</td>
+</tr>
+
+<tr>
+<td>9219</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:205</td>
+<td title="Message">browser maximaized </td>
+</tr>
+
+<tr>
+<td>9521</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>JiraServiceProvider.java:34</td>
+<td title="Message">ProjectName loggedAUT</td>
+</tr>
+
+<tr>
+<td>11657</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>JiraServiceProvider.java:74</td>
+<td title="Message">SummaryloginAsManager1 Failed in Automation Testing</td>
+</tr>
+
+<tr>
+<td>11658</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>JiraServiceProvider.java:77</td>
+<td title="Message">DescriptionFailure Reason from Automation Testing second time
+
+Returned value cannot be converted to WebElement: {stacktrace=Backtrace:
+	Microsoft::Applications::Events::EventProperties::SetProperty [0x00007FF7E5DF91A2+14306]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5D80962+842818]
+	(No symbol) [0x00007FF7E5A31BF3]
+	(No symbol) [0x00007FF7E5A65F38]
+	(No symbol) [0x00007FF7E5A67AE4]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5CCFDF8+119000]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5CBD4D6+42934]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5CC06EC+55756]
+	(No symbol) [0x00007FF7E5B37923]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5D8841A+874234]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5D8D514+894964]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5D8D66C+895308]
+	Microsoft::Applications::Events::EventProperty::EventProperty [0x00007FF7E5D9678E+932462]
+	BaseThreadInitThunk [0x00007FFA5B51244D+29]
+	RtlUserThreadStart [0x00007FFA5BE8DFB8+40]
+, error=invalid session id, message=invalid session id}
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'LAPTOP-8HQPNJSF', ip: '192.168.0.107', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: driver.version: RemoteWebDriver
+</td>
+</tr>
+
+<tr>
+<td>13897</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>JiraServiceProvider.java:81</td>
+<td title="Message">New issue created in Jira with ID: AUT-38</td>
+</tr>
+
+<tr>
+<td>13897</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>JiraServiceProvider.java:82</td>
+<td title="Message">New issue URL is :https://jiraseleapi.atlassian.net//browse/AUT-38</td>
+</tr>

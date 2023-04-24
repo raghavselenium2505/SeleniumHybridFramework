@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Default suite">
+	<listeners>
+		<listener class-name="com.web.utilities.TestListener" />
+	</listeners>
+	<test name="Regression Assessment Suite" >
+	<classes>
+		<class name="com.web.FlowchartAssessment.TC_001_Reg_AddAssessment" />
+		<class name="com.web.FlowchartAssessment.TC_002_Reg_EditAssessment" />
+		<class name="com.web.FlowchartAssessment.TC_003_Reg_FlowChart" />
+		<class name="com.web.FlowchartAssessment.TC_004_ProjectPlan" />
+		<class name="com.web.FlowchartAssessment.TC_005_Reg_AddPipeline" />
+		
+	</classes>
+	</test>
+	
+	<test name="Add Idea Page For Approval">
+	<classes>
+		<class name="com.web.Idea.TC_33_Reg_AddIdeaPage" />
+		<class name="com.web.Idea.TC_35_Reg_ApprovalIdea" />
+		
+	</classes>
+	</test>
+	<test name="Add Idea Page For Rejection">
+	<classes>
+		<class name="com.web.Idea.TC_33_Reg_AddIdeaPage" />
+		<class name="com.web.Idea.TC_34_Reg_RejectIdea" />
+		
+	</classes>
+	</test>
+
+	
+</suite>
