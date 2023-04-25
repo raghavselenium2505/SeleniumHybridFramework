@@ -23,7 +23,6 @@ public class NaukriUpdate extends TestBase{
 				NaukriLoginPage login1 = new NaukriLoginPage(driver);
 				test.log(LogStatus.INFO, "Enter the login the details");
 				login1.login();
-				Thread.sleep(5000);
 			}
 		}
 			catch(Exception e)
