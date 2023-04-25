@@ -33,6 +33,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -190,10 +191,14 @@ public class TestBase {
 						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\msedgedriver.exe");
 				driver = new EdgeDriver();
 				logger.info("browser launched" + config.getProperty("browser"));
-			} else if (config.getProperty("browser").equals("headless")) {
-				driver = new HtmlUnitDriver();
-				logger.info("browser launched" + config.getProperty("browser"));
-
+			} else if (config.getProperty("browser").equals("chromeheadless")) {
+				logger.info("chrome headless browser launched");
+				ChromeOptions options=new ChromeOptions();
+				options.addArguments("headless");
+				System.setProperty("webdriver.chrome.driver",
+						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\chromedriver.exe");
+				driver = new ChromeDriver(options);			
+				
 			}
 			driver.get(config.getProperty("testsiteurl"));
 			logger.info("browser launched " + config.getProperty("browser") + "Navigated to : "
@@ -525,7 +530,7 @@ public void actiontabsWithText(String value1,String passvalue,String failurevalu
 		report.endTest(test);
 			report.flush();	 
 			EmailOption();
-			driver.close();
+			driver.quit();
 
 			
 }
