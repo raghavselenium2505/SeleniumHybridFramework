@@ -14,7 +14,6 @@ public class NaukriUpdate extends TestBase{
 		test = report.startTest(getData("User", "Jira_Story_Name", xlsname));
 
 		String skip = getData("DashBoard", "User", xlsname);
-//		UserListPage user = new UserListPage(driver);
 		try {
 			if (skip.equalsIgnoreCase("N")) {
 				executioncount++;
