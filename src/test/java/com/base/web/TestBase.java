@@ -46,6 +46,7 @@ import org.testng.annotations.BeforeTest;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.testcase.Pages.NaukriLoginPage;
 
 
 public class TestBase {
@@ -55,6 +56,8 @@ public class TestBase {
 	public static Properties Report = new Properties();
 	public static Properties Excel = new Properties();
 	public static Properties JiraProp = new Properties();
+	
+
 
 	public static FileInputStream fis;
 	public static String browser;
@@ -68,6 +71,7 @@ public class TestBase {
 	public static int failcount = 0;
 	public static int skipCount = 0;
 	public static String Name;
+	
 	public String xlsname = "ExcelSheet_1.xls";
 	static {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hhmmss");
@@ -78,7 +82,7 @@ public class TestBase {
 	public void ReportGeneration() throws Exception {
 		
 		  report = new ExtentReports(
-		  "C:\\Users\\LatentBridge\\git\\LBFramework\\SELENIUM\\src\\test\\resources\\Reports\\Extentreport\\"
+		  "C:\\Automation_Sele\\Selenium\\src\\test\\resources\\Reports\\Extentreport\\"
 		  + value + new
 		  SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())
 		  + ".html");
