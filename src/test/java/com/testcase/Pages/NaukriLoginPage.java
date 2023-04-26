@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.base.web.TestBase;
 
 interface propetiesfiles {
-	public void login();
+	public void login(String userName,String password);
 }
 
 public class NaukriLoginPage extends TestBase implements propetiesfiles {
@@ -20,16 +20,16 @@ public class NaukriLoginPage extends TestBase implements propetiesfiles {
 	}
 
 	@Override
-	public void login() {
+	public void login(String userName,String password) {
 		driver.manage().timeouts().implicitlyWait(10000, TimeUnit.SECONDS);
-		elementHighlight(driver.findElement(textemailid));
-		SendKeys(textemailid, config.getProperty("userName"), "able to enter username in email",
-				"unable to enter username in email");
-		elementHighlight(driver.findElement(textpassword));
-		SendKeys(textpassword, config.getProperty("passWord"), "Able to enter password",
-				"unable to enter password");
-		Click(buttonlogin,"Able to click on login", "unable to click on login");
-
+		elementhighlight(driver.findElement(textemailid));
+		sendkeys(textemailid,userName, "able to enter username in email",
+				"unable to enter username in email");// config.getProperty("userName")
+		elementhighlight(driver.findElement(textpassword));
+		sendkeys(textpassword, password, "Able to enter password",
+				"unable to enter password");//
+		click(buttonlogin,"Able to click on login", "unable to click on login");
+waitforelement(4000);
 	}
 
 }
