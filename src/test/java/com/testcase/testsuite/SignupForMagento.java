@@ -27,7 +27,7 @@ public class SignupForMagento extends TestBase {
 
 					click(login.buttonCreateAnAccount, "Able to click on  Create button", "Unable to click on Create button");
 					waitforelement(5000);
-					login.signup("A", "B", "A@CD.com", "CBA15487", "CBA15487");
+					login.signup("A", "B", "A@CD121.com", "CBA15487", "CBA15487");
 					click(login.buttonRegister, "Able to click  on Register", "Unable to click on Register");
 				if (driver.findElement(By.xpath("//h1[text()='My Dashboard']")).isDisplayed()) {
 					test.log(LogStatus.PASS, "Enter all valid details for signup");
