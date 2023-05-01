@@ -3,11 +3,11 @@
 	<listeners>
 		<listener class-name="com.web.utilities.TestListener" />
 	</listeners>
-	<test name="Regression Assessment Suite" >
+   <test name = "Parallel Tests" parallel = "methods" thread-count = "2">
 	<classes>
 	
 		<class name="com.testcase.testsuite.NaukriUpdate" />
-		
+
 	</classes>
 	</test>
 	

@@ -3,15 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.testcase.testsuite.NaukriUpdate">
+      <class name="com.testcase.testsuite.WindowHandleTest">
         <methods>
-          <include name="UserCreation"/>
-          <include name="ReportGeneration"/>
-          <include name="setUp"/>
-          <include name="flushTest"/>
-          <include name="tearDown"/>
+          <include name="Test1"/>
         </methods>
-      </class> <!-- com.testcase.testsuite.NaukriUpdate -->
+      </class> <!-- com.testcase.testsuite.WindowHandleTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
