@@ -437,7 +437,7 @@ driver.close();
 	public void elementhighlight(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].setAttribute('style', arguments[1]);", element,
-				"color: Yellow; border: 3px solid red;");		
+				"color: black; border: 3px solid blue;");		
 	}
 
 	@Override
