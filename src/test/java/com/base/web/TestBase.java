@@ -33,6 +33,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -208,12 +209,15 @@ public class TestBase implements baseMethods{
 						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\msedgedriver.exe");
 				driver = new EdgeDriver();
 				logger.info("browser launched" + config.getProperty("browser"));
-			} else if (config.getProperty("browser").equals("chromeheadless")) {
+			} 
+			else if (config.getProperty("browser").equals("chromeheadless")) {
+				
+				
 				logger.info("chrome headless browser launched");
-				ChromeOptions options=new ChromeOptions();
-				options.addArguments("headless");
 				System.setProperty("webdriver.chrome.driver",
 						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\chromedriver.exe");
+				ChromeOptions options=new ChromeOptions();
+				options.addArguments("--headless");
 				driver = new ChromeDriver(options);			
 				
 			}
@@ -222,8 +226,10 @@ public class TestBase implements baseMethods{
 					+ config.getProperty("testsiteurl"));
 			driver.manage().window().maximize();
 			logger.info("browser maximaized ");
-			driver.manage().timeouts().implicitlyWait(Integer.parseInt(config.getProperty("implicit.wait")),
-					TimeUnit.SECONDS);
+			/*
+			 * driver.manage().timeouts().implicitlyWait(Integer.parseInt(config.getProperty
+			 * ("implicit.wait")), TimeUnit.SECONDS);
+			 */
 
 		}
 	}
