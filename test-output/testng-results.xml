@@ -2,28 +2,28 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-05-01T07:53:33Z" name="Default suite" finished-at="2023-05-01T07:53:49Z" duration-ms="16254">
+  <suite started-at="2023-05-01T12:15:21Z" name="Default suite" finished-at="2023-05-01T12:15:35Z" duration-ms="13617">
     <groups>
     </groups>
-    <test started-at="2023-05-01T07:53:33Z" name="Default test" finished-at="2023-05-01T07:53:49Z" duration-ms="16254">
+    <test started-at="2023-05-01T12:15:21Z" name="Default test" finished-at="2023-05-01T12:15:35Z" duration-ms="13617">
       <class name="com.testcase.testsuite.SignupForMagento">
-        <test-method is-config="true" signature="ReportGeneration()[pri:0, instance:com.testcase.testsuite.SignupForMagento@4bff64c2]" started-at="2023-05-01T13:23:33Z" name="ReportGeneration" finished-at="2023-05-01T13:23:33Z" duration-ms="195" status="PASS">
+        <test-method is-config="true" signature="ReportGeneration()[pri:0, instance:com.testcase.testsuite.SignupForMagento@4bff64c2]" started-at="2023-05-01T17:45:21Z" name="ReportGeneration" finished-at="2023-05-01T17:45:21Z" duration-ms="200" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- ReportGeneration -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.testcase.testsuite.SignupForMagento@4bff64c2]" started-at="2023-05-01T13:23:33Z" name="setUp" finished-at="2023-05-01T13:23:40Z" duration-ms="7203" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.testcase.testsuite.SignupForMagento@4bff64c2]" started-at="2023-05-01T17:45:21Z" name="setUp" finished-at="2023-05-01T17:45:26Z" duration-ms="4834" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="UserCreation()[pri:0, instance:com.testcase.testsuite.SignupForMagento@4bff64c2]" started-at="2023-05-01T13:23:40Z" name="UserCreation" finished-at="2023-05-01T13:23:49Z" duration-ms="9029" status="PASS">
+        <test-method signature="UserCreation()[pri:0, instance:com.testcase.testsuite.SignupForMagento@4bff64c2]" started-at="2023-05-01T17:45:26Z" name="UserCreation" finished-at="2023-05-01T17:45:35Z" duration-ms="8760" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- UserCreation -->
-        <test-method is-config="true" signature="flushTest()[pri:0, instance:com.testcase.testsuite.SignupForMagento@4bff64c2]" started-at="2023-05-01T13:23:49Z" name="flushTest" finished-at="2023-05-01T13:23:49Z" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="flushTest()[pri:0, instance:com.testcase.testsuite.SignupForMagento@4bff64c2]" started-at="2023-05-01T17:45:35Z" name="flushTest" finished-at="2023-05-01T17:45:35Z" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- flushTest -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.testcase.testsuite.SignupForMagento@4bff64c2]" started-at="2023-05-01T13:23:49Z" name="tearDown" finished-at="2023-05-01T13:23:50Z" duration-ms="507" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.testcase.testsuite.SignupForMagento@4bff64c2]" started-at="2023-05-01T17:45:35Z" name="tearDown" finished-at="2023-05-01T17:45:36Z" duration-ms="857" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
