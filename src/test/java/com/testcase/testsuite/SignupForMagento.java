@@ -1,5 +1,6 @@
 package com.testcase.testsuite;
 
+import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -14,8 +15,7 @@ public class SignupForMagento extends TestBase {
 
 		//@JiraCreateIssue(isCreateIssue = true)
 		@Test
-		public void UserCreation() throws Exception {
-			// test=report.startTest(getData("TC001", "Jira_Story_Name", xlsname));
+		public void SignupMagento() throws Exception {
 			test = report.startTest(getData("Signup", "Jira_Story_Name", xlsname));
 
 			String skip = getData("DashBoard", "Signup", xlsname);
@@ -31,12 +31,20 @@ public class SignupForMagento extends TestBase {
 					//login.signup("A", "B", "A@CD121.com", "CBA15487", "CBA15487");
 					
 					click(login.buttonRegister, "Able to click  on Register", "Unable to click on Register");
+					try {
 				if (driver.findElement(By.xpath("//h1[text()='My Dashboard']")).isDisplayed()) {
-					test.log(LogStatus.PASS, "Enter all valid details for signup");
-					
-					
+					test.log(LogStatus.PASS, "Login with the new profile successful");
 				}
-				
+				else
+				{
+					test.log(LogStatus.FAIL, "Unable to create new profile succesfull");
+					driver.close();
+				}}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+						driver.close();
+					}
 					passcount++;
 				} else {
 					
