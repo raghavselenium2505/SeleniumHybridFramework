@@ -30,6 +30,11 @@ public class LoginPageMagento extends TestBase implements LoginPage {
 	public By textConfPassword=By.xpath("//input[@id='confirmation']");
 	
 	public By buttonRegister=By.xpath("//span[text()='Register']");
+	
+	public By textUserName=By.xpath("//input[@name='login[username]']");
+	public By textPasword=By.xpath("//input[@name='login[password]']");
+	public By textSubmit=By.xpath("//button[@name='send']");
+	
 	public LoginPageMagento(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -41,8 +46,18 @@ public class LoginPageMagento extends TestBase implements LoginPage {
 
 	@Override
 	public void login() {
-		// TODO Auto-generated method stub
+		driver.manage().timeouts().implicitlyWait(10000, TimeUnit.SECONDS);
+		elementhighlight(driver.findElement(textUserName));
+		sendkeys(textUserName, config.getProperty("userName"), "able to enter username in email",
+				"unable to enter username in email");
+
+		elementhighlight(driver.findElement(textPasword));
+		sendkeys(textPasword, config.getProperty("passWord"), "Able to enter password",
+				"unable to enter password");
 		
+		//elementHighlight(driver.findElement(login.agreecheckbox));
+		click(textSubmit, "Able to click on Checkbox", "Unable to click on Checkbox");
+		elementhighlight(driver.findElement(textSubmit));		
 	}
 
 	

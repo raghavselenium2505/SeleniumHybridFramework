@@ -48,6 +48,8 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 /**
  * @author Admin
@@ -193,9 +195,11 @@ public class TestBase implements baseMethods{
 			if (config.getProperty("browser").equals("firefox")) {
 				driver = new FirefoxDriver();
 			} else if (config.getProperty("browser").equals("chrome")) {
-				System.setProperty("webdriver.chrome.driver",
-						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\chromedriver.exe");
-				driver = new ChromeDriver();
+				ChromeOptions chromeOptions = new ChromeOptions();
+
+				WebDriverManager.chromedriver().setup();
+
+				driver = new ChromeDriver(chromeOptions);
 				logger.info("browser launched" + config.getProperty("browser"));
 			} else if (config.getProperty("browser").equals("ie")) {
 				System.setProperty("webdriver.ie.driver",
