@@ -3,15 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.testcase.testsuite.SigninForMagento">
+      <class name="com.testcase.testsuite.TestCase1">
         <methods>
-          <include name="SignInForMagento"/>
-          <include name="ReportGeneration"/>
-          <include name="setUp"/>
-          <include name="flushTest"/>
+          <include name="endReport"/>
+          <include name="isSkip"/>
+          <include name="doUserReg"/>
+          <include name="setReport"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- com.testcase.testsuite.SigninForMagento -->
+      </class> <!-- com.testcase.testsuite.TestCase1 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
