@@ -50,7 +50,6 @@ public class LoginPageMagento extends TestBase implements LoginPage {
 		elementhighlight(driver.findElement(textUserName));
 		sendkeys(textUserName, config.getProperty("userName"), "able to enter username in email",
 				"unable to enter username in email");
-
 		elementhighlight(driver.findElement(textPasword));
 		sendkeys(textPasword, config.getProperty("passWord"), "Able to enter password",
 				"unable to enter password");

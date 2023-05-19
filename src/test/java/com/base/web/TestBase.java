@@ -25,11 +25,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -44,6 +48,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -66,6 +72,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 	public void elementhighlight(WebElement element);
 	public void jsclick();
 	public void waitforelement(int value);
+	public String getScreenshot();
 	
 }
 
@@ -102,12 +109,34 @@ public class TestBase implements baseMethods{
 	@BeforeSuite
 	public void ReportGeneration() throws Exception {
 		
-		  report = new ExtentReports(
-		  "C:\\Automation_Sele\\Selenium\\src\\test\\resources\\Reports\\Extentreport\\"
-		  + value + new
-		  SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())
-		  + ".html");
-	//	report.loadConfig(new File(System.getProperty("user. dir") + "\\extent-config.xml"));
+		//ExtentReports(String filePath,Boolean replaceExisting) 
+				//filepath - path of the file, in .htm or .html format - path where your report needs to generate. 
+				//replaceExisting - Setting to overwrite (TRUE) the existing file or append to it
+				//True (default): the file will be replaced with brand new markup, and all existing data will be lost. Use this option to create a brand new report
+				//False: existing data will remain, new tests will be appended to the existing report. If the the supplied path does not exist, a new file will be created.
+		report = new ExtentReports( System.getProperty("user.dir")+
+				  "\\src\\test\\resources\\Reports\\Extentreport\\" + value + new
+				  SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())
+				  + ".html",true);
+				//extent.addSystemInfo("Environment","Environment Name")
+		report
+		                .addSystemInfo("Host Name", "SoftwareTestingMaterial")
+		                .addSystemInfo("Environment", "Automation Testing")
+		                .addSystemInfo("User Name", "Rajkumar SM")
+		                .addSystemInfo("email triggered","Y");
+		                //loading the external xml file (i.e., extent-config.xml) which was placed under the base directory
+		                //You could find the xml file below. Create xml file in your project and copy past the code mentioned below
+		report.loadConfig(new File("C:\\Users\\RaghavendraD\\git\\SeleniumHybridFramework\\src\\test\\resources\\extentconfig\\ReportsConfig.xml"));
+			
+
+		
+		/*
+		 * 
+		 * report = new ExtentReports( System.getProperty("user.dir")+
+		 * "\\src\\test\\resources\\Reports\\Extentreport\\" + value + new
+		 * SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())
+		 * + ".html");
+		 */	//	report.loadConfig(new File(System.getProperty("user. dir") + "\\extent-config.xml"));
 
 	}
 
@@ -151,6 +180,7 @@ public class TestBase implements baseMethods{
 			try {
 				fis = new FileInputStream(
 						System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\EMAIL.properties");
+			
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -191,8 +221,8 @@ public class TestBase implements baseMethods{
 			} else {
 				browser = config.getProperty("browser");
 			}
-			config.setProperty("browser", browser);
-			if (config.getProperty("browser").equals("firefox")) {
+			config.setProperty("browser1", browser);
+			if (config.getProperty("browser1").equals("firefox")) {
 				driver = new FirefoxDriver();
 			} else if (config.getProperty("browser").equals("chrome")) {
 				ChromeOptions chromeOptions = new ChromeOptions();
@@ -324,12 +354,15 @@ driver.close();
 			elementhighlight(driver.findElement(element));
 			driver.findElement(element).sendKeys(value);
 			logger.info("passed click statement");
-
-			test.log(LogStatus.PASS, passvalue);
+			TakesScreenshot scrShot =((TakesScreenshot)driver);
+			File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+			File DestFile=new File("C:\\Users\\RaghavendraD\\git\\SeleniumHybridFramework\\src\\test\\resources\\Screenshots\\"+value+".jpg");
+			 FileUtils.copyFile(SrcFile, DestFile);
+			test.log(LogStatus.PASS,passvalue+getScreenshot());
 
 		} catch (Exception e) {
 			logger.info("failed with some reason");
-			test.log(LogStatus.FAIL, failurevalue + e);
+			test.log(LogStatus.FAIL,failurevalue+ getScreenshot());
 
 		
 	}
@@ -460,5 +493,21 @@ driver.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}		
+	}
+
+	@Override
+	public String getScreenshot() {
+		
+		String s="<html>\r\n"
+				+ "<head>\r\n"
+				+ "   <title>HTML Image as link</title>\r\n"
+				+ "</head>\r\n"
+				+ "<body>\r\n"
+				+ "<p><a href=\"html_images.asp\">HTML Images</a></p>\r\n"
+				+ "\r\n"
+				+ "</body>\r\n"
+				+ "</html>";
+		System.out.println(s);
+		return s;
+		}		
 	}

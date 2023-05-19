@@ -25,6 +25,7 @@ public class SigninForMagento extends TestBase {
 				test.log(LogStatus.INFO, "Enter all valid details for signup");
 
 				login.login();
+
 				waitforelement(5000);
 				passcount++;
 				
