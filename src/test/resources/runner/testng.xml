@@ -4,19 +4,10 @@
 	
    <test name = "Parallel Tests" parallel = "classes" thread-count = "2">
 	<classes>
-	
-		<class name="com.testcase.testsuite.SignupForMagento" />
-
+     <class name = "com.testcase.testsuite.SigninForMagento" />
+    
 	</classes>
 	</test>
-   <test name = "Parallel Tests2">
-      <classes>
-         <class name = "com.testcase.testsuite.SigninForMagento" />
-      </classes>
-   </test>
-	
-	
+  
 </suite>
-
-
 

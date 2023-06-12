@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite parallel="tests" name="Failed suite [Parallel Test Suite]">
-  <test parallel="tests" name="Parallel Tests(failed)">
+  <test parallel="classes" name="Parallel Tests(failed)">
     <classes>
-      <class name="com.testcase.testsuite.SignupForMagento">
-        <methods>
-          <include name="ReportGeneration"/>
-          <include name="setUp"/>
-          <include name="flushTest"/>
-          <include name="tearDown"/>
-          <include name="SignupMagento"/>
-        </methods>
-      </class> <!-- com.testcase.testsuite.SignupForMagento -->
       <class name="com.testcase.testsuite.SigninForMagento">
         <methods>
           <include name="SignInForMagento"/>
