@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <test name="Default test(failed)">
+<suite parallel="tests" name="Failed suite [Parallel Test Suite]">
+  <test parallel="classes" name="Parallel Tests(failed)">
     <classes>
       <class name="com.testcase.testsuite.SigninForMagento">
         <methods>
@@ -13,5 +13,5 @@
         </methods>
       </class> <!-- com.testcase.testsuite.SigninForMagento -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- Parallel Tests(failed) -->
+</suite> <!-- Failed suite [Parallel Test Suite] -->

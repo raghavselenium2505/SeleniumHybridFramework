@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -37,19 +36,18 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -88,6 +86,7 @@ public class TestBase implements baseMethods{
 
 
 	public static FileInputStream fis;
+	public static String browserlaunch;
 	public static String browser;
 	public static ExtentTest test;
 	public static String value = "ExtentReport";
@@ -114,11 +113,15 @@ public class TestBase implements baseMethods{
 				//replaceExisting - Setting to overwrite (TRUE) the existing file or append to it
 				//True (default): the file will be replaced with brand new markup, and all existing data will be lost. Use this option to create a brand new report
 				//False: existing data will remain, new tests will be appended to the existing report. If the the supplied path does not exist, a new file will be created.
-		report = new ExtentReports( System.getProperty("user.dir")+
-				  "\\src\\test\\resources\\Reports\\Extentreport\\" + value + new
-				  SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())
-				  + ".html",true);
-				//extent.addSystemInfo("Environment","Environment Name")
+		
+		  report = new ExtentReports( System.getProperty("user.dir")+
+		  "\\src\\test\\resources\\Reports\\Extentreport\\" + value + new
+		  SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())
+		  + ".html",true);
+		 		//extent.addSystemInfo("Environment","Environment Name")
+	 //   ExtentHtmlReporter reporter=new ExtentHtmlReporter(System.getProperty("user.dir")"\\src\\test\\resources\\Reports\\Extentreport\\" + value + new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())+ ".html");
+
+
 		report
 		                .addSystemInfo("Host Name", "SoftwareTestingMaterial")
 		                .addSystemInfo("Environment", "Automation Testing")
@@ -216,19 +219,16 @@ public class TestBase implements baseMethods{
 				e.printStackTrace();
 			}
 
-			if (System.getenv("browser") != null && !System.getenv("browser").isEmpty()) {
-				browser = System.getenv("browser");
-			} else {
-				browser = config.getProperty("browser");
-			}
-			config.setProperty("browser1", browser);
+			
+			  if (System.getenv("browser") != null && !System.getenv("browser").isEmpty())
+			  { browser = System.getenv("browser"); } else { browser =
+			  config.getProperty("browser"); } config.setProperty("browser1", browser);
+			 
 			if (config.getProperty("browser1").equals("firefox")) {
 				driver = new FirefoxDriver();
-			} else if (config.getProperty("browser").equals("chrome")) {
+			} else if (config.getProperty("browser").equals("chrome")||browserlaunch.equals("chrome")) {
 				ChromeOptions chromeOptions = new ChromeOptions();
-
 				WebDriverManager.chromedriver().setup();
-
 				driver = new ChromeDriver(chromeOptions);
 				logger.info("browser launched" + config.getProperty("browser"));
 			} else if (config.getProperty("browser").equals("ie")) {
@@ -237,14 +237,14 @@ public class TestBase implements baseMethods{
 				driver = new InternetExplorerDriver();
 				logger.info("browser launched" + config.getProperty("browser"));
 				logger.warn("Using" + config.getProperty("browser") + "cannot close the browser");
-			} else if (config.getProperty("browser").equals("edge")) {
+			} else if (config.getProperty("browser").equals("edge")||browserlaunch.equals("edge")) {
 
 				System.setProperty("webdriver.edge.driver",
 						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\msedgedriver.exe");
 				driver = new EdgeDriver();
 				logger.info("browser launched" + config.getProperty("browser"));
 			} 
-			else if (config.getProperty("browser").equals("chromeheadless")) {
+			else if (browserlaunch.equals("chromeheadless")||config.getProperty("browser").equals("chromeheadless")) {
 				
 				
 				logger.info("chrome headless browser launched");
@@ -320,7 +320,18 @@ driver.close();
 
 		}
 	}
-	@Override
+	
+	/*
+	 * @AfterMethod public void Method(ITestResult result) throws IOException
+	 * 
+	 * {
+	 * 
+	 * if(result.getStatus()==ITestResult.FAILURE) { String
+	 * temp=Utility.getScreenshot();
+	 * 
+	 * 
+	 * logger.fatal(result.getThrowable().getMessage()); } }
+	 */	@Override
 	public void actionclick(WebElement element, String value, String failurevalue) {
 		try {
 			elementhighlight(element);
@@ -354,15 +365,11 @@ driver.close();
 			elementhighlight(driver.findElement(element));
 			driver.findElement(element).sendKeys(value);
 			logger.info("passed click statement");
-			TakesScreenshot scrShot =((TakesScreenshot)driver);
-			File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
-			File DestFile=new File("C:\\Users\\RaghavendraD\\git\\SeleniumHybridFramework\\src\\test\\resources\\Screenshots\\"+value+".jpg");
-			 FileUtils.copyFile(SrcFile, DestFile);
-			test.log(LogStatus.PASS,passvalue+getScreenshot());
+			test.log(LogStatus.PASS,passvalue);
 
 		} catch (Exception e) {
 			logger.info("failed with some reason");
-			test.log(LogStatus.FAIL,failurevalue+ getScreenshot());
+			test.log(LogStatus.FAIL,failurevalue);
 
 		
 	}
