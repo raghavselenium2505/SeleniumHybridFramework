@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Parallel Test Suite" parallel="tests" thread-count="5">
+<suite name="Parallel Test Suite" parallel = "none" >
 
 	
-   <test name = "Parallel Tests" parallel = "classes" thread-count = "2">
+   <test name = "Browser Tests"  >
+   <parameter name="browser" value="chrome"/>
 	<classes>
-     <class name = "com.testcase.testsuite.SigninForMagento" />
+     <class name = "com.testcase.testsuite.AmazonLogin_TC001" />
     
 	</classes>
 	</test>

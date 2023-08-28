@@ -12,21 +12,16 @@ public static void main(String args[])
 {
 	JSONParser parser = new JSONParser();
     try {
-       Object obj = parser.parse(new FileReader("C:\\Users\\RaghavendraD\\Desktop\\course.json"));
+       Object obj = parser.parse(new FileReader("C:\\Users\\RaghavendraD\\Desktop\\sample.json"));
        JSONObject jsonObject = (JSONObject)obj;
-       String name = (String)jsonObject.get("Name");
-       String course = (String)jsonObject.get("Course");
-       JSONArray subjects = (JSONArray)jsonObject.get("Subjects");
-       System.out.println("Name: " + name);
-       System.out.println("Course: " + course);
-       System.out.println("Subjects:");
-       Iterator iterator = subjects.iterator();
-       while (iterator.hasNext()) {
-          System.out.println(iterator.next());
-       }
+       String name = (String)jsonObject.get("name");
+      String phonenumber = (String)jsonObject.get("phonenumber");
+    
+    System.out.println(name);
+    System.out.println(phonenumber);
     } catch(Exception e) {
        e.printStackTrace();
-    }
+    } 
  }
 
 

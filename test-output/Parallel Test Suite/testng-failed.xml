@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite parallel="tests" name="Failed suite [Parallel Test Suite]">
-  <test parallel="classes" name="Parallel Tests(failed)">
+<suite name="Failed suite [Parallel Test Suite]">
+  <test name="Browser Tests(failed)">
+    <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="com.testcase.testsuite.SigninForMagento">
+      <class name="com.testcase.testsuite.ParabankAdminPage">
         <methods>
-          <include name="SignInForMagento"/>
           <include name="ReportGeneration"/>
+          <include name="SignInForMagento"/>
           <include name="setUp"/>
           <include name="flushTest"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- com.testcase.testsuite.SigninForMagento -->
+      </class> <!-- com.testcase.testsuite.ParabankAdminPage -->
     </classes>
-  </test> <!-- Parallel Tests(failed) -->
+  </test> <!-- Browser Tests(failed) -->
 </suite> <!-- Failed suite [Parallel Test Suite] -->

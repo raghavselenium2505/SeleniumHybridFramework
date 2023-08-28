@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite parallel="tests" name="Failed suite [Parallel Test Suite]">
-  <test parallel="classes" name="Parallel Tests(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test name="Default test(failed)">
     <classes>
-      <class name="com.testcase.testsuite.SigninForMagento">
+      <class name="com.testcase.testsuite.AmazonLogin_TC001">
         <methods>
-          <include name="SignInForMagento"/>
           <include name="ReportGeneration"/>
           <include name="setUp"/>
           <include name="flushTest"/>
           <include name="tearDown"/>
+          <include name="Amazon_Login_TC001"/>
         </methods>
-      </class> <!-- com.testcase.testsuite.SigninForMagento -->
+      </class> <!-- com.testcase.testsuite.AmazonLogin_TC001 -->
     </classes>
-  </test> <!-- Parallel Tests(failed) -->
-</suite> <!-- Failed suite [Parallel Test Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

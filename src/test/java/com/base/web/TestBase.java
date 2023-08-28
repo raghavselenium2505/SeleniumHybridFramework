@@ -1,10 +1,9 @@
 package com.base.web;
 
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,6 +28,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -54,36 +56,46 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-
 /**
  * @author Admin
  *
  */
- interface baseMethods{
-	public void click(By element,String value,String failurevalue);
-	public void actionclick(WebElement element,String value,String failurevalue);
+interface baseMethods {
+	public void click(By element, String value, String failurevalue);
+
+	public void actionclick(WebElement element, String value, String failurevalue);
+
 	public void clear(By element);
-	public void sendkeys(By element, String value,String passvalue,String failurevalue);
+
+	public void sendkeys(By element, String value, String passvalue, String failurevalue);
+
 	public void sendReport(String to, final String user, final String password, String host, String port,
 			String protocols, String fileLink);
+
 	public void emailOption();
+
 	public void elementhighlight(WebElement element);
+
 	public void jsclick();
+
 	public void waitforelement(int value);
+
 	public String getScreenshot();
-	
+
 }
 
-
-public class TestBase implements baseMethods{
+public class TestBase implements baseMethods {
 	public static WebDriver driver;
 	public static Properties config = new Properties();
 	public static Properties EMAIL = new Properties();
 	public static Properties Report = new Properties();
 	public static Properties Excel = new Properties();
 	public static Properties JiraProp = new Properties();
-	
+	public static Properties ExtReport=new Properties();
+	public static JSONParser parser = new JSONParser();
 
+	public static 	Object obj ;
+	public static JSONObject jsonObject = (JSONObject) obj;
 
 	public static FileInputStream fis;
 	public static String browserlaunch;
@@ -98,7 +110,7 @@ public class TestBase implements baseMethods{
 	public static int failcount = 0;
 	public static int skipCount = 0;
 	public static String Name;
-	
+
 	public String xlsname = "ExcelSheet_1.xls";
 	static {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hhmmss");
@@ -107,39 +119,58 @@ public class TestBase implements baseMethods{
 
 	@BeforeSuite
 	public void ReportGeneration() throws Exception {
-		
-		//ExtentReports(String filePath,Boolean replaceExisting) 
-				//filepath - path of the file, in .htm or .html format - path where your report needs to generate. 
-				//replaceExisting - Setting to overwrite (TRUE) the existing file or append to it
-				//True (default): the file will be replaced with brand new markup, and all existing data will be lost. Use this option to create a brand new report
-				//False: existing data will remain, new tests will be appended to the existing report. If the the supplied path does not exist, a new file will be created.
-		
-		  report = new ExtentReports( System.getProperty("user.dir")+
-		  "\\src\\test\\resources\\Reports\\Extentreport\\" + value + new
-		  SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())
-		  + ".html",true);
-		 		//extent.addSystemInfo("Environment","Environment Name")
-	 //   ExtentHtmlReporter reporter=new ExtentHtmlReporter(System.getProperty("user.dir")"\\src\\test\\resources\\Reports\\Extentreport\\" + value + new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())+ ".html");
+		System.out.println("in suite before");
+		try {
+			fis = new FileInputStream(
+					System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\extReport.properties");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			ExtReport.load(fis);
+			logger.debug("extent report properties file  loaded !!!");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
+		// ExtentReports(String filePath,Boolean replaceExisting)
+		// filepath - path of the file, in .htm or .html format - path where your report
+		// needs to generate.
+		// replaceExisting - Setting to overwrite (TRUE) the existing file or append to
+		// it
+		// True (default): the file will be replaced with brand new markup, and all
+		// existing data will be lost. Use this option to create a brand new report
+		// False: existing data will remain, new tests will be appended to the existing
+		// report. If the the supplied path does not exist, a new file will be created.
 
-		report
-		                .addSystemInfo("Host Name", "SoftwareTestingMaterial")
-		                .addSystemInfo("Environment", "Automation Testing")
-		                .addSystemInfo("User Name", "Rajkumar SM")
-		                .addSystemInfo("email triggered","Y");
-		                //loading the external xml file (i.e., extent-config.xml) which was placed under the base directory
-		                //You could find the xml file below. Create xml file in your project and copy past the code mentioned below
-		report.loadConfig(new File("C:\\Users\\RaghavendraD\\git\\SeleniumHybridFramework\\src\\test\\resources\\extentconfig\\ReportsConfig.xml"));
-			
+		report = new ExtentReports(
+				System.getProperty("user.dir") + "\\src\\test\\resources\\Reports\\Extentreport\\" + value
+						+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()) + ".html",
+				true);
+		// extent.addSystemInfo("Environment","Environment Name")
+		// ExtentHtmlReporter reporter=new
+		// ExtentHtmlReporter(System.getProperty("user.dir")"\\src\\test\\resources\\Reports\\Extentreport\\"
+		// + value + new
+		// SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())+
+		// ".html");
 
-		
+		report.addSystemInfo("Host Name", ExtReport.getProperty("HostName")).addSystemInfo("Environment", ExtReport.getProperty("Env"))
+				.addSystemInfo("User Name", ExtReport.getProperty("User")).addSystemInfo("email triggered", ExtReport.getProperty("emailTriggered"));
+		// loading the external xml file (i.e., extent-config.xml) which was placed
+		// under the base directory
+		// You could find the xml file below. Create xml file in your project and copy
+		// past the code mentioned below
+		report.loadConfig(new File(
+				"C:\\Users\\RaghavendraD\\git\\SeleniumHybridFramework\\src\\test\\resources\\extentconfig\\ReportsConfig.xml"));
+
 		/*
 		 * 
 		 * report = new ExtentReports( System.getProperty("user.dir")+
 		 * "\\src\\test\\resources\\Reports\\Extentreport\\" + value + new
 		 * SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())
 		 * + ".html");
-		 */	//	report.loadConfig(new File(System.getProperty("user. dir") + "\\extent-config.xml"));
+		 */ // report.loadConfig(new File(System.getProperty("user. dir") +
+			// "\\extent-config.xml"));
 
 	}
 
@@ -153,9 +184,8 @@ public class TestBase implements baseMethods{
 			 * actionCilck(driver.findElement(home.linkSignoff),"signoff sucesful"
 			 * ,"Unable to do signoff"); }
 			 */
-			
-		}catch(Exception e)
-		{
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -183,7 +213,7 @@ public class TestBase implements baseMethods{
 			try {
 				fis = new FileInputStream(
 						System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\EMAIL.properties");
-			
+
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -218,43 +248,60 @@ public class TestBase implements baseMethods{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 			
-			  if (System.getenv("browser") != null && !System.getenv("browser").isEmpty())
-			  { browser = System.getenv("browser"); } else { browser =
-			  config.getProperty("browser"); } config.setProperty("browser1", browser);
-			 
-			if (config.getProperty("browser1").equals("firefox")) {
+			if (System.getenv("browser") != null && !System.getenv("browser").isEmpty()) {
+				browser = System.getenv("browser");
+			} else {
+				browser = config.getProperty("browser");
+			}
+			config.setProperty("browser1", browser);
+
+			if(!config.getProperty("browser").equals("")) {
+			if (config.getProperty("browser").equals("firefox") ) {
 				driver = new FirefoxDriver();
-			} else if (config.getProperty("browser").equals("chrome")||browserlaunch.equals("chrome")) {
+			} else if (config.getProperty("browser").equals("chrome")) {
 				ChromeOptions chromeOptions = new ChromeOptions();
 				WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver(chromeOptions);
 				logger.info("browser launched" + config.getProperty("browser"));
-			} else if (config.getProperty("browser").equals("ie")) {
+			} else if (config.getProperty("browser").equals("ie") ) {
 				System.setProperty("webdriver.ie.driver",
 						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\IEDriverServer.exe");
 				driver = new InternetExplorerDriver();
 				logger.info("browser launched" + config.getProperty("browser"));
 				logger.warn("Using" + config.getProperty("browser") + "cannot close the browser");
-			} else if (config.getProperty("browser").equals("edge")||browserlaunch.equals("edge")) {
-
+			} else if (config.getProperty("browser").equals("edge")) {
 				System.setProperty("webdriver.edge.driver",
 						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\msedgedriver.exe");
 				driver = new EdgeDriver();
 				logger.info("browser launched" + config.getProperty("browser"));
-			} 
-			else if (browserlaunch.equals("chromeheadless")||config.getProperty("browser").equals("chromeheadless")) {
-				
-				
+			} else if ( config.getProperty("browser").equals("chromeheadless")) {
+
 				logger.info("chrome headless browser launched");
 				System.setProperty("webdriver.chrome.driver",
 						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\chromedriver.exe");
-				ChromeOptions options=new ChromeOptions();
+				ChromeOptions options = new ChromeOptions();
+				WebDriverManager.chromedriver().setup();
 				options.addArguments("--headless");
-				driver = new ChromeDriver(options);			
-				
+				driver = new ChromeDriver(options);
 			}
+			else if(browserlaunch.equals("incognito")
+					|| config.getProperty("browser").equals("incognito")) {
+
+				logger.info("chrome headless browser launched");
+				System.setProperty("webdriver.chrome.driver",
+						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\chromedriver.exe");
+				ChromeOptions options = new ChromeOptions();
+				WebDriverManager.chromedriver().setup();
+				options.addArguments("incognito");
+				driver = new ChromeDriver(options);
+			}
+			}
+			else
+			{
+				System.out.println("cannot move forward as browser not launched");
+			}
+			
 			driver.get(config.getProperty("testsiteurl"));
 			logger.info("browser launched " + config.getProperty("browser") + "Navigated to : "
 					+ config.getProperty("testsiteurl"));
@@ -271,6 +318,7 @@ public class TestBase implements baseMethods{
 			 */
 		}
 	}
+	
 
 	public static String getData(String SheetName, String ColName, String excelName) throws Exception {
 		String returnValue = "";
@@ -296,19 +344,36 @@ public class TestBase implements baseMethods{
 		return returnValue;
 	}
 
-
-	  @AfterSuite
-	  public void tearDown() throws Exception { 
+	
+	  
+	
+	public void getDatajson(String jsonValue)
+	{
+		String returnJson="";
+		 Object obj;
+		try {
+			obj = parser.parse(new FileReader("C:\\Users\\RaghavendraD\\Desktop\\sample.json"));
+		
+	       JSONObject jsonObject = (JSONObject)obj;
+	       String jsonval = (String)jsonObject.get(jsonValue);
+	       System.out.println(jsonval);
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	 
+	@AfterSuite
+	public void tearDown() throws Exception {
 		report.endTest(test);
-			report.flush();	 
-			emailOption();
-driver.close();
+		report.flush();
+		emailOption();
+		driver.close();
 
-			
-}
+	}
 
 	@Override
-	public void click(By element,String value,String failurevalue) {
+	public void click(By element, String value, String failurevalue) {
 
 		try {
 			elementhighlight(driver.findElement(element));
@@ -320,7 +385,7 @@ driver.close();
 
 		}
 	}
-	
+
 	/*
 	 * @AfterMethod public void Method(ITestResult result) throws IOException
 	 * 
@@ -331,33 +396,31 @@ driver.close();
 	 * 
 	 * 
 	 * logger.fatal(result.getThrowable().getMessage()); } }
-	 */	@Override
+	 */ @Override
 	public void actionclick(WebElement element, String value, String failurevalue) {
 		try {
 			elementhighlight(element);
 			Actions action = new Actions(driver);
 			action.moveToElement(element).click().perform();
-			test.log(LogStatus.PASS,value);
+			test.log(LogStatus.PASS, value);
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, failurevalue+ e);
+			test.log(LogStatus.FAIL, failurevalue + e);
 
-		}		
+		}
 	}
 
 	@Override
 	public void clear(By element) {
 		try {
-		
-				driver.findElement(element).sendKeys(value);
 
-			} catch (Exception e) {
-			
+			driver.findElement(element).sendKeys(value);
+
+		} catch (Exception e) {
+
 			e.printStackTrace();
-			}
 		}
-
-			
+	}
 
 	@Override
 	public void sendkeys(By element, String value, String passvalue, String failurevalue) {
@@ -365,83 +428,80 @@ driver.close();
 			elementhighlight(driver.findElement(element));
 			driver.findElement(element).sendKeys(value);
 			logger.info("passed click statement");
-			test.log(LogStatus.PASS,passvalue);
+			test.log(LogStatus.PASS, passvalue);
 
 		} catch (Exception e) {
 			logger.info("failed with some reason");
-			test.log(LogStatus.FAIL,failurevalue);
+			test.log(LogStatus.FAIL, failurevalue);
 
-		
-	}
+		}
 	}
 
 	@Override
 	public void sendReport(String to, final String user, final String password, String host, String port,
-				String protocols, String fileLink) {
-			Properties properties = System.getProperties();
-			properties.setProperty("mail.smtp.host", host);// change accordingly
-			properties.put("mail.smtp.auth", "true");
-			properties.put("mail.smtp.port", port); // default port 25
-			properties.put("mail.smtp.starttls.enable", true);
-			properties.setProperty("mail.smtp.ssl.protocols", protocols);
-			Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(user, password);
-				}
-			});
-
-			// 2) compose message
-			try {
-				MimeMessage message = new MimeMessage(session);
-				message.setFrom(new InternetAddress(user));
-				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-				/* new InternetAddress(to)); */
-				// message.addRecipient(Message.RecipientType.CC, new InternetAddress(to));
-				message.setSubject("Logger Report And Automation Report"+EMAIL.getProperty("EmailTextName")
-						+ new SimpleDateFormat("ddMMyy").format(Calendar.getInstance().getTime())
-
-				);
-
-				// 3) create MimeBodyPart object and set your message content
-				BodyPart messageBodyPart1 = new MimeBodyPart();
-				EMAIL.getProperty("PicText");
-			//	messageBodyPart1.setText(EMAIL.getProperty("PicText"));
-				messageBodyPart1.setText("execution report for the testcase report follows" + "\n" + "passcount:"
-						+ passcount + "\n" + "failCount:" + failcount + "\n" + "skipCount :" + skipCount + "\n"
-						+ "executionCount:"+ executioncount+"\n");
-				// 4) create new MimeBodyPart object and set DataHa00ler object to this object
-				MimeBodyPart messageBodyPart2 = new MimeBodyPart();
-				File dir = new File(fileLink);
-				File[] files = dir.listFiles();
-				File lastModifiedFile = files[0];
-				for (int i = 1; i < files.length; i++) {
-					if (lastModifiedFile.lastModified() < files[i].lastModified()) {
-						lastModifiedFile = files[i];
-					}
-				}
-				String[] filName = lastModifiedFile.getName().split("\"");
-				String filename = filName[filName.length - 1];// change accordingly
-				DataSource source = new FileDataSource(lastModifiedFile.getAbsolutePath());
-				messageBodyPart2.setDataHandler(new DataHandler(source));
-				messageBodyPart2.setFileName(filename);
-				System.out.println(filename);
-
-				// 5) create Multipart object and add MimeBodyPart objects to this object
-				Multipart multipart = new MimeMultipart();
-				multipart.addBodyPart(messageBodyPart1);
-				multipart.addBodyPart(messageBodyPart2);
-
-				// 6) set the multiplart object to the message object
-				message.setContent(multipart);
-
-				// 7) send message
-				Transport.send(message);
-			} catch (MessagingException ex) {
-				ex.printStackTrace();
+			String protocols, String fileLink) {
+		Properties properties = System.getProperties();
+		properties.setProperty("mail.smtp.host", host);// change accordingly
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.port", port); // default port 25
+		properties.put("mail.smtp.starttls.enable", true);
+		properties.setProperty("mail.smtp.ssl.protocols", protocols);
+		Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(user, password);
 			}
+		});
+
+		// 2) compose message
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(user));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			/* new InternetAddress(to)); */
+			// message.addRecipient(Message.RecipientType.CC, new InternetAddress(to));
+			message.setSubject("Logger Report And Automation Report" + EMAIL.getProperty("EmailTextName")
+					+ new SimpleDateFormat("ddMMyy").format(Calendar.getInstance().getTime())
+
+			);
+
+			// 3) create MimeBodyPart object and set your message content
+			BodyPart messageBodyPart1 = new MimeBodyPart();
+			EMAIL.getProperty("PicText");
+			// messageBodyPart1.setText(EMAIL.getProperty("PicText"));
+			messageBodyPart1.setText("execution report for the testcase report follows" + "\n" + "passcount:"
+					+ passcount + "\n" + "failCount:" + failcount + "\n" + "skipCount :" + skipCount + "\n"
+					+ "executionCount:" + executioncount + "\n");
+			// 4) create new MimeBodyPart object and set DataHa00ler object to this object
+			MimeBodyPart messageBodyPart2 = new MimeBodyPart();
+			File dir = new File(fileLink);
+			File[] files = dir.listFiles();
+			File lastModifiedFile = files[0];
+			for (int i = 1; i < files.length; i++) {
+				if (lastModifiedFile.lastModified() < files[i].lastModified()) {
+					lastModifiedFile = files[i];
+				}
+			}
+			String[] filName = lastModifiedFile.getName().split("\"");
+			String filename = filName[filName.length - 1];// change accordingly
+			DataSource source = new FileDataSource(lastModifiedFile.getAbsolutePath());
+			messageBodyPart2.setDataHandler(new DataHandler(source));
+			messageBodyPart2.setFileName(filename);
+			System.out.println(filename);
+
+			// 5) create Multipart object and add MimeBodyPart objects to this object
+			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(messageBodyPart1);
+			multipart.addBodyPart(messageBodyPart2);
+
+			// 6) set the multiplart object to the message object
+			message.setContent(multipart);
+
+			// 7) send message
+			Transport.send(message);
+		} catch (MessagingException ex) {
+			ex.printStackTrace();
 		}
-	
-	
+	}
 
 	@Override
 	public void emailOption() {
@@ -449,31 +509,31 @@ driver.close();
 		if (EMAIL.getProperty("EMAILSendTEXT").equalsIgnoreCase("Y")) {
 
 			if (EMAIL.getProperty("logFileStatus").equals("Y")) {
-				sendReport(EMAIL.getProperty("toMail"), EMAIL.getProperty("fromMail"),
-						EMAIL.getProperty("passWord"), EMAIL.getProperty("smtpServer"), EMAIL.getProperty("port"),
-						EMAIL.getProperty("protocols"), EMAIL.getProperty("logFile"));
+				sendReport(EMAIL.getProperty("toMail"), EMAIL.getProperty("fromMail"), EMAIL.getProperty("passWord"),
+						EMAIL.getProperty("smtpServer"), EMAIL.getProperty("port"), EMAIL.getProperty("protocols"),
+						EMAIL.getProperty("logFile"));
 				test.log(LogStatus.PASS, "EMAIL trigered for logFileStatus");
 			} else if (EMAIL.getProperty("htmlFileStatus").equals("Y")) {
-				sendReport(EMAIL.getProperty("toMail"), EMAIL.getProperty("fromMail"),
-						EMAIL.getProperty("passWord"), EMAIL.getProperty("smtpServer"), EMAIL.getProperty("port"),
-						EMAIL.getProperty("protocols"), EMAIL.getProperty("htmlFile"));
+				sendReport(EMAIL.getProperty("toMail"), EMAIL.getProperty("fromMail"), EMAIL.getProperty("passWord"),
+						EMAIL.getProperty("smtpServer"), EMAIL.getProperty("port"), EMAIL.getProperty("protocols"),
+						EMAIL.getProperty("htmlFile"));
 				test.log(LogStatus.PASS, "EMAIL trigered for htmlFileStatus");
 			} else if (EMAIL.getProperty("textFileStatus").equals("Y")) {
-				sendReport(EMAIL.getProperty("toMail"), EMAIL.getProperty("fromMail"),
-						EMAIL.getProperty("passWord"), EMAIL.getProperty("smtpServer"), EMAIL.getProperty("port"),
-						EMAIL.getProperty("protocols"), EMAIL.getProperty("textFile"));
+				sendReport(EMAIL.getProperty("toMail"), EMAIL.getProperty("fromMail"), EMAIL.getProperty("passWord"),
+						EMAIL.getProperty("smtpServer"), EMAIL.getProperty("port"), EMAIL.getProperty("protocols"),
+						EMAIL.getProperty("textFile"));
 				test.log(LogStatus.PASS, "EMAIL trigered for textFileStatus");
 
 			} else if (EMAIL.getProperty("excelFileStatus").equals("Y")) {
-				sendReport(EMAIL.getProperty("toMail"), EMAIL.getProperty("fromMail"),
-						EMAIL.getProperty("passWord"), EMAIL.getProperty("smtpServer"), EMAIL.getProperty("port"),
-						EMAIL.getProperty("protocols"), EMAIL.getProperty("excelFile"));
+				sendReport(EMAIL.getProperty("toMail"), EMAIL.getProperty("fromMail"), EMAIL.getProperty("passWord"),
+						EMAIL.getProperty("smtpServer"), EMAIL.getProperty("port"), EMAIL.getProperty("protocols"),
+						EMAIL.getProperty("excelFile"));
 				test.log(LogStatus.PASS, "EMAIL trigered for excelFileStatus");
 
 			} else if (EMAIL.getProperty("extentReportStatus").equals("Y")) {
-				sendReport(EMAIL.getProperty("toMail"), EMAIL.getProperty("fromMail"),
-						EMAIL.getProperty("passWord"), EMAIL.getProperty("smtpServer"), EMAIL.getProperty("port"),
-						EMAIL.getProperty("protocols"), EMAIL.getProperty("extentReport"));
+				sendReport(EMAIL.getProperty("toMail"), EMAIL.getProperty("fromMail"), EMAIL.getProperty("passWord"),
+						EMAIL.getProperty("smtpServer"), EMAIL.getProperty("port"), EMAIL.getProperty("protocols"),
+						EMAIL.getProperty("extentReport"));
 				test.log(LogStatus.PASS, "EMAIL trigered for extentReportStatus");
 
 			}
@@ -485,13 +545,13 @@ driver.close();
 	public void elementhighlight(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].setAttribute('style', arguments[1]);", element,
-				"color: black; border: 3px solid blue;");		
+				"color: black; border: 3px solid blue;");
 	}
 
 	@Override
 	public void jsclick() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void waitforelement(int value) {
@@ -504,17 +564,12 @@ driver.close();
 
 	@Override
 	public String getScreenshot() {
-		
-		String s="<html>\r\n"
-				+ "<head>\r\n"
-				+ "   <title>HTML Image as link</title>\r\n"
-				+ "</head>\r\n"
-				+ "<body>\r\n"
-				+ "<p><a href=\"html_images.asp\">HTML Images</a></p>\r\n"
-				+ "\r\n"
-				+ "</body>\r\n"
+
+		String s = "<html>\r\n" + "<head>\r\n" + "   <title>HTML Image as link</title>\r\n" + "</head>\r\n"
+				+ "<body>\r\n" + "<p><a href=\"html_images.asp\">HTML Images</a></p>\r\n" + "\r\n" + "</body>\r\n"
 				+ "</html>";
 		System.out.println(s);
 		return s;
-		}		
 	}
+
+}

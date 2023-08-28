@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>AutomationReportLog</title>
+<style type="text/css">
+<!--
+body, table {font-family: arial,sans-serif; font-size: x-small;}
+th {background: #336699; color: #FFFFFF; text-align: left;}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" topmargin="6" leftmargin="6">
+<hr size="1" noshade>
+Log session start time Wed Jul 12 17:27:57 IST 2023<br>
+<br>
+<table cellspacing="0" cellpadding="4" border="1" bordercolor="#224466" width="100%">
+<tr>
+<th>Time</th>
+<th>Thread</th>
+<th>Level</th>
+<th>Category</th>
+<th>File:Line</th>
+<th>Message</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:131</td>
+<td title="Message">extent report properties file  loaded !!!</td>
+</tr>
+
+<tr>
+<td>116</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:208</td>
+<td title="Message">Config properties file loaded</td>
+</tr>
+
+<tr>
+<td>117</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:222</td>
+<td title="Message">Email file loaded !!!</td>
+</tr>
+
+<tr>
+<td>119</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:235</td>
+<td title="Message">Excel file loaded !!!</td>
+</tr>
+
+<tr>
+<td>120</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:247</td>
+<td title="Message">Jira file  loaded !!!</td>
+</tr>
+
+<tr>
+<td>1339</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:266</td>
+<td title="Message">browser launchedchrome</td>
+</tr>
+
+<tr>
+<td>2978</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:296</td>
+<td title="Message">browser launched chromeNavigated to : https://www.amazon.in/</td>
+</tr>
+
+<tr>
+<td>3119</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:299</td>
+<td title="Message">browser maximaized </td>
+</tr>
+
+<tr>
+<td>13536</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#993300"><strong>ERROR</strong></font></td>
+<td title="freemarker.runtime category">freemarker.runtime</td>
+<td>_Log4jLoggerFactory.java:60</td>
+<td title="Message">Error executing FreeMarker template</td>
+</tr>
+<tr><td bgcolor="#993300" style="color:White; font-size : xx-small;" colspan="6">FreeMarker template error:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;The following has evaluated to null or missing:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;==&gt; report.systemInfoMap[info]  [in template &quot;Extent.ftl&quot; at line 193, column 95]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;----
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Tip: It's the final [] step that caused this error, not those before it.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;----
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Tip: If the failing expression is known to be legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use &lt;#if myOptionalVar??&gt;when-present&lt;#else&gt;when-missing&lt;/#if&gt;. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
+<br>&nbsp;&nbsp;&nbsp;&nbsp;----
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;----
+<br>&nbsp;&nbsp;&nbsp;&nbsp;FTL stack trace (&quot;~&quot; means nesting-related):
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	- Failed at: ${report.systemInfoMap[info]}  [in template &quot;Extent.ftl&quot; at line 193, column 93]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;----
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Java stack trace (for programmers):
+<br>&nbsp;&nbsp;&nbsp;&nbsp;----
+<br>&nbsp;&nbsp;&nbsp;&nbsp;freemarker.core.InvalidReferenceException: [... Exception message was already printed; see it above ...]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:131)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.EvalUtil.coerceModelToString(EvalUtil.java:355)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.Expression.evalAndCoerceToString(Expression.java:82)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.DollarVariable.accept(DollarVariable.java:41)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.Environment.visit(Environment.java:324)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.MixedContent.accept(MixedContent.java:54)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.Environment.visitByHiddingParent(Environment.java:345)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.IteratorBlock$IterationContext.executeNestedBlockInner(IteratorBlock.java:240)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.IteratorBlock$IterationContext.executeNestedBlock(IteratorBlock.java:220)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.IteratorBlock$IterationContext.accept(IteratorBlock.java:194)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.Environment.visitIteratorBlock(Environment.java:572)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.IteratorBlock.acceptWithResult(IteratorBlock.java:78)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.IteratorBlock.accept(IteratorBlock.java:64)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.Environment.visit(Environment.java:324)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.MixedContent.accept(MixedContent.java:54)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.Environment.visit(Environment.java:324)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.core.Environment.process(Environment.java:302)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at freemarker.template.Template.process(Template.java:325)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at com.relevantcodes.extentreports.HTMLReporter.flush(HTMLReporter.java:173)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at com.relevantcodes.extentreports.Report.flush(Report.java:468)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at com.relevantcodes.extentreports.ExtentReports.flush(ExtentReports.java:900)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at com.base.web.TestBase.tearDown(TestBase.java:359)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:523)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:224)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:146)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:350)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.TestNG.runSuites(TestNG.java:1144)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.TestNG.run(TestNG.java:1115)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</td></tr>
