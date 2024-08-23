@@ -4,15 +4,15 @@
   <test name="Browser Tests(failed)">
     <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="com.testcase.testsuite.ParabankAdminPage">
+      <class name="com.testcase.testsuite.AmazonLogin_TC001">
         <methods>
           <include name="ReportGeneration"/>
-          <include name="SignInForMagento"/>
           <include name="setUp"/>
           <include name="flushTest"/>
           <include name="tearDown"/>
+          <include name="Amazon_Login_TC001"/>
         </methods>
-      </class> <!-- com.testcase.testsuite.ParabankAdminPage -->
+      </class> <!-- com.testcase.testsuite.AmazonLogin_TC001 -->
     </classes>
   </test> <!-- Browser Tests(failed) -->
 </suite> <!-- Failed suite [Parallel Test Suite] -->

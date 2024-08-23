@@ -40,6 +40,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -110,6 +111,7 @@ public class TestBase implements baseMethods {
 	public static int failcount = 0;
 	public static int skipCount = 0;
 	public static String Name;
+	public static int i;
 
 	public String xlsname = "ExcelSheet_1.xls";
 	static {
@@ -132,59 +134,22 @@ public class TestBase implements baseMethods {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		// ExtentReports(String filePath,Boolean replaceExisting)
-		// filepath - path of the file, in .htm or .html format - path where your report
-		// needs to generate.
-		// replaceExisting - Setting to overwrite (TRUE) the existing file or append to
-		// it
-		// True (default): the file will be replaced with brand new markup, and all
-		// existing data will be lost. Use this option to create a brand new report
-		// False: existing data will remain, new tests will be appended to the existing
-		// report. If the the supplied path does not exist, a new file will be created.
-
 		report = new ExtentReports(
 				System.getProperty("user.dir") + "\\src\\test\\resources\\Reports\\Extentreport\\" + value
 						+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()) + ".html",
 				true);
-		// extent.addSystemInfo("Environment","Environment Name")
-		// ExtentHtmlReporter reporter=new
-		// ExtentHtmlReporter(System.getProperty("user.dir")"\\src\\test\\resources\\Reports\\Extentreport\\"
-		// + value + new
-		// SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())+
-		// ".html");
-
+	
 		report.addSystemInfo("Host Name", ExtReport.getProperty("HostName")).addSystemInfo("Environment", ExtReport.getProperty("Env"))
 				.addSystemInfo("User Name", ExtReport.getProperty("User")).addSystemInfo("email triggered", ExtReport.getProperty("emailTriggered"));
-		// loading the external xml file (i.e., extent-config.xml) which was placed
-		// under the base directory
-		// You could find the xml file below. Create xml file in your project and copy
-		// past the code mentioned below
 		report.loadConfig(new File(
 				"C:\\Users\\RaghavendraD\\git\\SeleniumHybridFramework\\src\\test\\resources\\extentconfig\\ReportsConfig.xml"));
-
-		/*
-		 * 
-		 * report = new ExtentReports( System.getProperty("user.dir")+
-		 * "\\src\\test\\resources\\Reports\\Extentreport\\" + value + new
-		 * SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())
-		 * + ".html");
-		 */ // report.loadConfig(new File(System.getProperty("user. dir") +
-			// "\\extent-config.xml"));
 
 	}
 
 	@AfterTest
 	public void flushTest() {
 		try {
-			/*
-			 * if(driver.findElement(home.buttonAccount).isDisplayed()) {
-			 * Click(home.buttonAccount,"clicked on account button"
-			 * ,"unable to click on account button"); sleepMethod(3000);
-			 * actionCilck(driver.findElement(home.linkSignoff),"signoff sucesful"
-			 * ,"Unable to do signoff"); }
-			 */
-
+		driver.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -193,131 +158,259 @@ public class TestBase implements baseMethods {
 	public static Logger logger = Logger.getLogger("devpinoyLogger");
 
 	@BeforeTest
-	public void setUp() {
-		if (driver == null) {
-			try {
-				fis = new FileInputStream(
-						System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\Config.properties");
-				// debug("Config properties file loaded");
-			} catch (FileNotFoundException e) {
-				logger.error("Exception thrown" + e);
-				e.printStackTrace();
-			}
-			try {
-				config.load(fis);
-				logger.debug("Config properties file loaded");
-			} catch (IOException e) {
-				e.printStackTrace();
-				logger.error("Exception thrown" + e);
-			}
-			try {
-				fis = new FileInputStream(
-						System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\EMAIL.properties");
+	public void setUp() {  if (driver == null) {
 
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			try {
-				EMAIL.load(fis);
-				logger.debug("Email file loaded !!!");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+        try {
 
-			try {
-				fis = new FileInputStream(
-						System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\Excel.properties");
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			try {
-				Excel.load(fis);
-				logger.debug("Excel file loaded !!!");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			try {
-				fis = new FileInputStream(
-						System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\jiraProp.properties");
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			try {
-				JiraProp.load(fis);
-				logger.debug("Jira file  loaded !!!");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			if (System.getenv("browser") != null && !System.getenv("browser").isEmpty()) {
-				browser = System.getenv("browser");
-			} else {
-				browser = config.getProperty("browser");
-			}
-			config.setProperty("browser1", browser);
+               fis = new FileInputStream(
 
-			if(!config.getProperty("browser").equals("")) {
-			if (config.getProperty("browser").equals("firefox") ) {
-				driver = new FirefoxDriver();
-			} else if (config.getProperty("browser").equals("chrome")) {
-				ChromeOptions chromeOptions = new ChromeOptions();
-				WebDriverManager.chromedriver().setup();
-				driver = new ChromeDriver(chromeOptions);
-				logger.info("browser launched" + config.getProperty("browser"));
-			} else if (config.getProperty("browser").equals("ie") ) {
-				System.setProperty("webdriver.ie.driver",
-						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\IEDriverServer.exe");
-				driver = new InternetExplorerDriver();
-				logger.info("browser launched" + config.getProperty("browser"));
-				logger.warn("Using" + config.getProperty("browser") + "cannot close the browser");
-			} else if (config.getProperty("browser").equals("edge")) {
-				System.setProperty("webdriver.edge.driver",
-						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\msedgedriver.exe");
-				driver = new EdgeDriver();
-				logger.info("browser launched" + config.getProperty("browser"));
-			} else if ( config.getProperty("browser").equals("chromeheadless")) {
+                            System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\Config.properties");
 
-				logger.info("chrome headless browser launched");
-				System.setProperty("webdriver.chrome.driver",
-						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\chromedriver.exe");
-				ChromeOptions options = new ChromeOptions();
-				WebDriverManager.chromedriver().setup();
-				options.addArguments("--headless");
-				driver = new ChromeDriver(options);
-			}
-			else if(browserlaunch.equals("incognito")
-					|| config.getProperty("browser").equals("incognito")) {
+        } catch (FileNotFoundException e) {
 
-				logger.info("chrome headless browser launched");
-				System.setProperty("webdriver.chrome.driver",
-						System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\chromedriver.exe");
-				ChromeOptions options = new ChromeOptions();
-				WebDriverManager.chromedriver().setup();
-				options.addArguments("incognito");
-				driver = new ChromeDriver(options);
-			}
-			}
-			else
-			{
-				System.out.println("cannot move forward as browser not launched");
-			}
-			
-			driver.get(config.getProperty("testsiteurl"));
-			logger.info("browser launched " + config.getProperty("browser") + "Navigated to : "
-					+ config.getProperty("testsiteurl"));
-			driver.manage().window().maximize();
-			logger.info("browser maximaized ");
-			/*
-			 * driver.manage().timeouts().implicitlyWait(Integer.parseInt(config.getProperty
-			 * ("implicit.wait")), TimeUnit.SECONDS);
-			 */
+               logger.error("Exception thrown" + e);
 
-			/*
-			 * 
-			 * Worest branch
-			 */
-		}
+               e.printStackTrace();
+
+        }
+
+        try {
+
+               config.load(fis);
+
+               logger.debug("Config properties file loaded");
+
+        } catch (IOException e) {
+
+               e.printStackTrace();
+
+               logger.error("Exception thrown" + e);
+
+        }
+
+        try {
+
+               fis = new FileInputStream(
+
+                            System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\EMAIL.properties");
+
+
+
+        } catch (FileNotFoundException e) {
+
+               e.printStackTrace();
+
+        }
+
+        try {
+
+               EMAIL.load(fis);
+
+               logger.debug("Email file loaded !!!");
+
+        } catch (IOException e) {
+
+               e.printStackTrace();
+
+        }
+
+
+
+        try {
+
+               fis = new FileInputStream(
+
+                            System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\Excel.properties");
+
+        } catch (FileNotFoundException e) {
+
+               e.printStackTrace();
+
+        }
+
+        try {
+
+               Excel.load(fis);
+
+               logger.debug("Excel file loaded !!!");
+
+        } catch (IOException e) {
+
+               e.printStackTrace();
+
+        }
+
+      
+        if (System.getenv("browser") != null && !System.getenv("browser").isEmpty()) {
+
+               browser = System.getenv("browser");
+
+        } else {
+
+               browser = config.getProperty("browser");
+
+        }
+
+        config.setProperty("browser1", browser);
+
+
+
+        if (!config.getProperty("browser").equals("")) {
+
+               if (config.getProperty("browser").equals("firefox")) {
+
+                     // driver = new FirefoxDriver();
+
+                     WebDriverManager.firefoxdriver().setup();
+
+                     driver = new FirefoxDriver();
+
+
+
+               } else if (config.getProperty("browser").equals("chrome")) {
+
+                     ChromeOptions chromeOptions = new ChromeOptions();
+
+//                      WebDriverManager.chromedriver().clearDriverCache().setup();
+                      WebDriverManager.chromedriver().setup();
+
+  //                    WebDriverManager.chromedriver().clearResolutionCache().setup();
+
+                     driver = new ChromeDriver(chromeOptions);
+
+
+
+                     logger.info("browser launched" + config.getProperty("browser"));
+
+               } else if (config.getProperty("browser").equals("ie")) {
+
+                     System.setProperty("webdriver.ie.driver",
+
+                                   System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\IEDriverServer.exe");
+
+                     WebDriverManager.iedriver().setup();
+
+                     driver = new InternetExplorerDriver();
+
+                     logger.info("browser launched" + config.getProperty("browser"));
+
+
+
+                     logger.warn("Using" + config.getProperty("browser") + "cannot close the browser");
+
+               } else if (config.getProperty("browser").equals("edge")) {
+                     i++;
+
+                     logger.info("incremental count" + i++);
+
+                     EdgeOptions edgeoption = new EdgeOptions();
+
+                     WebDriverManager.edgedriver().setup();
+                     driver = new EdgeDriver(edgeoption);
+                     edgeoption.addArguments("--disable-web-security");
+                     edgeoption.addArguments("--no-sandbox");
+                     edgeoption.addArguments("--disable-dev-shm-usage");
+
+
+                     logger.info("browser launched" + config.getProperty("browser"));
+
+               } else if (config.getProperty("browser").equals("chromeheadless")) {
+
+
+
+                     logger.info("chrome headless browser launched");
+
+                     ChromeOptions options = new ChromeOptions();
+
+                     WebDriverManager.chromedriver().setup();
+
+                     options.addArguments("--headless");
+
+                     options.addArguments("--window-size=1920,1080");
+
+                     options.addArguments("--disable-extensions");
+
+                     options.addArguments("--proxy-server='direct://'");
+
+                     options.addArguments("--proxy-bypass-list=*");
+
+                     options.addArguments("--disable-gpu");
+
+                     options.addArguments("--proxy-bypass-list=*");
+
+                     options.addArguments("--proxy-bypass-list=*");
+                     driver = new ChromeDriver(options);
+
+               } else if (config.getProperty("browser").equals("incognito")) {
+
+
+
+                     logger.info("Incognito browser launched");
+                     ChromeOptions options = new ChromeOptions();
+
+                     WebDriverManager.chromedriver().setup();
+
+                     options.addArguments("incognito");
+
+                     driver = new ChromeDriver(options);
+
+               }
+
+
+
+               else if (config.getProperty("browser").equals("edgeheadless")) {
+
+                     EdgeOptions edgeoption = new EdgeOptions();
+
+                     WebDriverManager.edgedriver().setup();
+
+                     edgeoption.addArguments("--headless");
+
+                     edgeoption.addArguments("--window-size=1920,1080");
+
+                     edgeoption.addArguments("--disable-extensions");
+
+                     edgeoption.addArguments("--proxy-server='direct://'");
+
+                     edgeoption.addArguments("--proxy-bypass-list=*");
+
+                     edgeoption.addArguments("--disable-gpu");
+
+                     edgeoption.addArguments("--proxy-bypass-list=*");
+
+                     edgeoption.addArguments("--proxy-bypass-list=*");
+
+                     driver = new EdgeDriver(edgeoption);
+
+
+
+                     
+
+
+               } else {
+
+                     System.out.println("cannot move forward as browser not launched");
+
+               }
+
+
+
+               driver.get(config.getProperty("testsiteurl"));
+
+               logger.info("browser launched " + config.getProperty("browser") + "Navigated to : "
+
+                            + config.getProperty("testsiteurl"));
+
+               driver.manage().window().maximize();
+
+               logger.info("browser maximaized ");
+
+
+
+        }
 	}
+
+ }
 	
 
 	public static String getData(String SheetName, String ColName, String excelName) throws Exception {
