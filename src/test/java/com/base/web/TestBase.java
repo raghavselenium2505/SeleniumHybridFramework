@@ -113,7 +113,7 @@ public class TestBase implements baseMethods {
 	public static String Name;
 	public static int i;
 
-	public String xlsname = "ExcelSheet_1.xls";
+	public String xlsname = "TestDataConfiguration.xls";
 	static {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hhmmss");
 		System.setProperty("current.date.time", dateFormat.format(new Date()));
@@ -149,7 +149,7 @@ public class TestBase implements baseMethods {
 	@AfterTest
 	public void flushTest() {
 		try {
-		driver.close();
+		driver.quit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -269,14 +269,18 @@ public class TestBase implements baseMethods {
 
                } else if (config.getProperty("browser").equals("chrome")) {
 
-                     ChromeOptions chromeOptions = new ChromeOptions();
+					/*
+					 * ChromeOptions chromeOptions = new ChromeOptions();
+					 * 
+					 * WebDriverManager.chromedriver().clearDriverCache().setup();
+					 * WebDriverManager.chromedriver().setup();
+					 * 
+					 * WebDriverManager.chromedriver().clearResolutionCache().setup();
+					 * 
+					 * driver = new ChromeDriver(chromeOptions);
+					 */
+                     driver = new ChromeDriver();
 
-//                      WebDriverManager.chromedriver().clearDriverCache().setup();
-                      WebDriverManager.chromedriver().setup();
-
-  //                    WebDriverManager.chromedriver().clearResolutionCache().setup();
-
-                     driver = new ChromeDriver(chromeOptions);
 
 
 
@@ -461,7 +465,7 @@ public class TestBase implements baseMethods {
 		report.endTest(test);
 		report.flush();
 		emailOption();
-		driver.close();
+		driver.quit();
 
 	}
 
