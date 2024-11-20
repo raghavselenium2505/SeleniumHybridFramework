@@ -1,0 +1,14 @@
+Pipeline{
+Agent any
+
+			stages{
+			stage('compile Stage'){
+			steps{
+	withMaven(maven :'3.9.9')
+{
+		sh 'mvn clean compile'
+}
+}
+}
+}
+}

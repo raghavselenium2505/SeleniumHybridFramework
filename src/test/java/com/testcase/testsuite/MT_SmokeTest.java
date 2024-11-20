@@ -22,19 +22,19 @@ public class MT_SmokeTest extends TestBase {
 			test.log(LogStatus.INFO, "Click on Button login and close icon ");
 
 			waitforelement(1000);
-
+			logger.info("waiting for the login button");
 			home.click(home.buttonLogin, "Click on Button login", "Unable to click on Button Login");
-			
+			logger.info("clicking on login button");
 			waitforelement(1000);
 
 			home.click(home.iconClose, "Click on close icon", "Unable to close icon");
 
 			// test.log(LogStatus.INFO, "Click on cabs tab");
-			
-			//Flights
+
+			// Flights
 
 			test.log(LogStatus.INFO, "Click on Flights Header");
-			
+
 			home.click(home.headerFlights, "User able to click on Flights", "User unable to click on Flights");
 
 			waitforelement(1000);
@@ -42,11 +42,11 @@ public class MT_SmokeTest extends TestBase {
 			String flightsTitle = driver.getTitle();
 
 			home.getTitle(flightsTitle, "Webpage Title contain Flights", "Webpage Title doesn't contain Flights");
-			
-			//Hotels
-			
+
+			// Hotels
+
 			test.log(LogStatus.INFO, "Click on Hotels Header");
-			
+
 			home.click(home.headerHotels, "User able to click on Hotels", "User unable to click on Hotels");
 
 			waitforelement(1000);
@@ -54,35 +54,39 @@ public class MT_SmokeTest extends TestBase {
 			String hotelsTitle = driver.getTitle();
 
 			home.getTitle(hotelsTitle, "Webpage Title contain Hotels", "Webpage Title doesn't contain Hotels");
-			
-			//Homestays & Villas
-			
+
+			// Homestays & Villas
+
 			test.log(LogStatus.INFO, "Click on Homestays & Villas Header");
-			
-			home.click(home.headerHomestays, "User able to click on Homestays & Villas", "User unable to click on Homestays & Villas");
+
+			home.click(home.headerHomestays, "User able to click on Homestays & Villas",
+					"User unable to click on Homestays & Villas");
 
 			waitforelement(1000);
 
 			String homestaysTitle = driver.getTitle();
 
-			home.getTitle(homestaysTitle, "Webpage Title contain Homestays & Villas", "Webpage Title doesn't contain Homestays & Villas");
-			
-			//Holiday Packages
-			
+			home.getTitle(homestaysTitle, "Webpage Title contain Homestays & Villas",
+					"Webpage Title doesn't contain Homestays & Villas");
+
+			// Holiday Packages
+
 			test.log(LogStatus.INFO, "Click on Holiday Packages Header");
-			
-			home.click(home.headerHolidays, "User able to click on Holiday Packages", "User unable to click on Holiday Packages");
+
+			home.click(home.headerHolidays, "User able to click on Holiday Packages",
+					"User unable to click on Holiday Packages");
 
 			waitforelement(1000);
 
 			String holidaysTitle = driver.getTitle();
 
-			home.getTitle(holidaysTitle, "Webpage Title contain Holiday Packages", "Webpage Title doesn't contain Holiday Packages");
-			
-			//Trains
-			
+			home.getTitle(holidaysTitle, "Webpage Title contain Holiday Packages",
+					"Webpage Title doesn't contain Holiday Packages");
+
+			// Trains
+
 			test.log(LogStatus.INFO, "Click on Trains Header");
-			
+
 			home.click(home.headerTrain, "User able to click on Trains", "User unable to click on Trains");
 
 			waitforelement(1000);
@@ -90,11 +94,11 @@ public class MT_SmokeTest extends TestBase {
 			String trainsTitle = driver.getTitle();
 
 			home.getTitle(trainsTitle, "Webpage Title contain Trains", "Webpage Title doesn't contain Trains");
-			
-			//Buses
-			
+
+			// Buses
+
 			test.log(LogStatus.INFO, "Click on Buses Header");
-			
+
 			home.click(home.headerBuses, "User able to click on Buses", "User unable to click on Buses");
 
 			waitforelement(1000);
@@ -102,11 +106,11 @@ public class MT_SmokeTest extends TestBase {
 			String busesTitle = driver.getTitle();
 
 			home.getTitle(busesTitle, "Webpage Title contain Buses", "Webpage Title doesn't contain Buses");
-			
-			//Cabs
-			
+
+			// Cabs
+
 			test.log(LogStatus.INFO, "Click on Cabs Header");
-			
+
 			home.click(home.headerCab, "User able to click on Cabs", "User unable to click on Cabs");
 
 			waitforelement(1000);
@@ -114,31 +118,35 @@ public class MT_SmokeTest extends TestBase {
 			String cabsTitle = driver.getTitle();
 
 			home.getTitle(cabsTitle, "Webpage Title contain Cabs", "Webpage Title doesn't contain Cabs");
-			
-			//Forex Card & Currency
-			
+
+			// Forex Card & Currency
+
 			test.log(LogStatus.INFO, "Click on Forex Card & Currency Header");
-			
-			home.click(home.headerForex, "User able to click on Forex Card & Currency", "User unable to click on Forex Card & Currency");
+
+			home.click(home.headerForex, "User able to click on Forex Card & Currency",
+					"User unable to click on Forex Card & Currency");
 
 			waitforelement(1000);
 
 			String forexTitle = driver.getTitle();
 
-			home.getTitle(forexTitle, "Webpage Title contain Forex Card & Currency", "Webpage Title doesn't contain Forex Card & Currency");
-			
-			//Travel Insurance
-			
+			home.getTitle(forexTitle, "Webpage Title contain Forex Card & Currency",
+					"Webpage Title doesn't contain Forex Card & Currency");
+
+			// Travel Insurance
+
 			test.log(LogStatus.INFO, "Click on Travel Insurance Header");
-			
-			home.click(home.headerTravelInsurance, "User able to click on Travel Insurance", "User unable to click on Travel Insurance");
+
+			home.click(home.headerTravelInsurance, "User able to click on Travel Insurance",
+					"User unable to click on Travel Insurance");
 
 			waitforelement(1000);
 
 			String travelinsuranceTitle = driver.getTitle();
 
-			home.getTitle(travelinsuranceTitle, "Webpage Title contain Travel Insurance", "Webpage Title doesn't contain Travel Insurance");
-			
+			home.getTitle(travelinsuranceTitle, "Webpage Title contain Travel Insurance",
+					"Webpage Title doesn't contain Travel Insurance");
+
 		}
 
 		else {

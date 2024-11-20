@@ -13,14 +13,9 @@ interface homePage {
 
 public class MT_HomePage extends TestBase implements homePage {
 
-	// WebDriver driver;
 
 	public By iconClose = By.xpath("//span[contains(@class,'close')]");
 
-	// public By mobile=By.xpath("//input[contains(@placeholder,'Enter Mobile
-	// Number')]");
-
-	// public By continuebutton=By.xpath("//span[text()='Continue']");
 
 	public By buttonLogin = By.xpath("//li[@data-cy='account']");
 
