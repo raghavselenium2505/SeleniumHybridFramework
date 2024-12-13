@@ -3,11 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.testcase.Pages.SampleTest">
+      <class name="com.testcase.testsuite.ETeki_AddCandidate">
         <methods>
-          <include name="Test"/>
+          <include name="invalidAddCandidate"/>
+          <include name="ReportGeneration"/>
+          <include name="setUp"/>
+          <include name="flushTest"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- com.testcase.Pages.SampleTest -->
+      </class> <!-- com.testcase.testsuite.ETeki_AddCandidate -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

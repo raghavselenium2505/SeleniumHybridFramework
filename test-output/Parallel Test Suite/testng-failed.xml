@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Parallel Test Suite]">
-  <test name="Browser Tests(failed)">
-    <parameter name="browser" value="chrome"/>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Parallel Test Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Parallel Test(failed)">
     <classes>
-      <class name="com.testcase.testsuite.AmazonLogin_TC001">
+      <class name="com.testcase.testsuite.ETeki_JobCreation">
         <methods>
           <include name="ReportGeneration"/>
+          <include name="validCreateJob"/>
           <include name="setUp"/>
           <include name="flushTest"/>
           <include name="tearDown"/>
-          <include name="Amazon_Login_TC001"/>
         </methods>
-      </class> <!-- com.testcase.testsuite.AmazonLogin_TC001 -->
+      </class> <!-- com.testcase.testsuite.ETeki_JobCreation -->
+      <class name="com.testcase.testsuite.ETeki_AddCandidate">
+        <methods>
+          <include name="invalidAddCandidate"/>
+          <include name="validAddCandidate"/>
+          <include name="ReportGeneration"/>
+          <include name="setUp"/>
+          <include name="emptyAddCandidate"/>
+          <include name="flushTest"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.testcase.testsuite.ETeki_AddCandidate -->
+      <class name="com.testcase.testsuite.Eteki_EditJob">
+        <methods>
+          <include name="addCandidate"/>
+          <include name="ReportGeneration"/>
+          <include name="Eteki_EditJobInvalidJobFormat"/>
+          <include name="setUp"/>
+          <include name="Eteki_EditJobInvalidDate"/>
+          <include name="flushTest"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.testcase.testsuite.Eteki_EditJob -->
     </classes>
-  </test> <!-- Browser Tests(failed) -->
+  </test> <!-- Parallel Test(failed) -->
 </suite> <!-- Failed suite [Parallel Test Suite] -->

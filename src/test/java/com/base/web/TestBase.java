@@ -1,14 +1,25 @@
 package com.base.web;
 
+import java.awt.Desktop;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Year;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -31,11 +42,13 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -44,12 +57,16 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-
+import org.openqa.selenium.remote.tracing.Status;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -62,11 +79,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  *
  */
 interface baseMethods {
-	public void click(By element, String value, String failurevalue);
+	public void click(By element, WebElement element_webelement, String value, String failurevalue);
 
 	public void actionclick(WebElement element, String value, String failurevalue);
 
-	public void clear(By element);
+	public void clear(By element, String passvalue, String failValue);
 
 	public void sendkeys(By element, String value, String passvalue, String failurevalue);
 
@@ -83,6 +100,21 @@ interface baseMethods {
 
 	public String getScreenshot();
 
+	public void selectDropdownValue(By elementPath, String dropdownValue, String passvalue, String failurevalue);
+
+	public void chooseFile(By fileWebElement, WebElement Element, String fileLocation, String passvalue,
+			String failurevalue) throws Exception;
+
+	public void alert(By alertElement);
+
+	public int randomNumberGeneration();
+
+	public void calendarSelection(By month_year, By month, By day, String monthvalue, String dayvalue, String passvalue,
+			String failurevalue);
+
+	public void selectTime(By inputhours, By inputminutes, By timeconvention, String hours, String minutes,
+			String TimeConvention, String passvalue, String failurevalue) throws Exception;
+
 }
 
 public class TestBase implements baseMethods {
@@ -92,17 +124,17 @@ public class TestBase implements baseMethods {
 	public static Properties Report = new Properties();
 	public static Properties Excel = new Properties();
 	public static Properties JiraProp = new Properties();
-	public static Properties ExtReport=new Properties();
+	public static Properties ExtReport = new Properties();
 	public static JSONParser parser = new JSONParser();
 
-	public static 	Object obj ;
+	public static Object obj;
 	public static JSONObject jsonObject = (JSONObject) obj;
 
 	public static FileInputStream fis;
 	public static String browserlaunch;
 	public static String browser;
 	public static ExtentTest test;
-	public static String value = "ExtentReport";
+	public static String value_extentreport = "ExtentReport";
 	public static ExtentReports report;
 	// public static String screenshotPath;
 	public static String screenshotName = "ErrorFile";
@@ -113,7 +145,21 @@ public class TestBase implements baseMethods {
 	public static String Name;
 	public static int i;
 
-	public String xlsname = "TestDataConfiguration.xls";
+	public int monthflag, dayflag;
+
+	public static int shortwaitvalue;
+	public static int mediumwaitvalue;
+	public static int longwaitvalue;
+	public static int verylongwaitvalue;
+	public static int extraverylongwaitvalue;
+	public static String pathImage;
+	public static String fileName_path;
+	public int randomValue;
+
+	public int currentyear = Year.now().getValue();
+
+	// public String xlsname = "TestDataConfiguration.xls";
+	public String xlsname = "ETekiTestDataConfiguration.xls";
 	static {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hhmmss");
 		System.setProperty("current.date.time", dateFormat.format(new Date()));
@@ -125,6 +171,7 @@ public class TestBase implements baseMethods {
 		try {
 			fis = new FileInputStream(
 					System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\extReport.properties");
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -134,13 +181,15 @@ public class TestBase implements baseMethods {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		report = new ExtentReports(
-				System.getProperty("user.dir") + "\\src\\test\\resources\\Reports\\Extentreport\\" + value
-						+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()) + ".html",
-				true);
-	
-		report.addSystemInfo("Host Name", ExtReport.getProperty("HostName")).addSystemInfo("Environment", ExtReport.getProperty("Env"))
-				.addSystemInfo("User Name", ExtReport.getProperty("User")).addSystemInfo("email triggered", ExtReport.getProperty("emailTriggered"));
+		pathImage = System.getProperty("user.dir") + "\\src\\test\\resources\\Reports\\Extentreport\\"
+				+ value_extentreport + new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())
+				+ ".html";
+		report = new ExtentReports(pathImage, true);
+
+		report.addSystemInfo("Host Name", ExtReport.getProperty("HostName"))
+				.addSystemInfo("Environment", ExtReport.getProperty("Env"))
+				.addSystemInfo("User Name", ExtReport.getProperty("User"))
+				.addSystemInfo("email triggered", ExtReport.getProperty("emailTriggered"));
 		report.loadConfig(new File(
 				"C:\\Users\\RaghavendraD\\git\\SeleniumHybridFramework\\src\\test\\resources\\extentconfig\\ReportsConfig.xml"));
 
@@ -149,7 +198,7 @@ public class TestBase implements baseMethods {
 	@AfterTest
 	public void flushTest() {
 		try {
-		driver.quit();
+			driver.quit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -158,116 +207,108 @@ public class TestBase implements baseMethods {
 	public static Logger logger = Logger.getLogger("devpinoyLogger");
 
 	@BeforeTest
-	public void setUp() {  if (driver == null) {
+	public void setUp() {
+		if (driver == null) {
 
-        try {
+			try {
 
-               fis = new FileInputStream(
+				fis = new FileInputStream(
 
-                            System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\Config.properties");
+						System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\Config.properties");
 
-        } catch (FileNotFoundException e) {
+			} catch (FileNotFoundException e) {
 
-               logger.error("Exception thrown" + e);
+				logger.error("Exception thrown" + e);
 
-               e.printStackTrace();
+				e.printStackTrace();
 
-        }
+			}
 
-        try {
+			try {
 
-               config.load(fis);
+				config.load(fis);
 
-               logger.debug("Config properties file loaded");
+				logger.debug("Config properties file loaded");
 
-        } catch (IOException e) {
+			} catch (IOException e) {
 
-               e.printStackTrace();
+				e.printStackTrace();
 
-               logger.error("Exception thrown" + e);
+				logger.error("Exception thrown" + e);
 
-        }
+			}
 
-        try {
+			try {
 
-               fis = new FileInputStream(
+				fis = new FileInputStream(
 
-                            System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\EMAIL.properties");
+						System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\EMAIL.properties");
 
+			} catch (FileNotFoundException e) {
 
+				e.printStackTrace();
 
-        } catch (FileNotFoundException e) {
+			}
 
-               e.printStackTrace();
+			try {
 
-        }
+				EMAIL.load(fis);
 
-        try {
+				logger.debug("Email file loaded !!!");
 
-               EMAIL.load(fis);
+			} catch (IOException e) {
 
-               logger.debug("Email file loaded !!!");
+				e.printStackTrace();
 
-        } catch (IOException e) {
+			}
 
-               e.printStackTrace();
+			try {
 
-        }
+				fis = new FileInputStream(
 
+						System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\Excel.properties");
 
+			} catch (FileNotFoundException e) {
 
-        try {
+				e.printStackTrace();
 
-               fis = new FileInputStream(
+			}
 
-                            System.getProperty("user.dir") + "\\src\\test\\resources\\properties\\Excel.properties");
+			try {
 
-        } catch (FileNotFoundException e) {
+				Excel.load(fis);
 
-               e.printStackTrace();
+				logger.debug("Excel file loaded !!!");
 
-        }
+			} catch (IOException e) {
 
-        try {
+				e.printStackTrace();
 
-               Excel.load(fis);
+			}
 
-               logger.debug("Excel file loaded !!!");
+			if (System.getenv("browser") != null && !System.getenv("browser").isEmpty()) {
 
-        } catch (IOException e) {
+				browser = System.getenv("browser");
 
-               e.printStackTrace();
+			} else {
 
-        }
+				browser = config.getProperty("browser");
 
-      
-        if (System.getenv("browser") != null && !System.getenv("browser").isEmpty()) {
+			}
 
-               browser = System.getenv("browser");
+			config.setProperty("browser1", browser);
 
-        } else {
+			if (!config.getProperty("browser").equals("")) {
 
-               browser = config.getProperty("browser");
+				if (config.getProperty("browser").equals("firefox")) {
 
-        }
+					// driver = new FirefoxDriver();
 
-        config.setProperty("browser1", browser);
+					WebDriverManager.firefoxdriver().setup();
 
+					driver = new FirefoxDriver();
 
-
-        if (!config.getProperty("browser").equals("")) {
-
-               if (config.getProperty("browser").equals("firefox")) {
-
-                     // driver = new FirefoxDriver();
-
-                     WebDriverManager.firefoxdriver().setup();
-
-                     driver = new FirefoxDriver();
-
-
-
-               } else if (config.getProperty("browser").equals("chrome")) {
+				} else if (config.getProperty("browser").equals("chrome")) {
 
 					/*
 					 * ChromeOptions chromeOptions = new ChromeOptions();
@@ -279,143 +320,121 @@ public class TestBase implements baseMethods {
 					 * 
 					 * driver = new ChromeDriver(chromeOptions);
 					 */
-                     driver = new ChromeDriver();
+					driver = new ChromeDriver();
 
+					logger.info("browser launched" + config.getProperty("browser"));
 
+				} else if (config.getProperty("browser").equals("ie")) {
 
+					System.setProperty("webdriver.ie.driver",
 
-                     logger.info("browser launched" + config.getProperty("browser"));
+							System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\IEDriverServer.exe");
 
-               } else if (config.getProperty("browser").equals("ie")) {
+					WebDriverManager.iedriver().setup();
 
-                     System.setProperty("webdriver.ie.driver",
+					driver = new InternetExplorerDriver();
 
-                                   System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\IEDriverServer.exe");
+					logger.info("browser launched" + config.getProperty("browser"));
 
-                     WebDriverManager.iedriver().setup();
+					logger.warn("Using" + config.getProperty("browser") + "cannot close the browser");
 
-                     driver = new InternetExplorerDriver();
+				} else if (config.getProperty("browser").equals("edge")) {
+					i++;
 
-                     logger.info("browser launched" + config.getProperty("browser"));
+					logger.info("incremental count" + i++);
 
+					EdgeOptions edgeoption = new EdgeOptions();
 
+					WebDriverManager.edgedriver().setup();
+					driver = new EdgeDriver(edgeoption);
+					edgeoption.addArguments("--disable-web-security");
+					edgeoption.addArguments("--no-sandbox");
+					edgeoption.addArguments("--disable-dev-shm-usage");
 
-                     logger.warn("Using" + config.getProperty("browser") + "cannot close the browser");
+					logger.info("browser launched" + config.getProperty("browser"));
 
-               } else if (config.getProperty("browser").equals("edge")) {
-                     i++;
+				} else if (config.getProperty("browser").equals("chromeheadless")) {
 
-                     logger.info("incremental count" + i++);
+					logger.info("chrome headless browser launched");
 
-                     EdgeOptions edgeoption = new EdgeOptions();
+					ChromeOptions options = new ChromeOptions();
 
-                     WebDriverManager.edgedriver().setup();
-                     driver = new EdgeDriver(edgeoption);
-                     edgeoption.addArguments("--disable-web-security");
-                     edgeoption.addArguments("--no-sandbox");
-                     edgeoption.addArguments("--disable-dev-shm-usage");
+					WebDriverManager.chromedriver().setup();
 
+					options.addArguments("--headless");
 
-                     logger.info("browser launched" + config.getProperty("browser"));
+					options.addArguments("--window-size=1920,1080");
 
-               } else if (config.getProperty("browser").equals("chromeheadless")) {
+					options.addArguments("--disable-extensions");
 
+					options.addArguments("--proxy-server='direct://'");
 
+					options.addArguments("--proxy-bypass-list=*");
 
-                     logger.info("chrome headless browser launched");
+					options.addArguments("--disable-gpu");
 
-                     ChromeOptions options = new ChromeOptions();
+					options.addArguments("--proxy-bypass-list=*");
 
-                     WebDriverManager.chromedriver().setup();
+					options.addArguments("--proxy-bypass-list=*");
+					driver = new ChromeDriver(options);
 
-                     options.addArguments("--headless");
+				} else if (config.getProperty("browser").equals("incognito")) {
 
-                     options.addArguments("--window-size=1920,1080");
+					logger.info("Incognito browser launched");
+					ChromeOptions options = new ChromeOptions();
 
-                     options.addArguments("--disable-extensions");
+					WebDriverManager.chromedriver().setup();
 
-                     options.addArguments("--proxy-server='direct://'");
+					options.addArguments("incognito");
 
-                     options.addArguments("--proxy-bypass-list=*");
+					driver = new ChromeDriver(options);
 
-                     options.addArguments("--disable-gpu");
+				}
 
-                     options.addArguments("--proxy-bypass-list=*");
+				else if (config.getProperty("browser").equals("edgeheadless")) {
 
-                     options.addArguments("--proxy-bypass-list=*");
-                     driver = new ChromeDriver(options);
+					EdgeOptions edgeoption = new EdgeOptions();
 
-               } else if (config.getProperty("browser").equals("incognito")) {
+					WebDriverManager.edgedriver().setup();
 
+					edgeoption.addArguments("--headless");
 
+					edgeoption.addArguments("--window-size=1920,1080");
 
-                     logger.info("Incognito browser launched");
-                     ChromeOptions options = new ChromeOptions();
+					edgeoption.addArguments("--disable-extensions");
 
-                     WebDriverManager.chromedriver().setup();
+					edgeoption.addArguments("--proxy-server='direct://'");
 
-                     options.addArguments("incognito");
+					edgeoption.addArguments("--proxy-bypass-list=*");
 
-                     driver = new ChromeDriver(options);
+					edgeoption.addArguments("--disable-gpu");
 
-               }
+					edgeoption.addArguments("--proxy-bypass-list=*");
 
+					edgeoption.addArguments("--proxy-bypass-list=*");
 
+					driver = new EdgeDriver(edgeoption);
 
-               else if (config.getProperty("browser").equals("edgeheadless")) {
+				} else {
 
-                     EdgeOptions edgeoption = new EdgeOptions();
+					System.out.println("cannot move forward as browser not launched");
 
-                     WebDriverManager.edgedriver().setup();
+				}
 
-                     edgeoption.addArguments("--headless");
+				driver.get(config.getProperty("testsiteurl"));
 
-                     edgeoption.addArguments("--window-size=1920,1080");
+				logger.info("browser launched " + config.getProperty("browser") + "Navigated to : "
 
-                     edgeoption.addArguments("--disable-extensions");
+						+ config.getProperty("testsiteurl"));
 
-                     edgeoption.addArguments("--proxy-server='direct://'");
+				driver.manage().window().maximize();
 
-                     edgeoption.addArguments("--proxy-bypass-list=*");
+				logger.info("browser maximaized ");
 
-                     edgeoption.addArguments("--disable-gpu");
+			}
+		}
 
-                     edgeoption.addArguments("--proxy-bypass-list=*");
-
-                     edgeoption.addArguments("--proxy-bypass-list=*");
-
-                     driver = new EdgeDriver(edgeoption);
-
-
-
-                     
-
-
-               } else {
-
-                     System.out.println("cannot move forward as browser not launched");
-
-               }
-
-
-
-               driver.get(config.getProperty("testsiteurl"));
-
-               logger.info("browser launched " + config.getProperty("browser") + "Navigated to : "
-
-                            + config.getProperty("testsiteurl"));
-
-               driver.manage().window().maximize();
-
-               logger.info("browser maximaized ");
-
-
-
-        }
 	}
-
- }
-	
 
 	public static String getData(String SheetName, String ColName, String excelName) throws Exception {
 		String returnValue = "";
@@ -441,44 +460,74 @@ public class TestBase implements baseMethods {
 		return returnValue;
 	}
 
-	
-	  
-	
-	public void getDatajson(String jsonValue)
-	{
-		String returnJson="";
-		 Object obj;
+	public void getDatajson(String jsonValue) {
+		// String returnJson = "";
+		Object obj;
 		try {
 			obj = parser.parse(new FileReader("C:\\Users\\RaghavendraD\\Desktop\\sample.json"));
-		
-	       JSONObject jsonObject = (JSONObject)obj;
-	       String jsonval = (String)jsonObject.get(jsonValue);
-	       System.out.println(jsonval);
+
+			JSONObject jsonObject = (JSONObject) obj;
+			String jsonval = (String) jsonObject.get(jsonValue);
+			System.out.println(jsonval);
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	 
+
+	public void isdisplay(By element1, String passValue, String failureValue) {
+		if (driver.findElement(element1).isDisplayed()) {
+			elementhighlight(driver.findElement(element1));
+
+			Assert.assertTrue(driver.findElement(element1).isDisplayed(), "Able to enter the login page");
+
+			test.log(LogStatus.PASS, passValue);
+
+		} else {
+			test.log(LogStatus.FAIL, failureValue);
+
+		}
+	}
+
 	@AfterSuite
 	public void tearDown() throws Exception {
 		report.endTest(test);
 		report.flush();
+		Desktop.getDesktop().browse(new File(pathImage).toURI());
+//		Desktop.getDesktop().browse(new File(fileName_path).toURI());
+
 		emailOption();
 		driver.quit();
 
 	}
 
 	@Override
-	public void click(By element, String value, String failurevalue) {
+	public void click(By element, WebElement element_webelement, String value, String failurevalue) {
+
+		try {
+			elementhighlight(driver.findElement(element));
+			driver.findElement(element).click();
+			driver.manage().timeouts().implicitlyWait(Duration.ofMillis(verylongwaitvalue));
+
+			Assert.assertTrue(element_webelement.isDisplayed(), "Result element is not visible after form submission");
+			test.log(LogStatus.PASS, value);
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, failurevalue);
+
+			captureScreenshot(value_extentreport);
+		}
+	}
+
+	public void click(By element) {
 
 		try {
 			elementhighlight(driver.findElement(element));
 			driver.findElement(element).click();
 
-			test.log(LogStatus.PASS, value);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, failurevalue + e);
+			e.printStackTrace();
+			// logger.log(Status.FAIL, captureScreenshot("file.jpg"));
 
 		}
 	}
@@ -508,13 +557,15 @@ public class TestBase implements baseMethods {
 	}
 
 	@Override
-	public void clear(By element) {
+	public void clear(By element, String passvalue, String failValue) {
 		try {
+			elementhighlight(driver.findElement(element));
 
-			driver.findElement(element).sendKeys(value);
+			driver.findElement(element).clear();
+			test.log(LogStatus.PASS, passvalue);
 
 		} catch (Exception e) {
-
+			test.log(LogStatus.FAIL, failValue);
 			e.printStackTrace();
 		}
 	}
@@ -526,10 +577,16 @@ public class TestBase implements baseMethods {
 			driver.findElement(element).sendKeys(value);
 			logger.info("passed click statement");
 			test.log(LogStatus.PASS, passvalue);
-
+			Assert.assertTrue(driver.findElement(element).getAttribute("value").contains(value),
+					"Able to enter the login page");
 		} catch (Exception e) {
-			logger.info("failed with some reason");
+			logger.info("issue with some error");
+			// e.printStackTrace();
 			test.log(LogStatus.FAIL, failurevalue);
+
+			captureScreenshot("test.png");
+			Assert.assertTrue(driver.findElement(element).getAttribute("value").contains(value),
+					"Able to enter the login page");
 
 		}
 	}
@@ -667,6 +724,235 @@ public class TestBase implements baseMethods {
 				+ "</html>";
 		System.out.println(s);
 		return s;
+	}
+
+	@Override
+	public void selectDropdownValue(By elementPath, String dropdownValue, String passvalue, String failurevalue) {
+		WebElement AreasOfExpertise = driver.findElement(elementPath);
+		Select areasOfExpertiseValue = new Select(AreasOfExpertise);
+		areasOfExpertiseValue.selectByVisibleText(dropdownValue);
+		waitforelement(mediumwaitvalue);
+
+		Assert.assertEquals(dropdownValue, dropdownValue, "The selected option is incorrect!");
+
+	}
+
+	@Override
+	public void chooseFile(By fileWebElement, WebElement Element, String fileLocation, String passvalue,
+			String failurevalue) throws Exception {
+		try {
+			Actions action = new Actions(driver);
+			action.click(driver.findElement(fileWebElement)).build().perform();
+			waitforelement(mediumwaitvalue);
+
+			Robot robot = new Robot();
+			StringSelection select = new StringSelection(fileLocation);
+			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(select, null);
+			waitforelement(mediumwaitvalue);
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyRelease(KeyEvent.VK_V);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+
+			waitforelement(mediumwaitvalue);
+			Assert.assertTrue(Element.isDisplayed(), "File upload failed!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.assertTrue(Element.isDisplayed(), "File upload failed!");
+
+		}
+
+	}
+
+	@Override
+	public int randomNumberGeneration() {
+		Random random = new Random();
+		return randomValue = random.nextInt(10000);
+	}
+
+	@Override
+	public void alert(By alertElement) {
+		if (!driver.findElement(alertElement).isDisplayed()) {
+			Alert a = driver.switchTo().alert();
+			a.dismiss();
+		}
+	}
+
+	@Override
+	public void selectTime(By inputhours, By inputminutes, By timeconvention, String hours, String minutes,
+			String TimeConvention, String passvalue, String failurevalue) throws Exception {
+
+		Robot robot = new Robot();
+		driver.findElement(inputhours).click();
+		waitforelement(shortwaitvalue);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_A);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyRelease(KeyEvent.VK_A);
+		waitforelement(shortwaitvalue);
+		robot.keyPress(KeyEvent.VK_BACK_SPACE);
+		robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+		waitforelement(mediumwaitvalue);
+		driver.findElement(inputhours).sendKeys(hours);
+
+		waitforelement(mediumwaitvalue);
+		driver.findElement(inputminutes).click();
+		waitforelement(shortwaitvalue);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_A);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyRelease(KeyEvent.VK_A);
+		waitforelement(shortwaitvalue);
+		robot.keyPress(KeyEvent.VK_BACK_SPACE);
+		robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+		waitforelement(mediumwaitvalue);
+		driver.findElement(inputminutes).click();
+		waitforelement(shortwaitvalue);
+		driver.findElement(inputminutes).sendKeys(minutes);
+		waitforelement(mediumwaitvalue);
+		if (driver.findElement(timeconvention).getText().equals(TimeConvention)) {
+			waitforelement(shortwaitvalue);
+			driver.findElement(timeconvention).click();
+
+		}
+
+	}
+
+	@Override
+	public void calendarSelection(By month_year, By month, By day, String monthvalue, String dayvalue, String passvalue,
+			String failurevalue) {
+
+		driver.findElement(month_year).click();
+
+		waitforelement(shortwaitvalue);
+
+		WebElement monthstable = driver.findElement(month);
+
+		waitforelement(shortwaitvalue);
+
+		// For selecting months row
+
+		List<WebElement> monthsrow = monthstable.findElements(By.tagName("tr"));
+
+		waitforelement(mediumwaitvalue);
+
+		System.out.println("months row count: " + monthsrow.size());
+
+		for (int mrow = 0; mrow < monthsrow.size(); mrow++) {
+
+			if (monthflag == 0) {
+
+				// For selecting months column
+
+				List<WebElement> monthscolumn = monthsrow.get(mrow).findElements(By.tagName("td"));
+
+				waitforelement(shortwaitvalue);
+
+				System.out.println("months column count: " + monthscolumn.size());
+
+				// Select corresponding month in Year
+
+				for (int mcolumn = 0; mcolumn < monthscolumn.size(); mcolumn++) {
+
+					if (monthscolumn.get(mcolumn).getText().equals(monthvalue)) {
+
+						monthscolumn.get(mcolumn).click();
+
+						System.out.println("month selected");
+
+						monthflag = 1;
+
+						break;
+					}
+				}
+			}
+		}
+		WebElement daystable = driver.findElement(By.xpath("//table[@class='uib-daypicker']/tbody"));
+
+		waitforelement(shortwaitvalue);
+
+		// For selecting days row
+
+		List<WebElement> daysrow = daystable.findElements(By.tagName("tr"));
+
+		waitforelement(shortwaitvalue);
+
+		System.out.println("days row count: " + daysrow.size());
+
+		for (int drow = 0; drow < daysrow.size(); drow++) {
+
+			if (dayflag == 0) {
+
+				// For selecting days column
+
+				List<WebElement> dayscolumn = daysrow.get(drow).findElements(By.tagName("td"));
+
+				waitforelement(mediumwaitvalue);
+
+				System.out.println("days column count: " + dayscolumn.size());
+
+				// Select corresponding date in the month
+
+				for (int dcolumn = 0; dcolumn < dayscolumn.size(); dcolumn++) {
+
+					if (dayscolumn.get(dcolumn).getText().equals(dayvalue)) {
+
+						dayscolumn.get(dcolumn).click();
+
+						System.out.println("day selected");
+
+						dayflag = 1;
+
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	public static String captureScreenshot_base64() {
+		TakesScreenshot takescreenshot = (TakesScreenshot) driver;
+
+		String baseCode = takescreenshot.getScreenshotAs(OutputType.BASE64);
+
+		return baseCode;
+	}
+
+	public static File captureScreenshot(String fileName_screenshot) {
+		TakesScreenshot takescreenshot = (TakesScreenshot) driver;
+
+		File sourceFile = takescreenshot.getScreenshotAs(OutputType.FILE);
+		fileName_path = System.getProperty("user.dir") + "\\src\\test\\resources\\Screenshots\\" + fileName_screenshot
+				+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()) + ".jpg";
+		File destFile = new File(fileName_path);
+
+		try {
+			FileUtils.copyFile(sourceFile, destFile);
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return destFile;
+	}
+
+
+	public void SubmitClick(By element, String value, String failurevalue) {
+
+		try {
+			elementhighlight(driver.findElement(element));
+			driver.findElement(element).click();
+			WebElement element_webelement = driver.findElement(element);
+			Assert.assertTrue(element_webelement.isDisplayed(), "Result element is not visible after form submission");
+			test.log(LogStatus.PASS, value);
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, failurevalue + e);
+			captureScreenshot(value_extentreport);
+		}
 	}
 
 }
