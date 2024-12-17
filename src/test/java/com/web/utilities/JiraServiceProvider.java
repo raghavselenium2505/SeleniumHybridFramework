@@ -21,7 +21,7 @@ public class JiraServiceProvider extends TestBase {
      
      
      public JiraServiceProvider() {
-    	 if(JiraProp.getProperty("jiraEnabled").equals("N"))
+    	 if(JiraProp.getProperty("jiraEnabled").equals("Y"))
          {
         	 
         this. JiraUrl=JiraProp.getProperty("jiraUrl");

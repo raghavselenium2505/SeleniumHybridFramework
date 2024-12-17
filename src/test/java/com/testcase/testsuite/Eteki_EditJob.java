@@ -1,6 +1,5 @@
 package com.testcase.testsuite;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,7 +12,6 @@ import com.testcase.Pages.ETeki_HomePage;
 import com.testcase.Pages.ETeki_JobsPage;
 import com.testcase.Pages.ETeki_LoginPage;
 import com.testcase.Pages.ETeki_OpenJobsPage;
-import com.testcase.Pages.ETeki_UsersPage;
 
 public class Eteki_EditJob extends TestBase {
 
@@ -28,7 +26,8 @@ public class Eteki_EditJob extends TestBase {
 
 		test = report.startTest(getData("EditJobPage", "Jira_Story_Name", xlsname));
 		try {
-			if (getData("Dashboard", "EditJobInvalidDate", xlsname).equalsIgnoreCase("N")) {
+			if (getData("Dashboard", "EditJobInvalidDate", xlsname).equalsIgnoreCase("N"))
+			{
 				test.log(LogStatus.INFO, "Enter valid Login Credentails.");
 
 				ETeki_LoginPage loginpage = new ETeki_LoginPage();

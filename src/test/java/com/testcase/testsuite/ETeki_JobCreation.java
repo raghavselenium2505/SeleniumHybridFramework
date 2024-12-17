@@ -13,7 +13,7 @@ import com.testcase.Pages.ETeki_LoginPage;
 import com.testcase.Pages.ETeki_OpenJobsPage;
 import com.testcase.Pages.ETeki_UsersPage;
 
-public class ETeki_JobCreation extends TestBase {
+public class ETeki_JobCreation extends TestBase{
 	@Test(priority=2)
 	public void validCreateJob() {
 
