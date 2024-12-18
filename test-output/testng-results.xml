@@ -2,36 +2,36 @@
 <testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-12-17T11:35:55 IST" name="Default suite" finished-at="2024-12-17T11:36:06 IST" duration-ms="10097">
+  <suite started-at="2024-12-17T18:04:37 IST" name="Default suite" finished-at="2024-12-17T18:06:05 IST" duration-ms="87380">
     <groups>
     </groups>
-    <test started-at="2024-12-17T11:35:55 IST" name="Default test" finished-at="2024-12-17T11:36:06 IST" duration-ms="10097">
+    <test started-at="2024-12-17T18:04:37 IST" name="Default test" finished-at="2024-12-17T18:06:05 IST" duration-ms="87380">
       <class name="com.testcase.testsuite.ETeki_Login">
-        <test-method is-config="true" signature="ReportGeneration()[pri:0, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T11:35:55 IST" name="ReportGeneration" finished-at="2024-12-17T11:35:55 IST" duration-ms="140" status="PASS">
+        <test-method is-config="true" signature="ReportGeneration()[pri:0, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T18:04:37 IST" name="ReportGeneration" finished-at="2024-12-17T18:04:37 IST" duration-ms="253" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- ReportGeneration -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T11:35:55 IST" name="setUp" finished-at="2024-12-17T11:36:05 IST" duration-ms="9277" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T18:04:37 IST" name="setUp" finished-at="2024-12-17T18:04:49 IST" duration-ms="12025" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="eTekiValidLogin()[pri:10, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T11:36:05 IST" name="eTekiValidLogin" finished-at="2024-12-17T11:36:05 IST" duration-ms="258" status="PASS">
+        <test-method signature="eTekiValidLogin()[pri:10, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T18:04:49 IST" name="eTekiValidLogin" finished-at="2024-12-17T18:05:21 IST" duration-ms="31764" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- eTekiValidLogin -->
-        <test-method signature="eTekiEmptyLogin()[pri:11, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T11:36:05 IST" name="eTekiEmptyLogin" finished-at="2024-12-17T11:36:05 IST" duration-ms="20" status="PASS">
+        <test-method signature="eTekiEmptyLogin()[pri:11, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T18:05:21 IST" name="eTekiEmptyLogin" finished-at="2024-12-17T18:05:35 IST" duration-ms="13637" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- eTekiEmptyLogin -->
-        <test-method signature="eTekiInvalidLogin()[pri:12, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T11:36:05 IST" name="eTekiInvalidLogin" finished-at="2024-12-17T11:36:05 IST" duration-ms="9" status="PASS">
+        <test-method signature="eTekiInvalidLogin()[pri:12, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T18:05:35 IST" name="eTekiInvalidLogin" finished-at="2024-12-17T18:06:04 IST" duration-ms="28995" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- eTekiInvalidLogin -->
-        <test-method is-config="true" signature="flushTest()[pri:0, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T11:36:05 IST" name="flushTest" finished-at="2024-12-17T11:36:06 IST" duration-ms="478" status="PASS">
+        <test-method is-config="true" signature="flushTest()[pri:0, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T18:06:04 IST" name="flushTest" finished-at="2024-12-17T18:06:05 IST" duration-ms="837" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- flushTest -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T11:36:06 IST" name="tearDown" finished-at="2024-12-17T11:36:07 IST" duration-ms="934" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.testcase.testsuite.ETeki_Login@62656be4]" started-at="2024-12-17T18:06:05 IST" name="tearDown" finished-at="2024-12-17T18:06:06 IST" duration-ms="1460" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
