@@ -34,9 +34,7 @@ pipeline {
                 script {
                     // Find the latest report file
                     def reportFile = bat(script: '''
-                        for /f "delims=" %%i in ('dir /b /o-d src\\test\\resources\\Reports\\Extentreport\\extentreport_*.html') do @echo %%i & exit /b
-                    ''', returnStdout: true).trim()
-                    
+                        for /f "delims=" %%i in ('dir /b /o-d src\\test\\resources\\Reports\\Extentreport\\extentreport_*.html')
                     echo "Latest report file: ${reportFile}"
 
                     // Publish the latest report
