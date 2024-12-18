@@ -27,22 +27,29 @@ pipeline {
             bat 'mvn test'
          }
       }
-   stage('Publish Extent Report') {
+        stage('Publish Latest Extent Report') {
             steps {
-                echo 'Publishing Extent Report...'
-                publishHTML(target: [
-                    reportDir: 'target',
-                    reportFiles: 'extent-report.html',
-                    reportName: 'Extent Report'
-                ])
+                echo 'Finding the latest Extent Report...'
+                script {
+                    // Find the latest file in the Reports directory
+                    def reportFile = bat(script: 'for /f "delims=" %i in (\'dir /b /o-d src\\test\\resources\\Reports\\Extentreport\\extentreport_*.html\') do @echo %i', returnStdout: true).trim()
+                    echo "Latest report file: ${reportFile}"
+                    
+                    // Publish the report
+                    publishHTML(target: [
+                        reportDir: 'src/test/resources/Reports/Extentreport',
+                        reportFiles: reportFile,
+                        reportName: 'Extent Report'
+                    ])
+                }
             }
         }
     }
 
     post {
         always {
-            echo 'Archiving Extent Report...'
-            archiveArtifacts artifacts: '**/target/extent-report.html', fingerprint: true
+            echo 'Archiving all Extent Reports...'
+            archiveArtifacts artifacts: 'src/test/resources/Reports/Extentreport/*.html', fingerprint: true
         }
         success {
             echo 'Pipeline completed successfully!'
