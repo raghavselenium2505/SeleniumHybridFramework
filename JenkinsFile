@@ -9,12 +9,7 @@ pipeline {
    
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                echo 'Checking out code from Git repository...'
-                git branch: 'amzur_pipeline_branch', url: 'https://github.com/raghavselenium2505/SeleniumHybridFramework.git'
-            }
-        }
+      
 
         stage('Build Project') {
             steps {
