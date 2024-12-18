@@ -37,7 +37,7 @@ pipeline {
                     
                     // Publish the report
                     publishHTML(target: [
-                        reportDir: 'src/test/resources/Reports/Extentreport',
+                        reportDir: 'C:/Users/RaghavendraD/git/AutomationFramework/SeleniumHybridFramework/src/test/resources/Reports/Extentreport',
                         reportFiles: reportFile,
                         reportName: 'Extent Report'
                     ])
@@ -49,7 +49,7 @@ pipeline {
     post {
         always {
             echo 'Archiving all Extent Reports...'
-            archiveArtifacts artifacts: 'src/test/resources/Reports/Extentreport/*.html', fingerprint: true
+            archiveArtifacts artifacts: 'C:/Users/RaghavendraD/git/AutomationFramework/SeleniumHybridFramework/src/test/resources/Reports/Extentreport/ExtentReport*.html', fingerprint: true
         }
         success {
             echo 'Pipeline completed successfully!'
