@@ -1,12 +1,19 @@
 pipeline {
-    agent any // Run on any available Jenkins agent
+    agent any
 
     tools {
-        maven 'MAVEN_HOME'    // Maven tool configured in Jenkins
-        jdk 'JAVA_HOME'      // JDK tool configured in Jenkins
+        maven 'MAVEN_HOME'
+        jdk 'JAVA_HOME'
     }
 
     stages {
+        stage('Clean Workspace') {
+            steps {
+                echo 'Cleaning workspace...'
+                deleteDir() // This will clean the current workspace
+            }
+        }
+
         stage('Checkout Code') {
             steps {
                 echo 'Checking out code from Git repository...'
@@ -26,37 +33,6 @@ pipeline {
                 echo 'Running Selenium tests...'
                 sh 'mvn test'
             }
-        }
-
-        stage('Publish Test Results') {
-            steps {
-                echo 'Publishing JUnit test results...'
-                junit '**/target/surefire-reports/*.xml' // Publish JUnit XML results
-            }
-        }
-
-        stage('Publish HTML Report') {
-            steps {
-                echo 'Publishing Selenium HTML reports...'
-                publishHTML(target: [
-                    reportDir: 'target/surefire-reports',
-                    reportFiles: 'index.html',
-                    reportName: 'Selenium Test Report'
-                ])
-            }
-        }
-    }
-
-    post {
-        always {
-            echo 'Archiving build artifacts...'
-            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-        }
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed. Check the logs for details.'
         }
     }
 }
