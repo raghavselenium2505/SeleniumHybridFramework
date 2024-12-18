@@ -14,7 +14,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 echo 'Checking out code...'
-                git branch: 'Radhika_new_Branch', url: 'https://github.com/raghavselenium2505/SeleniumHybridFramework.git'
+                git branch: 'Radhika_new-Branch', url: 'https://github.com/raghavselenium2505/SeleniumHybridFramework.git'
             }
         }
 
