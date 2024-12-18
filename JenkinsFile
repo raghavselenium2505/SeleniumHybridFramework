@@ -1,43 +1,39 @@
 pipeline {
-    agent any
-
-    tools {
-        maven 'MAVEN_HOME'
-        jdk 'JAVA_HOME'
-    }
-
-    stages {
-        stage('Clean Workspace') {
-            steps {
-                echo 'Cleaning workspace...'
-                deleteDir()
-            }
-        }
-
-        stage('Checkout Code') {
-            steps {
-                echo 'Checking out code...'
-                git branch: 'Radhika_new-Branch', url: 'https://github.com/raghavselenium2505/SeleniumHybridFramework.git'
-            }
-        }
-
-        stage('Build and Test') {
-            steps {
-                echo 'Building project...'
-                sh 'mvn -v' // Verify Maven installation
-                sh 'mvn clean compile'
-                echo 'Running tests...'
-                sh 'mvn test -X' // Debug Maven test step
-            }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline completed!'
-        }
-        failure {
-            echo 'Pipeline failed. Please check the logs.'
-        }
-    }
+   agent any
+   
+   tools {
+      maven 'MAVEN_HOME'
+      jdk 'JAVA_HOME'
+   }
+   
+   stages {
+      stage('Clean Workspace') {
+         steps {
+            echo 'Cleaning workspace...'
+            deleteDir()
+         }
+      }
+      
+      stage('Checkout Code') {
+         steps {
+            echo 'Checking out code...'
+            git branch: 'Radhika_new-Branch', url: 'https://github.com/raghavselenium2505/SeleniumHybridFramework.git'
+         }
+      }
+      stage('Build and Test') {
+         steps {
+            echo 'Building and testing the project...'
+            bat 'mvn clean compile'
+            bat 'mvn test'
+         }
+      }
+   }
+   post {
+      always {
+         echo 'Pipeline completed!'
+      }
+      failure {
+         echo 'Pipeline failed. Please check the logs.'
+      }
+   }
 }
