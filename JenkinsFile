@@ -27,17 +27,21 @@ pipeline {
             bat 'mvn test'
          }
       }
+       
         stage('Publish Latest Extent Report') {
             steps {
                 echo 'Finding the latest Extent Report...'
                 script {
-                    // Find the latest file in the Reports directory
-                    def reportFile = bat(script: 'for /f "delims=" %i in (\'dir /b /o-d src\\test\\resources\\Reports\\Extentreport\\extentreport_*.html\') do @echo %i', returnStdout: true).trim()
-                    echo "Latest report file: ${reportFile}"
+                    // Find the latest report file
+                    def reportFile = bat(script: '''
+                        for /f "delims=" %%i in ('dir /b /o-d src\\test\\resources\\Reports\\Extentreport\\extentreport_*.html') do @echo %%i & exit /b
+                    ''', returnStdout: true).trim()
                     
-                    // Publish the report
+                    echo "Latest report file: ${reportFile}"
+
+                    // Publish the latest report
                     publishHTML(target: [
-                        reportDir: 'C:/Users/RaghavendraD/git/AutomationFramework/SeleniumHybridFramework/src/test/resources/Reports/Extentreport',
+                        reportDir: 'src/test/resources/Reports/Extentreport',
                         reportFiles: reportFile,
                         reportName: 'Extent Report'
                     ])
@@ -49,7 +53,7 @@ pipeline {
     post {
         always {
             echo 'Archiving all Extent Reports...'
-            archiveArtifacts artifacts: 'C:/Users/RaghavendraD/git/AutomationFramework/SeleniumHybridFramework/src/test/resources/Reports/Extentreport/ExtentReport*.html', fingerprint: true
+            archiveArtifacts artifacts: 'src/test/resources/Reports/Extentreport/*.html', fingerprint: true
         }
         success {
             echo 'Pipeline completed successfully!'
