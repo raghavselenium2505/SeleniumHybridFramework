@@ -27,13 +27,28 @@ pipeline {
             bat 'mvn test'
          }
       }
-   }
-   post {
-      always {
-         echo 'Pipeline completed!'
-      }
-      failure {
-         echo 'Pipeline failed. Please check the logs.'
-      }
-   }
+   stage('Publish Extent Report') {
+            steps {
+                echo 'Publishing Extent Report...'
+                publishHTML(target: [
+                    reportDir: 'target',
+                    reportFiles: 'extent-report.html',
+                    reportName: 'Extent Report'
+                ])
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Archiving Extent Report...'
+            archiveArtifacts artifacts: '**/target/extent-report.html', fingerprint: true
+        }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Check logs for more details.'
+        }
+    }
 }
