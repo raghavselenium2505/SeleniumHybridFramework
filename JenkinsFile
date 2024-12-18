@@ -2,14 +2,17 @@ pipeline {
     agent any // Run on any available Jenkins agent
 
     tools {
-        maven 'MAVEN_HOME'  // Maven configured in Jenkins
-        jdk 'JAVA_HOME'    // JDK configured in Jenkins
+        maven 'MAVEN_HOME'    // Maven tool configured in Jenkins
+        jdk 'JAVA_HOME'      // JDK tool configured in Jenkins
     }
 
-   
-
     stages {
-      
+        stage('Checkout Code') {
+            steps {
+                echo 'Checking out code from Git repository...'
+                git branch: 'radhika_new-Branch', url: 'https://github.com/raghavselenium2505/SeleniumHybridFramework.git'
+            }
+        }
 
         stage('Build Project') {
             steps {
@@ -28,12 +31,20 @@ pipeline {
         stage('Publish Test Results') {
             steps {
                 echo 'Publishing JUnit test results...'
-                junit '**/target/surefire-reports/*.xml'
+                junit '**/target/surefire-reports/*.xml' // Publish JUnit XML results
             }
         }
 
-       
-        
+        stage('Publish HTML Report') {
+            steps {
+                echo 'Publishing Selenium HTML reports...'
+                publishHTML(target: [
+                    reportDir: 'target/surefire-reports',
+                    reportFiles: 'index.html',
+                    reportName: 'Selenium Test Report'
+                ])
+            }
+        }
     }
 
     post {
