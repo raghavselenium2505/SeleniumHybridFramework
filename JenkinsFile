@@ -21,30 +21,23 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build and Test') {
             steps {
-                echo 'Building the project...'
+                echo 'Building project...'
+                sh 'mvn -v' // Verify Maven installation
                 sh 'mvn clean compile'
-            }
-        }
-
-        stage('Test') {
-            steps {
                 echo 'Running tests...'
-                sh 'mvn clean compile'
+                sh 'mvn test -X' // Debug Maven test step
             }
         }
     }
 
     post {
         always {
-            echo 'Build finished.'
-        }
-        success {
-            echo 'Build completed successfully!'
+            echo 'Pipeline completed!'
         }
         failure {
-            echo 'Build failed. Check the logs.'
+            echo 'Pipeline failed. Please check the logs.'
         }
     }
 }
