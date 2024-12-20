@@ -103,7 +103,7 @@ public class Eteki_EditJob extends TestBase {
 
 		test = report.startTest(getData("EditJobPage", "Jira_Story_Name_1", xlsname));
 		try {
-			if (getData("Dashboard", "Add Candidate", xlsname).equalsIgnoreCase("N")) {
+			if (getData("Dashboard", "EditJobInvalidJobFormat", xlsname).equalsIgnoreCase("N")) {
 				test.log(LogStatus.INFO, "Enter valid Login Credentails.");
 
 				ETeki_LoginPage loginpage = new ETeki_LoginPage();

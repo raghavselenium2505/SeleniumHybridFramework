@@ -117,10 +117,8 @@ public class TestBase implements baseMethods {
 	public static Properties JiraProp = new Properties();
 	public static Properties ExtReport = new Properties();
 	public static JSONParser parser = new JSONParser();
-
 	public static Object obj;
 	public static JSONObject jsonObject = (JSONObject) obj;
-
 	public static FileInputStream fis;
 	public static String browserlaunch;
 	public static String browser;
@@ -135,9 +133,7 @@ public class TestBase implements baseMethods {
 	public static int skipCount = 0;
 	public static String Name;
 	public static int i;
-
 	public int monthflag, dayflag;
-
 	public static int shortwaitvalue;
 	public static int mediumwaitvalue;
 	public static int longwaitvalue;
@@ -146,10 +142,7 @@ public class TestBase implements baseMethods {
 	public static String pathImage;
 	public static String fileName_path;
 	public int randomValue;
-
 	public int currentyear = Year.now().getValue();
-
-	// public String xlsname = "TestDataConfiguration.xls";
 	public String xlsname = "ETekiTestDataConfiguration.xls";
 	static {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hhmmss");
