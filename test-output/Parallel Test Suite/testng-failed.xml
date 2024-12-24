@@ -3,11 +3,23 @@
 <suite name="Failed suite [Parallel Test Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Parallel Test(failed)">
     <classes>
+      <class name="com.testcase.testsuite.ETeki_Login">
+        <methods>
+          <include name="ReportGeneration"/>
+          <include name="setUp"/>
+          <include name="eTekiInvalidLogin"/>
+          <include name="eTekiEmptyLogin"/>
+          <include name="flushTest"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.testcase.testsuite.ETeki_Login -->
       <class name="com.testcase.testsuite.ETeki_JobCreation">
         <methods>
           <include name="ReportGeneration"/>
           <include name="validCreateJob"/>
           <include name="setUp"/>
+          <include name="emptyCreateJob"/>
+          <include name="invalidCreateJob"/>
           <include name="flushTest"/>
           <include name="tearDown"/>
         </methods>
@@ -19,21 +31,11 @@
           <include name="ReportGeneration"/>
           <include name="setUp"/>
           <include name="emptyAddCandidate"/>
+          <include name="validAddCandidateWithRecruiter"/>
           <include name="flushTest"/>
           <include name="tearDown"/>
         </methods>
       </class> <!-- com.testcase.testsuite.ETeki_AddCandidate -->
-      <class name="com.testcase.testsuite.Eteki_EditJob">
-        <methods>
-          <include name="addCandidate"/>
-          <include name="ReportGeneration"/>
-          <include name="Eteki_EditJobInvalidJobFormat"/>
-          <include name="setUp"/>
-          <include name="Eteki_EditJobInvalidDate"/>
-          <include name="flushTest"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- com.testcase.testsuite.Eteki_EditJob -->
     </classes>
   </test> <!-- Parallel Test(failed) -->
 </suite> <!-- Failed suite [Parallel Test Suite] -->

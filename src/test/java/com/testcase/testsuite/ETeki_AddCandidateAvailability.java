@@ -30,7 +30,9 @@ public class ETeki_AddCandidateAvailability extends TestBase {
 
 			ETeki_LoginPage loginpage = new ETeki_LoginPage();
 
-			loginpage.login(config.getProperty("userName"), config.getProperty("password"));
+			loginpage.login(config.getProperty("userName"), config.getProperty("password"),
+                    "User able to enter valid Username.", "User unable to enter invalid Username.",
+                    "User able to enter valid Password.", "User unable to enter invalid Password.");
 
 			waitforelement(mediumwaitvalue);
 			

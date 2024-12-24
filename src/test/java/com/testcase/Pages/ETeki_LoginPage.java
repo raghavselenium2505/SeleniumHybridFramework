@@ -14,7 +14,7 @@ interface VerifyInput {
 
 	public void verifyTitle(String verifyTitle, String passValue, String failVallue);
 	
-	public void login(String username, String password);
+	public void login(String username, String password, String usernamePassValue, String usernameFailValue, String passwordPassValue, String passwordFailValue);
 	
 	public String futureDate(int futurevalue);
 }
@@ -68,35 +68,22 @@ public class ETeki_LoginPage extends TestBase implements VerifyInput {
 	}
 
 	@Override
-	public void login(String username, String password) {
-		
-		sendkeys(inputUsername, username, "User able to enter valid Username.", "User unable to enter valid Username.");
-		
-		waitforelement(mediumwaitvalue);
+    public void login(String username, String password, String usernamePassValue, String usernameFailValue, String passwordPassValue, String passwordFailValue) {
+        
+        sendkeys(inputUsername, username, usernamePassValue, usernameFailValue);
+        
+        waitforelement(mediumwaitvalue);
 
-		sendkeys(inputPassword, password, "User able to enter valid Password.", "User unable to enter valid Password.");
-		
-		waitforelement(mediumwaitvalue);
-		
-		/*
-		 * Assert.assertEquals(driver.findElement(inputUsername).getText(), username);
-		 * 
-		 * waitforelement(shortwaitvalue);
-		 * 
-		 * Assert.assertEquals(driver.findElement(inputPassword).getText(), password);
-		 * 
-		 * waitforelement(shortwaitvalue);
-		 */
+        sendkeys(inputPassword, password, passwordPassValue, passwordFailValue);
+        
+        waitforelement(mediumwaitvalue);
+        
+        SubmitClick(buttonSignIn, "User able to click on Sign IN button.", "User unable to click on Sign IN button.");
 
-		// click(buttonSignIn,driver.findElement(element), "User able to Sign In
-		// successfully.", "User unable to Sign In successfully.");
-		SubmitClick(buttonSignIn, "User able to click on Sign IN button.", "User unable to click on Sign IN button.");
+        waitforelement(mediumwaitvalue);
 
-		waitforelement(mediumwaitvalue);
+    }
 
-		// Assert.assertTrue(driver.findElement(By.xpath("//h1[contains(text(),' Pending
-		// Activities')]")).isDisplayed(), "Able to enter the login page");
-	}
 	
 	@Override
 	public String futureDate(int futurevalue) {
@@ -114,7 +101,6 @@ public class ETeki_LoginPage extends TestBase implements VerifyInput {
         String formattedDate = newDate.format(formatter);
 
         // Print the result
-        System.out.println("Date after adding 15 days: " + formattedDate);
         
         return formattedDate;
 	}

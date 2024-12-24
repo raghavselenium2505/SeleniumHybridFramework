@@ -31,6 +31,7 @@ public class ETeki_AddCandidatePage extends TestBase implements candidateCount {
 
 	public By phoneNumber = By.id("phone");
 
+	public By addingCheckfileName=By.xpath("//a[@ng-click='candidate.brief_bio_file = undefined']");
 	public By validationPhoneNumber = By.xpath("//p[@class='help-block'][contains(text(),'Phone number')]");
 
 	public By uploadResume = By.xpath("//button[@filetype='brief_bio_file']");

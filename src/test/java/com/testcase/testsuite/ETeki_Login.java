@@ -20,46 +20,48 @@ public class ETeki_Login extends TestBase {
 		extraverylongwaitvalue = Integer.valueOf(config.getProperty("extraverylongwait"));
 
 		test = report.startTest(getData("Login", "Jira_Story_Name", xlsname));
-try {
-		if (getData("Dashboard", "Login", xlsname).equalsIgnoreCase("N")) {
+		try {
+			if (getData("Dashboard", "Validate Login with valid Username & Password.", xlsname).equalsIgnoreCase("N")) {
 
-			test.log(LogStatus.INFO, "Enter valid Login Credentails.");
+				test.log(LogStatus.INFO, "Enter valid Login Credentails.");
 
-			ETeki_LoginPage loginpage = new ETeki_LoginPage();
+				ETeki_LoginPage loginpage = new ETeki_LoginPage();
 
-			loginpage.login(config.getProperty("userName"), config.getProperty("password"));
+				loginpage.login(config.getProperty("userName"), config.getProperty("password"),
+						"User able to enter valid Username.", "User unable to enter invalid Username.",
+						"User able to enter valid Password.", "User unable to enter invalid Password.");
 
-			waitforelement(mediumwaitvalue);
+				waitforelement(mediumwaitvalue);
 
-			ETeki_HomePage homepage = new ETeki_HomePage();
+				ETeki_HomePage homepage = new ETeki_HomePage();
 
-			alert(homepage.Dashboard);
+				alert(homepage.Dashboard);
 
-			waitforelement(shortwaitvalue);
+				waitforelement(shortwaitvalue);
 
-			Assert.assertEquals(driver.getCurrentUrl(), loginpage.dashboardURL);
+				Assert.assertEquals(driver.getCurrentUrl(), loginpage.dashboardURL);
 
-			test.log(LogStatus.INFO, "User logout eTeki successfully");
+				test.log(LogStatus.INFO, "User logout eTeki successfully");
 
-			click(homepage.userProfile, driver.findElement(homepage.Dashboard), "User able to click on Profile.",
-					"User unable to click on Profile.");
+				click(homepage.userProfile, driver.findElement(homepage.Dashboard), "User able to click on Profile.",
+						"User unable to click on Profile.");
 
-			waitforelement(shortwaitvalue);
+				waitforelement(shortwaitvalue);
 
-			click(homepage.logoutButton, driver.findElement(homepage.userProfile), "User able to click on Logout.",
-					"User unable to click on Logout.");
+				click(homepage.logoutButton, driver.findElement(homepage.userProfile), "User able to click on Logout.",
+						"User unable to click on Logout.");
 
-			waitforelement(mediumwaitvalue);
-		}else
-		{
-			test.log(LogStatus.SKIP, "Testcase got skipped please check the excel sheet for reference");
-			
+				waitforelement(mediumwaitvalue);
+			} else {
+				test.log(LogStatus.SKIP, "Testcase got skipped please check the excel sheet for reference");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			captureScreenshot(value_extentreport);
 		}
-	} catch (Exception e) {
-		e.printStackTrace();
-		captureScreenshot(value_extentreport);
 	}
-}
+
 	@Test(priority = 11)
 	public void eTekiEmptyLogin() throws Exception {
 
@@ -70,40 +72,41 @@ try {
 		extraverylongwaitvalue = Integer.valueOf(config.getProperty("extraverylongwait"));
 
 		test = report.startTest(getData("Login", "Jira_Story_Name_1", xlsname));
-try {
-		if (getData("Dashboard", "Login", xlsname).equalsIgnoreCase("N")) {
+		try {
+			if (getData("Dashboard", "Validate Login with empty Username or Password.", xlsname).equalsIgnoreCase("N")) {
 
-			test.log(LogStatus.INFO, "Enter empty Login Credentails.");
+				test.log(LogStatus.INFO, "Enter empty Login Credentails.");
 
-			ETeki_LoginPage loginpage = new ETeki_LoginPage();
-			
-			SubmitClick(loginpage.buttonSignIn, "User able to click on Sign IN button.", "User unable to click on Sign IN button.");
+				ETeki_LoginPage loginpage = new ETeki_LoginPage();
 
-			waitforelement(shortwaitvalue);
+				SubmitClick(loginpage.buttonSignIn, "User able to click on Sign IN button.",
+						"User unable to click on Sign IN button.");
 
-			Assert.assertEquals(driver.findElement(loginpage.validationUsername).getText(),
-					loginpage.usernamevalidationmessage);
+				waitforelement(shortwaitvalue);
 
-			waitforelement(shortwaitvalue);
+				Assert.assertEquals(driver.findElement(loginpage.validationUsername).getText(),
+						loginpage.usernamevalidationmessage);
 
-			Assert.assertEquals(driver.findElement(loginpage.validationPassword).getText(),
-					loginpage.passwordvalidationmessage);
+				waitforelement(shortwaitvalue);
 
-			waitforelement(shortwaitvalue);
+				Assert.assertEquals(driver.findElement(loginpage.validationPassword).getText(),
+						loginpage.passwordvalidationmessage);
 
-			driver.navigate().refresh();
-			
-			waitforelement(mediumwaitvalue);
-		}else
-		{
-			test.log(LogStatus.SKIP, "Testcase got skipped please check the excel sheet for reference");
-			
+				waitforelement(shortwaitvalue);
+
+				driver.navigate().refresh();
+
+				waitforelement(mediumwaitvalue);
+			} else {
+				test.log(LogStatus.SKIP, "Testcase got skipped please check the excel sheet for reference");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			captureScreenshot(value_extentreport);
 		}
-	} catch (Exception e) {
-		e.printStackTrace();
-		captureScreenshot(value_extentreport);
 	}
-}
+
 	@Test(priority = 12)
 	public void eTekiInvalidLogin() throws Exception {
 
@@ -114,37 +117,37 @@ try {
 		extraverylongwaitvalue = Integer.valueOf(config.getProperty("extraverylongwait"));
 
 		test = report.startTest(getData("Login", "Jira_Story_Name_2", xlsname));
-try {
+		try {
 
+			if (getData("Dashboard", "Validate Login with invalid Username or Password.", xlsname).equalsIgnoreCase("N")) {
 
-		if (getData("Dashboard", "Login", xlsname)
-				.equalsIgnoreCase("N")) {
+				test.log(LogStatus.INFO, "Enter invalid Login Credentails.");
 
-			test.log(LogStatus.INFO, "Enter invalid Login Credentails.");
+				ETeki_LoginPage loginpage = new ETeki_LoginPage();
 
-			ETeki_LoginPage loginpage = new ETeki_LoginPage();
+				loginpage.login(getData("Login", "Invalid Username", xlsname),
+						getData("Login", "Invalid Password", xlsname), "User able to enter invalid Username.",
+						"User unable to enter valid Username.", "User able to enter invalid Password.",
+						"User unable to enter valid Password.");
 
-			loginpage.login(getData("Login", "Invalid Username", xlsname),
-					getData("Login", "Invalid Password", xlsname));
+				waitforelement(mediumwaitvalue);
 
-			waitforelement(mediumwaitvalue);
+				Assert.assertEquals(driver.findElement(loginpage.validationmessage).getText(),
+						loginpage.messageValidation);
 
-			Assert.assertEquals(driver.findElement(loginpage.validationmessage).getText(), loginpage.messageValidation);
+				waitforelement(shortwaitvalue);
 
-			waitforelement(shortwaitvalue);
+				driver.navigate().refresh();
 
-			driver.navigate().refresh();
-			
-			waitforelement(mediumwaitvalue);
+				waitforelement(mediumwaitvalue);
 
-		}else
-		{
-			test.log(LogStatus.SKIP, "Testcase got skipped please check the excel sheet for reference");
-			
+			} else {
+				test.log(LogStatus.SKIP, "Testcase got skipped please check the excel sheet for reference");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			captureScreenshot(value_extentreport);
 		}
-	} catch (Exception e) {
-		e.printStackTrace();
-		captureScreenshot(value_extentreport);
 	}
-}
 }

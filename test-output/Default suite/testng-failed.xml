@@ -6,8 +6,11 @@
       <class name="com.testcase.testsuite.ETeki_AddCandidate">
         <methods>
           <include name="invalidAddCandidate"/>
+          <include name="validAddCandidate"/>
           <include name="ReportGeneration"/>
           <include name="setUp"/>
+          <include name="emptyAddCandidate"/>
+          <include name="validAddCandidateWithRecruiter"/>
           <include name="flushTest"/>
           <include name="tearDown"/>
         </methods>

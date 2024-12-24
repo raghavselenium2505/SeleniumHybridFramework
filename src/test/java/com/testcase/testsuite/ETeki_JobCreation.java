@@ -27,15 +27,14 @@ public class ETeki_JobCreation extends TestBase{
 			test = report.startTest(getData("CreateJob", "Jira_Story_Name", xlsname));
 			if (getData("Dashboard", "Validating Create Job with mandatory fields data.", xlsname)
 					.equalsIgnoreCase("N")) {
-
 				ETeki_LoginPage loginpage = new ETeki_LoginPage();
 
 				ETeki_HomePage homepage = new ETeki_HomePage();
-				
+
 				ETeki_UsersPage userspage = new ETeki_UsersPage();
-				
+
 				ETeki_JobsPage jobspage = new ETeki_JobsPage();
-				
+
 				test.log(LogStatus.INFO, "Click on Actions Button.");
 
 				click(userspage.buttonActions, driver.findElement(homepage.Dashboard),
@@ -109,6 +108,9 @@ public class ETeki_JobCreation extends TestBase{
 				SubmitClick(createjob.saveButton, "User able to Create Job.", "User unable to Create Job.");
 
 				waitforelement(mediumwaitvalue);
+
+				Assert.assertEquals(driver.findElement(createjob.successMessage).getText(),
+						getData("CreateJob", "Success_Message", xlsname));
 
 				click(createjob.okButton, driver.findElement(homepage.Dashboard), "User able to click on OK button.",
 						"User unable to click on OK button.");
@@ -195,7 +197,9 @@ public class ETeki_JobCreation extends TestBase{
 
 				ETeki_LoginPage loginpage = new ETeki_LoginPage();
 
-				loginpage.login(config.getProperty("userName"), config.getProperty("password"));
+				loginpage.login(config.getProperty("userName"), config.getProperty("password"),
+						"User able to enter valid Username.", "User unable to enter invalid Username.",
+						"User able to enter valid Password.", "User unable to enter invalid Password.");
 
 				waitforelement(mediumwaitvalue);
 
@@ -240,35 +244,35 @@ public class ETeki_JobCreation extends TestBase{
 				test.log(LogStatus.INFO, "Click on save button without filling mandatory fields.");
 
 				SubmitClick(createjob.saveButton,
-						"User able to click on save button without filling mandatory fields data.",
-						"User unable to click on save button without filling mandatory fields data.");
+						"User able to find mandatory field validations after clicking on save button.",
+						"User unable to find mandatory field validations after clicking on save button.");
 
 				Assert.assertEquals(driver.findElement(createjob.validationCompanyName).getText(),
-						createjob.ValidationMessage_CompanyName);
+						getData("CreateJob", "Validation_CompanyName", xlsname));
 
 				Assert.assertEquals(driver.findElement(createjob.validationJobTitle).getText(),
-						createjob.ValidationMessage_JobTitle);
+						getData("CreateJob", "Validation_JobTitle", xlsname));
 
 				Assert.assertEquals(driver.findElement(createjob.validationJobDescription).getText(),
-						createjob.ValidationMessage_JobDescription);
+						getData("CreateJob", "Validation_JobDescription", xlsname));
 
 				Assert.assertEquals(driver.findElement(createjob.validationSkillsToBeAssessed).getText(),
-						createjob.ValidationMessage_SkillsToBeAssessed);
+						getData("CreateJob", "Validation_SkillsToBeAssessed", xlsname));
 
 				Assert.assertEquals(driver.findElement(createjob.validationYearsOfExperience).getText(),
-						createjob.ValidationMessage_YearsOfExperience);
+						getData("CreateJob", "Validation_YearsOfExperience", xlsname));
 
 				Assert.assertEquals(driver.findElement(createjob.validationJobClosingDate).getText(),
-						createjob.ValidationMessage_JobClosingDate);
+						getData("CreateJob", "Validation_JobClosingDate", xlsname));
 
 				Assert.assertEquals(driver.findElement(createjob.validationAreasOfExpertise).getText(),
-						createjob.ValidationMessage_AreasOfExpertise);
+						getData("CreateJob", "Validation_AreasOfExpertise", xlsname));
 
 				Assert.assertEquals(driver.findElement(createjob.validationProjectedNumberOfCandidates).getText(),
-						createjob.ValidationMessage_ProjectedNumberOfCandidates);
+						getData("CreateJob", "Validation_ProjectedNumberOfCandidates", xlsname));
 
 				Assert.assertEquals(driver.findElement(createjob.validationClientSelectedInterviewers).getText(),
-						createjob.ValidationMessage_ClientSelectedInterviewers);
+						getData("CreateJob", "Validation_ClientSelectedInterviewers", xlsname));
 
 				waitforelement(shortwaitvalue);
 
@@ -330,7 +334,8 @@ public class ETeki_JobCreation extends TestBase{
 				waitforelement(shortwaitvalue);
 
 				sendkeys(createjob.jobClosingDate, getData("CreateJob", "Job Closing Date", xlsname),
-						"User able to enter Job Closing Date.", "User unable to enter Job Closing Date.");
+						"User able to enter invalid Job Closing Date.",
+						"User unable to enter invalid Job Closing Date.");
 
 				waitforelement(shortwaitvalue);
 
@@ -352,15 +357,16 @@ public class ETeki_JobCreation extends TestBase{
 
 				waitforelement(shortwaitvalue);
 
-				SubmitClick(createjob.saveButton, "User able to Create Job.", "User unable to Create Job.");
+				SubmitClick(createjob.saveButton, "User unable to Create Job with invalid data.",
+						"User able to Create Job with invalid data.");
 
 				waitforelement(mediumwaitvalue);
 
 				Assert.assertEquals(driver.findElement(createjob.validationInvalidJobClosingDate).getText(),
-						createjob.ValidationMessage_InvalidJobClosingDate);
+						getData("CreateJob", "Validation_Invalid_JobClosingDate", xlsname));
 
-				SubmitClick(createjob.cancelButton, "User able to Create Job.", "User unable to Create Job.");
-				
+				SubmitClick(createjob.cancelButton, "User able to cancel Job Creation.",
+						"User unable to cancel Job Creation.");
 				waitforelement(shortwaitvalue);
 
 			}else

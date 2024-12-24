@@ -20,7 +20,9 @@ public class ETeki_HomePage extends TestBase implements handleAlert {
 	public By Admin = By.xpath("//ul[@class='nav navbar-nav navbar-right']/li[3]");
 	
 	public By Recruiter = By.xpath("//ul[@class='nav navbar-nav navbar-right']/li[4]");
-	
+	public By GlobalSearch = By.xpath("//div[@class='input-group global-search']");
+
+
 	public By Notifications = By.xpath("//ul[@class='nav navbar-nav navbar-right']/li[5]");
 	
 	public By userProfile = By.xpath("//ul[@class='nav navbar-nav navbar-right']/li[6]");

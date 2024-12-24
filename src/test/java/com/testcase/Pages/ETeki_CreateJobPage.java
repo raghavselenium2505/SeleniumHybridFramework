@@ -20,6 +20,7 @@ public class ETeki_CreateJobPage extends TestBase {
 
 	public By validationJobDescription = By
 			.xpath("//span[@class='help-block'][contains(text(), 'Please upload file or write the description')]");
+	public By successMessage = By.xpath("//p[text()='Job created successfully.']");
 
 	public By skillsToBeAssessed = By.xpath("//input[@placeholder='Select Required Skills (example: java, c, etc)']");
 

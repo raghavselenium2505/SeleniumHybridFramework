@@ -144,6 +144,7 @@ public class TestBase implements baseMethods {
 	public int randomValue;
 	public int currentyear = Year.now().getValue();
 	public String xlsname = "ETekiTestDataConfiguration.xls";
+	public static int priorityValue=0;
 	static {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hhmmss");
 		System.setProperty("current.date.time", dateFormat.format(new Date()));
@@ -443,6 +444,8 @@ public class TestBase implements baseMethods {
 		}
 		return returnValue;
 	}
+	
+	
 
 	public void getDatajson(String jsonValue) {
 		// String returnJson = "";
