@@ -2,7 +2,6 @@
 
 package com.web.utilities;
 
-import java.util.Properties;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.WebDriver;
