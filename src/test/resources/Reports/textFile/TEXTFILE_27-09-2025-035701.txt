@@ -1,0 +1,29 @@
+2025-09-27 15:57:01,401 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-09-27 15:57:01,533 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-09-27 15:57:01,534 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-09-27 15:57:01,536 - devpinoyLogger -INFO - chrome  browser launched
+2025-09-27 15:57:07,880 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-09-27 15:57:07,924 - devpinoyLogger -INFO - browser maximaized 
+2025-09-27 15:57:10,898 - devpinoyLogger -INFO - click worked
+2025-09-27 15:57:19,378 - devpinoyLogger -INFO - passed click statement
+2025-09-27 15:57:32,010 - devpinoyLogger -INFO - element click intercepted: Element <span _ngcontent-frj-c10="" class="fs-letter rounded-circle profile-img ng-star-inserted" style="background: rgb(205, 92, 92);">...</span> is not clickable at point (1501, 30). Other element would receive the click: <a class="ui-toast-close-icon pi pi-times ng-tns-c4-22 ng-star-inserted" tabindex="0" style=""></a>
+  (Session info: chrome=140.0.7339.207)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [893bee6c7b3efb2c5459aa3862f470a2, clickElement {id=f.B15342086B28F354FB3FF672E85B8EA5.d.466626764B5D5AAEA7DFFD21020D286C.e.149}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.207, chrome: {chromedriverVersion: 140.0.7339.207 (17230b545fd..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:64225}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:64225/devtoo..., se:cdpVersion: 140.0.7339.207, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (893bee6c7b3efb2c5459aa3862f470a2)] -> xpath: //p//span[contains(@class,'profile-img')]]
+Session ID: 893bee6c7b3efb2c5459aa3862f470a2
+2025-09-27 15:57:32,013 - devpinoyLogger -INFO - Action click worked
+2025-09-27 15:57:32,134 - devpinoyLogger -INFO - click worked
+2025-09-27 15:57:34,524 - devpinoyLogger -INFO - click worked
+2025-09-27 15:57:39,529 - devpinoyLogger -INFO - click worked
+2025-09-27 15:57:39,638 - devpinoyLogger -INFO - click worked
+2025-09-27 15:57:42,037 - devpinoyLogger -INFO - click worked
+2025-09-27 15:57:48,929 - devpinoyLogger -INFO - passed click statement
+2025-09-27 15:58:02,020 - devpinoyLogger -INFO - click worked
+2025-09-27 15:58:02,690 - devpinoyLogger -INFO - click worked
+2025-09-27 15:58:04,247 - devpinoyLogger -INFO - click worked
+2025-09-27 15:58:31,192 - devpinoyLogger -INFO - JS click worked
+2025-09-27 15:58:31,303 - devpinoyLogger -INFO - click worked

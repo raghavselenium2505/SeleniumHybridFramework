@@ -1,0 +1,15 @@
+2025-10-14 17:27:30,504 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-10-14 17:27:30,748 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-10-14 17:27:30,749 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-10-14 17:27:30,755 - devpinoyLogger -INFO - chrome  browser launched
+2025-10-14 17:27:49,550 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-10-14 17:27:49,684 - devpinoyLogger -INFO - browser maximaized 
+2025-10-14 17:27:55,212 - devpinoyLogger -INFO - click worked
+2025-10-14 17:28:24,077 - devpinoyLogger -INFO - JS click worked
+2025-10-14 17:29:46,601 - devpinoyLogger -INFO - JS click worked
+2025-10-14 17:30:28,084 - devpinoyLogger -INFO - Expected condition failed: waiting for element to be clickable: By.xpath: //input[@id='email'] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 141.0.7390.76, chrome: {chromedriverVersion: 141.0.7390.76 (d6fcfbb51aac..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63291}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63291/devtoo..., se:cdpVersion: 141.0.7390.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: f4fc4999515de2da1480d22c9bd1e7ac

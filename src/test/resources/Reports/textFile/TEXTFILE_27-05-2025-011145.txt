@@ -1,0 +1,28 @@
+2025-05-27 13:11:46,275 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-05-27 13:11:46,727 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-05-27 13:11:46,732 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-05-27 13:11:53,613 - devpinoyLogger -INFO - browser launchededge
+2025-05-27 13:12:16,640 - devpinoyLogger -INFO - browser launched edgeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-05-27 13:12:16,728 - devpinoyLogger -INFO - browser maximaized 
+2025-05-27 13:12:18,038 - devpinoyLogger -INFO - click worked
+2025-05-27 13:12:50,881 - devpinoyLogger -INFO - click worked
+2025-05-27 13:13:13,542 - devpinoyLogger -INFO - passed click statement
+2025-05-27 13:13:19,041 - devpinoyLogger -INFO - passed click statement
+2025-05-27 13:13:33,625 - devpinoyLogger -INFO - element click intercepted: Element <span class="ui-button-text ui-clickable">...</span> is not clickable at point (1298, 461). Other element would receive the click: <div _ngcontent-vxm-c2="" class="backdrop" style="border-radius: 5px; background-color: rgba(0, 0, 0, 0.3);"></div>
+  (Session info: MicrosoftEdge=136.0.3240.92)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [5f8d6f01f5ef15b7bf946d75131246e9, clickElement {id=f.9B38BA72F44730B3AF528C35FBD97503.d.A3A6366723C4CDB6DD617D664DDD5155.e.605}]
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 136.0.3240.92, fedcm:accounts: true, ms:edgeOptions: {debuggerAddress: localhost:63332}, msedge: {msedgedriverVersion: 136.0.3240.92 (a30c59ee983a..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63332/devtoo..., se:cdpVersion: 136.0.3240.92, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[EdgeDriver: MicrosoftEdge on windows (5f8d6f01f5ef15b7bf946d75131246e9)] -> xpath: //span[contains(text(),'Login')]]
+Session ID: 5f8d6f01f5ef15b7bf946d75131246e9
+2025-05-27 13:13:33,628 - devpinoyLogger -INFO - Action click worked
+2025-05-27 13:13:49,482 - devpinoyLogger -INFO - passed click statement
+2025-05-27 13:13:53,600 - devpinoyLogger -INFO - passed click statement
+2025-05-27 13:14:03,567 - devpinoyLogger -INFO - click worked
+2025-05-27 13:14:20,078 - devpinoyLogger -INFO - passed click statement
+2025-05-27 13:14:31,561 - devpinoyLogger -INFO - click worked
+2025-05-27 13:14:44,607 - devpinoyLogger -INFO - passed click statement
+2025-05-27 13:14:49,780 - devpinoyLogger -INFO - click worked
+2025-05-27 13:15:04,528 - devpinoyLogger -INFO - passed click statement

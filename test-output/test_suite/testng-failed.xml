@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [test_suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="ETeki_AddCandidate(failed)">
+    <groups>
+      <run>
+        <include name="demo1"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.testcase.testsuite.ETeki_AddCandidate">
+        <methods>
+          <include name="addCandidate"/>
+        </methods>
+      </class> <!-- com.testcase.testsuite.ETeki_AddCandidate -->
+    </classes>
+  </test> <!-- ETeki_AddCandidate(failed) -->
+</suite> <!-- Failed suite [test_suite] -->

@@ -1,0 +1,4801 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ExcelReportLog</title>
+<style type="text/css">
+<!--
+body, table {font-family: arial,sans-serif; font-size: x-small;}
+th {background: #336699; color: #FFFFFF; text-align: left;}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" topmargin="6" leftmargin="6">
+<hr size="1" noshade>
+Log session start time Wed May 28 11:24:05 IST 2025<br>
+<br>
+<table cellspacing="0" cellpadding="4" border="1" bordercolor="#224466" width="100%">
+<tr>
+<th>Time</th>
+<th>Thread</th>
+<th>Level</th>
+<th>Category</th>
+<th>File:Line</th>
+<th>Message</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:174</td>
+<td title="Message">extent report properties file  loaded !!!</td>
+</tr>
+
+<tr>
+<td>159</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:229</td>
+<td title="Message">Config properties file loaded</td>
+</tr>
+
+<tr>
+<td>161</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:255</td>
+<td title="Message">Email file loaded !!!</td>
+</tr>
+
+<tr>
+<td>5522</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:344</td>
+<td title="Message">browser launchededge</td>
+</tr>
+
+<tr>
+<td>14340</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:416</td>
+<td title="Message">browser launched edgeNavigated to : https://ta-qa.mapstechnologies.com/auth/login</td>
+</tr>
+
+<tr>
+<td>14389</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:423</td>
+<td title="Message">browser maximaized </td>
+</tr>
+
+<tr>
+<td>15063</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>31036</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>31294</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>33634</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>35772</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>35885</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>37327</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>49881</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>50061</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>101768</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>101880</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>103329</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>119465</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>119566</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>121004</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>132746</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>132934</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>133523</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>135666</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>190073</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>190184</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>191611</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>202502</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>203098</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>203182</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>204683</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>216546</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>216557</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:44</td>
+<td title="Message">Entered text: User is trying to check if the 'Name' fi</td>
+</tr>
+
+<tr>
+<td>216558</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:45</td>
+<td title="Message">The length is: 40</td>
+</tr>
+
+<tr>
+<td>216805</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>268845</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>269005</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>280115</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>291991</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>294786</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>294805</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:44</td>
+<td title="Message">Entered text: 1234ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=+[]{}|;:'&quot;,.&lt;&gt;?/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=+[]{}|;:'&quot;,.&lt;&gt;?/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=+[]{}|;:'&quot;,.&lt;&gt;?/aqwertyuioplkjhgfddsazxcvbnmlkmnbvcxaddswwertyuuiopkjffsazxcvbnnmABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345</td>
+</tr>
+
+<tr>
+<td>294805</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:45</td>
+<td title="Message">The length is: 400</td>
+</tr>
+
+<tr>
+<td>346421</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>346563</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>348075</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>359989</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>361384</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>361494</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>363013</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>377885</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>377976</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>379517</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>392444</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>392641</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>393095</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>394003</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>394108</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>395570</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>406494</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>409325</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>409438</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>410909</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>421681</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>423221</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>474956</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>475066</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>476568</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>487414</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>488650</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>490073</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>541803</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>541896</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>543341</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>554954</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>555050</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>556576</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>561104</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>562510</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>562599</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>564095</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>567461</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>569201</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>569297</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>569415</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>569540</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>569641</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>569755</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>621189</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>621313</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>622812</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>626240</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>634387</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>635725</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>637032</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>638382</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>639749</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>645235</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>645323</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>645417</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>646893</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>650280</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>650665</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>650757</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>652598</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>653290</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>654812</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>658730</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>659007</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>659347</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>659495</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>659672</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>659765</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>661251</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>664619</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>664999</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>665104</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>666471</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>667640</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>667742</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>669761</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>673164</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>673819</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>673941</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>727176</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>727293</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>734869</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_ForgotPasswordTest.java:380</td>
+<td title="Message">termsTerms and Conditions</td>
+</tr>
+
+<tr>
+<td>734979</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_ForgotPasswordTest.java:390</td>
+<td title="Message">excepted MAPSTechnologies.com is owned and operated by MAPS Technologies, LLC (“MAPS”). By using the website MAPTechnologies.com, (including but not limited to mobile, responsive web or otherwise), related data and/or related services (collectively the “Services”) you agree to be bound by the following terms of use, as updated from time to time (“Terms of Use”)</td>
+</tr>
+
+<tr>
+<td>748500</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>762379</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>770937</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_LoginTest.java:236</td>
+<td title="Message">termsTerms and Conditions</td>
+</tr>
+
+<tr>
+<td>771101</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_LoginTest.java:248</td>
+<td title="Message">excepted MAPSTechnologies.com is owned and operated by MAPS Technologies, LLC (“MAPS”). By using the website MAPTechnologies.com, (including but not limited to mobile, responsive web or otherwise), related data and/or related services (collectively the “Services”) you agree to be bound by the following terms of use, as updated from time to time (“Terms of Use”)</td>
+</tr>
+
+<tr>
+<td>773071</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>773301</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_LoginTest.java:378</td>
+<td title="Message">Login</td>
+</tr>
+
+<tr>
+<td>773628</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>776866</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_LoginTest.java:398</td>
+<td title="Message">The actual title is MAPS Technologies</td>
+</tr>
+
+<tr>
+<td>776866</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_LoginTest.java:400</td>
+<td title="Message">The expected title is MAPS Technologies</td>
+</tr>
+
+<tr>
+<td>783196</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>787384</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:769</td>
+<td title="Message">Modified Street address is 77532</td>
+</tr>
+
+<tr>
+<td>796104</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>796195</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>797709</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>802165</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>802300</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>803863</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>815023</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>818606</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:565</td>
+<td title="Message">entered value is A1y2Z3</td>
+</tr>
+
+<tr>
+<td>818606</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:570</td>
+<td title="Message">Business Name field is accepting alpha numeric characters</td>
+</tr>
+
+<tr>
+<td>818800</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:565</td>
+<td title="Message">entered value is @#$</td>
+</tr>
+
+<tr>
+<td>818801</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:570</td>
+<td title="Message">Business Name field is accepting special characters</td>
+</tr>
+
+<tr>
+<td>818943</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>819567</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>821041</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>829054</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>829143</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>830682</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>834920</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>834998</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>836560</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>846772</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:749</td>
+<td title="Message">Organization values are NOT updated</td>
+</tr>
+
+<tr>
+<td>846909</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>846995</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>848478</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>858824</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>858909</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>860444</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>916855</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>916949</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>918452</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>929202</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:769</td>
+<td title="Message">Modified Street address is 82024</td>
+</tr>
+
+<tr>
+<td>942776</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:778</td>
+<td title="Message">Organization address after updating is 82024, Visakhapatnam, Andhra Pradesh 987456, India</td>
+</tr>
+
+<tr>
+<td>942777</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:782</td>
+<td title="Message">Organization values are updated</td>
+</tr>
+
+<tr>
+<td>942861</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>942969</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>944571</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>948475</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>948610</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>950114</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>954421</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:442</td>
+<td title="Message">the length is 40</td>
+</tr>
+
+<tr>
+<td>955344</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:442</td>
+<td title="Message">the length is 40</td>
+</tr>
+
+<tr>
+<td>955423</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>955501</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>957353</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>975084</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>986358</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:398</td>
+<td title="Message">Number of search results are 2</td>
+</tr>
+
+<tr>
+<td>986374</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:403</td>
+<td title="Message">QA Automation</td>
+</tr>
+
+<tr>
+<td>986388</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:403</td>
+<td title="Message">QA Automation 1</td>
+</tr>
+
+<tr>
+<td>986472</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>986551</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>988047</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1000575</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:110</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-jqo-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot; style=&quot;color: black; border: 3px solid blue;&quot;&gt;...&lt;/h3&gt; is not clickable at point (455, 238). Other element would receive the click: &lt;div _ngcontent-jqo-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: MicrosoftEdge=136.0.3240.92)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [abb8b0f77fa3006ec77988f5c85cae91, clickElement {id=f.B129BDE65FE144FB9B2E2144BA79700F.d.E44728B42D94F286742553586D79ACCB.e.3933}]
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 136.0.3240.92, fedcm:accounts: true, ms:edgeOptions: {debuggerAddress: localhost:56608}, msedge: {msedgedriverVersion: 136.0.3240.92 (a30c59ee983a..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56608/devtoo..., se:cdpVersion: 136.0.3240.92, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[EdgeDriver: MicrosoftEdge on windows (abb8b0f77fa3006ec77988f5c85cae91)] -&gt; xpath: //h3[contains(text(),'QA Automation')]]
+Session ID: abb8b0f77fa3006ec77988f5c85cae91</td>
+</tr>
+
+<tr>
+<td>1000575</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:111</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>1002464</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1005643</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1005756</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1007251</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1011883</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:516</td>
+<td title="Message">the size of org type drop down is 3</td>
+</tr>
+
+<tr>
+<td>1011895</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:525</td>
+<td title="Message">The org type is Elite</td>
+</tr>
+
+<tr>
+<td>1011895</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:530</td>
+<td title="Message">elite</td>
+</tr>
+
+<tr>
+<td>1011904</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:525</td>
+<td title="Message">The org type is Pro</td>
+</tr>
+
+<tr>
+<td>1011905</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:534</td>
+<td title="Message">Pro</td>
+</tr>
+
+<tr>
+<td>1011915</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:525</td>
+<td title="Message">The org type is CORE</td>
+</tr>
+
+<tr>
+<td>1011915</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:537</td>
+<td title="Message">core</td>
+</tr>
+
+<tr>
+<td>1011996</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1012077</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1013572</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1017114</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:468</td>
+<td title="Message">Phone Number value is </td>
+</tr>
+
+<tr>
+<td>1017236</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:479</td>
+<td title="Message">New Phone Number value is +1 (895) 623-3336</td>
+</tr>
+
+<tr>
+<td>1017236</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:481</td>
+<td title="Message">Accepts numbers</td>
+</tr>
+
+<tr>
+<td>1017331</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1017426</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1018938</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1022396</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:715</td>
+<td title="Message">Placeholder Text is Select a Country</td>
+</tr>
+
+<tr>
+<td>1025473</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:176</td>
+<td title="Message">Total number of values in dropdown 192</td>
+</tr>
+
+<tr>
+<td>1025485</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Afghanistan</td>
+</tr>
+
+<tr>
+<td>1025495</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Albania</td>
+</tr>
+
+<tr>
+<td>1025505</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Algeria</td>
+</tr>
+
+<tr>
+<td>1025518</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Andorra</td>
+</tr>
+
+<tr>
+<td>1025529</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Angola</td>
+</tr>
+
+<tr>
+<td>1025541</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Antigua And Barbuda</td>
+</tr>
+
+<tr>
+<td>1025556</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Argentina</td>
+</tr>
+
+<tr>
+<td>1025569</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Armenia</td>
+</tr>
+
+<tr>
+<td>1025579</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Australia</td>
+</tr>
+
+<tr>
+<td>1025589</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Austria</td>
+</tr>
+
+<tr>
+<td>1025598</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Azerbaijan</td>
+</tr>
+
+<tr>
+<td>1025608</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Bahamas The</td>
+</tr>
+
+<tr>
+<td>1025617</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Bahrain</td>
+</tr>
+
+<tr>
+<td>1025626</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Bangladesh</td>
+</tr>
+
+<tr>
+<td>1025634</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Barbados</td>
+</tr>
+
+<tr>
+<td>1025642</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Belarus</td>
+</tr>
+
+<tr>
+<td>1025652</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Belgium</td>
+</tr>
+
+<tr>
+<td>1025661</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Belize</td>
+</tr>
+
+<tr>
+<td>1025674</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Benin</td>
+</tr>
+
+<tr>
+<td>1025684</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Bhutan</td>
+</tr>
+
+<tr>
+<td>1025694</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Bolivia</td>
+</tr>
+
+<tr>
+<td>1025703</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Bosnia and Herzegovina</td>
+</tr>
+
+<tr>
+<td>1025712</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Botswana</td>
+</tr>
+
+<tr>
+<td>1025721</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Brazil</td>
+</tr>
+
+<tr>
+<td>1025732</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Brunei</td>
+</tr>
+
+<tr>
+<td>1025741</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Bulgaria</td>
+</tr>
+
+<tr>
+<td>1025751</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Burkina Faso</td>
+</tr>
+
+<tr>
+<td>1025761</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Burundi</td>
+</tr>
+
+<tr>
+<td>1025771</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Cambodia</td>
+</tr>
+
+<tr>
+<td>1025780</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Cameroon</td>
+</tr>
+
+<tr>
+<td>1025790</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Canada</td>
+</tr>
+
+<tr>
+<td>1025799</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Cape Verde</td>
+</tr>
+
+<tr>
+<td>1025807</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Central African Republic</td>
+</tr>
+
+<tr>
+<td>1025816</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Chad</td>
+</tr>
+
+<tr>
+<td>1025824</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Chile</td>
+</tr>
+
+<tr>
+<td>1025834</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">China</td>
+</tr>
+
+<tr>
+<td>1025843</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Colombia</td>
+</tr>
+
+<tr>
+<td>1025852</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Comoros</td>
+</tr>
+
+<tr>
+<td>1025862</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Congo</td>
+</tr>
+
+<tr>
+<td>1025871</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Costa Rica</td>
+</tr>
+
+<tr>
+<td>1025879</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Cote D'Ivoire (Ivory Coast)</td>
+</tr>
+
+<tr>
+<td>1025887</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Croatia</td>
+</tr>
+
+<tr>
+<td>1025898</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Cuba</td>
+</tr>
+
+<tr>
+<td>1025908</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Cyprus</td>
+</tr>
+
+<tr>
+<td>1025918</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Czech Republic</td>
+</tr>
+
+<tr>
+<td>1025929</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Democratic Republic of the Congo</td>
+</tr>
+
+<tr>
+<td>1025939</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Denmark</td>
+</tr>
+
+<tr>
+<td>1025950</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Djibouti</td>
+</tr>
+
+<tr>
+<td>1025958</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Dominica</td>
+</tr>
+
+<tr>
+<td>1025969</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Dominican Republic</td>
+</tr>
+
+<tr>
+<td>1025978</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">East Timor</td>
+</tr>
+
+<tr>
+<td>1025988</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Ecuador</td>
+</tr>
+
+<tr>
+<td>1025996</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Egypt</td>
+</tr>
+
+<tr>
+<td>1026007</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">El Salvador</td>
+</tr>
+
+<tr>
+<td>1026016</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Equatorial Guinea</td>
+</tr>
+
+<tr>
+<td>1026026</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Eritrea</td>
+</tr>
+
+<tr>
+<td>1026039</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Estonia</td>
+</tr>
+
+<tr>
+<td>1026052</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Ethiopia</td>
+</tr>
+
+<tr>
+<td>1026064</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Fiji Islands</td>
+</tr>
+
+<tr>
+<td>1026081</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Finland</td>
+</tr>
+
+<tr>
+<td>1026095</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">France</td>
+</tr>
+
+<tr>
+<td>1026107</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Gabon</td>
+</tr>
+
+<tr>
+<td>1026123</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Gambia The</td>
+</tr>
+
+<tr>
+<td>1026138</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Georgia</td>
+</tr>
+
+<tr>
+<td>1026154</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Germany</td>
+</tr>
+
+<tr>
+<td>1026169</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Ghana</td>
+</tr>
+
+<tr>
+<td>1026185</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Greece</td>
+</tr>
+
+<tr>
+<td>1026200</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Grenada</td>
+</tr>
+
+<tr>
+<td>1026216</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Guatemala</td>
+</tr>
+
+<tr>
+<td>1026225</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Guinea</td>
+</tr>
+
+<tr>
+<td>1026237</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Guinea-Bissau</td>
+</tr>
+
+<tr>
+<td>1026246</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Guyana</td>
+</tr>
+
+<tr>
+<td>1026259</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Haiti</td>
+</tr>
+
+<tr>
+<td>1026270</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Honduras</td>
+</tr>
+
+<tr>
+<td>1026283</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Hungary</td>
+</tr>
+
+<tr>
+<td>1026293</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Iceland</td>
+</tr>
+
+<tr>
+<td>1026303</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">India</td>
+</tr>
+
+<tr>
+<td>1026312</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Indonesia</td>
+</tr>
+
+<tr>
+<td>1026324</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Iran</td>
+</tr>
+
+<tr>
+<td>1026334</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Iraq</td>
+</tr>
+
+<tr>
+<td>1026346</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Ireland</td>
+</tr>
+
+<tr>
+<td>1026356</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Israel</td>
+</tr>
+
+<tr>
+<td>1026365</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Italy</td>
+</tr>
+
+<tr>
+<td>1026374</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Jamaica</td>
+</tr>
+
+<tr>
+<td>1026382</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Japan</td>
+</tr>
+
+<tr>
+<td>1026392</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Jordan</td>
+</tr>
+
+<tr>
+<td>1026402</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Kazakhstan</td>
+</tr>
+
+<tr>
+<td>1026412</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Kenya</td>
+</tr>
+
+<tr>
+<td>1026423</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Kiribati</td>
+</tr>
+
+<tr>
+<td>1026433</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Kuwait</td>
+</tr>
+
+<tr>
+<td>1026443</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Kyrgyzstan</td>
+</tr>
+
+<tr>
+<td>1026454</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Laos</td>
+</tr>
+
+<tr>
+<td>1026464</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Latvia</td>
+</tr>
+
+<tr>
+<td>1026475</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Lebanon</td>
+</tr>
+
+<tr>
+<td>1026487</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Lesotho</td>
+</tr>
+
+<tr>
+<td>1026498</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Liberia</td>
+</tr>
+
+<tr>
+<td>1026509</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Libya</td>
+</tr>
+
+<tr>
+<td>1026519</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Liechtenstein</td>
+</tr>
+
+<tr>
+<td>1026531</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Lithuania</td>
+</tr>
+
+<tr>
+<td>1026541</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Luxembourg</td>
+</tr>
+
+<tr>
+<td>1026553</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Macedonia</td>
+</tr>
+
+<tr>
+<td>1026564</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Madagascar</td>
+</tr>
+
+<tr>
+<td>1026576</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Malawi</td>
+</tr>
+
+<tr>
+<td>1026587</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Malaysia</td>
+</tr>
+
+<tr>
+<td>1026598</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Maldives</td>
+</tr>
+
+<tr>
+<td>1026608</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Mali</td>
+</tr>
+
+<tr>
+<td>1026619</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Malta</td>
+</tr>
+
+<tr>
+<td>1026630</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Mauritania</td>
+</tr>
+
+<tr>
+<td>1026640</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Mauritius</td>
+</tr>
+
+<tr>
+<td>1026650</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Mexico</td>
+</tr>
+
+<tr>
+<td>1026657</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Micronesia</td>
+</tr>
+
+<tr>
+<td>1026668</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Moldova</td>
+</tr>
+
+<tr>
+<td>1026677</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Mongolia</td>
+</tr>
+
+<tr>
+<td>1026688</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Montenegro</td>
+</tr>
+
+<tr>
+<td>1026697</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Morocco</td>
+</tr>
+
+<tr>
+<td>1026706</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Mozambique</td>
+</tr>
+
+<tr>
+<td>1026717</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Myanmar</td>
+</tr>
+
+<tr>
+<td>1026727</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Namibia</td>
+</tr>
+
+<tr>
+<td>1026737</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Nauru</td>
+</tr>
+
+<tr>
+<td>1026748</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Nepal</td>
+</tr>
+
+<tr>
+<td>1026759</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Netherlands</td>
+</tr>
+
+<tr>
+<td>1026768</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">New Zealand</td>
+</tr>
+
+<tr>
+<td>1026776</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Nicaragua</td>
+</tr>
+
+<tr>
+<td>1026784</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Niger</td>
+</tr>
+
+<tr>
+<td>1026794</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Nigeria</td>
+</tr>
+
+<tr>
+<td>1026802</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">North Korea</td>
+</tr>
+
+<tr>
+<td>1026810</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Norway</td>
+</tr>
+
+<tr>
+<td>1026818</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Oman</td>
+</tr>
+
+<tr>
+<td>1026846</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Pakistan</td>
+</tr>
+
+<tr>
+<td>1026869</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Palau</td>
+</tr>
+
+<tr>
+<td>1026882</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Panama</td>
+</tr>
+
+<tr>
+<td>1026893</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Papua new Guinea</td>
+</tr>
+
+<tr>
+<td>1026902</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Paraguay</td>
+</tr>
+
+<tr>
+<td>1026912</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Peru</td>
+</tr>
+
+<tr>
+<td>1026922</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Philippines</td>
+</tr>
+
+<tr>
+<td>1026932</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Poland</td>
+</tr>
+
+<tr>
+<td>1026940</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Portugal</td>
+</tr>
+
+<tr>
+<td>1026950</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Qatar</td>
+</tr>
+
+<tr>
+<td>1026958</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Romania</td>
+</tr>
+
+<tr>
+<td>1026968</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Russia</td>
+</tr>
+
+<tr>
+<td>1026978</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Rwanda</td>
+</tr>
+
+<tr>
+<td>1026988</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Saint Kitts And Nevis</td>
+</tr>
+
+<tr>
+<td>1026999</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Saint Lucia</td>
+</tr>
+
+<tr>
+<td>1027008</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Saint Vincent And The Grenadines</td>
+</tr>
+
+<tr>
+<td>1027017</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Samoa</td>
+</tr>
+
+<tr>
+<td>1027024</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">San Marino</td>
+</tr>
+
+<tr>
+<td>1027034</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Sao Tome and Principe</td>
+</tr>
+
+<tr>
+<td>1027044</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Saudi Arabia</td>
+</tr>
+
+<tr>
+<td>1027053</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Senegal</td>
+</tr>
+
+<tr>
+<td>1027063</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Serbia</td>
+</tr>
+
+<tr>
+<td>1027071</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Seychelles</td>
+</tr>
+
+<tr>
+<td>1027079</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Sierra Leone</td>
+</tr>
+
+<tr>
+<td>1027088</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Singapore</td>
+</tr>
+
+<tr>
+<td>1027098</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Slovakia</td>
+</tr>
+
+<tr>
+<td>1027109</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Slovenia</td>
+</tr>
+
+<tr>
+<td>1027119</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Solomon Islands</td>
+</tr>
+
+<tr>
+<td>1027128</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Somalia</td>
+</tr>
+
+<tr>
+<td>1027138</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">South Africa</td>
+</tr>
+
+<tr>
+<td>1027151</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">South Korea</td>
+</tr>
+
+<tr>
+<td>1027162</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">South Sudan</td>
+</tr>
+
+<tr>
+<td>1027173</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Spain</td>
+</tr>
+
+<tr>
+<td>1027186</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Sri Lanka</td>
+</tr>
+
+<tr>
+<td>1027197</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Sudan</td>
+</tr>
+
+<tr>
+<td>1027209</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Suriname</td>
+</tr>
+
+<tr>
+<td>1027222</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Swaziland</td>
+</tr>
+
+<tr>
+<td>1027233</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Sweden</td>
+</tr>
+
+<tr>
+<td>1027243</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Switzerland</td>
+</tr>
+
+<tr>
+<td>1027254</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Syria</td>
+</tr>
+
+<tr>
+<td>1027265</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Taiwan</td>
+</tr>
+
+<tr>
+<td>1027275</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Tajikistan</td>
+</tr>
+
+<tr>
+<td>1027286</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Tanzania</td>
+</tr>
+
+<tr>
+<td>1027299</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Thailand</td>
+</tr>
+
+<tr>
+<td>1027312</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Togo</td>
+</tr>
+
+<tr>
+<td>1027325</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Tonga</td>
+</tr>
+
+<tr>
+<td>1027338</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Trinidad And Tobago</td>
+</tr>
+
+<tr>
+<td>1027350</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Tunisia</td>
+</tr>
+
+<tr>
+<td>1027364</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Turkey</td>
+</tr>
+
+<tr>
+<td>1027376</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Turkmenistan</td>
+</tr>
+
+<tr>
+<td>1027390</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Tuvalu</td>
+</tr>
+
+<tr>
+<td>1027402</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Uganda</td>
+</tr>
+
+<tr>
+<td>1027413</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Ukraine</td>
+</tr>
+
+<tr>
+<td>1027427</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">United Arab Emirates</td>
+</tr>
+
+<tr>
+<td>1027436</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">United Kingdom</td>
+</tr>
+
+<tr>
+<td>1027445</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">United States</td>
+</tr>
+
+<tr>
+<td>1027455</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Uruguay</td>
+</tr>
+
+<tr>
+<td>1027463</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Uzbekistan</td>
+</tr>
+
+<tr>
+<td>1027471</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Vanuatu</td>
+</tr>
+
+<tr>
+<td>1027480</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Venezuela</td>
+</tr>
+
+<tr>
+<td>1027490</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Vietnam</td>
+</tr>
+
+<tr>
+<td>1027499</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Yemen</td>
+</tr>
+
+<tr>
+<td>1027507</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Zambia</td>
+</tr>
+
+<tr>
+<td>1027517</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Zimbabwe</td>
+</tr>
+
+<tr>
+<td>1027517</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:198</td>
+<td title="Message">Organization names are in alphabetical order</td>
+</tr>
+
+<tr>
+<td>1027707</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1027794</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1029313</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1032877</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:600</td>
+<td title="Message">entered value is A1y2Z3</td>
+</tr>
+
+<tr>
+<td>1032878</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:605</td>
+<td title="Message">Street address is accepting alpha numeric characters</td>
+</tr>
+
+<tr>
+<td>1033287</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1033380</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1034858</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1047441</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:110</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-jqo-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot; style=&quot;color: black; border: 3px solid blue;&quot;&gt;...&lt;/h3&gt; is not clickable at point (455, 238). Other element would receive the click: &lt;div _ngcontent-jqo-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: MicrosoftEdge=136.0.3240.92)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [abb8b0f77fa3006ec77988f5c85cae91, clickElement {id=f.B129BDE65FE144FB9B2E2144BA79700F.d.E44728B42D94F286742553586D79ACCB.e.4511}]
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 136.0.3240.92, fedcm:accounts: true, ms:edgeOptions: {debuggerAddress: localhost:56608}, msedge: {msedgedriverVersion: 136.0.3240.92 (a30c59ee983a..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56608/devtoo..., se:cdpVersion: 136.0.3240.92, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[EdgeDriver: MicrosoftEdge on windows (abb8b0f77fa3006ec77988f5c85cae91)] -&gt; xpath: //h3[contains(text(),'QA Automation')]]
+Session ID: abb8b0f77fa3006ec77988f5c85cae91</td>
+</tr>
+
+<tr>
+<td>1047442</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:111</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>1049856</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1050771</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:176</td>
+<td title="Message">Total number of values in dropdown 53</td>
+</tr>
+
+<tr>
+<td>1050784</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">A TO Z PRO organization( ` )</td>
+</tr>
+
+<tr>
+<td>1050795</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Alphabetical testing</td>
+</tr>
+
+<tr>
+<td>1050804</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Amzur Demo</td>
+</tr>
+
+<tr>
+<td>1050812</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Amzur test account</td>
+</tr>
+
+<tr>
+<td>1050821</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Ananya Real Estate Pvt Ltd</td>
+</tr>
+
+<tr>
+<td>1050830</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BN 81 - 1</td>
+</tr>
+
+<tr>
+<td>1050840</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BN 81 - 2</td>
+</tr>
+
+<tr>
+<td>1050849</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BN 81 - 3</td>
+</tr>
+
+<tr>
+<td>1050858</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BN 812</td>
+</tr>
+
+<tr>
+<td>1050867</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Brand Factory101</td>
+</tr>
+
+<tr>
+<td>1050877</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Business organisation 777</td>
+</tr>
+
+<tr>
+<td>1050885</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Business organisation 89</td>
+</tr>
+
+<tr>
+<td>1050897</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BusinessName</td>
+</tr>
+
+<tr>
+<td>1050910</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BYD</td>
+</tr>
+
+<tr>
+<td>1050919</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BYD</td>
+</tr>
+
+<tr>
+<td>1050929</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BYD-bits</td>
+</tr>
+
+<tr>
+<td>1050939</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">core</td>
+</tr>
+
+<tr>
+<td>1050946</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Core Test</td>
+</tr>
+
+<tr>
+<td>1050954</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Dev_Hari Prasad</td>
+</tr>
+
+<tr>
+<td>1050962</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">DevQA Twilio Rebilling</td>
+</tr>
+
+<tr>
+<td>1050970</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">EDO Org</td>
+</tr>
+
+<tr>
+<td>1050978</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">EDO Org</td>
+</tr>
+
+<tr>
+<td>1050987</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">EDO1</td>
+</tr>
+
+<tr>
+<td>1050994</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Elite Test Organization</td>
+</tr>
+
+<tr>
+<td>1051002</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Form Business</td>
+</tr>
+
+<tr>
+<td>1051011</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Form Business1</td>
+</tr>
+
+<tr>
+<td>1051020</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Hill Ltd</td>
+</tr>
+
+<tr>
+<td>1051029</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">KT Org</td>
+</tr>
+
+<tr>
+<td>1051038</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">KYCNK</td>
+</tr>
+
+<tr>
+<td>1051047</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">MCKESSION</td>
+</tr>
+
+<tr>
+<td>1051056</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">New Business 88</td>
+</tr>
+
+<tr>
+<td>1051066</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">NYCFGHJ</td>
+</tr>
+
+<tr>
+<td>1051074</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Organization 100</td>
+</tr>
+
+<tr>
+<td>1051085</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Patient Rounding</td>
+</tr>
+
+<tr>
+<td>1051093</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">PioneerRealEstate123</td>
+</tr>
+
+<tr>
+<td>1051103</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Pro Acc</td>
+</tr>
+
+<tr>
+<td>1051112</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Pro Business</td>
+</tr>
+
+<tr>
+<td>1051124</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Pro Testing</td>
+</tr>
+
+<tr>
+<td>1051136</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">ProTesting</td>
+</tr>
+
+<tr>
+<td>1051146</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">QA Automation</td>
+</tr>
+
+<tr>
+<td>1051157</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">QA Automation 1</td>
+</tr>
+
+<tr>
+<td>1051168</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">QA Testing</td>
+</tr>
+
+<tr>
+<td>1051177</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">QA Twilio Rebilling</td>
+</tr>
+
+<tr>
+<td>1051186</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">RSYS</td>
+</tr>
+
+<tr>
+<td>1051196</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Sample test</td>
+</tr>
+
+<tr>
+<td>1051205</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">survey pro</td>
+</tr>
+
+<tr>
+<td>1051218</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Survey Pro2</td>
+</tr>
+
+<tr>
+<td>1051228</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Test Business Account</td>
+</tr>
+
+<tr>
+<td>1051238</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Test Business Name</td>
+</tr>
+
+<tr>
+<td>1051247</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Unique</td>
+</tr>
+
+<tr>
+<td>1051259</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Unique Tech</td>
+</tr>
+
+<tr>
+<td>1051271</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Vasanth Kumar Org</td>
+</tr>
+
+<tr>
+<td>1051280</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">VikasEnterprises</td>
+</tr>
+
+<tr>
+<td>1051281</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:198</td>
+<td title="Message">Organization names are in alphabetical order</td>
+</tr>
+
+<tr>
+<td>1051376</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1055431</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1055876</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1055987</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1057484</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1061834</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1061929</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1063388</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1066910</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:176</td>
+<td title="Message">Total number of values in dropdown 9</td>
+</tr>
+
+<tr>
+<td>1066922</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">A TO Z PRO organization( ` )</td>
+</tr>
+
+<tr>
+<td>1066929</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Alphabetical testing</td>
+</tr>
+
+<tr>
+<td>1066938</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Amzur Demo</td>
+</tr>
+
+<tr>
+<td>1066945</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Amzur test account</td>
+</tr>
+
+<tr>
+<td>1066954</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">Ananya Real Estate Pvt Ltd</td>
+</tr>
+
+<tr>
+<td>1066963</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BN 81 - 1</td>
+</tr>
+
+<tr>
+<td>1066971</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BN 81 - 2</td>
+</tr>
+
+<tr>
+<td>1066980</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BN 81 - 3</td>
+</tr>
+
+<tr>
+<td>1066989</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:184</td>
+<td title="Message">BN 812</td>
+</tr>
+
+<tr>
+<td>1066990</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_OrganizationPage.java:198</td>
+<td title="Message">Organization names are in alphabetical order</td>
+</tr>
+
+<tr>
+<td>1067669</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1067759</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1069284</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1081674</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1081771</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1083325</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1100798</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>1108110</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>1161374</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>1161469</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1163005</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1174529</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>1181828</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>1233501</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>1233640</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1235124</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1247846</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>1254792</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1255400</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1255502</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1257142</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1271176</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>1271891</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1271973</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1273546</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1284964</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>1286386</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1286483</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1288182</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1300165</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1300265</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1301807</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1313989</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1314091</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1315628</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>1332020</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>1339307</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>

@@ -1,0 +1,55 @@
+2025-11-03 12:12:37,296 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-11-03 12:12:39,224 - devpinoyLogger -INFO - Response Code: 200
+2025-11-03 12:12:39,225 - devpinoyLogger -INFO - Response Time: 1746 ms
+2025-11-03 12:12:39,226 - devpinoyLogger -INFO - Response Body: <!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <title>MAPS Technologies</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <meta http-equiv="cache-control" content="no-cache, no-store must-revalidate, post-check=0, pre-check=0">
+  <meta http-equiv="expires" content="0">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src * blob:;media-src * blob:; style-src 'unsafe-inline' * https://fonts.googleapis.com 	https://qa.mapstechnologies.com ; script-src 'unsafe-inline' *  https://qa.mapstechnologies.com https://maps.googleapis.com https://sdk.twilio.com https://apis.google.com https://www.google.com; img-src * 'self' https://www.facebook.com http://qa-web-app.s3-website.us-east-2.amazonaws.com http://prod-web-app.s3-website.us-east-2.amazonaws.com http://s3-website.us-east-2.amazonaws.com https://s3.amazonaws.com data:; font-src * 'self' https://fonts.googleapis.com https://fonts.gstatic.com data:; worker-src * 'self'; frame-src * blob:;"/>
+
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/edo-icons/styles.css">
+  <!-- <link rel="stylesheet" href="assets/edo-icons/edo-widget-icons.css"> -->
+  <link rel="stylesheet" href="assets/edo-custom-icons/edo-widget.css">
+  <link rel="stylesheet" href="assets/edo-icons/edoicons.css">
+  
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLZ263x9b2gHMm3V1M7J9v7H5Yc7eSEdU&amp;libraries=places&amp;language=en&amp;loading=async"></script>
+  <!-- <script type="text/javascript" src="https://media.twiliocdn.com/sdk/js/client/v1.7/twilio.min.js"></script> -->
+  <!-- <script src="//static.twilio.com/libs/twiliojs/edge/twilio.js"></script> -->
+  <script src="https://sdk.twilio.com/js/client/v1.10/twilio.js"></script>
+  <script src="https://apis.google.com/js/api.js"></script> 
+  <script src="https://www.google.com/recaptcha/api.js?render=explicit&amp;onload=loadCaptcha" async="" defer=""></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1976d2">
+<link rel="stylesheet" href="styles.67c75a35a80eeeb9d15d.css"></head>
+
+<body class="mat-typography">
+  <app-root></app-root>
+  <script>
+    var global = global || window;
+    var Buffer = Buffer || [];
+    // var process = process || {
+    //   env: { DEBUG: undefined },
+    //   version: []
+    // };
+  </script>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+<script src="runtime-es2015.f53100ac727b075912d5.js" type="module"></script><script src="runtime-es5.f53100ac727b075912d5.js" nomodule defer></script><script src="polyfills-es5.9a6725404e9beef8d5be.js" nomodule defer></script><script src="polyfills-es2015.52131c500678913dca9a.js" type="module"></script><script src="scripts.765aa4580f598f8abfd4.js" defer></script><script src="main-es2015.5aeb1e01fc3275912d46.js" type="module"></script><script src="main-es5.5aeb1e01fc3275912d46.js" nomodule defer></script></body>
+
+</html>
+

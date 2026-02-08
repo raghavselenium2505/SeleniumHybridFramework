@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite parallel="methods" name="Failed suite [ParallelExecutionSuite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" parallel="methods" name="ParallelGPSAutomation(failed)">
+    <classes>
+      <class name="com.gps.development.GPS_RulesAutomation">
+        <methods>
+          <include name="GPS_VerifyAddActionNegative"/>
+          <include name="GPS_VerifySendEmail"/>
+          <include name="GPS_VerifyRule_225_226_231_238"/>
+          <include name="GPS_AddContactTag"/>
+          <include name="GPS_VerifyAddFilterLabel_241_242_243"/>
+          <include name="GPS_VerifyAddNewRuleFunctionality"/>
+          <include name="GPS_CopyRule_171_172_173_174_175_176_177_178_179_180"/>
+          <include name="GPS_VerifyFBLeadForms"/>
+          <include name="GPS_VerifyRemoveSequences"/>
+          <include name="GPS_VerifyHelpFunctionality"/>
+          <include name="GPS_AddOppurnityPipeline"/>
+          <include name="GPS_VerifyEmailOrSMSConditionFunctionality"/>
+          <include name="GPS_VerifyBackButtonFunctionality_1"/>
+          <include name="GPS_VerifyTheRulesModule"/>
+          <include name="ReportGeneration"/>
+          <include name="GPS_VerifyContactDNDEventConditionsFunctionality"/>
+          <include name="GPS_VerifyNewRuleFunctionality"/>
+          <include name="GPS_AssignToUser"/>
+          <include name="flushTest"/>
+          <include name="GPS_AddToSequenceFunctionality"/>
+          <include name="GPS_VerifyAddNewFolderFunctionality"/>
+          <include name="GPS_VerifyPipelineStageChangeEventFunctionality"/>
+          <include name="GPS_VerifySendEmail_260"/>
+          <include name="GPS_VerifyTriangleFolderIcon"/>
+          <include name="GPS_VerifyRulesPageWithOrganization"/>
+          <include name="GPS_VerifyFormSubmittedEventFunctionality"/>
+          <include name="GPS_VerifyTags_292_293_294_295_296_297_298_299"/>
+          <include name="GPS_VerifyRulesPage"/>
+          <include name="setUp"/>
+          <include name="GPS_PerformTheseActions"/>
+          <include name="GPS_VerifyLabelFormSubmitted_244_245_246"/>
+          <include name="GPS_VerifyRemovefromallSequences_256"/>
+          <include name="GPS_VerifyAddNotes_249_250"/>
+          <include name="GPS_VerifyReplyToSequence_240"/>
+          <include name="GPS_AddToSequenceFunctionality_1"/>
+          <include name="GPS_VerifyRemoveoppurnityPipeline_259"/>
+          <include name="GPS_VerifyRemovefromspecificSequences_257_258"/>
+          <include name="GPS_VerifyRuleTileFunctionality"/>
+          <include name="GPS_BirthdayRemainder_303"/>
+          <include name="GPS_VerifyAddAppointmenteventConditionFunctionality"/>
+          <include name="GPS_VerifyRemoveUser_256"/>
+          <include name="GPS_VerifyRemoveUser_255"/>
+          <include name="GPS_VerifyFBLeadForms_1"/>
+          <include name="GPS_VerifyFacebookLead_247_248"/>
+          <include name="GPS_VerifyCopyRuleButtonFunctionality"/>
+          <include name="GPS_VerifyBackButtonFunctionality"/>
+          <include name="GPS_CopyRule_158_159_160_161_162_163_164_165_166_167"/>
+          <include name="GPS_VerifyAddOpportunity_253"/>
+          <include name="GPS_VerifyAttachmentFiles"/>
+          <include name="GPS_VerifyCustomerReplyEventFunctionality"/>
+          <include name="tearDown"/>
+          <include name="GPS_VerifyAssignUser_251_252"/>
+          <include name="GPS_VerifyAutomationLHS"/>
+          <include name="GPS_VerifyRule_239"/>
+        </methods>
+      </class> <!-- com.gps.development.GPS_RulesAutomation -->
+    </classes>
+  </test> <!-- ParallelGPSAutomation(failed) -->
+</suite> <!-- Failed suite [ParallelExecutionSuite] -->

@@ -1,0 +1,44 @@
+2025-07-31 21:36:57,253 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-07-31 21:36:57,409 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-07-31 21:36:57,411 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-07-31 21:36:57,415 - devpinoyLogger -INFO - chrome  browser launched
+2025-07-31 21:36:57,921 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-07-31 21:36:58,070 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-07-31 21:36:58,071 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-07-31 21:36:58,073 - devpinoyLogger -INFO - chrome  browser launched
+2025-07-31 21:37:02,144 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-07-31 21:37:02,192 - devpinoyLogger -INFO - browser maximaized 
+2025-07-31 21:37:02,248 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-07-31 21:37:02,303 - devpinoyLogger -INFO - browser maximaized 
+2025-07-31 21:37:05,476 - devpinoyLogger -INFO - click worked
+2025-07-31 21:37:05,918 - devpinoyLogger -INFO - click worked
+2025-07-31 21:37:14,883 - devpinoyLogger -INFO - element click intercepted: Element <h3 _ngcontent-yxn-c18="" class="fs-16 fw-400 m-b-10 m-t-10">...</h3> is not clickable at point (456, 235). Other element would receive the click: <div _ngcontent-yxn-c18="" class="agent-details-view"></div>
+  (Session info: chrome=138.0.7204.169)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [f7ed7988540e0b45878630a91d9f7f42, clickElement {id=f.7EF536A3CD1A696148250AA8AA454F7D.d.C0B067521143D1EAB7939794A89A4D75.e.49}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.169, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57121}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57121/devtoo..., se:cdpVersion: 138.0.7204.169, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (f7ed7988540e0b45878630a91d9f7f42)] -> xpath: //h3[text()='QA Automation']]
+Session ID: f7ed7988540e0b45878630a91d9f7f42
+2025-07-31 21:37:14,884 - devpinoyLogger -INFO - Action click worked
+2025-07-31 21:37:17,457 - devpinoyLogger -INFO - element click intercepted: Element <h3 _ngcontent-bfd-c18="" class="fs-16 fw-400 m-b-10 m-t-10">...</h3> is not clickable at point (456, 235). Other element would receive the click: <div _ngcontent-bfd-c18="" class="agent-details-view"></div>
+  (Session info: chrome=138.0.7204.169)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [c97ae6b0b996c958ec29002fd76298a7, clickElement {id=f.07565CCCB478C530E6AF5FD295B019A4.d.6CFCC081C83DD666D2B3BCFF134FC4D5.e.46}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.169, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57138}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57138/devtoo..., se:cdpVersion: 138.0.7204.169, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (c97ae6b0b996c958ec29002fd76298a7)] -> xpath: //h3[text()='QA Automation']]
+Session ID: c97ae6b0b996c958ec29002fd76298a7
+2025-07-31 21:37:17,460 - devpinoyLogger -INFO - Action click worked
+2025-07-31 21:37:24,521 - devpinoyLogger -INFO - passed click statement
+2025-07-31 21:37:26,077 - devpinoyLogger -INFO - passed click statement
+2025-07-31 21:37:26,294 - devpinoyLogger -INFO - passed click statement
+2025-07-31 21:37:27,777 - devpinoyLogger -INFO - passed click statement
+2025-07-31 21:37:30,506 - devpinoyLogger -INFO - passed click statement
+2025-07-31 21:37:31,470 - devpinoyLogger -INFO - passed click statement
+2025-07-31 21:37:37,169 - devpinoyLogger -INFO - click worked
+2025-07-31 21:37:37,273 - devpinoyLogger -INFO - click worked
+2025-07-31 21:37:54,957 - devpinoyLogger -INFO - JS click worked
+2025-07-31 21:37:55,033 - devpinoyLogger -INFO - click worked

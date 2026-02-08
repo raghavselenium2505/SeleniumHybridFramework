@@ -1,0 +1,18 @@
+2025-06-08 09:21:27,649 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-06-08 09:21:27,886 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-06-08 09:21:27,889 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-06-08 09:21:27,896 - devpinoyLogger -INFO - chrome  browser launched
+2025-06-08 09:21:41,484 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-06-08 09:21:41,547 - devpinoyLogger -INFO - browser maximaized 
+2025-06-08 09:21:42,861 - devpinoyLogger -INFO - click worked
+2025-06-08 09:21:56,579 - devpinoyLogger -INFO - Placeholder Text is Select a Country
+2025-06-08 09:21:56,981 - devpinoyLogger -INFO - stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [db0ac21dbddfe92dc22ffc09b03f1a3a, isElementDisplayed {id=f.916B920E4EE38087ED4D554465BE4427.d.5EC1949BFD6EACE348BF2BF4C54A6DF4.e.129}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.69, chrome: {chromedriverVersion: 137.0.7151.68 (2989ffee9373..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:59828}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:59828/devtoo..., se:cdpVersion: 137.0.7151.69, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (db0ac21dbddfe92dc22ffc09b03f1a3a)] -> xpath: //ul[contains(@class,'helper')]//span]
+Session ID: db0ac21dbddfe92dc22ffc09b03f1a3a

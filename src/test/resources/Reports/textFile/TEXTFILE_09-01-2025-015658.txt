@@ -1,0 +1,67 @@
+2025-01-09 13:56:58,680 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-01-09 13:56:58,799 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-01-09 13:56:58,802 - devpinoyLogger -INFO - Incognito browser launched
+2025-01-09 13:57:05,235 - devpinoyLogger -INFO - browser launched incognitoNavigated to : https://staging.eteki.com/admin/login
+2025-01-09 13:57:05,283 - devpinoyLogger -INFO - browser maximaized 
+2025-01-09 13:57:05,632 - devpinoyLogger -INFO - passed click statement
+2025-01-09 13:57:10,715 - devpinoyLogger -INFO - passed click statement
+2025-01-09 13:57:42,046 - freemarker.runtime -ERROR - Error executing FreeMarker template
+FreeMarker template error:
+The following has evaluated to null or missing:
+==> report.systemInfoMap[info]  [in template "Extent.ftl" at line 193, column 95]
+
+----
+Tip: It's the final [] step that caused this error, not those before it.
+----
+Tip: If the failing expression is known to be legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
+----
+
+----
+FTL stack trace ("~" means nesting-related):
+	- Failed at: ${report.systemInfoMap[info]}  [in template "Extent.ftl" at line 193, column 93]
+----
+
+Java stack trace (for programmers):
+----
+freemarker.core.InvalidReferenceException: [... Exception message was already printed; see it above ...]
+	at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:131)
+	at freemarker.core.EvalUtil.coerceModelToString(EvalUtil.java:355)
+	at freemarker.core.Expression.evalAndCoerceToString(Expression.java:82)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:41)
+	at freemarker.core.Environment.visit(Environment.java:324)
+	at freemarker.core.MixedContent.accept(MixedContent.java:54)
+	at freemarker.core.Environment.visitByHiddingParent(Environment.java:345)
+	at freemarker.core.IteratorBlock$IterationContext.executeNestedBlockInner(IteratorBlock.java:240)
+	at freemarker.core.IteratorBlock$IterationContext.executeNestedBlock(IteratorBlock.java:220)
+	at freemarker.core.IteratorBlock$IterationContext.accept(IteratorBlock.java:194)
+	at freemarker.core.Environment.visitIteratorBlock(Environment.java:572)
+	at freemarker.core.IteratorBlock.acceptWithResult(IteratorBlock.java:78)
+	at freemarker.core.IteratorBlock.accept(IteratorBlock.java:64)
+	at freemarker.core.Environment.visit(Environment.java:324)
+	at freemarker.core.MixedContent.accept(MixedContent.java:54)
+	at freemarker.core.Environment.visit(Environment.java:324)
+	at freemarker.core.Environment.process(Environment.java:302)
+	at freemarker.template.Template.process(Template.java:325)
+	at com.relevantcodes.extentreports.HTMLReporter.flush(HTMLReporter.java:173)
+	at com.relevantcodes.extentreports.Report.flush(Report.java:468)
+	at com.relevantcodes.extentreports.ExtentReports.flush(ExtentReports.java:900)
+	at com.gps.base.TestBase.tearDown(TestBase.java:374)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:344)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)

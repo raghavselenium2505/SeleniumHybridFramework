@@ -1,0 +1,17 @@
+2025-09-22 20:34:44,025 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-09-22 20:34:44,162 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-09-22 20:34:44,163 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-09-22 20:34:44,165 - devpinoyLogger -INFO - chrome  browser launched
+2025-09-22 20:34:55,998 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-09-22 20:34:56,034 - devpinoyLogger -INFO - browser maximaized 
+2025-09-22 20:34:56,725 - devpinoyLogger -INFO - click worked
+2025-09-22 20:35:05,373 - devpinoyLogger -INFO - passed click statement
+2025-09-22 20:35:33,812 - devpinoyLogger -INFO - invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=140.0.7339.127)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [138d3f0f9f908360e0c72c56421a8f4e, findElement {value=//span[contains(text(),'Logout')], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.127, chrome: {chromedriverVersion: 140.0.7339.185 (eeea00e459e..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51739}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51739/devtoo..., se:cdpVersion: 140.0.7339.127, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 138d3f0f9f908360e0c72c56421a8f4e

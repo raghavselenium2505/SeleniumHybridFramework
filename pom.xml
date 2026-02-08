@@ -1,33 +1,36 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-<properties>
-<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-<java.version>17.0</java.version>
-<maven.compiler.source>7</maven.compiler.source>
-<maven.compiler.target>7</maven.compiler.target>
- </properties>	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<java.version>17.0</java.version>
+		<maven.compiler.source>7</maven.compiler.source>
+		<maven.compiler.target>7</maven.compiler.target>
+	</properties>
 
-<modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 	<groupId>SeleApi0.2</groupId>
 	<artifactId>SeleApi0.2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
-<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
-<dependency>
-    <groupId>io.github.bonigarcia</groupId>
-    <artifactId>webdrivermanager</artifactId>
-    <version>5.3.2</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
 
-<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>5.7.0</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.11</version>
+			<version>7.4.0</version>
 		</dependency>
 
-<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -36,7 +39,7 @@
 			<scope>test</scope>
 		</dependency>
 
-<!-- https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot -->
+		<!-- https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot -->
 
 		<dependency>
 			<groupId>ru.yandex.qatools.ashot</groupId>
@@ -44,39 +47,44 @@
 			<version>1.5.4</version>
 		</dependency>
 
-<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 
-	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-<dependency>
-    <groupId>org.seleniumhq.selenium</groupId>
-    <artifactId>selenium-java</artifactId>
-    <version>3.1.0</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>4.17.0</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-remote-driver</artifactId>
+			<version>4.17.0</version>
+		</dependency>
 
-<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
-<dependency>
-    <groupId>com.aventstack</groupId>
-    <artifactId>extentreports</artifactId>
-    <version>3.1.5</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>5.1.1</version>
+		</dependency>
 
-<dependency>
-    <groupId>com.google.code.gson</groupId>
-    <artifactId>gson</artifactId>
-    <version>2.8.7</version>
-</dependency>
-
-
-<dependency>
-    <groupId>com.googlecode.json-simple</groupId>
-    <artifactId>json-simple</artifactId>
-    <version>1.1.1</version>
-</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.7</version>
+		</dependency>
 
 
-<!-- https://mvnrepository.com/artifact/com.relevantcodes/extentreports -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.relevantcodes/extentreports -->
 
 		<dependency>
 			<groupId>com.relevantcodes</groupId>
@@ -90,7 +98,8 @@
 			<version>3.1.5</version>
 		</dependency>
 
-<!-- https://mvnrepository.com/artifact/org.uncommons/reportng -->
+
+		<!-- https://mvnrepository.com/artifact/org.uncommons/reportng -->
 
 		<dependency>
 			<groupId>org.uncommons</groupId>
@@ -98,7 +107,7 @@
 			<version>1.1.4</version>
 		</dependency>
 
-<!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
+		<!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
 
 		<dependency>
 			<groupId>com.google.inject</groupId>
@@ -107,7 +116,7 @@
 		</dependency>
 
 
-<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 
 		<dependency>
 			<groupId>log4j</groupId>
@@ -115,7 +124,7 @@
 			<version>1.2.17</version>
 		</dependency>
 
-<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -123,7 +132,7 @@
 			<version>1.4.7</version>
 		</dependency>
 
-<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+		<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
 
 		<dependency>
 			<groupId>javax.activation</groupId>
@@ -131,24 +140,24 @@
 			<version>1.1.1</version>
 		</dependency>
 
-<!-- https://mvnrepository.com/artifact/net.rcarz/jira-client -->
+		<!-- https://mvnrepository.com/artifact/net.rcarz/jira-client -->
 
-	<dependency>
-      <groupId>net.rcarz</groupId>
-      <artifactId>jira-client</artifactId>
-      <version>0.5</version>
-      <scope>compile</scope>
-    </dependency>
-	
-<!-- http://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+			<groupId>net.rcarz</groupId>
+			<artifactId>jira-client</artifactId>
+			<version>0.5</version>
+			<scope>compile</scope>
+		</dependency>
 
-	<dependency>
+		<!-- http://mvnrepository.com/artifact/org.apache.poi/poi -->
+
+		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 			<version>3.6</version>
 		</dependency>
 
-<!-- http://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+		<!-- http://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -156,7 +165,7 @@
 			<version>3.6</version>
 		</dependency>
 
-<!-- http://mvnrepository.com/artifact/dom4j/dom4j -->
+		<!-- http://mvnrepository.com/artifact/dom4j/dom4j -->
 
 		<dependency>
 			<groupId>dom4j</groupId>
@@ -164,7 +173,7 @@
 			<version>1.1</version>
 		</dependency>
 
-<!-- http://mvnrepository.com/artifact/org.apache.xmlbeans/xmlbeans -->
+		<!-- http://mvnrepository.com/artifact/org.apache.xmlbeans/xmlbeans -->
 
 		<dependency>
 			<groupId>org.apache.xmlbeans</groupId>
@@ -172,15 +181,35 @@
 			<version>2.3.0</version>
 		</dependency>
 
-<!-- http://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
+		<!-- http://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
 
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml-schemas</artifactId>
 			<version>3.6</version>
 		</dependency>
-	
+		<!-- https://mvnrepository.com/artifact/org.bytedeco/javacv-platform -->
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>javacv-platform</artifactId>
+			<version>1.5.11</version>
+		</dependency>
+<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>rest-assured</artifactId>
+    <version>5.5.6</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
+<dependency>
+    <groupId>org.hamcrest</groupId>
+    <artifactId>hamcrest</artifactId>
+    <version>3.0</version>
+</dependency>
 	</dependencies>
+
+
 	<build>
 		<plugins>
 			<plugin>
@@ -190,7 +219,8 @@
 				<configuration>
 					<testFailureIgnore> false </testFailureIgnore>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/resources/runner/testng.xml</suiteXmlFile>
+
+						<suiteXmlFile>src/test/resources/runner/Rules.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
@@ -199,7 +229,15 @@
 				<artifactId>maven-enforce-plugin</artifactId>
 				<version>1.4</version>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
 		</plugins>
 		<testResources>
 			<testResource>
@@ -209,5 +247,7 @@
 				</includes>
 			</testResource>
 		</testResources>
+
 	</build>
+
 </project>

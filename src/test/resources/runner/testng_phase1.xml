@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Parallel Test Suite">
+	<test name="Parallel Test">
+		<classes>
+			<class name="com.gps.development.GPS_LoginTest" />
+			<class name="com.gps.development.GPS_ForgotPasswordTest" />
+			<class name="com.gps.development.GPS_EditUserTest" />
+			<class name="com.gps.development.GPS_UserManagementTest" />
+			<class name="com.gps.development.GPS_DeleteUserTest" />
+			<class name="com.gps.development.GPS_MySettings" />
+			<class name="com.gps.development.GPS_SysAddUser" />
+			<class name="com.gps.development.GPS_UserManagement_UploadFiles" />
+			<class name="com.gps.development.GPS_MySettings_UploadFiles" />
+			
+
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestSuite" time="3.912" tests="4" errors="0" skipped="3" failures="1">
+<testsuite name="TestSuite" time="18.209" tests="112" errors="0" skipped="111" failures="1">
   <properties>
     <property name="jansi.mode" value="strip"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="17.0.3+7"/>
     <property name="sun.boot.library.path" value="C:\Users\RaghavendraD\Downloads\eclipse-20230517T140723Z-001\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.3.v20220515-1416\jre\bin"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\RaghavendraD\git\SeleniumHybridFramework"/>
+    <property name="maven.multiModuleProjectDirectory" value="D:\GpsAutomation\GPS"/>
     <property name="java.vm.vendor" value="Eclipse Adoptium"/>
     <property name="java.vendor.url" value="https://adoptium.net/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="user.country" value="IN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\RaghavendraD\git\SeleniumHybridFramework"/>
+    <property name="user.dir" value="D:\GpsAutomation\GPS"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="17.0.3+7"/>
     <property name="os.arch" value="amd64"/>
@@ -25,9 +25,9 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 11"/>
-    <property name="classworlds.conf" value="D:\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf8814357842300643229.tmp"/>
+    <property name="classworlds.conf" value="D:\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf3909664241163445777.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Users\RaghavendraD\Downloads\eclipse-20230517T140723Z-001\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.3.v20220515-1416\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Users/RaghavendraD/Downloads/eclipse-20230517T140723Z-001/eclipse//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.3.v20220515-1416/jre/bin/server;C:/Users/RaghavendraD/Downloads/eclipse-20230517T140723Z-001/eclipse//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.3.v20220515-1416/jre/bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\RaghavendraD\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Java\jdk1.8.0_281\bin;C:\Users\RaghavendraD\AppData\Roaming\npm;C:\Users\RaghavendraD\AppData\Local\GitHubDesktop\bin;C:\Users\RaghavendraD\Downloads\eclipse-20230517T140723Z-001\eclipse;;."/>
+    <property name="java.library.path" value="C:\Users\RaghavendraD\Downloads\eclipse-20230517T140723Z-001\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.3.v20220515-1416\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Users/RaghavendraD/Downloads/eclipse-20230517T140723Z-001/eclipse//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.3.v20220515-1416/jre/bin/server;C:/Users/RaghavendraD/Downloads/eclipse-20230517T140723Z-001/eclipse//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.3.v20220515-1416/jre/bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\RaghavendraD\AppData\Local\Microsoft\WindowsApps;C:\Users\RaghavendraD\AppData\Roaming\npm;C:\Users\RaghavendraD\AppData\Local\GitHubDesktop\bin;C:\Program Files\Java\jdk-21\bin;C:\Users\RaghavendraD\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Users\RaghavendraD\Downloads\eclipse-20230517T140723Z-001\eclipse;;."/>
     <property name="jdk.debug" value="release"/>
     <property name="java.class.version" value="61.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -49,7 +49,7 @@
     <property name="java.version" value="17.0.3"/>
     <property name="native.encoding" value="Cp1252"/>
     <property name="java.vendor" value="Eclipse Adoptium"/>
-    <property name="maven.home" value="C:\Users\RaghavendraD\git\SeleniumHybridFramework\EMBEDDED"/>
+    <property name="maven.home" value="D:\GpsAutomation\GPS\EMBEDDED"/>
     <property name="file.separator" value="\"/>
     <property name="java.version.date" value="2022-04-19"/>
     <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
@@ -58,64 +58,66 @@
     <property name="java.vendor.version" value="Temurin-17.0.3+7"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="setUp" classname="com.testcase.testsuite.AmazonLogin_TC001" time="3.912">
-    <failure message="session not created: This version of ChromeDriver only supports Chrome version 114&#10;Current browser version is 116.0.5845.96 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe&#10;  (Driver info: chromedriver=114.0.5735.90 (386bc09e8f4f2e025eddae123f36f6263096ae49-refs/branch-heads/5735@{#1052}),platform=Windows NT 10.0.22621 x86_64) (WARNING: The server did not provide any stacktrace information)&#10;Command duration or timeout: 995 milliseconds&#10;Build info: version: &apos;2.53.0&apos;, revision: &apos;35ae25b1534ae328c771e0856c93e187490ca824&apos;, time: &apos;2016-03-15 10:43:46&apos;&#10;System info: host: &apos;RaghavendraDamaraju&apos;, ip: &apos;192.168.1.4&apos;, os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.3&apos;&#10;Driver info: org.openqa.selenium.chrome.ChromeDriver" type="org.openqa.selenium.SessionNotCreatedException"><![CDATA[org.openqa.selenium.SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version 114
-Current browser version is 116.0.5845.96 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
-  (Driver info: chromedriver=114.0.5735.90 (386bc09e8f4f2e025eddae123f36f6263096ae49-refs/branch-heads/5735@{#1052}),platform=Windows NT 10.0.22621 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 995 milliseconds
-Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
-System info: host: 'RaghavendraDamaraju', ip: '192.168.1.4', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+  <testcase name="setUp" classname="com.gps.development.GPS_SysAddUser" time="18.209">
+    <failure message="no such window: target window already closed&#10;from unknown error: web view not found&#10;  (Session info: chrome=136.0.7103.114)&#10;Build info: version: &apos;4.17.0&apos;, revision: &apos;e52b1be057*&apos;&#10;System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.3&apos;&#10;Driver info: org.openqa.selenium.chrome.ChromeDriver&#10;Command: [87f7ccc173385b2555df690db19a03a6, maximizeCurrentWindow {}]&#10;Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 136.0.7103.114, chrome: {chromedriverVersion: 136.0.7103.94 (fa0be0b33deb..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51092}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51092/devtoo..., se:cdpVersion: 136.0.7103.114, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}&#10;Session ID: 87f7ccc173385b2555df690db19a03a6" type="org.openqa.selenium.NoSuchWindowException">org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=136.0.7103.114)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [87f7ccc173385b2555df690db19a03a6, maximizeCurrentWindow {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 136.0.7103.114, chrome: {chromedriverVersion: 136.0.7103.94 (fa0be0b33deb..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51092}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51092/devtoo..., se:cdpVersion: 136.0.7103.114, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 87f7ccc173385b2555df690db19a03a6
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
-	at org.openqa.selenium.remote.RemoteWebDriver.startSession(RemoteWebDriver.java:249)
-	at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:131)
-	at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:144)
-	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:178)
-	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:167)
-	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:156)
-	at com.base.web.TestBase.setUp(TestBase.java:286)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:185)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:134)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:51)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:519)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:592)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:596)
+	at org.openqa.selenium.remote.RemoteWebDriver$RemoteWebDriverOptions$RemoteWindow.maximize(RemoteWebDriver.java:1035)
+	at com.gps.base.TestBase.setUp(TestBase.java:419)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
-	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:523)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:224)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:146)
-	at org.testng.TestRunner.beforeRun(TestRunner.java:626)
-	at org.testng.TestRunner.run(TestRunner.java:594)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
-	at org.testng.TestNG.runSuites(TestNG.java:1144)
-	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
+	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:385)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:321)
+	at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:637)
+	at org.testng.TestRunner.beforeRun(TestRunner.java:627)
+	at org.testng.TestRunner.run(TestRunner.java:589)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+	at org.testng.TestNG.runSuites(TestNG.java:1063)
+	at org.testng.TestNG.run(TestNG.java:1031)
 	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:295)
 	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:84)
 	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:90)
 	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:203)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:155)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
-]]></failure>
-    <system-out><![CDATA[[TestNGContentHandler] [WARN] It is strongly recommended to add "<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >" at the top of your file, otherwise TestNG may fail or not work as expected.
-in suite before
-DEBUG [main] (TestBase.java:131)- extent report properties file  loaded !!!
-DEBUG [main] (TestBase.java:208)- Config properties file loaded
-DEBUG [main] (TestBase.java:222)- Email file loaded !!!
-DEBUG [main] (TestBase.java:235)- Excel file loaded !!!
-DEBUG [main] (TestBase.java:247)- Jira file  loaded !!!
- INFO [main] (TestBase.java:280)- chrome headless browser launched
+</failure>
+    <system-out><![CDATA[in suite before
+DEBUG [main] (TestBase.java:173)- extent report properties file  loaded !!!
+DEBUG [main] (TestBase.java:228)- Config properties file loaded
+DEBUG [main] (TestBase.java:254)- Email file loaded !!!
+ INFO [main] (TestBase.java:300)- chrome  browser launched
+ INFO [main] (TestBase.java:415)- browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
 ]]></system-out>
     <system-err><![CDATA[log4j:ERROR Could not find value for key log4j.appender.Debug
 log4j:ERROR Could not instantiate appender named "Debug".
@@ -123,73 +125,346 @@ log4j:ERROR Could not find value for key log4j.appender.Warn
 log4j:ERROR Could not instantiate appender named "Warn".
 log4j:ERROR Could not find value for key log4j.appender.WARN
 log4j:ERROR Could not instantiate appender named "WARN".
-SLF4J: No SLF4J providers were found.
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-Starting ChromeDriver 114.0.5735.90 (386bc09e8f4f2e025eddae123f36f6263096ae49-refs/branch-heads/5735@{#1052}) on port 54276
-Only local connections are allowed.
-Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
-ChromeDriver was started successfully.
-Aug 28, 2023 9:47:00 AM org.openqa.selenium.os.ProcessUtils killWinProcess
-WARNING: Process refused to die after 10 seconds, and couldn't taskkill it
-java.lang.reflect.InaccessibleObjectException: Unable to make field private final long java.lang.ProcessImpl.handle accessible: module java.base does not "opens java.lang" to unnamed module @66d1af89
-	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
-	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
-	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
-	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
-	at org.openqa.selenium.os.ProcessUtils.killWinProcess(ProcessUtils.java:130)
-	at org.openqa.selenium.os.ProcessUtils.killProcess(ProcessUtils.java:81)
-	at org.openqa.selenium.os.UnixProcess$SeleniumWatchDog.destroyHarder(UnixProcess.java:247)
-	at org.openqa.selenium.os.UnixProcess$SeleniumWatchDog.access$200(UnixProcess.java:201)
-	at org.openqa.selenium.os.UnixProcess.destroy(UnixProcess.java:125)
-	at org.openqa.selenium.os.CommandLine.destroy(CommandLine.java:155)
-	at org.openqa.selenium.remote.service.DriverService.stop(DriverService.java:196)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:94)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:644)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:701)
-	at org.openqa.selenium.remote.RemoteWebDriver.quit(RemoteWebDriver.java:526)
-	at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:134)
-	at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:144)
-	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:178)
-	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:167)
-	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:156)
-	at com.base.web.TestBase.setUp(TestBase.java:286)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
-	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:523)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:224)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:146)
-	at org.testng.TestRunner.beforeRun(TestRunner.java:626)
-	at org.testng.TestRunner.run(TestRunner.java:594)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
-	at org.testng.TestNG.runSuites(TestNG.java:1144)
-	at org.testng.TestNG.run(TestNG.java:1115)
-	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:295)
-	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:84)
-	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:90)
-	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:203)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:155)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
-
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+May 21, 2025 7:10:57 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 136
+May 21, 2025 7:10:57 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+WARNING: Unable to find version of CDP to use for 136.0.7103.114. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.17.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 ]]></system-err>
   </testcase>
-  <testcase name="Amazon_Login_TC001" classname="com.testcase.testsuite.AmazonLogin_TC001" time="0">
+  <testcase name="GPS_AddUserWithExistingEmail" classname="com.gps.development.GPS_SysAddUser" time="0">
     <skipped/>
   </testcase>
-  <testcase name="flushTest" classname="com.testcase.testsuite.AmazonLogin_TC001" time="0">
+  <testcase name="GPS_AddUserWithInvalidEmailandPhoneNumber" classname="com.gps.development.GPS_SysAddUser" time="0">
     <skipped/>
   </testcase>
-  <testcase name="tearDown" classname="com.testcase.testsuite.AmazonLogin_TC001" time="0">
+  <testcase name="GPS_AddUserWithValidData" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ClearText" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_InvalidSymbolsFirstName" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_InvalidSymbolsLastname" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateCoreAdminPermissions" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateCoreUserPermissions" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateEliteAdminPermissions" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateEliteUserPermissions" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateProAdminPermissions" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateProUserPermissions" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateSystemAdminUserPermissions" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateSystemUserPermissions" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Gps_SearchWithEmail" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Gps_SearchWithPartialTextName" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Gps_SearchWithPhoneNumber" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Gps_SearchWithUserName" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="SYS_ValidateAddUserEmptyFields" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="SysAdmin_AddUserWithInvalidPassword" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Usermanagement_UI" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="SYS_ValidateEditUserFields" classname="com.gps.development.GPS_SysEditUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="SYS_editFieldsinEditPopup" classname="com.gps.development.GPS_SysEditUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="SYS_invalidSearch" classname="com.gps.development.GPS_SysEditUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="SYS_validateCancelButtoninEditPopup" classname="com.gps.development.GPS_SysEditUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="SYS_validateDeleteButton" classname="com.gps.development.GPS_SysDeleteUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="SYS_validateDeletePopup" classname="com.gps.development.GPS_SysDeleteUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="deleteUser" classname="com.gps.development.GPS_DeleteUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="validateDeletePopup" classname="com.gps.development.GPS_DeleteUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="validatedeletebutton" classname="com.gps.development.GPS_DeleteUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_AddUserWithEmptyData" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_AddUserWithExistingEmail" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_AddUserWithInvalidEmailandPhoneNumber" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_AddUserWithInvalidPassword" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_AddUserWithValidData" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ClearText" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_InvalidSymbolsFirstName" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_InvalidSymbolsLastname" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateEliteAdminPermissions" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateEliteUserPermissions" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Gps_SearchWithEmail" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Gps_SearchWithPartialTextName" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Gps_SearchWithPhoneNumber" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Gps_SearchWithUserName" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Gps_SearchWithUserRole" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Gps_UserManagementUI" classname="com.gps.development.GPS_UserManagementTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="editEmailinEditUserPopUp" classname="com.gps.development.GPS_EditUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="editFirstNameinEditUserPopUp" classname="com.gps.development.GPS_EditUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="editLastNameinEditUserPopUp" classname="com.gps.development.GPS_EditUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="editPasswordinEditUserPopUp" classname="com.gps.development.GPS_EditUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="editPhoneNumberinEditUserPopUp" classname="com.gps.development.GPS_EditUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="editUserRoleFromAUser_AdmininEditUserPopUp" classname="com.gps.development.GPS_EditUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="editUserRoleFromAdmin_UserinEditUserPopUp" classname="com.gps.development.GPS_EditUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="invalidSearch" classname="com.gps.development.GPS_EditUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="validateCancelbuttoninEditPopup" classname="com.gps.development.GPS_EditUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="validateEditUserFields" classname="com.gps.development.GPS_EditUserTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="loginPageTermsConditions" classname="com.gps.development.GPS_LoginTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="loginPageUIFields" classname="com.gps.development.GPS_LoginTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="requiredFields" classname="com.gps.development.GPS_LoginTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="validEmailError" classname="com.gps.development.GPS_LoginTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="validLogin" classname="com.gps.development.GPS_LoginTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="TermsConditions" classname="com.gps.development.GPS_ForgotPasswordTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="emailRequire" classname="com.gps.development.GPS_ForgotPasswordTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="enterValidEmail" classname="com.gps.development.GPS_ForgotPasswordTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="forgotPasswordLinkUIFields" classname="com.gps.development.GPS_ForgotPasswordTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="userNOTExist" classname="com.gps.development.GPS_ForgotPasswordTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="addExistingEmail" classname="com.gps.development.GPS_MySettings" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="changePasswordwithValidData" classname="com.gps.development.GPS_MySettings" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="passwordFieldValidation" classname="com.gps.development.GPS_MySettings" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateFieldsWithValidData" classname="com.gps.development.GPS_MySettings" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateProfileWithInvalidData" classname="com.gps.development.GPS_MySettings" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="validateChangePasswordScreen" classname="com.gps.development.GPS_MySettings" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="validateMySettingsFields" classname="com.gps.development.GPS_MySettings" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyAddOrganizationCancel" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyAddOrganizationFields" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyAddOrganizationMandatoryFieldsErrors" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyBusinessNameAllowAlphaNumericSpecialCharacters" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyCityRequired" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyDeleteOrganizationPopUp" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyEditOrganizationCancel" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyEditOrganizationMandatoryFieldErrors" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyEditOrganizationUI" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyEditOrganizationUpdate" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyEnterValidEmail" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyFirstNameLastNameValidations" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyOrganizationInvalidSearch" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyOrganizationSearch" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyOrganizationSettings" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyOrganizationTypeDropdown" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyPhoneNumberAcceptNumbers" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifySelectCountryDropdown" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyStreetAddressAllowAlphaNumericSpecialCharacters" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifySwitchOrganziation" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifyWebsiteFormatError" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_VerifythecontentoftheOrganizationPage" classname="com.gps.development.GPS_OrganizationTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_AddCustomValuewithAlphaNumericSepecialCharactersandSpaces" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_AddValidDataInAddCustomValuesPopup" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_CustomValue_AddCustomValueUI" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_DeleteCustomValue" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_InvalidSearchinCustomValuesPage" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_LengthcheckingforNameField" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_LengthcheckingforValueField" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_SearchinCustomValuesPage" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateAddCustomValuePopupWithEmptyData" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateCloseButton" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateCloseandCrossinEditCustomValuePopup" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateDeletePopup" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="GPS_ValidateEditFuncinCustomValuePage" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="Gps_Settings_CustomValuesUI" classname="com.gps.development.GPS_Settings_CustomValues" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="flushTest" classname="com.gps.development.GPS_SysAddUser" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="tearDown" classname="com.gps.development.GPS_SysAddUser" time="0">
     <skipped/>
   </testcase>
 </testsuite>

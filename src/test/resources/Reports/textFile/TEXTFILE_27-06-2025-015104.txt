@@ -1,0 +1,15 @@
+2025-06-27 13:51:05,336 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-06-27 13:51:06,104 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-06-27 13:51:06,108 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-06-27 13:51:06,116 - devpinoyLogger -INFO - chrome  browser launched
+2025-06-27 13:51:13,413 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-06-27 13:51:13,467 - devpinoyLogger -INFO - browser maximaized 
+2025-06-27 13:51:38,662 - devpinoyLogger -INFO - target frame detached
+  (failed to check if window was closed: disconnected: Unable to receive message from renderer)
+  (Session info: chrome=137.0.7151.120)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [7125b6a2e14c2026d4b941fc90a64aac, findElement {value=//span[text()='Organizations'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.120, chrome: {chromedriverVersion: 137.0.7151.119 (e0ac9d12dff..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:50615}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50615/devtoo..., se:cdpVersion: 137.0.7151.120, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 7125b6a2e14c2026d4b941fc90a64aac

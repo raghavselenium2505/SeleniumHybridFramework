@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Parallel Test Suite">
+	<test name="Parallel Test">
+		<classes>
+
+			<class name="modifiedCode_Raghav.GPS_Settings_CustomValues" />
+			<class name="modifiedCode_Raghav.GPS_MySettings" />
+			<class name="modifiedCode_Raghav.GPS_ForgotPasswordTest" />
+			<class name="modifiedCode_Raghav.GPS_LoginTest" />
+			
+			
+			
+			<class name="modifiedCode_Raghav.GPS_OrganizationTest" />
+			<class name="modifiedCode_Raghav.GPS_DeleteUserTest" />
+			<class name="modifiedCode_Raghav.GPS_SysDeleteUser" />
+			<class name="modifiedCode_Raghav.GPS_SysEditUser" />
+		
+			<class name="modifiedCode_Raghav.GPS_Settings_Tags" />
+			<class name="modifiedCode_Raghav.GPS_EditUserTest" />
+			
+		
+
+
+
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->
