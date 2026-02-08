@@ -1,0 +1,1072 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ExcelReportLog</title>
+<style type="text/css">
+<!--
+body, table {font-family: arial,sans-serif; font-size: x-small;}
+th {background: #336699; color: #FFFFFF; text-align: left;}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" topmargin="6" leftmargin="6">
+<hr size="1" noshade>
+Log session start time Mon Jun 16 16:16:41 IST 2025<br>
+<br>
+<table cellspacing="0" cellpadding="4" border="1" bordercolor="#224466" width="100%">
+<tr>
+<th>Time</th>
+<th>Thread</th>
+<th>Level</th>
+<th>Category</th>
+<th>File:Line</th>
+<th>Message</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:182</td>
+<td title="Message">extent report properties file  loaded !!!</td>
+</tr>
+
+<tr>
+<td>176</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:237</td>
+<td title="Message">Config properties file loaded</td>
+</tr>
+
+<tr>
+<td>179</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:263</td>
+<td title="Message">Email file loaded !!!</td>
+</tr>
+
+<tr>
+<td>182</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:309</td>
+<td title="Message">chrome  browser launched</td>
+</tr>
+
+<tr>
+<td>11557</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:424</td>
+<td title="Message">browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login</td>
+</tr>
+
+<tr>
+<td>11590</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:431</td>
+<td title="Message">browser maximaized </td>
+</tr>
+
+<tr>
+<td>12253</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>21699</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.59}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>21702</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>27349</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>27593</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>30436</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>32427</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>32548</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>34139</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>40870</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.226}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>40871</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>46757</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>46966</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>68983</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:128</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>69564</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>71200</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>77792</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.362}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>77792</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>84416</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>85012</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>86543</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>93094</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.495}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>93095</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>97785</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>97938</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>98360</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>100243</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>124164</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:128</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>124288</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>125930</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>133070</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.639}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>133071</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>139732</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>140294</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>140462</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>142051</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>149737</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.749}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>149737</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>160329</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>160364</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:44</td>
+<td title="Message">Entered text: User is trying to check if the 'Name' fi</td>
+</tr>
+
+<tr>
+<td>160364</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:45</td>
+<td title="Message">The length is: 40</td>
+</tr>
+
+<tr>
+<td>160742</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>182762</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:128</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>182916</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>184517</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>191239</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.890}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>191239</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>201073</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>206266</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>206304</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:44</td>
+<td title="Message">Entered text: 1234ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=+[]{}|;:'&quot;,.&lt;&gt;?/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=+[]{}|;:'&quot;,.&lt;&gt;?/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=+[]{}|;:'&quot;,.&lt;&gt;?/aqwertyuioplkjhgfddsazxcvbnmlkmnbvcxaddswwertyuuiopkjffsazxcvbnnmABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345</td>
+</tr>
+
+<tr>
+<td>206304</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:45</td>
+<td title="Message">The length is: 400</td>
+</tr>
+
+<tr>
+<td>228330</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:128</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>228434</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>230004</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>236626</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.1032}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>236626</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>243398</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>245771</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>245824</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>247573</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>254143</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.1172}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>254144</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>262688</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>262743</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>264493</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>270961</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.1316}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>270962</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>280684</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>280823</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>281109</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>281656</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>282297</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>283914</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>290418</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.1459}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>290419</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>294083</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>296542</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>296595</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>298155</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>304764</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.1579}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>304764</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>308951</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>311038</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>332745</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:128</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>332840</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>334399</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>340870</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.1720}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>340870</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>348979</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>350377</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>352003</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:577</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>373667</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:128</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>373731</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>375363</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>381826</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:117</td>
+<td title="Message">element click intercepted: Element &lt;h3 _ngcontent-wju-c18=&quot;&quot; class=&quot;fs-16 fw-400 m-b-10 m-t-10&quot;&gt;...&lt;/h3&gt; is not clickable at point (456, 235). Other element would receive the click: &lt;div _ngcontent-wju-c18=&quot;&quot; class=&quot;agent-details-view&quot;&gt;&lt;/div&gt;
+  (Session info: chrome=137.0.7151.104)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b77093ed8007a4a2a763ba3124f1bede, clickElement {id=f.A023A1424BAEE4E440349CDBC4AAADF6.d.1F75D289E17D6913E110BDCF00D28082.e.1852}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.104, chrome: {chromedriverVersion: 137.0.7151.70 (dfa4dc56b2ab..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63366}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63366/devtoo..., se:cdpVersion: 137.0.7151.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (b77093ed8007a4a2a763ba3124f1bede)] -&gt; xpath: //h3[text()='QA Automation']]
+Session ID: b77093ed8007a4a2a763ba3124f1bede</td>
+</tr>
+
+<tr>
+<td>381827</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:118</td>
+<td title="Message">Action click worked</td>
+</tr>
+
+<tr>
+<td>386430</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>387007</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:106</td>
+<td title="Message">click worked</td>
+</tr>

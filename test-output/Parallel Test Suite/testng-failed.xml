@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Parallel Test Suite]">
-  <test name="Browser Tests(failed)">
-    <parameter name="browser" value="chrome"/>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Parallel Test Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Parallel Test(failed)">
+    <groups>
+      <run>
+        <include name="smoke"/>
+      </run>
+    </groups>
     <classes>
-      <class name="com.testcase.testsuite.ParabankAdminPage">
+      <class name="com.gps.testsuite.ETeki_Login">
         <methods>
-          <include name="ReportGeneration"/>
-          <include name="SignInForMagento"/>
-          <include name="setUp"/>
-          <include name="flushTest"/>
-          <include name="tearDown"/>
+          <include name="eTekiEmptyLogin"/>
         </methods>
-      </class> <!-- com.testcase.testsuite.ParabankAdminPage -->
+      </class> <!-- com.gps.testsuite.ETeki_Login -->
     </classes>
-  </test> <!-- Browser Tests(failed) -->
+  </test> <!-- Parallel Test(failed) -->
 </suite> <!-- Failed suite [Parallel Test Suite] -->

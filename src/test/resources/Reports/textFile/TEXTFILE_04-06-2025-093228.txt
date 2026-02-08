@@ -1,0 +1,18 @@
+2025-06-04 09:32:28,379 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-06-04 09:32:28,565 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-06-04 09:32:28,566 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-06-04 09:32:28,571 - devpinoyLogger -INFO - chrome  browser launched
+2025-06-04 09:32:43,039 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-06-04 09:32:43,115 - devpinoyLogger -INFO - browser maximaized 
+2025-06-04 09:32:44,366 - devpinoyLogger -INFO - click worked
+2025-06-04 09:33:09,112 - devpinoyLogger -INFO - element click intercepted: Element <span _ngcontent-ovb-c10="" class="fs-letter rounded-circle profile-img ng-star-inserted" style="background: rgb(205, 92, 92);">...</span> is not clickable at point (1501, 30). Other element would receive the click: <p-toastitem class="ng-tns-c4-52 ng-trigger ng-trigger-toastAnimation ng-tns-c1-10 ng-star-inserted">...</p-toastitem>
+  (Session info: chrome=136.0.7103.114)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a077be598402b7bc3b02ea9c6eb33b05, clickElement {id=f.D3BFB89F057B000A9C3AA4529443C4B1.d.FB9FFD61433EA06E93147F85E7EC2A07.e.364}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 136.0.7103.114, chrome: {chromedriverVersion: 136.0.7103.113 (76fa3c17824..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:62166}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62166/devtoo..., se:cdpVersion: 136.0.7103.114, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (a077be598402b7bc3b02ea9c6eb33b05)] -> xpath: //p//span[contains(@class,'profile-img')]]
+Session ID: a077be598402b7bc3b02ea9c6eb33b05
+2025-06-04 09:33:09,133 - devpinoyLogger -INFO - Action click worked
+2025-06-04 09:33:09,314 - devpinoyLogger -INFO - click worked

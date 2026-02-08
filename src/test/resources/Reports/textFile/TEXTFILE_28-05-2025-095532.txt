@@ -1,0 +1,100 @@
+2025-05-28 21:55:32,405 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-05-28 21:55:32,548 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-05-28 21:55:32,549 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-05-28 21:55:32,551 - devpinoyLogger -INFO - chrome  browser launched
+2025-05-28 21:55:43,269 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-05-28 21:55:43,321 - devpinoyLogger -INFO - browser maximaized 
+2025-05-28 21:55:43,874 - devpinoyLogger -INFO - click worked
+2025-05-28 21:56:11,454 - devpinoyLogger -INFO - click worked
+2025-05-28 21:56:28,902 - devpinoyLogger -INFO - click worked
+2025-05-28 21:56:29,015 - devpinoyLogger -INFO - click worked
+2025-05-28 21:56:30,442 - devpinoyLogger -INFO - click worked
+2025-05-28 21:56:41,795 - devpinoyLogger -INFO - click worked
+2025-05-28 21:56:41,912 - devpinoyLogger -INFO - click worked
+2025-05-28 21:56:43,350 - devpinoyLogger -INFO - click worked
+2025-05-28 21:56:56,376 - devpinoyLogger -INFO - passed click statement
+2025-05-28 21:56:56,592 - devpinoyLogger -INFO - passed click statement
+2025-05-28 21:58:00,396 - devpinoyLogger -INFO - JS click worked
+2025-05-28 21:58:00,513 - devpinoyLogger -INFO - click worked
+2025-05-28 21:58:02,192 - devpinoyLogger -INFO - click worked
+2025-05-28 21:58:14,832 - devpinoyLogger -INFO - click worked
+2025-05-28 21:58:15,474 - devpinoyLogger -INFO - click worked
+2025-05-28 21:58:17,022 - devpinoyLogger -INFO - click worked
+2025-05-28 21:58:28,503 - devpinoyLogger -INFO - Existing value in the input field is (Empty/ have some value) 
+2025-05-28 21:58:29,870 - devpinoyLogger -INFO - Input field value after updating is xyz Contact
+2025-05-28 21:58:31,915 - devpinoyLogger -INFO - Existing value in the input field is (Empty/ have some value) 
+2025-05-28 21:58:33,942 - devpinoyLogger -INFO - Input field value after updating is +1 (852) 589-6352
+2025-05-28 21:58:35,990 - devpinoyLogger -INFO - Existing value in the input field is (Empty/ have some value) 
+2025-05-28 21:58:38,047 - devpinoyLogger -INFO - Input field value after updating is 533126
+2025-05-28 21:58:40,100 - devpinoyLogger -INFO - Existing value in the input field is (Empty/ have some value) 
+2025-05-28 21:58:41,581 - devpinoyLogger -INFO - no such element: Unable to locate element: {"method":"xpath","selector":"//div[contains(@class,'lead-rightrail')]//button//span"}
+  (Session info: chrome=136.0.7103.114)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [91828ab450feb46b3a99c3254dc03fa8, findElement {value=//div[contains(@class,'lead-rightrail')]//button//span, using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 136.0.7103.114, chrome: {chromedriverVersion: 136.0.7103.113 (76fa3c17824..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53570}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53570/devtoo..., se:cdpVersion: 136.0.7103.114, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 91828ab450feb46b3a99c3254dc03fa8
+2025-05-28 21:58:41,821 - devpinoyLogger -INFO - click worked
+2025-05-28 21:58:41,906 - devpinoyLogger -INFO - click worked
+2025-05-28 21:58:43,475 - devpinoyLogger -INFO - click worked
+2025-05-28 21:58:53,937 - devpinoyLogger -INFO - passed click statement
+2025-05-28 21:58:57,628 - devpinoyLogger -INFO - The length is: 6
+2025-05-28 21:58:57,727 - devpinoyLogger -INFO - click worked
+2025-05-28 21:58:57,839 - devpinoyLogger -INFO - click worked
+2025-05-28 21:58:59,505 - devpinoyLogger -INFO - click worked
+2025-05-28 21:59:10,055 - devpinoyLogger -INFO - passed click statement
+2025-05-28 21:59:11,654 - devpinoyLogger -INFO - passed click statement
+2025-05-28 21:59:11,684 - devpinoyLogger -INFO - After passing the invalid value in the Extension field is 
+2025-05-28 21:59:11,704 - devpinoyLogger -INFO - no such element: Unable to locate element: {"method":"xpath","selector":"//div[contains(@class,'lead-rightrail')]//button//span"}
+  (Session info: chrome=136.0.7103.114)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [91828ab450feb46b3a99c3254dc03fa8, findElement {value=//div[contains(@class,'lead-rightrail')]//button//span, using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 136.0.7103.114, chrome: {chromedriverVersion: 136.0.7103.113 (76fa3c17824..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53570}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53570/devtoo..., se:cdpVersion: 136.0.7103.114, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 91828ab450feb46b3a99c3254dc03fa8
+2025-05-28 21:59:11,956 - devpinoyLogger -INFO - click worked
+2025-05-28 21:59:12,047 - devpinoyLogger -INFO - click worked
+2025-05-28 21:59:13,561 - devpinoyLogger -INFO - click worked
+2025-05-28 21:59:27,124 - devpinoyLogger -INFO - passed click statement
+2025-05-28 21:59:27,312 - devpinoyLogger -INFO - passed click statement
+2025-05-28 21:59:30,057 - devpinoyLogger -INFO - passed click statement
+2025-05-28 21:59:32,576 - devpinoyLogger -INFO - passed click statement
+2025-05-28 21:59:34,991 - devpinoyLogger -INFO - passed click statement
+2025-05-28 21:59:37,863 - devpinoyLogger -INFO - click worked
+2025-05-28 21:59:37,968 - devpinoyLogger -INFO - click worked
+2025-05-28 21:59:39,382 - devpinoyLogger -INFO - click worked
+2025-05-28 21:59:53,046 - devpinoyLogger -INFO - passed click statement
+2025-05-28 21:59:53,275 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:00:06,799 - devpinoyLogger -INFO - click worked
+2025-05-28 22:00:06,883 - devpinoyLogger -INFO - click worked
+2025-05-28 22:00:08,433 - devpinoyLogger -INFO - click worked
+2025-05-28 22:00:20,375 - devpinoyLogger -INFO - Existing value in the input field is (Empty/ have some value) 
+2025-05-28 22:00:21,816 - devpinoyLogger -INFO - Input field value after updating is +1 (707) 598-9833
+2025-05-28 22:01:13,225 - devpinoyLogger -INFO - JS click worked
+2025-05-28 22:01:13,828 - devpinoyLogger -INFO - click worked
+2025-05-28 22:01:15,388 - devpinoyLogger -INFO - click worked
+2025-05-28 22:01:27,199 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:28,440 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:30,009 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:31,235 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:32,441 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:33,664 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:34,923 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:36,470 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:37,699 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:38,923 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:40,112 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:41,334 - devpinoyLogger -INFO - passed click statement
+2025-05-28 22:01:42,435 - devpinoyLogger -INFO - click worked
+2025-05-28 22:01:42,494 - devpinoyLogger -INFO - click worked
+2025-05-28 22:01:44,018 - devpinoyLogger -INFO - click worked
+2025-05-28 22:01:56,308 - devpinoyLogger -INFO - click worked
+2025-05-28 22:01:56,889 - devpinoyLogger -INFO - click worked
+2025-05-28 22:01:58,388 - devpinoyLogger -INFO - click worked
+2025-05-28 22:02:08,983 - devpinoyLogger -INFO - click worked
+2025-05-28 22:02:09,588 - devpinoyLogger -INFO - click worked
+2025-05-28 22:02:11,170 - devpinoyLogger -INFO - click worked

@@ -1,0 +1,24 @@
+2025-09-27 12:31:23,455 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-09-27 12:31:23,607 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-09-27 12:31:23,608 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-09-27 12:31:23,612 - devpinoyLogger -INFO - chrome  browser launched
+2025-09-27 12:31:29,309 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-09-27 12:31:29,356 - devpinoyLogger -INFO - browser maximaized 
+2025-09-27 12:31:34,027 - devpinoyLogger -INFO - click worked
+2025-09-27 12:31:43,886 - devpinoyLogger -INFO - passed click statement
+2025-09-27 12:31:44,070 - devpinoyLogger -INFO - passed click statement
+2025-09-27 12:31:45,296 - devpinoyLogger -INFO - passed click statement
+2025-09-27 12:31:45,540 - devpinoyLogger -INFO - passed click statement
+2025-09-27 12:31:45,773 - devpinoyLogger -INFO - passed click statement
+2025-09-27 12:31:45,968 - devpinoyLogger -INFO - passed click statement
+2025-09-27 12:31:48,443 - devpinoyLogger -INFO - passed click statement
+2025-09-27 12:31:50,957 - devpinoyLogger -INFO - passed click statement
+2025-09-27 12:32:02,542 - devpinoyLogger -INFO - invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=140.0.7339.207)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [60c129ce1208f500964f42e4077a8af2, findElement {value=//span[contains(text(),'Logout')], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 140.0.7339.207, chrome: {chromedriverVersion: 140.0.7339.207 (17230b545fd..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63460}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63460/devtoo..., se:cdpVersion: 140.0.7339.207, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60c129ce1208f500964f42e4077a8af2

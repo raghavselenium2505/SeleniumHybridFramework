@@ -1,0 +1,708 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ExcelReportLog</title>
+<style type="text/css">
+<!--
+body, table {font-family: arial,sans-serif; font-size: x-small;}
+th {background: #336699; color: #FFFFFF; text-align: left;}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" topmargin="6" leftmargin="6">
+<hr size="1" noshade>
+Log session start time Mon May 26 18:08:16 IST 2025<br>
+<br>
+<table cellspacing="0" cellpadding="4" border="1" bordercolor="#224466" width="100%">
+<tr>
+<th>Time</th>
+<th>Thread</th>
+<th>Level</th>
+<th>Category</th>
+<th>File:Line</th>
+<th>Message</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:174</td>
+<td title="Message">extent report properties file  loaded !!!</td>
+</tr>
+
+<tr>
+<td>354</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:229</td>
+<td title="Message">Config properties file loaded</td>
+</tr>
+
+<tr>
+<td>357</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:255</td>
+<td title="Message">Email file loaded !!!</td>
+</tr>
+
+<tr>
+<td>367</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:301</td>
+<td title="Message">chrome  browser launched</td>
+</tr>
+
+<tr>
+<td>10165</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:416</td>
+<td title="Message">browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login</td>
+</tr>
+
+<tr>
+<td>10252</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:423</td>
+<td title="Message">browser maximaized </td>
+</tr>
+
+<tr>
+<td>11582</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>27368</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>27858</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>31027</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>33444</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>33673</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>35434</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>50388</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>50804</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>72876</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>73118</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>75005</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>93798</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>93952</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>95798</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>114998</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>115468</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>116504</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>118410</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>141994</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>142199</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>143924</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>156702</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>157078</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>157264</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>158948</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>173167</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>173191</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:44</td>
+<td title="Message">Entered text: User is trying to check if the 'Name' fi</td>
+</tr>
+
+<tr>
+<td>173192</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:45</td>
+<td title="Message">The length is: 40</td>
+</tr>
+
+<tr>
+<td>173827</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>195772</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>195974</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>197714</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>211711</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>219201</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>219234</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:44</td>
+<td title="Message">Entered text: 1234ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=+[]{}|;:'&quot;,.&lt;&gt;?/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=+[]{}|;:'&quot;,.&lt;&gt;?/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=+[]{}|;:'&quot;,.&lt;&gt;?/aqwertyuioplkjhgfddsazxcvbnmlkmnbvcxaddswwertyuuiopkjffsazxcvbnnmABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345</td>
+</tr>
+
+<tr>
+<td>219234</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>GPS_CustomValue_AddCustomValuePage.java:45</td>
+<td title="Message">The length is: 400</td>
+</tr>
+
+<tr>
+<td>241293</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>241470</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>243173</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>253439</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>255306</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>255487</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>257199</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>273705</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>274411</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>276133</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>290131</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>290479</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>291305</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>292633</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>292818</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>294561</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>306921</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>310223</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>310920</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>312541</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>325113</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>327593</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>349623</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>349846</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>351639</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>364156</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>366416</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>367997</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>TestBase.java:572</td>
+<td title="Message">passed click statement</td>
+</tr>
+
+<tr>
+<td>390003</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:121</td>
+<td title="Message">JS click worked</td>
+</tr>
+
+<tr>
+<td>390193</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>391884</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>405229</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>
+
+<tr>
+<td>405389</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="devpinoyLogger category">devpinoyLogger</td>
+<td>WaitUtils.java:99</td>
+<td title="Message">click worked</td>
+</tr>

@@ -1,0 +1,21 @@
+2025-07-24 19:38:22,613 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-07-24 19:38:22,758 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-07-24 19:38:22,758 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-07-24 19:38:22,760 - devpinoyLogger -INFO - chrome  browser launched
+2025-07-24 19:38:33,116 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-07-24 19:38:33,161 - devpinoyLogger -INFO - browser maximaized 
+2025-07-24 19:38:35,249 - devpinoyLogger -INFO - click worked
+2025-07-24 19:38:46,445 - devpinoyLogger -INFO - element click intercepted: Element <h3 _ngcontent-uqj-c18="" class="fs-16 fw-400 m-b-10 m-t-10">...</h3> is not clickable at point (456, 235). Other element would receive the click: <div _ngcontent-uqj-c18="" class="agent-details-view"></div>
+  (Session info: chrome=138.0.7204.102)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [1f061ab9a6542553d01211f24421d7b2, clickElement {id=f.78123A5766EC1D1FC2577942844A4921.d.007989A466FDB4B42C5F4987F990BDD5.e.60}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.102, chrome: {chromedriverVersion: 138.0.7204.168 (3e8d82e86e9..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54625}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54625/devtoo..., se:cdpVersion: 138.0.7204.102, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (1f061ab9a6542553d01211f24421d7b2)] -> xpath: //h3[text()='QA Automation']]
+Session ID: 1f061ab9a6542553d01211f24421d7b2
+2025-07-24 19:38:46,448 - devpinoyLogger -INFO - Action click worked
+2025-07-24 19:38:51,954 - devpinoyLogger -INFO - passed click statement
+2025-07-24 19:39:10,829 - devpinoyLogger -INFO - passed click statement
+2025-07-24 19:39:16,016 - devpinoyLogger -INFO - click worked
+2025-07-24 19:39:16,120 - devpinoyLogger -INFO - click worked

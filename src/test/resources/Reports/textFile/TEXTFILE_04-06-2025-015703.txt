@@ -1,0 +1,60 @@
+2025-06-04 13:57:04,112 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-06-04 13:57:04,240 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-06-04 13:57:04,240 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-06-04 13:57:04,242 - devpinoyLogger -INFO - chrome  browser launched
+2025-06-04 13:57:08,278 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-06-04 13:57:08,327 - devpinoyLogger -INFO - browser maximaized 
+2025-06-04 13:57:09,403 - devpinoyLogger -INFO - click worked
+2025-06-04 13:57:19,214 - devpinoyLogger -INFO - element click intercepted: Element <h3 _ngcontent-wrt-c18="" class="fs-16 fw-400 m-b-10 m-t-10">...</h3> is not clickable at point (456, 235). Other element would receive the click: <div _ngcontent-wrt-c18="" class="agent-details-view"></div>
+  (Session info: chrome=136.0.7103.114)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [c0e41143bb9a7fe58f576b9c7c65f496, clickElement {id=f.AB88D1B9E19376FB9148AD89C5FF56EA.d.7C6B1CB67515C1ECC7509A5E856A7BB4.e.42}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 136.0.7103.114, chrome: {chromedriverVersion: 136.0.7103.113 (76fa3c17824..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54267}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54267/devtoo..., se:cdpVersion: 136.0.7103.114, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (c0e41143bb9a7fe58f576b9c7c65f496)] -> xpath: //h3[text()='QA Automation']]
+Session ID: c0e41143bb9a7fe58f576b9c7c65f496
+2025-06-04 13:57:19,217 - devpinoyLogger -INFO - Action click worked
+2025-06-04 13:57:25,510 - devpinoyLogger -INFO - click worked
+2025-06-04 13:57:25,650 - devpinoyLogger -INFO - click worked
+2025-06-04 13:57:27,775 - devpinoyLogger -INFO - click worked
+2025-06-04 13:57:34,503 - devpinoyLogger -INFO - element click intercepted: Element <h3 _ngcontent-wrt-c18="" class="fs-16 fw-400 m-b-10 m-t-10">...</h3> is not clickable at point (456, 235). Other element would receive the click: <div _ngcontent-wrt-c18="" class="agent-details-view"></div>
+  (Session info: chrome=136.0.7103.114)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [c0e41143bb9a7fe58f576b9c7c65f496, clickElement {id=f.AB88D1B9E19376FB9148AD89C5FF56EA.d.7C6B1CB67515C1ECC7509A5E856A7BB4.e.368}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 136.0.7103.114, chrome: {chromedriverVersion: 136.0.7103.113 (76fa3c17824..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54267}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54267/devtoo..., se:cdpVersion: 136.0.7103.114, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (c0e41143bb9a7fe58f576b9c7c65f496)] -> xpath: //h3[text()='QA Automation']]
+Session ID: c0e41143bb9a7fe58f576b9c7c65f496
+2025-06-04 13:57:34,504 - devpinoyLogger -INFO - Action click worked
+2025-06-04 13:57:49,828 - devpinoyLogger -INFO - passed click statement
+2025-06-04 13:57:55,389 - devpinoyLogger -INFO - passed click statement
+2025-06-04 13:58:18,676 - devpinoyLogger -INFO - JS click worked
+2025-06-04 13:58:18,771 - devpinoyLogger -INFO - click worked
+2025-06-04 13:58:20,756 - devpinoyLogger -INFO - click worked
+2025-06-04 13:58:27,492 - devpinoyLogger -INFO - element click intercepted: Element <h3 _ngcontent-wrt-c18="" class="fs-16 fw-400 m-b-10 m-t-10">...</h3> is not clickable at point (456, 235). Other element would receive the click: <div _ngcontent-wrt-c18="" class="agent-details-view"></div>
+  (Session info: chrome=136.0.7103.114)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [c0e41143bb9a7fe58f576b9c7c65f496, clickElement {id=f.AB88D1B9E19376FB9148AD89C5FF56EA.d.7C6B1CB67515C1ECC7509A5E856A7BB4.e.722}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 136.0.7103.114, chrome: {chromedriverVersion: 136.0.7103.113 (76fa3c17824..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54267}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54267/devtoo..., se:cdpVersion: 136.0.7103.114, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (c0e41143bb9a7fe58f576b9c7c65f496)] -> xpath: //h3[text()='QA Automation']]
+Session ID: c0e41143bb9a7fe58f576b9c7c65f496
+2025-06-04 13:58:27,493 - devpinoyLogger -INFO - Action click worked
+2025-06-04 13:58:34,931 - devpinoyLogger -INFO - passed click statement
+2025-06-04 13:58:42,077 - devpinoyLogger -INFO - passed click statement
+2025-06-04 13:59:04,241 - devpinoyLogger -INFO - JS click worked
+2025-06-04 13:59:04,330 - devpinoyLogger -INFO - click worked
+2025-06-04 13:59:06,280 - devpinoyLogger -INFO - click worked
+2025-06-04 13:59:15,444 - devpinoyLogger -INFO - element click intercepted: Element <h3 _ngcontent-wrt-c18="" class="fs-16 fw-400 m-b-10 m-t-10">...</h3> is not clickable at point (456, 235). Other element would receive the click: <div _ngcontent-wrt-c18="" class="agent-details-view"></div>
+  (Session info: chrome=136.0.7103.114)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [c0e41143bb9a7fe58f576b9c7c65f496, clickElement {id=f.AB88D1B9E19376FB9148AD89C5FF56EA.d.7C6B1CB67515C1ECC7509A5E856A7BB4.e.925}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 136.0.7103.114, chrome: {chromedriverVersion: 136.0.7103.113 (76fa3c17824..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54267}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54267/devtoo..., se:cdpVersion: 136.0.7103.114, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (c0e41143bb9a7fe58f576b9c7c65f496)] -> xpath: //h3[text()='QA Automation']]
+Session ID: c0e41143bb9a7fe58f576b9c7c65f496
+2025-06-04 13:59:15,445 - devpinoyLogger -INFO - Action click worked

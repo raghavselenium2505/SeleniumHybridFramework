@@ -1,0 +1,26 @@
+2025-07-03 19:13:12,481 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-07-03 19:13:12,620 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-07-03 19:13:12,621 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-07-03 19:13:12,625 - devpinoyLogger -INFO - chrome  browser launched
+2025-07-03 19:13:22,624 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-07-03 19:13:22,661 - devpinoyLogger -INFO - browser maximaized 
+2025-07-03 19:13:24,838 - devpinoyLogger -INFO - click worked
+2025-07-03 19:13:35,615 - devpinoyLogger -INFO - element click intercepted: Element <h3 _ngcontent-qmf-c18="" class="fs-16 fw-400 m-b-10 m-t-10">...</h3> is not clickable at point (456, 235). Other element would receive the click: <div _ngcontent-qmf-c18="" class="agent-details-view"></div>
+  (Session info: chrome=138.0.7204.49)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [39d1bac7bf987d70cc1888fe19e92866, clickElement {id=f.C2B5247EB6912B026BBF16CB6E636EC8.d.8459BA8EEB8D699D0A6C6E225C3C64AB.e.60}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.49, chrome: {chromedriverVersion: 138.0.7204.92 (f079b9bc781e..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:60738}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:60738/devtoo..., se:cdpVersion: 138.0.7204.49, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (39d1bac7bf987d70cc1888fe19e92866)] -> xpath: //h3[text()='QA Automation']]
+Session ID: 39d1bac7bf987d70cc1888fe19e92866
+2025-07-03 19:13:35,620 - devpinoyLogger -INFO - Action click worked
+2025-07-03 19:13:49,556 - devpinoyLogger -INFO - invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=138.0.7204.49)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [39d1bac7bf987d70cc1888fe19e92866, findElement {value=//span[contains(text(),'Logout')], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.49, chrome: {chromedriverVersion: 138.0.7204.92 (f079b9bc781e..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:60738}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:60738/devtoo..., se:cdpVersion: 138.0.7204.49, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 39d1bac7bf987d70cc1888fe19e92866

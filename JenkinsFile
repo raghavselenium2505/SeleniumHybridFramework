@@ -1,0 +1,122 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO = 'https://github.com/amzurtechnologies/GPS.git'
+        BASE_BRANCH = 'develop'
+        NEW_BRANCH = 'feature_devPhase1Mar2025'
+        WORKSPACE_DIR = "repo"
+    }
+
+    stages {
+        stage('Clean Workspace') {
+            steps {
+                script {
+                    echo 'Cleaning workspace...'
+                    bat """
+                        if exist ${WORKSPACE_DIR} (
+                            rmdir /s /q ${WORKSPACE_DIR}
+                            echo "Deleted existing workspace directory."
+                        ) else (
+                            echo "No previous directory found."
+                        )
+                    """
+                }
+            }
+        }
+
+        stage('Clone Repository & Checkout Develop') {
+            steps {
+                script {
+                    echo "Cloning repository into '${WORKSPACE_DIR}' and checking out '${BASE_BRANCH}' branch..."
+                    bat """
+                        git clone ${GIT_REPO} ${WORKSPACE_DIR}
+                    """
+                    dir("${WORKSPACE_DIR}") {
+                        bat """
+                            git checkout ${BASE_BRANCH}
+                            git pull origin ${BASE_BRANCH}
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Check & Create New Branch') {
+            steps {
+                script {
+                    echo "Checking if branch '${NEW_BRANCH}' exists remotely..."
+
+                    def branchExists = bat(
+                        script: """
+                            git ls-remote --heads ${GIT_REPO} 2>nul | find "refs/heads/${NEW_BRANCH}" >nul && echo 1 || echo 0
+                        """,
+                        returnStdout: true
+                    ).trim()
+
+                    if (branchExists == "0") {
+                        echo "Branch '${NEW_BRANCH}' does not exist. Creating and pushing..."
+                        dir("${WORKSPACE_DIR}") {
+                            bat """
+                                git checkout -b ${NEW_BRANCH} ${BASE_BRANCH}
+                                git push --set-upstream origin ${NEW_BRANCH}
+                            """
+                        }
+                    } else {
+                        echo "Branch '${NEW_BRANCH}' already exists. Checking out..."
+                        dir("${WORKSPACE_DIR}") {
+                            bat """
+                                git checkout ${NEW_BRANCH}
+                                git pull origin ${NEW_BRANCH}
+                            """
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Build Project') {
+            steps {
+                script {
+                    echo 'Building the project...'
+                    dir("${WORKSPACE_DIR}") {
+                        bat """
+                            mvn clean compile
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Execute Test Cases') {
+            steps {
+                script {
+                    echo 'Executing test cases...'
+                    dir("${WORKSPACE_DIR}") {
+                        bat """
+                            mvn test
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Generate & Archive Test Reports') {
+            steps {
+                script {
+                    echo "Archiving test results..."
+                    archiveArtifacts artifacts: "${WORKSPACE_DIR}/target/surefire-reports/*.xml", fingerprint: true
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline execution completed successfully'
+        }
+        failure {
+            echo 'Pipeline failed! Please check the logs.'
+        }
+    }
+}

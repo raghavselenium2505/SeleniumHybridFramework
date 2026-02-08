@@ -1,0 +1,31 @@
+2025-07-01 20:20:37,196 - devpinoyLogger -DEBUG - extent report properties file  loaded !!!
+2025-07-01 20:20:37,525 - devpinoyLogger -DEBUG - Config properties file loaded
+2025-07-01 20:20:37,527 - devpinoyLogger -DEBUG - Email file loaded !!!
+2025-07-01 20:20:37,530 - devpinoyLogger -INFO - chrome  browser launched
+2025-07-01 20:20:45,079 - devpinoyLogger -INFO - browser launched chromeNavigated to : https://ta-qa.mapstechnologies.com/auth/login
+2025-07-01 20:20:45,131 - devpinoyLogger -INFO - browser maximaized 
+2025-07-01 20:20:49,151 - devpinoyLogger -INFO - click worked
+2025-07-01 20:20:59,634 - devpinoyLogger -INFO - element click intercepted: Element <h3 _ngcontent-heh-c18="" class="fs-16 fw-400 m-b-10 m-t-10">...</h3> is not clickable at point (456, 235). Other element would receive the click: <div _ngcontent-heh-c18="" class="agent-details-view"></div>
+  (Session info: chrome=138.0.7204.49)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [4a209eb48d05eb444eaf61dd9f3bcf1f, clickElement {id=f.90D46DE809A59DDC3246F14A2ECC962A.d.355CC2A50DED89F107DE9E1AF183DDD8.e.49}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.49, chrome: {chromedriverVersion: 138.0.7204.92 (f079b9bc781e..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:61959}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:61959/devtoo..., se:cdpVersion: 138.0.7204.49, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (4a209eb48d05eb444eaf61dd9f3bcf1f)] -> xpath: //h3[text()='QA Automation']]
+Session ID: 4a209eb48d05eb444eaf61dd9f3bcf1f
+2025-07-01 20:20:59,642 - devpinoyLogger -INFO - Action click worked
+2025-07-01 20:21:11,482 - devpinoyLogger -INFO - passed click statement
+2025-07-01 20:21:18,850 - devpinoyLogger -INFO - passed click statement
+2025-07-01 20:21:20,271 - devpinoyLogger -INFO - passed click statement
+2025-07-01 20:21:29,085 - devpinoyLogger -INFO - element click intercepted: Element <span _ngcontent-heh-c10="" class="fs-letter rounded-circle profile-img ng-star-inserted" style="background: rgb(205, 92, 92);">...</span> is not clickable at point (1501, 30). Other element would receive the click: <div class="ui-toast-message-content">...</div>
+  (Session info: chrome=138.0.7204.49)
+Build info: version: '4.17.0', revision: 'e52b1be057*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.3'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [4a209eb48d05eb444eaf61dd9f3bcf1f, clickElement {id=f.90D46DE809A59DDC3246F14A2ECC962A.d.355CC2A50DED89F107DE9E1AF183DDD8.e.319}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.49, chrome: {chromedriverVersion: 138.0.7204.92 (f079b9bc781e..., userDataDir: C:\Users\RAGHAV~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:61959}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:61959/devtoo..., se:cdpVersion: 138.0.7204.49, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (4a209eb48d05eb444eaf61dd9f3bcf1f)] -> xpath: //p//span[contains(@class,'profile-img')]]
+Session ID: 4a209eb48d05eb444eaf61dd9f3bcf1f
+2025-07-01 20:21:29,108 - devpinoyLogger -INFO - Action click worked
+2025-07-01 20:21:29,542 - devpinoyLogger -INFO - click worked
