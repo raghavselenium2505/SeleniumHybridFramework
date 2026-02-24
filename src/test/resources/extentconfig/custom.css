@@ -1,0 +1,19 @@
+/* ================= CUSTOM LOGO (SPARK v5) ================= */
+
+/* Hide default Extent logo image */
+.brand-logo img {
+    display: none !important;
+}
+
+/* Inject custom logo */
+.brand-logo::before {
+    content: url("logo.png") !important;
+    display: inline-block !important;
+    height: 40px !important;
+    width: auto !important;
+}
+
+/* Optional spacing fix */
+.brand-logo {
+    padding-left: 10px !important;
+}
