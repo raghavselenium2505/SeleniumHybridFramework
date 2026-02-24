@@ -1,14 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suite name="Parallel Test Suite" parallel = "none" >
-
-	
-   <test name = "Browser Tests"  >
-   <parameter name="browser" value="chrome"/>
-	<classes>
-     <class name = "com.testcase.testsuite.AmazonLogin_TC001" />
+<suite name="ParallelCrossBrowserSuite" parallel="tests" thread-count="3">
     
-	</classes>
-	</test>
-  
-</suite>
+    <test name="ChromeTest">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.gps.development.AmazonLogin_TC001"/>
+        </classes>
+        
+    
+     <test name="EdgeTest">
+        <parameter name="browser" value="edge"/>
+        <classes>
+            <class name="com.gps.development.AmazonLogin_TC001"/>
+        </classes>
+    </test>
+        
+        
+    </test>
 
+</suite>

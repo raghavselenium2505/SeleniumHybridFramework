@@ -8,66 +8,91 @@ import org.bytedeco.ffmpeg.global.avutil;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.RescaleOp;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class OpenCVScreenRecorder {
+
     private FFmpegFrameRecorder recorder;
     private Java2DFrameConverter converter = new Java2DFrameConverter();
     private Robot robot;
     private Rectangle screenBounds;
-    private boolean recording = false;
+    private volatile boolean recording = false;
+    private Thread recordingThread;
 
-    public void startRecording(String fileName) throws Exception {
+    public synchronized void startRecording(String testName) throws Exception {
+
+        if (recording) {
+            return; // Prevent duplicate start
+        }
+
         screenBounds = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-        recorder = new FFmpegFrameRecorder(new File(fileName), screenBounds.width, screenBounds.height);
+
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
+                .format(new Date());
+
+        String filePath = System.getProperty("user.dir")
+                + "\\recordings\\"
+                + testName + "_" + timestamp + ".mp4";
+
+        new File(System.getProperty("user.dir") + "\\recordings\\").mkdirs();
+
+        recorder = new FFmpegFrameRecorder(filePath,
+                screenBounds.width,
+                screenBounds.height);
+
         recorder.setFormat("mp4");
         recorder.setFrameRate(15);
         recorder.setVideoCodec(avcodec.AV_CODEC_ID_H264);
-        
-        // ✅ FIX: Change pixel format to avoid error
         recorder.setPixelFormat(avutil.AV_PIX_FMT_YUV420P);
-
-        // ✅ Fix brightness issue
         recorder.setVideoBitrate(4000000);
         recorder.setGopSize(30);
-        recorder.setVideoOption("preset", "medium");
+        recorder.setVideoOption("preset", "ultrafast");
 
         recorder.start();
-        
+
         robot = new Robot();
         recording = true;
 
-        new Thread(() -> {
-            while (recording) {
-                try {
-                    BufferedImage screenshot = robot.createScreenCapture(screenBounds);
+        recordingThread = new Thread(() -> {
+            try {
+                while (recording) {
 
-                    // ✅ Convert Image to YUV420P-compatible format
-                    BufferedImage correctedImage = correctBrightness(screenshot);
+                    BufferedImage screen =
+                            robot.createScreenCapture(screenBounds);
 
-                    Frame frame = converter.convert(correctedImage);
+                    Frame frame = converter.convert(screen);
                     recorder.record(frame);
-                    Thread.sleep(100);
-                } catch (Exception e) {
-                    e.printStackTrace();
+
+                    Thread.sleep(66); // ~15 FPS
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }).start();
+        });
+
+        recordingThread.setDaemon(true);
+        recordingThread.start();
     }
 
-    public void stopRecording() throws Exception {
+    public synchronized String stopRecording() throws Exception {
+
+        if (!recording) {
+            return null;
+        }
+
         recording = false;
-        recorder.stop();
-        recorder.release();
-    }
-    
-    private BufferedImage correctBrightness(BufferedImage image) {
-        RescaleOp rescaleOp = new RescaleOp(1.0f, -10, null);
-        BufferedImage adjustedImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = adjustedImage.createGraphics();
-        g2d.drawImage(image, rescaleOp, 0, 0);
-        g2d.dispose();
-        return adjustedImage;
+
+        if (recordingThread != null) {
+            recordingThread.join();
+        }
+
+        if (recorder != null) {
+            recorder.stop();
+            recorder.release();
+        }
+
+        return "Recording Stopped Successfully";
     }
 }
