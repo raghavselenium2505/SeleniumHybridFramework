@@ -2,121 +2,84 @@ pipeline {
     agent any
 
     environment {
-        GIT_REPO = 'https://github.com/amzurtechnologies/GPS.git'
-        BASE_BRANCH = 'develop'
-        NEW_BRANCH = 'feature_devPhase1Mar2025'
-        WORKSPACE_DIR = "repo"
+        MAIN_BRANCH = "Feb_2026"
+        FEATURE_BRANCH = "feature_auto_${new Date().format('yyyyMMddHHmmss')}"
+        GIT_REPO = "https://github.com/amzurtechnologies/GPS.git"
+        GITHUB_API = "https://api.github.com"
+        GITHUB_CREDENTIALS = "github-token"
     }
 
     stages {
-        stage('Clean Workspace') {
+
+        stage('Checkout Main Branch') {
+            steps {
+                cleanWs()
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "*/${MAIN_BRANCH}"]],
+                    userRemoteConfigs: [[url: "${GIT_REPO}"]]
+                ])
+            }
+        }
+
+        stage('Create Feature Branch') {
             steps {
                 script {
-                    echo 'Cleaning workspace...'
+                    echo "Creating new branch ${FEATURE_BRANCH}"
                     bat """
-                        if exist ${WORKSPACE_DIR} (
-                            rmdir /s /q ${WORKSPACE_DIR}
-                            echo "Deleted existing workspace directory."
-                        ) else (
-                            echo "No previous directory found."
-                        )
+                        git checkout -b ${FEATURE_BRANCH}
                     """
                 }
             }
         }
 
-        stage('Clone Repository & Checkout Develop') {
+        stage('Make Dummy Code Change') {
             steps {
                 script {
-                    echo "Cloning repository into '${WORKSPACE_DIR}' and checking out '${BASE_BRANCH}' branch..."
+                    writeFile file: 'auto.txt', text: "Auto commit at ${new Date()}"
                     bat """
-                        git clone ${GIT_REPO} ${WORKSPACE_DIR}
+                        git add .
+                        git commit -m "Auto commit from Jenkins"
                     """
-                    dir("${WORKSPACE_DIR}") {
-                        bat """
-                            git checkout ${BASE_BRANCH}
-                            git pull origin ${BASE_BRANCH}
-                        """
-                    }
                 }
             }
         }
 
-        stage('Check & Create New Branch') {
+        stage('Push Feature Branch') {
             steps {
-                script {
-                    echo "Checking if branch '${NEW_BRANCH}' exists remotely..."
+                withCredentials([string(credentialsId: "${GITHUB_CREDENTIALS}", variable: 'TOKEN')]) {
+                    bat """
+                        git push https://${TOKEN}@github.com/amzurtechnologies/GPS.git ${FEATURE_BRANCH}
+                    """
+                }
+            }
+        }
 
-                    def branchExists = bat(
-                        script: """
-                            git ls-remote --heads ${GIT_REPO} 2>nul | find "refs/heads/${NEW_BRANCH}" >nul && echo 1 || echo 0
-                        """,
-                        returnStdout: true
-                    ).trim()
-
-                    if (branchExists == "0") {
-                        echo "Branch '${NEW_BRANCH}' does not exist. Creating and pushing..."
-                        dir("${WORKSPACE_DIR}") {
-                            bat """
-                                git checkout -b ${NEW_BRANCH} ${BASE_BRANCH}
-                                git push --set-upstream origin ${NEW_BRANCH}
-                            """
+        stage('Create Pull Request') {
+            steps {
+                withCredentials([string(credentialsId: "${GITHUB_CREDENTIALS}", variable: 'TOKEN')]) {
+                    script {
+                        def prData = """
+                        {
+                          "title": "Auto PR from Jenkins",
+                          "head": "${FEATURE_BRANCH}",
+                          "base": "${MAIN_BRANCH}",
+                          "body": "This PR was created automatically by Jenkins."
                         }
-                    } else {
-                        echo "Branch '${NEW_BRANCH}' already exists. Checking out..."
-                        dir("${WORKSPACE_DIR}") {
-                            bat """
-                                git checkout ${NEW_BRANCH}
-                                git pull origin ${NEW_BRANCH}
-                            """
-                        }
-                    }
-                }
-            }
-        }
+                        """
 
-        stage('Build Project') {
-            steps {
-                script {
-                    echo 'Building the project...'
-                    dir("${WORKSPACE_DIR}") {
+                        writeFile file: 'pr.json', text: prData
+
                         bat """
-                            mvn clean compile
+                            curl -X POST ^
+                            -H "Authorization: token %TOKEN%" ^
+                            -H "Accept: application/vnd.github.v3+json" ^
+                            ${GITHUB_API}/repos/amzurtechnologies/GPS/pulls ^
+                            -d @pr.json
                         """
                     }
-                }
-            }
-        }
-
-        stage('Execute Test Cases') {
-            steps {
-                script {
-                    echo 'Executing test cases...'
-                    dir("${WORKSPACE_DIR}") {
-                        bat """
-                            mvn test
-                        """
-                    }
-                }
-            }
-        }
-
-        stage('Generate & Archive Test Reports') {
-            steps {
-                script {
-                    echo "Archiving test results..."
-                    archiveArtifacts artifacts: "${WORKSPACE_DIR}/target/surefire-reports/*.xml", fingerprint: true
                 }
             }
         }
     }
-
-    post {
-        always {
-            echo 'Pipeline execution completed successfully'
-        }
-        failure {
-            echo 'Pipeline failed! Please check the logs.'
-        }
-    }
-}
+}s
