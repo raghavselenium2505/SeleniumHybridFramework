@@ -1,7 +1,16 @@
-{
-  "TC_Login_JSON": {
+[
+  {
+    "testCase": "jsonLoginTest",
+    "runMode": "yes",
     "username": "jsonUser1",
     "password": "jsonPass1",
     "search": "Laptop"
+  },
+  {
+    "testCase": "jsonLoginTest",
+    "runMode": "yes",
+    "username": "jsonUser2",
+    "password": "jsonPass2",
+    "search": "Mobile"
   }
-}
+]

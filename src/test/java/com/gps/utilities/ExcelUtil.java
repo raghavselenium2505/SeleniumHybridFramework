@@ -1,127 +1,129 @@
 package com.gps.utilities;
 
-import java.io.FileInputStream;
-
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
 
-import com.gps.base.TestBase;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ExcelUtil extends TestBase {
+public class ExcelUtil {
 
-    // ---------------------------------------------
-    // OLD METHOD (DO NOT REMOVE)
-    // ---------------------------------------------
-    public String getData(String SheetName,
-                          String ColName,
-                          String excelName) {
+    private Workbook workbook;
 
-        String returnValue = "";
+    // ================= CONSTRUCTOR =================
+
+    public ExcelUtil(String filePath) {
 
         try {
+            FileInputStream fis = new FileInputStream(filePath);
 
-            FileInputStream fis =
-                    new FileInputStream(
-                            System.getProperty("user.dir")
-                                    + "\\src\\test\\resources\\excel\\"
-                                    + excelName);
-
-            HSSFWorkbook wb = new HSSFWorkbook(fis);
-            HSSFSheet sh = wb.getSheet(SheetName);
-
-            int rowCount = sh.getLastRowNum();
-            DataFormatter formatter =
-                    new DataFormatter();
-
-            for (int i = 0; i <= rowCount; i++) {
-
-                String val =
-                        formatter.formatCellValue(
-                                sh.getRow(i).getCell(0));
-
-                if (val.equalsIgnoreCase(ColName)) {
-
-                    returnValue =
-                            formatter.formatCellValue(
-                                    sh.getRow(i).getCell(1));
-                    break;
-                }
+            if (filePath.endsWith(".xls")) {
+                workbook = new HSSFWorkbook(fis);
+            } else if (filePath.endsWith(".xlsx")) {
+                workbook = new XSSFWorkbook(fis);
+            } else {
+                throw new RuntimeException("Unsupported Excel format: " + filePath);
             }
 
-            wb.close();
-            fis.close();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load Excel file: " + filePath, e);
         }
-
-        return returnValue;
     }
 
-    // ---------------------------------------------
-    // NEW METHOD FOR DATAPROVIDER
-    // ---------------------------------------------
+    // ================= DATAPROVIDER METHOD =================
+
     public Object[][] getSheetDataByTestCaseName(
             String sheetName,
-            String testCaseName,
-            String excelName) {
+            String testCaseName) {
 
         try {
 
-            FileInputStream fis =
-                    new FileInputStream(
-                            System.getProperty("user.dir")
-                                    + "\\src\\test\\resources\\excel\\"
-                                    + excelName);
+            Sheet sheet = workbook.getSheet(sheetName);
 
-            HSSFWorkbook wb = new HSSFWorkbook(fis);
-            HSSFSheet sh = wb.getSheet(sheetName);
+            if (sheet == null) {
+                throw new RuntimeException("Sheet not found: " + sheetName);
+            }
 
-            int rowCount = sh.getLastRowNum();
-            int colCount =
-                    sh.getRow(0).getLastCellNum();
+            int rowCount = sheet.getLastRowNum();
+            int colCount = sheet.getRow(0).getLastCellNum();
 
-            DataFormatter formatter =
-                    new DataFormatter();
+            DataFormatter formatter = new DataFormatter();
+            List<Object[]> dataList = new ArrayList<>();
 
             for (int i = 1; i <= rowCount; i++) {
 
+                Row row = sheet.getRow(i);
+                if (row == null) continue;
+
                 String currentTestName =
-                        formatter.formatCellValue(
-                                sh.getRow(i).getCell(0));
+                        formatter.formatCellValue(row.getCell(0));
 
-                if (currentTestName
-                        .equalsIgnoreCase(testCaseName)) {
+                if (currentTestName.equalsIgnoreCase(testCaseName)) {
 
-                    Object[][] data =
-                            new Object[1][colCount - 1];
+                    Object[] rowData = new Object[colCount - 1];
 
-                    for (int j = 1;
-                         j < colCount;
-                         j++) {
+                    for (int j = 1; j < colCount; j++) {
 
-                        data[0][j - 1] =
-                                formatter.formatCellValue(
-                                        sh.getRow(i).getCell(j));
+                        Cell cell = row.getCell(j);
+                        rowData[j - 1] =
+                                formatter.formatCellValue(cell);
                     }
 
-                    wb.close();
-                    fis.close();
-
-                    return data;
+                    dataList.add(rowData);
                 }
             }
 
-            wb.close();
-            fis.close();
+            if (dataList.isEmpty()) {
+                throw new RuntimeException(
+                        "No data found for test case: " + testCaseName);
+            }
+
+            return dataList.toArray(new Object[0][]);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error reading Excel data", e);
+        }
+    }
+
+    // ================= OPTIONAL: SINGLE VALUE FETCH =================
+
+    public String getSingleCellValue(
+            String sheetName,
+            String keyName) {
+
+        try {
+
+            Sheet sheet = workbook.getSheet(sheetName);
+            DataFormatter formatter = new DataFormatter();
+
+            for (Row row : sheet) {
+
+                if (formatter.formatCellValue(row.getCell(0))
+                        .equalsIgnoreCase(keyName)) {
+
+                    return formatter.formatCellValue(row.getCell(1));
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
-        throw new RuntimeException(
-                "Test case not found in Excel: "
-                        + testCaseName);
+        return "";
+    }
+
+    // ================= CLOSE WORKBOOK =================
+
+    public void closeWorkbook() {
+        try {
+            if (workbook != null) {
+                workbook.close();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
