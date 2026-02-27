@@ -66,7 +66,11 @@ public class TestBase implements baseMethods {
 
     public static Properties config = new Properties();
     public static ScreenshotUtil screenshotutil = new ScreenshotUtil();
-    public static ExcelUtil excelutil = new ExcelUtil();
+    static String filePath = System.getProperty("user.dir")
+            + "/src/test/resources/excel/Gps_Rules.xls";
+
+  public static   ExcelUtil excelUtil = new ExcelUtil(filePath);
+	/* public static ExcelUtil excelUtil = new ExcelUtil("Gps_Rules.xls"); */
     public static Logger logger = Logger.getLogger("devpinoyLogger");
 
     private static final String CONFIG_PATH =
