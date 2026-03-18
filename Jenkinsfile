@@ -7,6 +7,8 @@ pipeline {
         GIT_REPO = "https://github.com/raghavselenium2505/SeleniumHybridFramework.git"
         GITHUB_API = "https://api.github.com"
         GITHUB_CREDENTIALS = "github-token"
+
+        JAVA_HOME = "C:\\Program Files\\Java\\jdk-25.0.2"
         MAVEN_HOME = "D:\\apache-maven-3.9.14"
     }
 
@@ -22,14 +24,18 @@ pipeline {
         stage('Run Selenium Tests') {
             steps {
                 echo "Running Selenium TestNG automation"
-                bat "\"${MAVEN_HOME}\\bin\\mvn.cmd\" clean test"
+
+                bat '''
+                set JAVA_HOME=C:\\Program Files\\Java\\jdk-25.0.2
+                set PATH=%JAVA_HOME%\\bin;%PATH%
+                "D:\\apache-maven-3.9.14\\bin\\mvn.cmd" clean test
+                '''
             }
         }
 
         stage('Create Feature Branch') {
             steps {
                 script {
-                    echo "Creating branch ${FEATURE_BRANCH}"
                     bat "git checkout -b ${FEATURE_BRANCH}"
                 }
             }
@@ -39,7 +45,7 @@ pipeline {
             steps {
                 script {
 
-                    writeFile file: 'auto.txt', text: "Auto commit at ${new Date()}"
+                    writeFile file: 'auto.txt', text: "Auto commit ${new Date()}"
 
                     bat '''
                     git config user.email "jenkins@local"
