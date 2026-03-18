@@ -4,7 +4,7 @@ pipeline {
     environment {
         MAIN_BRANCH = "Feb_2026"
         FEATURE_BRANCH = "feature_auto_${new Date().format('yyyyMMddHHmmss')}"
-        GIT_REPO = "https://github.com/amzurtechnologies/GPS.git"
+        GIT_REPO = "https://github.com/raghavselenium2505/SeleniumHybridFramework.git"
         GITHUB_API = "https://api.github.com"
         GITHUB_CREDENTIALS = "github-token"
     }
@@ -26,9 +26,7 @@ pipeline {
             steps {
                 script {
                     echo "Creating new branch ${FEATURE_BRANCH}"
-                    bat """
-                        git checkout -b ${FEATURE_BRANCH}
-                    """
+                    bat "git checkout -b ${FEATURE_BRANCH}"
                 }
             }
         }
@@ -37,28 +35,30 @@ pipeline {
             steps {
                 script {
                     writeFile file: 'auto.txt', text: "Auto commit at ${new Date()}"
-                    bat """
-                        git add .
-                        git commit -m "Auto commit from Jenkins"
-                    """
+
+                    bat '''
+                    git config user.email "jenkins@local"
+                    git config user.name "Jenkins"
+                    git add .
+                    git commit -m "Auto commit from Jenkins"
+                    '''
                 }
             }
         }
 
         stage('Push Feature Branch') {
             steps {
-                withCredentials([string(credentialsId: "${GITHUB_CREDENTIALS}", variable: 'TOKEN')]) {
-                    bat """
-                        git push https://${TOKEN}@github.com/amzurtechnologies/GPS.git ${FEATURE_BRANCH}
-                    """
+                withCredentials([string(credentialsId: "github-token", variable: 'TOKEN')]) {
+                    bat "git push https://${TOKEN}@github.com/raghavselenium2505/SeleniumHybridFramework.git ${FEATURE_BRANCH}"
                 }
             }
         }
 
         stage('Create Pull Request') {
             steps {
-                withCredentials([string(credentialsId: "${GITHUB_CREDENTIALS}", variable: 'TOKEN')]) {
+                withCredentials([string(credentialsId: "github-token", variable: 'TOKEN')]) {
                     script {
+
                         def prData = """
                         {
                           "title": "Auto PR from Jenkins",
@@ -71,15 +71,15 @@ pipeline {
                         writeFile file: 'pr.json', text: prData
 
                         bat """
-                            curl -X POST ^
-                            -H "Authorization: token %TOKEN%" ^
-                            -H "Accept: application/vnd.github.v3+json" ^
-                            ${GITHUB_API}/repos/amzurtechnologies/GPS/pulls ^
-                            -d @pr.json
+                        curl -X POST ^
+                        -H "Authorization: token %TOKEN%" ^
+                        -H "Accept: application/vnd.github.v3+json" ^
+                        ${GITHUB_API}/repos/raghavselenium2505/SeleniumHybridFramework/pulls ^
+                        -d @pr.json
                         """
                     }
                 }
             }
         }
     }
-}s
+}
