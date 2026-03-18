@@ -11,20 +11,16 @@ pipeline {
 
     stages {
 
-        stage('Checkout Main Branch') {
+        stage('Checkout Code') {
             steps {
                 cleanWs()
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: "*/${MAIN_BRANCH}"]],
-                    userRemoteConfigs: [[url: "${GIT_REPO}"]]
-                ])
+                git branch: "${MAIN_BRANCH}", url: "${GIT_REPO}"
             }
         }
 
-        stage('Run Selenium Automation Tests') {
+        stage('Run Selenium Tests') {
             steps {
-                echo "Executing Selenium TestNG scripts"
+                echo "Running Selenium TestNG automation"
                 bat "mvn clean test"
             }
         }
@@ -32,15 +28,16 @@ pipeline {
         stage('Create Feature Branch') {
             steps {
                 script {
-                    echo "Creating new branch ${FEATURE_BRANCH}"
+                    echo "Creating branch ${FEATURE_BRANCH}"
                     bat "git checkout -b ${FEATURE_BRANCH}"
                 }
             }
         }
 
-        stage('Make Dummy Code Change') {
+        stage('Commit Changes') {
             steps {
                 script {
+
                     writeFile file: 'auto.txt', text: "Auto commit at ${new Date()}"
 
                     bat '''
@@ -53,7 +50,7 @@ pipeline {
             }
         }
 
-        stage('Push Feature Branch') {
+        stage('Push Branch') {
             steps {
                 withCredentials([string(credentialsId: "github-token", variable: 'TOKEN')]) {
                     bat "git push https://${TOKEN}@github.com/raghavselenium2505/SeleniumHybridFramework.git ${FEATURE_BRANCH}"
@@ -64,6 +61,7 @@ pipeline {
         stage('Create Pull Request') {
             steps {
                 withCredentials([string(credentialsId: "github-token", variable: 'TOKEN')]) {
+
                     script {
 
                         def prData = """
@@ -71,7 +69,7 @@ pipeline {
                           "title": "Auto PR from Jenkins",
                           "head": "${FEATURE_BRANCH}",
                           "base": "${MAIN_BRANCH}",
-                          "body": "This PR was created automatically by Jenkins."
+                          "body": "Created automatically by Jenkins"
                         }
                         """
 
@@ -87,6 +85,15 @@ pipeline {
                     }
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline executed successfully"
+        }
+        failure {
+            echo "Pipeline failed"
         }
     }
 }
