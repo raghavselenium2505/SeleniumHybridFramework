@@ -7,6 +7,7 @@ pipeline {
         GIT_REPO = "https://github.com/raghavselenium2505/SeleniumHybridFramework.git"
         GITHUB_API = "https://api.github.com"
         GITHUB_CREDENTIALS = "github-token"
+        MAVEN_HOME = "D:\\apache-maven-3.9.14"
     }
 
     stages {
@@ -21,7 +22,7 @@ pipeline {
         stage('Run Selenium Tests') {
             steps {
                 echo "Running Selenium TestNG automation"
-                bat "mvn clean test"
+                bat "\"${MAVEN_HOME}\\bin\\mvn.cmd\" clean test"
             }
         }
 
