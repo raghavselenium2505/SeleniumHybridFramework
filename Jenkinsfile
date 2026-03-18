@@ -22,6 +22,13 @@ pipeline {
             }
         }
 
+        stage('Run Selenium Automation Tests') {
+            steps {
+                echo "Executing Selenium TestNG scripts"
+                bat "mvn clean test"
+            }
+        }
+
         stage('Create Feature Branch') {
             steps {
                 script {
