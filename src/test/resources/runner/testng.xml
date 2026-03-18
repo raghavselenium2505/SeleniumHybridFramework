@@ -1,4 +1,3 @@
-
 <suite name="ParallelCrossBrowserSuite"
        parallel="tests"
        thread-count="2">
@@ -6,7 +5,9 @@
     <!-- ================= CHROME ================= -->
 
     <test name="ChromeTest">
+
         <parameter name="browser" value="chrome"/>
+        <parameter name="url" value="https://www.amazon.in"/>
 
         <groups>
             <run>
@@ -18,23 +19,26 @@
         <classes>
             <class name="com.gps.development.AmazonLogin_TC001"/>
         </classes>
+
     </test>
 
     <!-- ================= EDGE ================= -->
 
     <test name="EdgeTest">
+
         <parameter name="browser" value="edge"/>
+        <parameter name="url" value="https://www.flipkart.com"/>
 
         <groups>
             <run>
                 <include name="json"/>
-                <include name="excel"/>
             </run>
         </groups>
 
         <classes>
             <class name="com.gps.development.AmazonLogin_TC001"/>
         </classes>
+
     </test>
 
 </suite>
