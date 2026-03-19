@@ -35,30 +35,49 @@ pipeline {
 
     post {
 
-        always {
-
-            echo "Sending Email with Extent Report"
-
+        success {
             emailext(
-                subject: "${env.BUILD_STATUS}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
-                body: '''
-                Hello Team,
+                subject: "SUCCESS: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
+                body: """
+                <h2>Automation Execution - SUCCESS ✅</h2>
 
-                Please find the attached automation execution report.
+                <p><b>Job:</b> ${env.JOB_NAME}</p>
+                <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
+                <p><b>Status:</b> SUCCESS</p>
 
-                Job Name: ${JOB_NAME}
-                Build Number: ${BUILD_NUMBER}
-                Status: ${BUILD_STATUS}
+                <p><b>Build URL:</b><br>
+                <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
 
-                Build URL:
-                ${BUILD_URL}
+                <p>Please find the Extent Report attached.</p>
 
-                Regards,
+                Regards,<br>
                 Jenkins
-                ''',
+                """,
                 to: "raghavendra2119818@gmail.com",
+                attachmentsPattern: "**/ExtentReport.html"
+            )
+        }
 
-                attachmentsPattern: "test-output/**/*.html"
+        failure {
+            emailext(
+                subject: "FAILURE: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
+                body: """
+                <h2>Automation Execution - FAILURE ❌</h2>
+
+                <p><b>Job:</b> ${env.JOB_NAME}</p>
+                <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
+                <p><b>Status:</b> FAILURE</p>
+
+                <p><b>Build URL:</b><br>
+                <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+
+                <p>Please check the attached Extent Report.</p>
+
+                Regards,<br>
+                Jenkins
+                """,
+                to: "raghavendra2119818@gmail.com",
+                attachmentsPattern: "**/ExtentReport.html"
             )
         }
     }
