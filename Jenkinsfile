@@ -29,21 +29,6 @@ pipeline {
                 '''
             }
         }
-
-        stage('Get Latest Report') {
-            steps {
-                script {
-                    def latestReport = bat(
-                        script: 'for /f "delims=" %%i in (\'dir /b /o-d reports\\AutomationReport_*.html\') do @echo %%i & goto :done\n:done',
-                        returnStdout: true
-                    ).trim()
-
-                    echo "Latest Report: ${latestReport}"
-
-                    env.LATEST_REPORT = "reports/${latestReport}"
-                }
-            }
-        }
     }
 
     post {
@@ -60,13 +45,15 @@ pipeline {
                 <p><b>Build URL:</b><br>
                 <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
 
-                <p>Latest Extent Report attached.</p>
+                <p>Automation Report attached.</p>
 
                 Regards,<br>
                 Jenkins
                 """,
                 to: "raghavendra2119818@gmail.com",
-                attachmentsPattern: "${env.LATEST_REPORT}"
+
+                // ✅ Matches your dynamic timestamp format
+                attachmentsPattern: "reports/AutomationReport_*.html"
             )
         }
     }
