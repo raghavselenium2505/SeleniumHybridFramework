@@ -29,6 +29,29 @@ pipeline {
                 '''
             }
         }
+
+        stage('Keep Only Latest Report') {
+            steps {
+                script {
+                    bat '''
+                    cd reports
+
+                    REM Get latest file
+                    for /f "delims=" %%i in ('dir /b /o-d AutomationReport_*.html') do (
+                        set latest=%%i
+                        goto done
+                    )
+
+                    :done
+
+                    REM Delete all except latest
+                    for %%f in (AutomationReport_*.html) do (
+                        if not "%%f"=="%latest%" del %%f
+                    )
+                    '''
+                }
+            }
+        }
     }
 
     post {
@@ -45,14 +68,14 @@ pipeline {
                 <p><b>Build URL:</b><br>
                 <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
 
-                <p>Automation Report attached.</p>
+                <p>Latest Automation Report attached.</p>
 
                 Regards,<br>
                 Jenkins
                 """,
                 to: "raghavendra2119818@gmail.com",
 
-                // ✅ Matches your dynamic timestamp format
+                // Now only one file exists
                 attachmentsPattern: "reports/AutomationReport_*.html"
             )
         }
