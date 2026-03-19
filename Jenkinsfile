@@ -54,7 +54,7 @@ pipeline {
                 Jenkins
                 """,
                 to: "raghavendra2119818@gmail.com",
-                attachmentsPattern: "**/ExtentReport.html"
+                attachmentsPattern: "**/AutomationReport_*.html"
             )
         }
 
@@ -71,13 +71,13 @@ pipeline {
                 <p><b>Build URL:</b><br>
                 <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
 
-                <p>Please check the attached Extent Report.</p>
+                <p>Please check the attached report.</p>
 
                 Regards,<br>
                 Jenkins
                 """,
                 to: "raghavendra2119818@gmail.com",
-                attachmentsPattern: "**/ExtentReport.html"
+                attachmentsPattern: "**/AutomationReport_*.html"
             )
         }
     }
