@@ -3,9 +3,7 @@ pipeline {
 
     environment {
         MAIN_BRANCH = "Feb_2026"
-        FEATURE_BRANCH = "feature_auto_${new Date().format('yyyyMMddHHmmss')}"
         GIT_REPO = "https://github.com/raghavselenium2505/SeleniumHybridFramework.git"
-        GITHUB_API = "https://api.github.com"
 
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-25.0.2"
         MAVEN_HOME = "D:\\apache-maven-3.9.14"
@@ -31,53 +29,44 @@ pipeline {
                 '''
             }
         }
+
+        stage('Get Latest Report') {
+            steps {
+                script {
+                    def latestReport = bat(
+                        script: 'for /f "delims=" %%i in (\'dir /b /o-d reports\\AutomationReport_*.html\') do @echo %%i & goto :done\n:done',
+                        returnStdout: true
+                    ).trim()
+
+                    echo "Latest Report: ${latestReport}"
+
+                    env.LATEST_REPORT = "reports/${latestReport}"
+                }
+            }
+        }
     }
 
     post {
 
-        success {
+        always {
             emailext(
-                subject: "SUCCESS: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
+                subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
                 body: """
-                <h2>Automation Execution - SUCCESS ✅</h2>
+                <h2>Automation Execution - ${currentBuild.currentResult}</h2>
 
                 <p><b>Job:</b> ${env.JOB_NAME}</p>
                 <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
-                <p><b>Status:</b> SUCCESS</p>
 
                 <p><b>Build URL:</b><br>
                 <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
 
-                <p>Please find the Extent Report attached.</p>
+                <p>Latest Extent Report attached.</p>
 
                 Regards,<br>
                 Jenkins
                 """,
                 to: "raghavendra2119818@gmail.com",
-                attachmentsPattern: "**/AutomationReport_*.html"
-            )
-        }
-
-        failure {
-            emailext(
-                subject: "FAILURE: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
-                body: """
-                <h2>Automation Execution - FAILURE ❌</h2>
-
-                <p><b>Job:</b> ${env.JOB_NAME}</p>
-                <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
-                <p><b>Status:</b> FAILURE</p>
-
-                <p><b>Build URL:</b><br>
-                <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-
-                <p>Please check the attached report.</p>
-
-                Regards,<br>
-                Jenkins
-                """,
-                to: "raghavendra2119818@gmail.com",
-                attachmentsPattern: "**/AutomationReport_*.html"
+                attachmentsPattern: "${env.LATEST_REPORT}"
             )
         }
     }
