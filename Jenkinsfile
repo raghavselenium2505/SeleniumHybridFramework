@@ -30,25 +30,54 @@ pipeline {
             }
         }
 
+        // ✅ Keep only latest report (FIXED)
         stage('Keep Only Latest Report') {
             steps {
+                bat '''
+                cd reports
+                setlocal enabledelayedexpansion
+
+                for /f "delims=" %%i in ('dir /b /o-d AutomationReport_*.html') do (
+                    set latest=%%i
+                    goto done
+                )
+
+                :done
+
+                for %%f in (AutomationReport_*.html) do (
+                    if not "%%f"=="!latest!" del %%f
+                )
+                '''
+            }
+        }
+
+        // ✅ Extract summary from Extent report
+        stage('Extract Extent Summary') {
+            steps {
                 script {
-                    bat '''
-                    cd reports
 
-                    REM Get latest file
-                    for /f "delims=" %%i in ('dir /b /o-d AutomationReport_*.html') do (
-                        set latest=%%i
-                        goto done
-                    )
+                    def reportFile = bat(
+                        script: 'for /f "delims=" %%i in (\'dir /b reports\\AutomationReport_*.html\') do @echo %%i',
+                        returnStdout: true
+                    ).trim()
 
-                    :done
+                    def reportPath = "reports/${reportFile}"
+                    echo "Using report: ${reportPath}"
 
-                    REM Delete all except latest
-                    for %%f in (AutomationReport_*.html) do (
-                        if not "%%f"=="%latest%" del %%f
-                    )
-                    '''
+                    def content = readFile(reportPath)
+
+                    def passed = (content =~ /status pass/).count
+                    def failed = (content =~ /status fail/).count
+                    def skipped = (content =~ /status skip/).count
+
+                    def total = passed + failed + skipped
+
+                    env.PASSED = passed.toString()
+                    env.FAILED = failed.toString()
+                    env.SKIPPED = skipped.toString()
+                    env.TOTAL = total.toString()
+
+                    echo "Total: ${total}, Passed: ${passed}, Failed: ${failed}, Skipped: ${skipped}"
                 }
             }
         }
@@ -59,11 +88,28 @@ pipeline {
         always {
             emailext(
                 subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
+
                 body: """
                 <h2>Automation Execution - ${currentBuild.currentResult}</h2>
 
                 <p><b>Job:</b> ${env.JOB_NAME}</p>
                 <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
+
+                <h3>Test Summary (Extent Report) 📊</h3>
+                <table border="1" cellpadding="5" cellspacing="0">
+                <tr>
+                    <th>Total</th>
+                    <th style="color:green;">Passed</th>
+                    <th style="color:red;">Failed</th>
+                    <th style="color:orange;">Skipped</th>
+                </tr>
+                <tr>
+                    <td>${env.TOTAL}</td>
+                    <td style="color:green;">${env.PASSED}</td>
+                    <td style="color:red;">${env.FAILED}</td>
+                    <td style="color:orange;">${env.SKIPPED}</td>
+                </tr>
+                </table>
 
                 <p><b>Build URL:</b><br>
                 <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
@@ -73,9 +119,10 @@ pipeline {
                 Regards,<br>
                 Jenkins
                 """,
+
                 to: "raghavendra2119818@gmail.com",
 
-                // Now only one file exists
+                // ✅ Only one file remains
                 attachmentsPattern: "reports/AutomationReport_*.html"
             )
         }
