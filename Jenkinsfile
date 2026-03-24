@@ -1,6 +1,14 @@
 pipeline {
     agent any
 
+    parameters {
+        choice(
+            name: 'dataMode',
+            choices: ['json', 'excel'],
+            description: 'Select API Data Mode'
+        )
+    }
+
     environment {
         MAIN_BRANCH = "Feb_2026_API"
         GIT_REPO = "https://github.com/raghavselenium2505/SeleniumHybridFramework.git"
@@ -18,40 +26,48 @@ pipeline {
             }
         }
 
-        stage('Run Selenium Tests') {
+        // 🔥 DELETE OLD REPORTS BEFORE RUN
+        stage('Clean Old Reports') {
             steps {
-                echo "Running Selenium TestNG automation"
+                echo "Deleting old reports..."
 
                 bat '''
-                set JAVA_HOME=C:\\Program Files\\Java\\jdk-25.0.2
+                if exist reports (
+                    del /q reports\\AutomationReport_*.html
+                )
+                '''
+            }
+        }
+
+        // 🔥 RUN API TESTS
+        stage('Run API Tests') {
+            steps {
+                echo "Running API TestNG automation with mode: ${params.dataMode}"
+
+                bat """
+                set JAVA_HOME=${JAVA_HOME}
                 set PATH=%JAVA_HOME%\\bin;%PATH%
-                "D:\\apache-maven-3.9.14\\bin\\mvn.cmd" clean test
-                '''
+
+                "${MAVEN_HOME}\\bin\\mvn.cmd" clean test ^
+                -DsuiteXmlFile=src/test/resources/runner/testngAPI.xml ^
+                -DdataMode=${params.dataMode}
+                """
             }
         }
 
-        // ✅ Keep only latest report (FIXED)
-        stage('Keep Only Latest Report') {
+        // 🔥 VALIDATE REPORT EXISTS
+        stage('Validate Report') {
             steps {
                 bat '''
-                cd reports
-                setlocal enabledelayedexpansion
-
-                for /f "delims=" %%i in ('dir /b /o-d AutomationReport_*.html') do (
-                    set latest=%%i
-                    goto done
-                )
-
-                :done
-
-                for %%f in (AutomationReport_*.html) do (
-                    if not "%%f"=="!latest!" del %%f
+                if not exist reports\\AutomationReport_*.html (
+                    echo ❌ No report generated!
+                    exit 1
                 )
                 '''
             }
         }
 
-        // ✅ Extract summary from Extent report
+        // 🔥 EXTRACT SUMMARY
         stage('Extract Extent Summary') {
             steps {
                 script {
@@ -90,10 +106,11 @@ pipeline {
                 subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
 
                 body: """
-                <h2>Automation Execution - ${currentBuild.currentResult}</h2>
+                <h2>API Automation Execution - ${currentBuild.currentResult}</h2>
 
                 <p><b>Job:</b> ${env.JOB_NAME}</p>
                 <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
+                <p><b>Execution Mode:</b> ${params.dataMode}</p>
 
                 <h3>Test Summary (Extent Report) 📊</h3>
                 <table border="1" cellpadding="5" cellspacing="0">
@@ -114,7 +131,7 @@ pipeline {
                 <p><b>Build URL:</b><br>
                 <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
 
-                <p>Latest Automation Report attached.</p>
+                <p>Latest API Automation Report attached.</p>
 
                 Regards,<br>
                 Jenkins
@@ -122,7 +139,6 @@ pipeline {
 
                 to: "raghavendra2119818@gmail.com",
 
-                // ✅ Only one file remains
                 attachmentsPattern: "reports/AutomationReport_*.html"
             )
         }
