@@ -1,14 +1,6 @@
 pipeline {
     agent any
 
-    parameters {
-        choice(
-            name: 'dataMode',
-            choices: ['json', 'excel'],
-            description: 'Select API Data Mode'
-        )
-    }
-
     environment {
         MAIN_BRANCH = "Feb_2026_API"
         GIT_REPO = "https://github.com/raghavselenium2505/SeleniumHybridFramework.git"
@@ -19,6 +11,7 @@ pipeline {
 
     stages {
 
+        // 🔥 CHECKOUT CODE
         stage('Checkout Code') {
             steps {
                 cleanWs()
@@ -38,24 +31,19 @@ pipeline {
             }
         }
 
-        // 🔥 RUN API TESTS (FIXED)
+        // 🔥 RUN API TESTS (CONTROL FROM XML ONLY)
         stage('Run API Tests') {
             steps {
-                echo "Running API TestNG automation with mode: ${params.dataMode}"
+                echo "Running API tests using testngAPI.xml configuration"
 
                 bat """
                 set JAVA_HOME=${JAVA_HOME}
                 set PATH=%JAVA_HOME%\\bin;%PATH%
 
-                echo ===== EXECUTION MODE =====
-                echo ${params.dataMode}
-
-                REM 🔥 FIX: Set variable properly
-                set dataMode=${params.dataMode}
+                echo ===== EXECUTION CONTROLLED BY TESTNG XML =====
 
                 "${MAVEN_HOME}\\bin\\mvn.cmd" clean test ^
-                -DsuiteXmlFile=src/test/resources/runner/testngAPI.xml ^
-                -DdataMode=%dataMode%
+                -DsuiteXmlFile=src/test/resources/runner/testngAPI.xml
                 """
             }
         }
@@ -72,7 +60,7 @@ pipeline {
             }
         }
 
-        // 🔥 EXTRACT SUMMARY (FIXED FILE NAME)
+        // 🔥 EXTRACT SUMMARY
         stage('Extract Extent Summary') {
             steps {
                 script {
@@ -104,6 +92,7 @@ pipeline {
         }
     }
 
+    // 🔥 EMAIL REPORT
     post {
         always {
             emailext(
@@ -114,7 +103,6 @@ pipeline {
 
                 <p><b>Job:</b> ${env.JOB_NAME}</p>
                 <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
-                <p><b>Execution Mode:</b> ${params.dataMode}</p>
 
                 <h3>Test Summary 📊</h3>
                 <table border="1" cellpadding="5">
@@ -133,6 +121,9 @@ pipeline {
                 </table>
 
                 <p><a href="${env.BUILD_URL}">View Build</a></p>
+
+                Regards,<br>
+                Jenkins
                 """,
 
                 to: "raghavendra2119818@gmail.com",
