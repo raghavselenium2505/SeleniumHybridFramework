@@ -18,57 +18,84 @@ pipeline {
             }
         }
 
-        stage('Run Selenium Tests') {
+        // ✅ NEW (from API pipeline)
+        stage('Clean Old Reports') {
             steps {
-                echo "Running Selenium TestNG automation"
-
+                echo "Cleaning old reports..."
                 bat '''
-                set JAVA_HOME=C:\\Program Files\\Java\\jdk-25.0.2
-                set PATH=%JAVA_HOME%\\bin;%PATH%
-                "D:\\apache-maven-3.9.14\\bin\\mvn.cmd" clean test
+                if exist reports (
+                    del /q reports\\*.html
+                )
                 '''
             }
         }
 
-        // ✅ Keep only latest report (FIXED)
+        // ✅ SAME UI EXECUTION
+        stage('Run Selenium Tests') {
+            steps {
+                echo "🚀 Running Selenium UI automation"
+
+                bat """
+                set JAVA_HOME=${JAVA_HOME}
+                set PATH=%JAVA_HOME%\\bin;%PATH%
+
+                "${MAVEN_HOME}\\bin\\mvn.cmd" clean test
+                """
+            }
+        }
+
+        // ✅ NEW (important validation)
+        stage('Validate Report') {
+            steps {
+                bat '''
+                if not exist reports\\*.html (
+                    echo ❌ No report generated!
+                    exit 1
+                )
+                '''
+            }
+        }
+
+        // ✅ IMPROVED (generic + cleaner)
         stage('Keep Only Latest Report') {
             steps {
                 bat '''
                 cd reports
                 setlocal enabledelayedexpansion
 
-                for /f "delims=" %%i in ('dir /b /o-d AutomationReport_*.html') do (
+                for /f "delims=" %%i in ('dir /b /o-d *.html') do (
                     set latest=%%i
                     goto done
                 )
 
                 :done
 
-                for %%f in (AutomationReport_*.html) do (
+                for %%f in (*.html) do (
                     if not "%%f"=="!latest!" del %%f
                 )
                 '''
             }
         }
 
-        // ✅ Extract summary from Extent report
+        // ✅ FIXED (SAFE - NO SANDBOX ISSUE)
         stage('Extract Extent Summary') {
             steps {
                 script {
 
                     def reportFile = bat(
-                        script: 'for /f "delims=" %%i in (\'dir /b reports\\AutomationReport_*.html\') do @echo %%i',
+                        script: '@dir /b reports\\*.html',
                         returnStdout: true
-                    ).trim()
+                    ).trim().split("\\r?\\n")[-1]
+
+                    echo "Using Report: ${reportFile}"
 
                     def reportPath = "reports/${reportFile}"
-                    echo "Using report: ${reportPath}"
-
                     def content = readFile(reportPath)
 
-                    def passed = (content =~ /status pass/).count
-                    def failed = (content =~ /status fail/).count
-                    def skipped = (content =~ /status skip/).count
+                    // ✅ SAFE COUNTING (no regex sandbox issue)
+                    def passed = content.split("status pass").length - 1
+                    def failed = content.split("status fail").length - 1
+                    def skipped = content.split("status skip").length - 1
 
                     def total = passed + failed + skipped
 
@@ -86,17 +113,18 @@ pipeline {
     post {
 
         always {
+
             emailext(
                 subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
 
                 body: """
-                <h2>Automation Execution - ${currentBuild.currentResult}</h2>
+                <h2>Selenium UI Automation - ${currentBuild.currentResult}</h2>
 
                 <p><b>Job:</b> ${env.JOB_NAME}</p>
                 <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
 
-                <h3>Test Summary (Extent Report) 📊</h3>
-                <table border="1" cellpadding="5" cellspacing="0">
+                <h3>Test Summary 📊</h3>
+                <table border="1" cellpadding="5">
                 <tr>
                     <th>Total</th>
                     <th style="color:green;">Passed</th>
@@ -114,16 +142,14 @@ pipeline {
                 <p><b>Build URL:</b><br>
                 <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
 
-                <p>Latest Automation Report attached.</p>
+                <p>📎 Latest Extent Report attached</p>
 
                 Regards,<br>
                 Jenkins
                 """,
 
                 to: "raghavendra2119818@gmail.com",
-
-                // ✅ Only one file remains
-                attachmentsPattern: "reports/AutomationReport_*.html"
+                attachmentsPattern: "reports/*.html"
             )
         }
     }
