@@ -31,16 +31,14 @@ pipeline {
             }
         }
 
-        // 🔥 RUN API TESTS (CONTROL FROM XML ONLY)
+        // 🔥 RUN API TESTS
         stage('Run API Tests') {
             steps {
-                echo "Running API tests using testngAPI.xml configuration"
+                echo "Running API tests using testngAPI.xml"
 
                 bat """
                 set JAVA_HOME=${JAVA_HOME}
                 set PATH=%JAVA_HOME%\\bin;%PATH%
-
-                echo ===== EXECUTION CONTROLLED BY TESTNG XML =====
 
                 "${MAVEN_HOME}\\bin\\mvn.cmd" clean test ^
                 -DsuiteXmlFile=src/test/resources/runner/testngAPI.xml
@@ -60,18 +58,19 @@ pipeline {
             }
         }
 
-        // 🔥 EXTRACT SUMMARY
+        // 🔥 FINAL FIXED SUMMARY STAGE
         stage('Extract Extent Summary') {
             steps {
                 script {
 
                     def reportFile = bat(
-                        script: 'for /f "delims=" %%i in (\'dir /b reports\\*.html\') do @echo %%i',
+                        script: '@dir /b reports\\*.html',
                         returnStdout: true
-                    ).trim()
+                    ).trim().split("\r?\n")[-1]
+
+                    echo "Report File Detected: ${reportFile}"
 
                     def reportPath = "reports/${reportFile}"
-                    echo "Using report: ${reportPath}"
 
                     def content = readFile(reportPath)
 
@@ -91,35 +90,41 @@ pipeline {
             }
         }
     }
-stage('Extract Extent Summary') {
-    steps {
-        script {
 
-            // 🔥 Get ONLY file name (clean output)
-            def reportFile = bat(
-                script: '@dir /b reports\\*.html',
-                returnStdout: true
-            ).trim().split("\r?\n")[-1]
+    post {
+        always {
+            emailext(
+                subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
 
-            echo "Report File Detected: ${reportFile}"
+                body: """
+                <h2>API Automation Execution - ${currentBuild.currentResult}</h2>
 
-            def reportPath = "reports/${reportFile}"
+                <p><b>Job:</b> ${env.JOB_NAME}</p>
+                <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
 
-            def content = readFile(reportPath)
+                <h3>Test Summary 📊</h3>
+                <table border="1" cellpadding="5">
+                <tr>
+                    <th>Total</th>
+                    <th style="color:green;">Passed</th>
+                    <th style="color:red;">Failed</th>
+                    <th style="color:orange;">Skipped</th>
+                </tr>
+                <tr>
+                    <td>${env.TOTAL}</td>
+                    <td style="color:green;">${env.PASSED}</td>
+                    <td style="color:red;">${env.FAILED}</td>
+                    <td style="color:orange;">${env.SKIPPED}</td>
+                </tr>
+                </table>
 
-            def passed = (content =~ /status pass/).count
-            def failed = (content =~ /status fail/).count
-            def skipped = (content =~ /status skip/).count
+                <p><a href="${env.BUILD_URL}">View Build</a></p>
+                """,
 
-            def total = passed + failed + skipped
+                to: "raghavendra2119818@gmail.com",
 
-            env.PASSED = passed.toString()
-            env.FAILED = failed.toString()
-            env.SKIPPED = skipped.toString()
-            env.TOTAL = total.toString()
-
-            echo "Total: ${total}, Passed: ${passed}, Failed: ${failed}, Skipped: ${skipped}"
+                attachmentsPattern: "reports/*.html"
+            )
         }
     }
-}
 }
