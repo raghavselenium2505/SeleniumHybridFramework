@@ -6,8 +6,7 @@ import org.apache.poi.ss.usermodel.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ExcelUtil {
 
@@ -85,6 +84,68 @@ public class ExcelUtil {
 
         } catch (Exception e) {
             throw new RuntimeException("Error reading Excel data", e);
+        }
+    }
+
+    // ================= NEW METHOD: MAP BASED (NO AMBIGUITY) =================
+
+    public List<Map<String, String>> getDataAsMap(
+            String sheetName,
+            String testCaseName) {
+
+        try {
+
+            Sheet sheet = workbook.getSheet(sheetName);
+
+            if (sheet == null) {
+                throw new RuntimeException("Sheet not found: " + sheetName);
+            }
+
+            DataFormatter formatter = new DataFormatter();
+            List<Map<String, String>> dataList = new ArrayList<>();
+
+            // Header row
+            Row headerRow = sheet.getRow(0);
+            int colCount = headerRow.getLastCellNum();
+
+            int rowCount = sheet.getLastRowNum();
+
+            for (int i = 1; i <= rowCount; i++) {
+
+                Row row = sheet.getRow(i);
+                if (row == null) continue;
+
+                String currentTestName =
+                        formatter.formatCellValue(row.getCell(0));
+
+                if (currentTestName.equalsIgnoreCase(testCaseName)) {
+
+                    Map<String, String> rowMap = new HashMap<>();
+
+                    for (int j = 1; j < colCount; j++) {
+
+                        String columnName =
+                                formatter.formatCellValue(headerRow.getCell(j));
+
+                        String cellValue =
+                                formatter.formatCellValue(row.getCell(j));
+
+                        rowMap.put(columnName, cellValue);
+                    }
+
+                    dataList.add(rowMap);
+                }
+            }
+
+            if (dataList.isEmpty()) {
+                throw new RuntimeException(
+                        "No data found for test case: " + testCaseName);
+            }
+
+            return dataList;
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error reading Excel as Map", e);
         }
     }
 

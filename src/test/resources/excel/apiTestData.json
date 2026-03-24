@@ -1,0 +1,64 @@
+[
+  {
+    "testCase": "getUsersTest",
+    "runMode": "yes",
+    "method": "GET",
+    "endpoint": "/users",
+    "expectedStatusCode": "200"
+  },
+  {
+    "testCase": "getUsersTest",
+    "runMode": "no",
+    "method": "GET",
+    "endpoint": "/users",
+    "expectedStatusCode": "200"
+  },
+
+  {
+    "testCase": "updateUserTest",
+    "runMode": "yes",
+    "method": "PUT",
+    "endpoint": "/users/1",
+    "body": "{ \"name\": \"Raghav Updated\", \"email\": \"raghav@test.com\" }",
+    "expectedStatusCode": "200"
+  },
+  {
+    "testCase": "updateUserTest",
+    "runMode": "no",
+    "method": "PUT",
+    "endpoint": "/users/2",
+    "body": "{ \"name\": \"Skip User\", \"email\": \"skip@test.com\" }",
+    "expectedStatusCode": "200"
+  },
+
+  {
+    "testCase": "createUserTest",
+    "runMode": "yes",
+    "method": "POST",
+    "endpoint": "/users",
+    "body": "{ \"name\": \"Raghav\", \"email\": \"raghav@test.com\" }",
+    "expectedStatusCode": "201"
+  },
+  {
+    "testCase": "createUserTest",
+    "runMode": "no",
+    "method": "POST",
+    "endpoint": "/users",
+    "body": "{ \"name\": \"Skip User\", \"email\": \"skip@test.com\" }",
+    "expectedStatusCode": "201"
+  }
+  {
+    "testCase": "deleteUserTest",
+    "runMode": "yes",
+    "method": "DELETE",
+    "endpoint": "/users/1",
+    "expectedStatusCode": "200"
+  },
+  {
+    "testCase": "deleteUserTest",
+    "runMode": "no",
+    "method": "DELETE",
+    "endpoint": "/users/2",
+    "expectedStatusCode": "200"
+  }
+]

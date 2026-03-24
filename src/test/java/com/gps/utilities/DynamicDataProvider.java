@@ -1,87 +1,180 @@
 package com.gps.utilities;
 
-import org.testng.Reporter;
-import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.ITestContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.aventstack.extentreports.Status;
-import com.gps.base.TestBase;
-import com.gps.utilities.ExcelUtil;
-import com.web.utilities.AITestAnalyzer;
-
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class DynamicDataProvider extends TestBase {
+public class DynamicDataProvider {
 
-	// ================= MAIN DATAPROVIDER =================
+    private static final String CONFIG_PATH = System.getProperty("user.dir")
+            + "/src/test/resources/properties/Config.properties";
 
-	@DataProvider(name = "dynamicData")
-	public Object[][] getData(Method method) throws Exception {
+    private Properties config = new Properties();
 
-		Test testAnnotation = method.getAnnotation(Test.class);
-		String[] groups = testAnnotation.groups();
+    // ================= EXISTING UI DATAPROVIDER (UNCHANGED) =================
 
-		for (String group : groups) {
+    @DataProvider(name = "dynamicData")
+    public Object[][] getData(Method method) throws Exception {
 
-			if (group.equalsIgnoreCase("json")) {
-				return getJsonData(method.getName());
-			}
+        Test testAnnotation = method.getAnnotation(Test.class);
+        String[] groups = testAnnotation.groups();
 
-			if (group.equalsIgnoreCase("excel")) {
-				return getExcelData(method.getName());
-			}
-		}
+        for (String group : groups) {
 
-		throw new RuntimeException("No valid group defined for test: " + method.getName());
-	}
+            if (group.equalsIgnoreCase("json")) {
+                return getJsonData(method.getName());
+            }
 
-	// ================= JSON =================
+            if (group.equalsIgnoreCase("excel")) {
+                return getExcelData(method.getName());
+            }
+        }
 
-	private Object[][] getJsonData(String testName) throws Exception {
-		String filePath = System.getProperty("user.dir") + "/src/test/resources/excel/testdata.json";
+        throw new RuntimeException("No valid group defined for test: " + method.getName());
+    }
 
-		JSONParser parser = new JSONParser();
-		JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(filePath));
+    // ================= EXISTING JSON (UI - UNCHANGED) =================
 
-		List<Object[]> dataList = new ArrayList<>();
+    private Object[][] getJsonData(String testName) throws Exception {
 
-		for (Object obj : jsonArray) {
+        String filePath = System.getProperty("user.dir")
+                + "/src/test/resources/excel/testdata.json";
 
-			JSONObject jsonObject = (JSONObject) obj;
+        JSONParser parser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(filePath));
 
-			String testCase = jsonObject.get("testCase").toString();
+        List<Object[]> dataList = new ArrayList<>();
 
-			if (testCase.equalsIgnoreCase(testName)) {
+        for (Object obj : jsonArray) {
 
-				dataList.add(
-						new Object[] { jsonObject.get("username").toString(), jsonObject.get("password").toString() });
-			}
-		}
+            JSONObject jsonObject = (JSONObject) obj;
 
-		return dataList.toArray(new Object[0][]);
-	}
-	// ================= EXCEL =================
+            String testCase = jsonObject.get("testCase").toString();
 
-	private Object[][] getExcelData(String testName) {
+            if (testCase.equalsIgnoreCase(testName)) {
 
-		String filePath = System.getProperty("user.dir") + "/src/test/resources/excel/Gps_Rules.xls";
+                dataList.add(new Object[]{
+                        jsonObject.get("username").toString(),
+                        jsonObject.get("password").toString()
+                });
+            }
+        }
 
-		ExcelUtil excelUtil = new ExcelUtil(filePath);
+        return dataList.toArray(new Object[0][]);
+    }
 
-		Object[][] data = excelUtil.getSheetDataByTestCaseName("Signin", testName);
+    // ================= EXISTING EXCEL (UI - UNCHANGED) =================
 
-		if (data.length == 0) {
+    private Object[][] getExcelData(String testName) {
 
-			throw new RuntimeException("No Excel data found for: " + testName);
-		}
+        String filePath = System.getProperty("user.dir")
+                + "/src/test/resources/excel/Gps_Rules.xls";
 
-		return data;
-	}
+        ExcelUtil excelUtil = new ExcelUtil(filePath);
+
+        Object[][] data = excelUtil.getSheetDataByTestCaseName("Signin", testName);
+
+        if (data.length == 0) {
+            throw new RuntimeException("No Excel data found for: " + testName);
+        }
+
+        return data;
+    }
+
+    // ============================================================
+    // 🔥 NEW API DATAPROVIDER (NO IMPACT TO UI)
+    // ============================================================
+
+    @DataProvider(name = "apiData")
+    public Object[][] getApiData(Method method, ITestContext context) throws Exception {
+
+        config.load(new FileInputStream(CONFIG_PATH));
+
+        // 🔥 PRIORITY: XML → System → Config → Default
+        String dataType = context.getCurrentXmlTest().getParameter("dataType");
+
+        if (dataType == null || dataType.isEmpty()) {
+            dataType = System.getProperty("dataType");
+        }
+
+        if (dataType == null || dataType.isEmpty()) {
+            dataType = config.getProperty("dataType");
+        }
+
+        if (dataType == null || dataType.isEmpty()) {
+            dataType = "json";
+        }
+
+        System.out.println("API Data Type: " + dataType);
+
+        if (dataType.equalsIgnoreCase("json")) {
+            return getApiJsonData(method.getName());
+        }
+
+        if (dataType.equalsIgnoreCase("excel")) {
+            return getApiExcelData(method.getName());
+        }
+
+        throw new RuntimeException("Invalid API dataType: " + dataType);
+    }
+
+    // ================= API JSON =================
+
+    private Object[][] getApiJsonData(String testName) throws Exception {
+
+        String filePath = System.getProperty("user.dir")
+                + "/src/test/resources/excel/apiTestData.json";
+
+        JSONParser parser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(filePath));
+
+        List<Object[]> dataList = new ArrayList<>();
+
+        for (Object obj : jsonArray) {
+
+            JSONObject jsonObject = (JSONObject) obj;
+
+            String testCase = jsonObject.get("testCase").toString();
+
+            if (testCase.equalsIgnoreCase(testName)) {
+
+                dataList.add(new Object[]{jsonObject});
+            }
+        }
+
+        if (dataList.isEmpty()) {
+            throw new RuntimeException("No API JSON data found for: " + testName);
+        }
+
+        return dataList.toArray(new Object[0][]);
+    }
+
+    // ================= API EXCEL =================
+
+    private Object[][] getApiExcelData(String testName) {
+
+        String filePath = System.getProperty("user.dir")
+                + "/src/test/resources/excel/Gps_Rules.xls";
+
+        ExcelUtil excelUtil = new ExcelUtil(filePath);
+
+        List<Map<String, String>> data =
+                excelUtil.getDataAsMap("Sheet1", testName);
+
+        if (data.isEmpty()) {
+            throw new RuntimeException("No API Excel data found for: " + testName);
+        }
+
+        return data.stream()
+                .map(d -> new Object[]{d})
+                .toArray(Object[][]::new);
+    }
 }

@@ -1,0 +1,23 @@
+<suite name="API Mixed Execution Suite">
+
+    <!-- ================= JSON APIs ================= -->
+    <test name="JSON APIs (GET + POST)">
+        <parameter name="dataMode" value="json"/>
+
+        <classes>
+            <class name="com.gps.developmentAPI.GetAPITest"/>
+            <class name="com.gps.developmentAPI.PostAPITest"/>
+        </classes>
+    </test>
+
+    <!-- ================= EXCEL APIs ================= -->
+    <test name="EXCEL APIs (PUT + DELETE)">
+        <parameter name="dataMode" value="excel"/>
+
+        <classes>
+            <class name="com.gps.developmentAPI.PutAPITest"/>
+            <class name="com.gps.developmentAPI.DeleteAPITest"/>
+        </classes>
+    </test>
+
+</suite>
