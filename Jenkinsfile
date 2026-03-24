@@ -73,7 +73,7 @@ pipeline {
                 script {
 
                     def reportFile = bat(
-                        script: 'for /f "delims=" %%i in (\'dir /b reports\\AutomationReport_*.html\') do @echo %%i',
+                        script: 'for /f "delims=" %%i in (\'dir /b reports\\API_Report_*.html\') do @echo %%i',
                         returnStdout: true
                     ).trim()
 
