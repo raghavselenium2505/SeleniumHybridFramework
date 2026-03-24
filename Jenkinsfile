@@ -11,7 +11,6 @@ pipeline {
 
     stages {
 
-        // 🔥 CHECKOUT CODE
         stage('Checkout Code') {
             steps {
                 cleanWs()
@@ -19,7 +18,6 @@ pipeline {
             }
         }
 
-        // 🔥 DELETE OLD REPORTS
         stage('Clean Old Reports') {
             steps {
                 echo "Deleting old reports..."
@@ -31,7 +29,6 @@ pipeline {
             }
         }
 
-        // 🔥 RUN API TESTS
         stage('Run API Tests') {
             steps {
                 echo "Running API tests using testngAPI.xml"
@@ -46,7 +43,6 @@ pipeline {
             }
         }
 
-        // 🔥 VALIDATE REPORT
         stage('Validate Report') {
             steps {
                 bat '''
@@ -58,7 +54,7 @@ pipeline {
             }
         }
 
-        // 🔥 FINAL FIXED SUMMARY STAGE
+        // ✅ ONLY ONE CLEAN SUMMARY STAGE
         stage('Extract Extent Summary') {
             steps {
                 script {
@@ -66,7 +62,7 @@ pipeline {
                     def reportFile = bat(
                         script: '@dir /b reports\\*.html',
                         returnStdout: true
-                    ).trim().split("\r?\n")[-1]
+                    ).trim().split("\\r?\\n")[-1]
 
                     echo "Report File Detected: ${reportFile}"
 
@@ -74,9 +70,10 @@ pipeline {
 
                     def content = readFile(reportPath)
 
-                    def passed = (content =~ /status pass/).count
-                    def failed = (content =~ /status fail/).count
-                    def skipped = (content =~ /status skip/).count
+                    // ✅ SAFE COUNT (NO SANDBOX ISSUE)
+                    def passed = content.split("status pass").length - 1
+                    def failed = content.split("status fail").length - 1
+                    def skipped = content.split("status skip").length - 1
 
                     def total = passed + failed + skipped
 
@@ -91,35 +88,39 @@ pipeline {
         }
     }
 
-   stage('Extract Extent Summary') {
-    steps {
-        script {
+    post {
+        always {
+            emailext(
+                subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
 
-            def reportFile = bat(
-                script: '@dir /b reports\\*.html',
-                returnStdout: true
-            ).trim().split("\r?\n")[-1]
+                body: """
+                <h2>API Automation Execution - ${currentBuild.currentResult}</h2>
 
-            echo "Report File Detected: ${reportFile}"
+                <p><b>Job:</b> ${env.JOB_NAME}</p>
+                <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
 
-            def reportPath = "reports/${reportFile}"
+                <h3>Test Summary 📊</h3>
+                <table border="1" cellpadding="5">
+                <tr>
+                    <th>Total</th>
+                    <th style="color:green;">Passed</th>
+                    <th style="color:red;">Failed</th>
+                    <th style="color:orange;">Skipped</th>
+                </tr>
+                <tr>
+                    <td>${env.TOTAL}</td>
+                    <td style="color:green;">${env.PASSED}</td>
+                    <td style="color:red;">${env.FAILED}</td>
+                    <td style="color:orange;">${env.SKIPPED}</td>
+                </tr>
+                </table>
 
-            def content = readFile(reportPath)
+                <p><a href="${env.BUILD_URL}">View Build</a></p>
+                """,
 
-            // 🔥 SAFE COUNT (NO SANDBOX ISSUE)
-            def passed = content.split("status pass").length - 1
-            def failed = content.split("status fail").length - 1
-            def skipped = content.split("status skip").length - 1
-
-            def total = passed + failed + skipped
-
-            env.PASSED = passed.toString()
-            env.FAILED = failed.toString()
-            env.SKIPPED = skipped.toString()
-            env.TOTAL = total.toString()
-
-            echo "Total: ${total}, Passed: ${passed}, Failed: ${failed}, Skipped: ${skipped}"
+                to: "raghavendra2119818@gmail.com",
+                attachmentsPattern: "reports/*.html"
+            )
         }
     }
-}
 }
