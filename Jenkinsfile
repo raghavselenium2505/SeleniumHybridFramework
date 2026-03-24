@@ -26,20 +26,19 @@ pipeline {
             }
         }
 
-        // 🔥 DELETE OLD REPORTS BEFORE RUN
+        // 🔥 DELETE OLD REPORTS
         stage('Clean Old Reports') {
             steps {
                 echo "Deleting old reports..."
-
                 bat '''
                 if exist reports (
-                    del /q reports\\AutomationReport_*.html
+                    del /q reports\\*.html
                 )
                 '''
             }
         }
 
-        // 🔥 RUN API TESTS
+        // 🔥 RUN API TESTS (FIXED)
         stage('Run API Tests') {
             steps {
                 echo "Running API TestNG automation with mode: ${params.dataMode}"
@@ -48,18 +47,24 @@ pipeline {
                 set JAVA_HOME=${JAVA_HOME}
                 set PATH=%JAVA_HOME%\\bin;%PATH%
 
+                echo ===== EXECUTION MODE =====
+                echo ${params.dataMode}
+
+                REM 🔥 FIX: Set variable properly
+                set dataMode=${params.dataMode}
+
                 "${MAVEN_HOME}\\bin\\mvn.cmd" clean test ^
                 -DsuiteXmlFile=src/test/resources/runner/testngAPI.xml ^
-                -DdataMode=${params.dataMode}
+                -DdataMode=%dataMode%
                 """
             }
         }
 
-        // 🔥 VALIDATE REPORT EXISTS
+        // 🔥 VALIDATE REPORT
         stage('Validate Report') {
             steps {
                 bat '''
-                if not exist reports\\AutomationReport_*.html (
+                if not exist reports\\*.html (
                     echo ❌ No report generated!
                     exit 1
                 )
@@ -67,13 +72,13 @@ pipeline {
             }
         }
 
-        // 🔥 EXTRACT SUMMARY
+        // 🔥 EXTRACT SUMMARY (FIXED FILE NAME)
         stage('Extract Extent Summary') {
             steps {
                 script {
 
                     def reportFile = bat(
-                        script: 'for /f "delims=" %%i in (\'dir /b reports\\API_Report_*.html\') do @echo %%i',
+                        script: 'for /f "delims=" %%i in (\'dir /b reports\\*.html\') do @echo %%i',
                         returnStdout: true
                     ).trim()
 
@@ -100,7 +105,6 @@ pipeline {
     }
 
     post {
-
         always {
             emailext(
                 subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
@@ -112,8 +116,8 @@ pipeline {
                 <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
                 <p><b>Execution Mode:</b> ${params.dataMode}</p>
 
-                <h3>Test Summary (Extent Report) 📊</h3>
-                <table border="1" cellpadding="5" cellspacing="0">
+                <h3>Test Summary 📊</h3>
+                <table border="1" cellpadding="5">
                 <tr>
                     <th>Total</th>
                     <th style="color:green;">Passed</th>
@@ -128,18 +132,12 @@ pipeline {
                 </tr>
                 </table>
 
-                <p><b>Build URL:</b><br>
-                <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-
-                <p>Latest API Automation Report attached.</p>
-
-                Regards,<br>
-                Jenkins
+                <p><a href="${env.BUILD_URL}">View Build</a></p>
                 """,
 
                 to: "raghavendra2119818@gmail.com",
 
-                attachmentsPattern: "reports/AutomationReport_*.html"
+                attachmentsPattern: "reports/*.html"
             )
         }
     }
