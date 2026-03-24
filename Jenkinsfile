@@ -91,45 +91,35 @@ pipeline {
             }
         }
     }
+stage('Extract Extent Summary') {
+    steps {
+        script {
 
-    // 🔥 EMAIL REPORT
-    post {
-        always {
-            emailext(
-                subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
+            // 🔥 Get ONLY file name (clean output)
+            def reportFile = bat(
+                script: '@dir /b reports\\*.html',
+                returnStdout: true
+            ).trim().split("\r?\n")[-1]
 
-                body: """
-                <h2>API Automation Execution - ${currentBuild.currentResult}</h2>
+            echo "Report File Detected: ${reportFile}"
 
-                <p><b>Job:</b> ${env.JOB_NAME}</p>
-                <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
+            def reportPath = "reports/${reportFile}"
 
-                <h3>Test Summary 📊</h3>
-                <table border="1" cellpadding="5">
-                <tr>
-                    <th>Total</th>
-                    <th style="color:green;">Passed</th>
-                    <th style="color:red;">Failed</th>
-                    <th style="color:orange;">Skipped</th>
-                </tr>
-                <tr>
-                    <td>${env.TOTAL}</td>
-                    <td style="color:green;">${env.PASSED}</td>
-                    <td style="color:red;">${env.FAILED}</td>
-                    <td style="color:orange;">${env.SKIPPED}</td>
-                </tr>
-                </table>
+            def content = readFile(reportPath)
 
-                <p><a href="${env.BUILD_URL}">View Build</a></p>
+            def passed = (content =~ /status pass/).count
+            def failed = (content =~ /status fail/).count
+            def skipped = (content =~ /status skip/).count
 
-                Regards,<br>
-                Jenkins
-                """,
+            def total = passed + failed + skipped
 
-                to: "raghavendra2119818@gmail.com",
+            env.PASSED = passed.toString()
+            env.FAILED = failed.toString()
+            env.SKIPPED = skipped.toString()
+            env.TOTAL = total.toString()
 
-                attachmentsPattern: "reports/*.html"
-            )
+            echo "Total: ${total}, Passed: ${passed}, Failed: ${failed}, Skipped: ${skipped}"
         }
     }
+}
 }
