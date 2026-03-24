@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        MAIN_BRANCH = "Feb_2026"
+        MAIN_BRANCH = "Feb_2026_API"
         GIT_REPO = "https://github.com/raghavselenium2505/SeleniumHybridFramework.git"
 
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-25.0.2"
