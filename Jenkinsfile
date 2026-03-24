@@ -91,40 +91,35 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            emailext(
-                subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
+   stage('Extract Extent Summary') {
+    steps {
+        script {
 
-                body: """
-                <h2>API Automation Execution - ${currentBuild.currentResult}</h2>
+            def reportFile = bat(
+                script: '@dir /b reports\\*.html',
+                returnStdout: true
+            ).trim().split("\r?\n")[-1]
 
-                <p><b>Job:</b> ${env.JOB_NAME}</p>
-                <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
+            echo "Report File Detected: ${reportFile}"
 
-                <h3>Test Summary 📊</h3>
-                <table border="1" cellpadding="5">
-                <tr>
-                    <th>Total</th>
-                    <th style="color:green;">Passed</th>
-                    <th style="color:red;">Failed</th>
-                    <th style="color:orange;">Skipped</th>
-                </tr>
-                <tr>
-                    <td>${env.TOTAL}</td>
-                    <td style="color:green;">${env.PASSED}</td>
-                    <td style="color:red;">${env.FAILED}</td>
-                    <td style="color:orange;">${env.SKIPPED}</td>
-                </tr>
-                </table>
+            def reportPath = "reports/${reportFile}"
 
-                <p><a href="${env.BUILD_URL}">View Build</a></p>
-                """,
+            def content = readFile(reportPath)
 
-                to: "raghavendra2119818@gmail.com",
+            // 🔥 SAFE COUNT (NO SANDBOX ISSUE)
+            def passed = content.split("status pass").length - 1
+            def failed = content.split("status fail").length - 1
+            def skipped = content.split("status skip").length - 1
 
-                attachmentsPattern: "reports/*.html"
-            )
+            def total = passed + failed + skipped
+
+            env.PASSED = passed.toString()
+            env.FAILED = failed.toString()
+            env.SKIPPED = skipped.toString()
+            env.TOTAL = total.toString()
+
+            echo "Total: ${total}, Passed: ${passed}, Failed: ${failed}, Skipped: ${skipped}"
         }
     }
+}
 }
