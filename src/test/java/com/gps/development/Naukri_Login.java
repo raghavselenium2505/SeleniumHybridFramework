@@ -112,6 +112,7 @@ String resumeheader="";
         waitForElementVisible(landingpage.iconBars, 350,
                 "waiting for update resume button", "Unable to wait");
         test.get().log(Status.INFO, "Click on profile icon and click on logout from the applications");
+        
         actionclick(getDriver().findElement(landingpage.iconBars) , "Able to click on profile icon", "Unable to click on profile icon");
         
         click(landingpage.linkLogout, "Able to click on logout", "Unable to click on logout");
