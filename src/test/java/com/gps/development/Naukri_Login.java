@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.gps.base.TestBase;
 import com.gps.pages.NaukriHomePage;
 import com.gps.pages.NaukriLandingPage;
@@ -41,6 +42,7 @@ String resumeheader="";
         logger.info("Starting JSON Login Test");
 
         NaukriHomePage homepage = new NaukriHomePage();
+		test.get().log(Status.INFO, "Click on Login button,enter valid credentials ");
 
         click(homepage.buttonLogin, "Clicked on login button", "Unable to click login button");
 
@@ -70,6 +72,7 @@ String resumeheader="";
         verifyElementDisplayed(landingpage.iconBell,
                 "Logged in successfully",
                 "Unable to login to the application");
+		test.get().log(Status.INFO, "Click on view Profile");
 
         click(landingpage.buttonViewProfile,
                 "Clicked on view profile",
@@ -82,6 +85,7 @@ String resumeheader="";
                 "Update resume button displayed",
                 "Unable to display update resume button");
 
+        test.get().log(Status.INFO, "Click on edit iconof the page ,clear the  text(if any) and enter the text");
         // 🔥 Final dynamic action
         landingpage.clickEditIcon(sectionName);
         
@@ -96,7 +100,9 @@ String resumeheader="";
         
         sendkeys(resumeheading.textResumeheader, resumeheader, "Able to enter the text", "Unable to enter the text");
         
+        test.get().log(Status.INFO, "Click on Save Button");
         click(resumeheading.buttonSave, "Able to click on save button and updated sucesfully", "Unable to click on save button");
+        test.get().log(Status.INFO, "Check the updated status changed to today/system date or not ");
         verifyElementDisplayed(landingpage.textToday,
                 "Data updated",
                 "Unable to save the data sucesfully");
@@ -105,6 +111,7 @@ String resumeheader="";
 
         waitForElementVisible(landingpage.iconBars, 350,
                 "waiting for update resume button", "Unable to wait");
+        test.get().log(Status.INFO, "Click on profile icon and click on logout from the applications");
         actionclick(getDriver().findElement(landingpage.iconBars) , "Able to click on profile icon", "Unable to click on profile icon");
         
         click(landingpage.linkLogout, "Able to click on logout", "Unable to click on logout");
