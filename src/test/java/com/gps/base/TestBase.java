@@ -11,8 +11,10 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
-
+import java.io.FileReader;
 import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -20,6 +22,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 import org.testng.annotations.*;
@@ -51,6 +56,15 @@ interface baseMethods {
 	void waitforelement(int milliSeconds);
 
 	int randomNumberGeneration(int value);
+	 String getTextAndVerify(By element, String expectedText, String passValue, String failValue);
+
+	    String getParentWindow(String passValue, String failValue);
+	    void switchToChildWindow(String parentWindow, String passValue, String failValue);
+	    void switchToParentWindow(String parentWindow, String passValue, String failValue);
+
+	    void waitForElementVisible(By element, int timeout, String passValue, String failValue);
+	    void waitForElementClickable(By element, int timeout, String passValue, String failValue);
+
 }
 
 /* ================= TEST BASE ================= */
@@ -208,7 +222,7 @@ public class TestBase implements baseMethods {
 
 	        if (result.getStatus() == ITestResult.SUCCESS) {
 
-	            test.get().pass("Test Passed");
+	       logger.info("testcases completed sucesfully");
 
 	        } else if (result.getStatus() == ITestResult.FAILURE) {
 
@@ -295,6 +309,8 @@ public class TestBase implements baseMethods {
 	@Override
 	public void click(By element, String passValue, String failValue) {
 		try {
+			elementhighlight(getDriver().findElement(element));
+
 			getDriver().findElement(element).click();
 			test.get().log(Status.PASS, passValue);
 		} catch (Exception e) {
@@ -304,17 +320,55 @@ public class TestBase implements baseMethods {
 
 	@Override
 	public void actionclick(WebElement element, String passValue, String failValue) {
-		try {
-			new Actions(getDriver()).moveToElement(element).click().perform();
-			test.get().log(Status.PASS, passValue);
-		} catch (Exception e) {
-			logAIFailure(e, failValue);
-		}
+	    try {
+
+	        // ✅ Wait until element is clickable
+	        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+	        wait.until(ExpectedConditions.elementToBeClickable(element));
+
+	        // Highlight
+	        elementhighlight(element);
+
+	        // ✅ Scroll into view (VERY IMPORTANT)
+	        ((JavascriptExecutor) getDriver())
+	                .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+
+	        // Small wait (for stability)
+	        Thread.sleep(300);
+
+	        // 🔥 Try normal click first
+	        try {
+	            element.click();
+	        } catch (Exception e) {
+
+	            // 🔥 Fallback to Actions
+	            try {
+	                new Actions(getDriver())
+	                        .moveToElement(element)
+	                        .pause(Duration.ofMillis(200))
+	                        .click()
+	                        .perform();
+	            } catch (Exception ex) {
+
+	                // 🔥 Final fallback → JS click (MOST POWERFUL)
+	                ((JavascriptExecutor) getDriver())
+	                        .executeScript("arguments[0].click();", element);
+	            }
+	        }
+
+	        test.get().log(Status.PASS, passValue);
+
+	    } catch (Exception e) {
+	        test.get().log(Status.FAIL, failValue + " | Exception: " + e.getMessage());
+	        Assert.fail("Action click failed: " + e.getMessage());
+	    }
 	}
 
 	@Override
 	public void clear(By element, String passvalue, String failValue) {
 		try {
+			elementhighlight(getDriver().findElement(element));
+
 			getDriver().findElement(element).clear();
 		} catch (Exception e) {
 			logAIFailure(e, failValue);
@@ -322,14 +376,45 @@ public class TestBase implements baseMethods {
 	}
 
 	@Override
-	public void sendkeys(By element, String value, String passvalue, String failValue) {
-		try {
-			getDriver().findElement(element).sendKeys(value);
-		} catch (Exception e) {
-			logAIFailure(e, failValue);
-		}
-	}
+	public void sendkeys(By element, String value, String passValue, String failValue) {
+	    try {
+	        WebElement ele = getDriver().findElement(element);
 
+	        // Highlight
+	        elementhighlight(ele);
+
+	        // Assertions
+	        Assert.assertTrue(ele.isDisplayed(), "Element is not displayed");
+	        Assert.assertTrue(ele.isEnabled(), "Element is not enabled");
+
+	        // Action
+	        ele.clear();
+	        ele.sendKeys(value);
+
+	        // Validation
+	        String enteredText = ele.getAttribute("value");
+	        Assert.assertEquals(enteredText, value, "Entered value mismatch");
+
+	        // 🔥 Mask value (applies to EVERYTHING)
+	        String logValue;
+	        if (value == null || value.length() <= 1) {
+	            logValue = "*";
+	        } else if (value.length() == 2) {
+	            logValue = "**";
+	        } else {
+	            logValue = value.charAt(0)
+	                    + "*".repeat(value.length() - 2)
+	                    + value.charAt(value.length() - 1);
+	        }
+
+	        // Log
+	        test.get().log(Status.PASS, passValue + " | Entered Value: " + logValue);
+
+	    } catch (Exception e) {
+	        test.get().log(Status.FAIL, failValue + " | Exception: " + e.getMessage());
+	        Assert.fail("SendKeys failed due to exception: " + e.getMessage());
+	    }
+	}
 	@Override
 	public void elementhighlight(WebElement element) {
 		try {
@@ -351,4 +436,146 @@ public class TestBase implements baseMethods {
 	public int randomNumberGeneration(int value) {
 		return new Random().nextInt(value);
 	}
-}
+	
+	   public String getExcelRunMode(String testName) {
+	        ExcelUtil excelUtil = new ExcelUtil(System.getProperty("user.dir")
+	                + "/src/test/resources/excel/Gps_Rules.xls");
+
+	        return excelUtil.getSingleCellValue("RunManager", testName);
+	    }
+	   
+	   public JSONArray getJsonArray() {
+	        try {
+	            return (JSONArray) new JSONParser().parse(new FileReader(
+	                    System.getProperty("user.dir") + "/src/test/resources/excel/testdata.json"));
+	        } catch (Exception e) {
+	            return null;
+	        }
+	    }
+	   
+	   @Override
+	    public void waitForElementVisible(By element, int timeout, String passValue, String failValue) {
+	        try {
+	            new WebDriverWait(getDriver(), Duration.ofMillis(timeout))
+	                    .until(ExpectedConditions.visibilityOfElementLocated(element));
+	        } catch (Exception e) {
+	            logAIFailure(e, failValue);
+	            throw e;
+	        }
+	    }
+
+	    @Override
+	    public void waitForElementClickable(By element, int timeout, String passValue, String failValue) {
+	        try {
+	            new WebDriverWait(getDriver(), Duration.ofSeconds(timeout))
+	                    .until(ExpectedConditions.elementToBeClickable(element));
+	        } catch (Exception e) {
+	            logAIFailure(e, failValue);
+	            throw e;
+	        }
+	    }
+
+	    /* ================= TEXT ================= */
+
+	    @Override
+	    public String getTextAndVerify(By element, String expectedText, String passValue, String failValue) {
+
+	        String actual = getDriver().findElement(element).getText().trim();
+
+	        Assert.assertTrue(actual.contains(expectedText), 
+	            "Expected text not found. Actual: " + actual);
+
+	        logger.info(passValue);
+	        test.get().pass(passValue);
+
+	        return actual;
+	    }
+	    /* ================= WINDOW ================= */
+
+	    @Override
+	    public String getParentWindow(String passValue, String failValue) {
+	        try {
+	            String parent = getDriver().getWindowHandle();
+	            logger.info(passValue);
+	            test.get().pass(passValue);
+	            return parent;
+	        } catch (Exception e) {
+	            logAIFailure(e, failValue);
+	            throw e;
+	        }
+	    }
+
+	    @Override
+	    public void switchToChildWindow(String parentWindow, String passValue, String failValue) {
+
+	        try {
+	            // Wait inside method
+	            new WebDriverWait(getDriver(), Duration.ofSeconds(10))
+	                    .until(driver -> driver.getWindowHandles().size() > 1);
+
+	            for (String win : getDriver().getWindowHandles()) {
+	                if (!win.equals(parentWindow)) {
+	                    getDriver().switchTo().window(win);
+
+	                    logger.info(passValue);
+	                    test.get().pass(passValue);
+	                    return;
+	                }
+	            }
+
+	            logger.error(failValue);
+	            test.get().fail(failValue);
+
+	        } catch (Exception e) {
+	            logAIFailure(e, failValue);
+	            throw e;
+	        }
+	    }
+
+	    @Override
+	    public void switchToParentWindow(String parentWindow, String passValue, String failValue) {
+	        try {
+	            getDriver().close();
+	            getDriver().switchTo().window(parentWindow);
+
+	            logger.info(passValue);
+	            test.get().pass(passValue);
+
+	        } catch (Exception e) {
+	            logAIFailure(e, failValue);
+	            throw e;
+	        }
+	    }
+	    public void verifyElementDisplayed(By element, String passMsg, String failMsg) {
+	        try {
+	            boolean status = getDriver().findElement(element).isDisplayed();
+
+	            if (status) {
+	             //   test.get().log(Status.PASS, passMsg);
+	            } else {
+	                test.get().log(Status.FAIL, failMsg);
+	                org.testng.Assert.fail(failMsg);
+	            }
+
+	        } catch (Exception e) {
+	            test.get().log(Status.FAIL, failMsg + " Exception: " + e.getMessage());
+	            org.testng.Assert.fail(failMsg);
+	        }
+	    }
+	    
+	    public void assertElementDisplayed(By element, String passMessage, String failMessage) {
+	        try {
+	            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+	            WebElement ele = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+
+	            Assert.assertTrue(ele.isDisplayed(), failMessage);
+
+	            test.get().log(Status.PASS, passMessage);
+
+	        } catch (Exception e) {
+	            test.get().log(Status.FAIL, failMessage + " | Exception: " + e.getMessage());
+	            Assert.fail(failMessage + " | Exception: " + e.getMessage());
+	        }
+	   
+
+} }
