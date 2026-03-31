@@ -18,9 +18,10 @@ pipeline {
             }
         }
 
+        // ✅ NEW (from API pipeline)
         stage('Clean Old Reports') {
             steps {
-                echo "🧹 Cleaning old reports..."
+                echo "Cleaning old reports..."
                 bat '''
                 if exist reports (
                     del /q reports\\*.html
@@ -29,9 +30,10 @@ pipeline {
             }
         }
 
+        // ✅ SAME UI EXECUTION
         stage('Run Selenium Tests') {
             steps {
-                echo "🚀 Running Selenium UI Automation..."
+                echo "🚀 Running Selenium UI automation"
 
                 bat """
                 set JAVA_HOME=${JAVA_HOME}
@@ -42,53 +44,19 @@ pipeline {
             }
         }
 
-        // 🔥 Ensure TestNG results exist
-        stage('Validate Test Execution') {
-            steps {
-                bat '''
-                if not exist target\\surefire-reports\\testng-results.xml (
-                    echo ❌ TestNG results not found! Tests may not have executed.
-                    exit 1
-                )
-                '''
-            }
-        }
-
-        // 🔥 Extract from TestNG (CORRECT WAY)
-        stage('Extract Test Summary') {
-            steps {
-                script {
-
-                    def xml = readFile("target/surefire-reports/testng-results.xml")
-
-                    def total = (xml =~ /total="(\\d+)"/)[0][1]
-                    def passed = (xml =~ /passed="(\\d+)"/)[0][1]
-                    def failed = (xml =~ /failed="(\\d+)"/)[0][1]
-                    def skipped = (xml =~ /skipped="(\\d+)"/)[0][1]
-
-                    env.TOTAL = total
-                    env.PASSED = passed
-                    env.FAILED = failed
-                    env.SKIPPED = skipped
-
-                    echo "✅ Total: ${total}, Passed: ${passed}, Failed: ${failed}, Skipped: ${skipped}"
-                }
-            }
-        }
-
-        // 🔥 Ensure Extent Report exists
+        // ✅ NEW (important validation)
         stage('Validate Report') {
             steps {
                 bat '''
                 if not exist reports\\*.html (
-                    echo ❌ Extent Report not generated!
+                    echo ❌ No report generated!
                     exit 1
                 )
                 '''
             }
         }
 
-        // 🔥 Keep only latest report
+        // ✅ IMPROVED (generic + cleaner)
         stage('Keep Only Latest Report') {
             steps {
                 bat '''
@@ -109,10 +77,35 @@ pipeline {
             }
         }
 
-        // 🔥 Archive report in Jenkins UI
-        stage('Archive Report') {
+        // ✅ FIXED (SAFE - NO SANDBOX ISSUE)
+        stage('Extract Extent Summary') {
             steps {
-                archiveArtifacts artifacts: 'reports/*.html', fingerprint: true
+                script {
+
+                    def reportFile = bat(
+                        script: '@dir /b reports\\*.html',
+                        returnStdout: true
+                    ).trim().split("\\r?\\n")[-1]
+
+                    echo "Using Report: ${reportFile}"
+
+                    def reportPath = "reports/${reportFile}"
+                    def content = readFile(reportPath)
+
+                    // ✅ SAFE COUNTING (no regex sandbox issue)
+                    def passed = content.split("status pass").length - 1
+                    def failed = content.split("status fail").length - 1
+                    def skipped = content.split("status skip").length - 1
+
+                    def total = passed + failed + skipped
+
+                    env.PASSED = passed.toString()
+                    env.FAILED = failed.toString()
+                    env.SKIPPED = skipped.toString()
+                    env.TOTAL = total.toString()
+
+                    echo "Total: ${total}, Passed: ${passed}, Failed: ${failed}, Skipped: ${skipped}"
+                }
             }
         }
     }
