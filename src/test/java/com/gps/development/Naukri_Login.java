@@ -27,6 +27,7 @@ String resumeheader="";
             String runMode = jsonObject.get("runMode").toString();
             sectionName = jsonObject.get("sectionName").toString(); // ✅ assign here
             resumeheader = jsonObject.get("resumeheader").toString(); // ✅ assign here
+
             if (runMode.equalsIgnoreCase("no")) {
 
                 logger.warn("Test skipped due to RunMode NO in JSON");
@@ -101,18 +102,12 @@ String resumeheader="";
         
         test.get().log(Status.INFO, "Click on Save Button");
         click(resumeheading.buttonSave, "Able to click on save button and updated sucesfully", "Unable to click on save button");
-        
         test.get().log(Status.INFO, "Check the updated status changed to today/system date or not ");
-        
-        waitForElementVisible(landingpage.textToday, 350,
-                "waiting for update resume button", "Unable to wait");
-        
-        
         verifyElementDisplayed(landingpage.textToday,
                 "Data updated",
                 "Unable to save the data sucesfully");
 
-        assertElementDisplayed(landingpage.textToday, "The application is updated to today 's date", "The application is  not updated to today 's date");
+        assertElementDisplayed(landingpage.textToday, "Updated sucesfully", "Updated sucesfully");
 
         waitForElementVisible(landingpage.iconBars, 350,
                 "waiting for update resume button", "Unable to wait");
