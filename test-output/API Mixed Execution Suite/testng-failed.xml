@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [API Mixed Execution Suite]">
+  <test thread-count="5" name="EXCEL APIs (PUT + DELETE)(failed)">
+    <parameter name="dataMode" value="excel"/>
+    <classes>
+      <class name="com.gps.developmentAPI.PutAPITest">
+        <methods>
+          <include name="createTest"/>
+          <include name="runPutTests" invocation-numbers="0"/>
+          <include name="flushReport"/>
+          <include name="startReport"/>
+        </methods>
+      </class> <!-- com.gps.developmentAPI.PutAPITest -->
+    </classes>
+  </test> <!-- EXCEL APIs (PUT + DELETE)(failed) -->
+</suite> <!-- Failed suite [API Mixed Execution Suite] -->

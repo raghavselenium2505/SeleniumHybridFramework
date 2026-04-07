@@ -16,36 +16,6 @@ import com.gps.utilities.ExcelUtil;
 
 public class AmazonLogin_TC001 extends TestBase {
 
-    // ================= JSON FILE READER =================
-
-    public JSONArray getJsonArray() {
-
-        String filePathJson = System.getProperty("user.dir")
-                + "/src/test/resources/excel/testdata.json";
-
-        JSONParser parser = new JSONParser();
-        JSONArray jsonArray = null;
-
-        try {
-            jsonArray = (JSONArray) parser.parse(new FileReader(filePathJson));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return jsonArray;
-    }
-
-    // ================= EXCEL RUNMODE READER =================
-
-    public String getExcelRunMode(String testName) {
-
-        String filePath = System.getProperty("user.dir")
-                + "/src/test/resources/excel/Gps_Rules.xls";
-
-        ExcelUtil excelUtil = new ExcelUtil(filePath);
-
-        return excelUtil.getSingleCellValue("RunManager", testName);
-    }
 
     // ================= JSON TEST =================
 

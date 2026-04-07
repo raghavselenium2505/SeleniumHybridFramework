@@ -16,7 +16,7 @@ public class NaukriHomePage extends TestBase implements NaukriHomePageInterface 
     WebDriver driver;
 
     public By buttonLogin = By.xpath("//a[contains(text(),'Login')]");
-    public By titleLogin = By.xpath("//div[@class='login-layer']/div[contains(text(),'Login')]");
+    public By titleLogin = By.xpath("/div[@class='login-layer']/div[contains(text(),'Login')]");
     public By signinGoogle=By.xpath("//span[contains(text(),'Sign in with Google')]");
     public By inputtextEmail=By.xpath("//input[@type='email']");
     public By buttonNext=By.xpath("//span[contains(text(),'Next')]");
