@@ -257,30 +257,68 @@ public class TestBase implements baseMethods {
 
 	private void uploadFolderToS3(File folder, String s3BasePath) {
 
-		if (folder == null || !folder.exists()) {
-			logger.warn("Folder not found: " + folder);
-			return;
-		}
+	    if (folder == null || !folder.exists()) {
+	        logger.warn("Folder not found: " + folder);
+	        return;
+	    }
 
-		File[] files = folder.listFiles();
-		if (files == null)
-			return;
+	    File[] files = folder.listFiles();
+	    if (files == null) return;
 
-		String accessKey = config.getProperty("aws.accessKey");
-		String secretKey = config.getProperty("aws.secretKey");
-		String bucketName = config.getProperty("aws.bucketName");
-		String region = config.getProperty("aws.region");
+	    String bucketName = config.getProperty("aws.bucketName");
+	    String region = config.getProperty("aws.region");
 
-		// 🔥 Create client ONCE
-		software.amazon.awssdk.services.s3.S3Client s3Client = software.amazon.awssdk.services.s3.S3Client.builder()
-				.region(software.amazon.awssdk.regions.Region.of(region))
-				.credentialsProvider(software.amazon.awssdk.auth.credentials.StaticCredentialsProvider.create(
-						software.amazon.awssdk.auth.credentials.AwsBasicCredentials.create(accessKey, secretKey)))
-				.build();
+	    // 🔥 ENV-BASED CREDENTIALS (NO HARD-CODED KEYS)
+	    software.amazon.awssdk.auth.credentials.AwsBasicCredentials credentials =
+	            software.amazon.awssdk.auth.credentials.AwsBasicCredentials.create(
+	                    System.getenv("AWS_ACCESS_KEY_ID"),
+	                    System.getenv("AWS_SECRET_ACCESS_KEY"));
 
-		uploadRecursive(folder, s3BasePath, s3Client, bucketName);
+	    software.amazon.awssdk.services.s3.S3Client s3Client =
+	            software.amazon.awssdk.services.s3.S3Client.builder()
+	                    .region(software.amazon.awssdk.regions.Region.of(region))
+	                    .credentialsProvider(
+	                            software.amazon.awssdk.auth.credentials.StaticCredentialsProvider.create(credentials))
+	                    .build();
+
+	    for (File file : files) {
+
+	        if (file.isDirectory()) {
+
+	            // 🔁 RECURSIVE CALL
+	            uploadFolderToS3(file, s3BasePath + "/" + file.getName());
+
+	        } else {
+
+	            try {
+
+	                // 🔥 ONLY UPLOAD HTML + SCREENSHOTS (YOUR LOGIC)
+	                if (!(file.getName().endsWith(".html") || file.getPath().toLowerCase().contains("screenshots"))) {
+	                    continue;
+	                }
+
+	                String key = s3BasePath + "/" + file.getName();
+
+	                // 🔥 FIX: Proper content type
+	                String contentType = getContentType(file.getName());
+
+	                software.amazon.awssdk.services.s3.model.PutObjectRequest request =
+	                        software.amazon.awssdk.services.s3.model.PutObjectRequest.builder()
+	                                .bucket(bucketName)
+	                                .key(key)
+	                                .contentType(contentType)
+	                                .build();
+
+	                s3Client.putObject(request, file.toPath());
+
+	                logger.info("Uploaded: " + key);
+
+	            } catch (Exception e) {
+	                logger.error("Upload failed: " + file.getName(), e);
+	            }
+	        }
+	    }
 	}
-
 	// ================= ONLY CHANGED PART BELOW =================
 	private void uploadRecursive(File folder, String s3BasePath,
 	        software.amazon.awssdk.services.s3.S3Client s3Client,
@@ -523,53 +561,63 @@ public class TestBase implements baseMethods {
 
 	private void deleteS3Folder(String s3BasePath) {
 
-		try {
+	    try {
 
-			String accessKey = config.getProperty("aws.accessKey");
-			String secretKey = config.getProperty("aws.secretKey");
-			String bucketName = config.getProperty("aws.bucketName");
-			String region = config.getProperty("aws.region");
+	        String bucketName = config.getProperty("aws.bucketName");
+	        String region = config.getProperty("aws.region");
 
-			software.amazon.awssdk.services.s3.S3Client s3Client = software.amazon.awssdk.services.s3.S3Client.builder()
-					.region(software.amazon.awssdk.regions.Region.of(region))
-					.credentialsProvider(software.amazon.awssdk.auth.credentials.StaticCredentialsProvider.create(
-							software.amazon.awssdk.auth.credentials.AwsBasicCredentials.create(accessKey, secretKey)))
-					.build();
+	        // 🔥 ENV-BASED CREDENTIALS (COMMON FIX)
+	        software.amazon.awssdk.auth.credentials.AwsBasicCredentials credentials =
+	                software.amazon.awssdk.auth.credentials.AwsBasicCredentials.create(
+	                        System.getenv("AWS_ACCESS_KEY_ID"),
+	                        System.getenv("AWS_SECRET_ACCESS_KEY"));
 
-			String continuationToken = null;
+	        software.amazon.awssdk.services.s3.S3Client s3Client =
+	                software.amazon.awssdk.services.s3.S3Client.builder()
+	                        .region(software.amazon.awssdk.regions.Region.of(region))
+	                        .credentialsProvider(
+	                                software.amazon.awssdk.auth.credentials.StaticCredentialsProvider.create(credentials))
+	                        .build();
 
-			do {
+	        String continuationToken = null;
 
-				software.amazon.awssdk.services.s3.model.ListObjectsV2Request.Builder listReqBuilder = software.amazon.awssdk.services.s3.model.ListObjectsV2Request
-						.builder().bucket(bucketName).prefix(s3BasePath);
+	        do {
 
-				if (continuationToken != null) {
-					listReqBuilder.continuationToken(continuationToken);
-				}
+	            software.amazon.awssdk.services.s3.model.ListObjectsV2Request.Builder listReqBuilder =
+	                    software.amazon.awssdk.services.s3.model.ListObjectsV2Request.builder()
+	                            .bucket(bucketName)
+	                            .prefix(s3BasePath);
 
-				software.amazon.awssdk.services.s3.model.ListObjectsV2Response listResponse = s3Client
-						.listObjectsV2(listReqBuilder.build());
+	            if (continuationToken != null) {
+	                listReqBuilder.continuationToken(continuationToken);
+	            }
 
-				if (listResponse.contents() != null && !listResponse.contents().isEmpty()) {
+	            software.amazon.awssdk.services.s3.model.ListObjectsV2Response listResponse =
+	                    s3Client.listObjectsV2(listReqBuilder.build());
 
-					for (software.amazon.awssdk.services.s3.model.S3Object s3Object : listResponse.contents()) {
+	            if (listResponse.contents() != null && !listResponse.contents().isEmpty()) {
 
-						software.amazon.awssdk.services.s3.model.DeleteObjectRequest deleteRequest = software.amazon.awssdk.services.s3.model.DeleteObjectRequest
-								.builder().bucket(bucketName).key(s3Object.key()).build();
+	                for (software.amazon.awssdk.services.s3.model.S3Object s3Object : listResponse.contents()) {
 
-						s3Client.deleteObject(deleteRequest);
+	                    software.amazon.awssdk.services.s3.model.DeleteObjectRequest deleteRequest =
+	                            software.amazon.awssdk.services.s3.model.DeleteObjectRequest.builder()
+	                                    .bucket(bucketName)
+	                                    .key(s3Object.key())
+	                                    .build();
 
-						logger.info("Deleted: " + s3Object.key());
-					}
-				}
+	                    s3Client.deleteObject(deleteRequest);
 
-				continuationToken = listResponse.nextContinuationToken();
+	                    logger.info("Deleted: " + s3Object.key());
+	                }
+	            }
 
-			} while (continuationToken != null);
+	            continuationToken = listResponse.nextContinuationToken();
 
-		} catch (Exception e) {
-			logger.error("Failed to clean S3 folder", e);
-		}
+	        } while (continuationToken != null);
+
+	    } catch (Exception e) {
+	        logger.error("Failed to clean S3 folder", e);
+	    }
 	}
 	/* ================= AI FAILURE LOGGER ================= */
 
