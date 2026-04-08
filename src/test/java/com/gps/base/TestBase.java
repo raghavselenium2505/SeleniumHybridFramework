@@ -40,6 +40,15 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Response;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.S3Object;
 
 /* ================= INTERFACE ================= */
 
@@ -122,9 +131,10 @@ public class TestBase implements baseMethods {
 
 		if (extent == null) {
 
-			String path = System.getProperty("user.dir") + "/Reports/Extentreport/AutomationReport_"
+			String path = System.getProperty("user.dir") + "/src/test/resources/Reports/Extentreport/AutomationReport_"
 					+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
-
+System.out.println(path);
+			
 			ExtentSparkReporter spark = new ExtentSparkReporter(path);
 			spark.config().setTheme(Theme.DARK);
 			spark.config().setReportName("Automation Execution Report");
@@ -257,64 +267,44 @@ public class TestBase implements baseMethods {
 
 	private void uploadFolderToS3(File folder, String s3BasePath) {
 
-	    if (folder == null || !folder.exists()) {
-	        logger.warn("Folder not found: " + folder);
-	        return;
-	    }
-
-	    File[] files = folder.listFiles();
-	    if (files == null) return;
+	    if (folder == null || !folder.exists()) return;
 
 	    String bucketName = config.getProperty("aws.bucketName");
 	    String region = config.getProperty("aws.region");
 
-	    // 🔥 ENV-BASED CREDENTIALS (NO HARD-CODED KEYS)
-	    software.amazon.awssdk.auth.credentials.AwsBasicCredentials credentials =
-	            software.amazon.awssdk.auth.credentials.AwsBasicCredentials.create(
-	                    System.getenv("AWS_ACCESS_KEY_ID"),
-	                    System.getenv("AWS_SECRET_ACCESS_KEY"));
+	    AwsBasicCredentials credentials = AwsBasicCredentials.create(
+	            System.getenv("AWS_ACCESS_KEY_ID"),
+	            System.getenv("AWS_SECRET_ACCESS_KEY"));
 
-	    software.amazon.awssdk.services.s3.S3Client s3Client =
-	            software.amazon.awssdk.services.s3.S3Client.builder()
-	                    .region(software.amazon.awssdk.regions.Region.of(region))
-	                    .credentialsProvider(
-	                            software.amazon.awssdk.auth.credentials.StaticCredentialsProvider.create(credentials))
-	                    .build();
+	    S3Client s3Client = S3Client.builder()
+	            .region(Region.of(region))
+	            .credentialsProvider(StaticCredentialsProvider.create(credentials))
+	            .build();
+
+	    File[] files = folder.listFiles();
+	    if (files == null) return;
 
 	    for (File file : files) {
 
 	        if (file.isDirectory()) {
-
-	            // 🔁 RECURSIVE CALL
 	            uploadFolderToS3(file, s3BasePath + "/" + file.getName());
-
 	        } else {
-
 	            try {
-
-	                // 🔥 ONLY UPLOAD HTML + SCREENSHOTS (YOUR LOGIC)
-	                if (!(file.getName().endsWith(".html") || file.getPath().toLowerCase().contains("screenshots"))) {
-	                    continue;
-	                }
 
 	                String key = s3BasePath + "/" + file.getName();
 
-	                // 🔥 FIX: Proper content type
-	                String contentType = getContentType(file.getName());
-
-	                software.amazon.awssdk.services.s3.model.PutObjectRequest request =
-	                        software.amazon.awssdk.services.s3.model.PutObjectRequest.builder()
-	                                .bucket(bucketName)
-	                                .key(key)
-	                                .contentType(contentType)
-	                                .build();
+	                PutObjectRequest request = PutObjectRequest.builder()
+	                        .bucket(bucketName)
+	                        .key(key)
+	                        .contentType(getContentType(file.getName()))
+	                        .build();
 
 	                s3Client.putObject(request, file.toPath());
 
-	                logger.info("Uploaded: " + key);
+	                logger.info("Uploaded screenshot: " + key);
 
 	            } catch (Exception e) {
-	                logger.error("Upload failed: " + file.getName(), e);
+	                logger.error("Screenshot upload failed", e);
 	            }
 	        }
 	    }
@@ -343,6 +333,7 @@ public class TestBase implements baseMethods {
 	                }
 
 	                String key = s3BasePath + "/" + file.getName();
+	                
 
 	                // 🔥 CLEAN FIX (BREAK INTO STEPS)
 	                software.amazon.awssdk.services.s3.model.PutObjectRequest.Builder builder =
@@ -398,29 +389,11 @@ public class TestBase implements baseMethods {
 
 	        if (extent != null) {
 
-	            extent.setSystemInfo("Browser", String.join(", ", browsers));
-
-	            StringBuilder urlList = new StringBuilder();
-	            int count = 1;
-
-	            for (String url : appUrls) {
-	                urlList.append(count++)
-	                       .append(". ")
-	                       .append(url)
-	                       .append("\n");
-	            }
-
-	            extent.setSystemInfo("Application URL", urlList.toString());
-
-	            // 🔥 STEP 1: Flush report
 	            extent.flush();
-
-	            // 🔥 STEP 2: Wait for file ready
 	            waitForReportToBeReady(reportPath);
 
 	            String finalUrl = "";
 
-	            // ✅ FEATURE FLAG CHECK
 	            if (isAwsUploadEnabled()) {
 
 	                try {
@@ -428,13 +401,14 @@ public class TestBase implements baseMethods {
 	                    String bucketName = config.getProperty("aws.bucketName");
 	                    String region = config.getProperty("aws.region");
 
-	                    // 🔥 Unique file name
+	                    // 🔥 TIMESTAMP FILE NAME
 	                    String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss")
 	                            .format(new java.util.Date());
 
-	                    String s3Key = "reports/latest/AutomationReport_" + timeStamp + ".html";
+	                    String fileName = "AutomationReport_" + timeStamp + ".html";
+	                    String s3Key = "reports/latest/" + fileName;
 
-	                    // 🔥 Upload ONLY report
+	                    // 🔥 ONLY REPORT UPLOAD (NO SCREENSHOTS)
 	                    uploadSingleFileToS3(reportPath, s3Key);
 
 	                    finalUrl = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + s3Key;
@@ -445,18 +419,16 @@ public class TestBase implements baseMethods {
 	                    logger.error("S3 upload failed", ex);
 	                }
 
-	                // ✅ ADD URL IN REPORT
 	                extent.setSystemInfo("AWS Report URL", finalUrl);
 
-	                if (test.get() != null) {
+	                if (test.get() != null && finalUrl != null) {
 	                    test.get().info(
-	                        "<b style='color:blue;'>AWS Report URL:</b> " +
-	                        "<a href='" + finalUrl + "' target='_blank'>" + finalUrl + "</a>"
+	                            "<b>AWS Report URL:</b> <a href='" + finalUrl + "'>" + finalUrl + "</a>"
 	                    );
 	                }
 
-	                // ✅ EMAIL (OPTIONAL FLAG)
-	                if (isEmailEnabled()) {
+	                // 🔥 EMAIL (OPTIONAL)
+	                if (isEmailEnabled() && finalUrl != null) {
 
 	                    String emailBody =
 	                            "<h3>Automation Execution Report</h3>" +
@@ -469,16 +441,17 @@ public class TestBase implements baseMethods {
 	                            emailBody
 	                    );
 	                }
-
-	            } else {
-	                logger.info("AWS Upload Disabled → Skipping S3 & Email");
 	            }
 
-	            // 🔥 FINAL FLUSH
 	            extent.flush();
 
-	            if (Desktop.isDesktopSupported()) {
-	                Desktop.getDesktop().browse(new File(reportPath).toURI());
+	            // 🔥 OPEN LOCAL REPORT
+	            try {
+	                if (Desktop.isDesktopSupported()) {
+	                    Desktop.getDesktop().browse(new File(reportPath).toURI());
+	                }
+	            } catch (Exception e) {
+	                logger.warn("Unable to open local report");
 	            }
 	        }
 
@@ -487,49 +460,42 @@ public class TestBase implements baseMethods {
 	    }
 	}
 	
-	
-	
-	
 	private void uploadSingleFileToS3(String filePath, String s3Key) {
 
 	    try {
 
-	        String accessKey = config.getProperty("aws.accessKey");
-	        String secretKey = config.getProperty("aws.secretKey");
+	        File file = new File(filePath);
+
+	        if (!file.exists()) {
+	            throw new RuntimeException("File not found: " + filePath);
+	        }
+
 	        String bucketName = config.getProperty("aws.bucketName");
 	        String region = config.getProperty("aws.region");
 
-	        software.amazon.awssdk.services.s3.S3Client s3Client =
-	                software.amazon.awssdk.services.s3.S3Client.builder()
-	                        .region(software.amazon.awssdk.regions.Region.of(region))
-	                        .credentialsProvider(
-	                                software.amazon.awssdk.auth.credentials.StaticCredentialsProvider.create(
-	                                        software.amazon.awssdk.auth.credentials.AwsBasicCredentials.create(
-	                                                accessKey,
-	                                                secretKey)))
-	                        .build();
+	        AwsBasicCredentials credentials = AwsBasicCredentials.create(
+	                System.getenv("AWS_ACCESS_KEY_ID"),
+	                System.getenv("AWS_SECRET_ACCESS_KEY"));
 
-	        File file = new File(filePath);
+	        S3Client s3Client = S3Client.builder()
+	                .region(Region.of(region))
+	                .credentialsProvider(StaticCredentialsProvider.create(credentials))
+	                .build();
 
-	        // 🔥 IMPORTANT: Dynamic content type
-	        String contentType = getContentType(file.getName());
-
-	        software.amazon.awssdk.services.s3.model.PutObjectRequest request =
-	                software.amazon.awssdk.services.s3.model.PutObjectRequest.builder()
-	                        .bucket(bucketName)
-	                        .key(s3Key)
-	                        .contentType(contentType) // 🔥 FIXED
-	                        .build();
+	        PutObjectRequest request = PutObjectRequest.builder()
+	                .bucket(bucketName)
+	                .key(s3Key)
+	                .contentType(getContentType(file.getName()))
+	                .build();
 
 	        s3Client.putObject(request, file.toPath());
 
-	        logger.info("Uploaded to S3: " + s3Key + " | Type: " + contentType);
+	        logger.info("Uploaded: " + s3Key);
 
 	    } catch (Exception e) {
-	        logger.error("Failed to upload to S3", e);
+	        logger.error("Upload failed", e);
 	    }
 	}
-	
 	private void waitForReportToBeReady(String reportPath) {
 
 	    File file = new File(reportPath);
@@ -559,64 +525,52 @@ public class TestBase implements baseMethods {
 	    logger.info("Report file is stable and ready for upload");
 	}
 
-	private void deleteS3Folder(String s3BasePath) {
+	private void deleteS3Folder(String prefix) {
 
 	    try {
 
 	        String bucketName = config.getProperty("aws.bucketName");
 	        String region = config.getProperty("aws.region");
 
-	        // 🔥 ENV-BASED CREDENTIALS (COMMON FIX)
-	        software.amazon.awssdk.auth.credentials.AwsBasicCredentials credentials =
-	                software.amazon.awssdk.auth.credentials.AwsBasicCredentials.create(
-	                        System.getenv("AWS_ACCESS_KEY_ID"),
-	                        System.getenv("AWS_SECRET_ACCESS_KEY"));
+	        AwsBasicCredentials credentials = AwsBasicCredentials.create(
+	                System.getenv("AWS_ACCESS_KEY_ID"),
+	                System.getenv("AWS_SECRET_ACCESS_KEY"));
 
-	        software.amazon.awssdk.services.s3.S3Client s3Client =
-	                software.amazon.awssdk.services.s3.S3Client.builder()
-	                        .region(software.amazon.awssdk.regions.Region.of(region))
-	                        .credentialsProvider(
-	                                software.amazon.awssdk.auth.credentials.StaticCredentialsProvider.create(credentials))
-	                        .build();
+	        S3Client s3Client = S3Client.builder()
+	                .region(Region.of(region))
+	                .credentialsProvider(StaticCredentialsProvider.create(credentials))
+	                .build();
 
 	        String continuationToken = null;
 
 	        do {
 
-	            software.amazon.awssdk.services.s3.model.ListObjectsV2Request.Builder listReqBuilder =
-	                    software.amazon.awssdk.services.s3.model.ListObjectsV2Request.builder()
-	                            .bucket(bucketName)
-	                            .prefix(s3BasePath);
+	            ListObjectsV2Request.Builder requestBuilder = ListObjectsV2Request.builder()
+	                    .bucket(bucketName)
+	                    .prefix(prefix);
 
 	            if (continuationToken != null) {
-	                listReqBuilder.continuationToken(continuationToken);
+	                requestBuilder.continuationToken(continuationToken);
 	            }
 
-	            software.amazon.awssdk.services.s3.model.ListObjectsV2Response listResponse =
-	                    s3Client.listObjectsV2(listReqBuilder.build());
+	            ListObjectsV2Response response = s3Client.listObjectsV2(requestBuilder.build());
 
-	            if (listResponse.contents() != null && !listResponse.contents().isEmpty()) {
+	            for (S3Object obj : response.contents()) {
 
-	                for (software.amazon.awssdk.services.s3.model.S3Object s3Object : listResponse.contents()) {
+	                s3Client.deleteObject(DeleteObjectRequest.builder()
+	                        .bucket(bucketName)
+	                        .key(obj.key())
+	                        .build());
 
-	                    software.amazon.awssdk.services.s3.model.DeleteObjectRequest deleteRequest =
-	                            software.amazon.awssdk.services.s3.model.DeleteObjectRequest.builder()
-	                                    .bucket(bucketName)
-	                                    .key(s3Object.key())
-	                                    .build();
-
-	                    s3Client.deleteObject(deleteRequest);
-
-	                    logger.info("Deleted: " + s3Object.key());
-	                }
+	                System.out.println("Deleted: " + obj.key());
 	            }
 
-	            continuationToken = listResponse.nextContinuationToken();
+	            continuationToken = response.nextContinuationToken();
 
 	        } while (continuationToken != null);
 
 	    } catch (Exception e) {
-	        logger.error("Failed to clean S3 folder", e);
+	        logger.error("Delete failed", e);
 	    }
 	}
 	/* ================= AI FAILURE LOGGER ================= */
@@ -636,52 +590,41 @@ public class TestBase implements baseMethods {
 
 	    if (test.get() != null) {
 
-	        // 🔴 Log failure step
 	        test.get().log(Status.FAIL, failValue);
 
-	        if (screenshotPath != null && !screenshotPath.isEmpty()) {
+	        if (screenshotPath != null && isAwsUploadEnabled()) {
 
 	            try {
-
-	                File file = new File(screenshotPath);
-	                String screenshotName = file.getName();
 
 	                String bucketName = config.getProperty("aws.bucketName");
 	                String region = config.getProperty("aws.region");
 
-	                // 🔥 ALWAYS SAME STRUCTURE
-	                String s3Key = "reports/latest/screenshots/" + screenshotName;
+	                String fileName = new File(screenshotPath).getName();
+	                String s3Key = "reports/latest/screenshots/" + fileName;
 
-	                // 🔥 UPLOAD FILE
+	                // 🔥 TRY UPLOAD
 	                uploadSingleFileToS3(screenshotPath, s3Key);
 
-	                // 🔥 FINAL S3 URL (NO MISMATCH)
-	                String s3ScreenshotUrl = "https://" + bucketName + ".s3." + region
-	                        + ".amazonaws.com/" + s3Key;
+	                String s3Url = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + s3Key;
 
-	                // 🔥 CLICKABLE IMAGE (BEST PRACTICE)
+	                // 🔥 ONLY LINK (NO IMAGE)
 	                test.get().log(Status.FAIL,
 	                        aiSuggestion + "<br><br>" +
-	                        "<b>Failure Screenshot:</b><br>" +
-
-	                        "<a href='" + s3ScreenshotUrl + "' target='_blank'>" +
-	                        "<img src='" + s3ScreenshotUrl + "' height='150' " +
-	                        "style='border:1px solid #ccc;border-radius:5px;'/>" +
-	                        "</a>"
-	                );
+	                        "<a href='" + s3Url + "' target='_blank' " +
+	                        "style='color:red;font-weight:bold;'>👉 View Screenshot</a>");
 
 	            } catch (Exception ex) {
 
-	                logger.error("Screenshot upload failed", ex);
-
+	                // 🔥 IF UPLOAD FAILS
 	                test.get().log(Status.FAIL,
-	                        aiSuggestion + "<br><b>Screenshot upload failed</b>");
+	                        aiSuggestion + "<br><br>" +
+	                        "<b style='color:red;'>Screenshot upload failed</b>");
+
+	                logger.error("Screenshot upload failed", ex);
 	            }
 
 	        } else {
-
-	            test.get().log(Status.FAIL,
-	                    aiSuggestion + "<br><b>Screenshot not available</b>");
+	            test.get().log(Status.FAIL, aiSuggestion);
 	        }
 	    }
 	}
