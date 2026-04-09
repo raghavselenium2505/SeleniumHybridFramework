@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-04-09T09:02:11 IST" name="Default suite" finished-at="2026-04-09T09:02:25 IST" duration-ms="13695">
+  <suite started-at="2026-04-09T23:40:53 IST" name="ParallelCrossBrowserSuite" finished-at="2026-04-09T23:41:06 IST" duration-ms="13006">
     <groups>
       <group name="json">
-        <method signature="Naukri_Login.jsonLoginTest(java.lang.String,java.lang.String)[pri:0, instance:com.gps.development.Naukri_Login@41e1e210]" name="jsonLoginTest" class="com.gps.development.Naukri_Login"/>
+        <method signature="Naukri_Login.jsonLoginTest(java.lang.String,java.lang.String)[pri:0, instance:com.gps.development.Naukri_Login@72cde7cc]" name="jsonLoginTest" class="com.gps.development.Naukri_Login"/>
+        <method signature="Naukri_Login.jsonLoginTest(java.lang.String,java.lang.String)[pri:0, instance:com.gps.development.Naukri_Login@3c73951]" name="jsonLoginTest" class="com.gps.development.Naukri_Login"/>
       </group> <!-- json -->
     </groups>
-    <test started-at="2026-04-09T09:02:11 IST" name="Default test" finished-at="2026-04-09T09:02:25 IST" duration-ms="13695">
+    <test started-at="2026-04-09T23:40:53 IST" name="EdgeTest" finished-at="2026-04-09T23:41:04 IST" duration-ms="11187">
       <class name="com.gps.development.Naukri_Login">
-        <test-method is-config="true" signature="startReport()[pri:0, instance:com.gps.development.Naukri_Login@41e1e210]" started-at="2026-04-09T09:02:11 IST" name="startReport" finished-at="2026-04-09T09:02:11 IST" duration-ms="170" status="PASS">
+        <test-method is-config="true" signature="startReport()[pri:0, instance:com.gps.development.Naukri_Login@3c73951]" started-at="2026-04-09T23:40:53 IST" name="startReport" finished-at="2026-04-09T23:40:53 IST" duration-ms="160" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startReport -->
-        <test-method is-config="true" signature="setUp(java.lang.String,java.lang.String,java.lang.reflect.Method)[pri:0, instance:com.gps.development.Naukri_Login@41e1e210]" started-at="2026-04-09T09:02:11 IST" name="setUp" finished-at="2026-04-09T09:02:17 IST" duration-ms="5949" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.String,java.lang.String,java.lang.reflect.Method)[pri:0, instance:com.gps.development.Naukri_Login@3c73951]" started-at="2026-04-09T23:40:53 IST" name="setUp" finished-at="2026-04-09T23:40:57 IST" duration-ms="4137" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[edge]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[]]>
+                <![CDATA[https://www.naukri.com/]]>
               </value>
             </param>
             <param index="2">
@@ -35,7 +36,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="jsonLoginTest(java.lang.String,java.lang.String)[pri:0, instance:com.gps.development.Naukri_Login@41e1e210]" started-at="2026-04-09T09:02:17 IST" name="jsonLoginTest" data-provider="dynamicData" finished-at="2026-04-09T09:02:24 IST" duration-ms="7418" status="PASS">
+        <test-method signature="jsonLoginTest(java.lang.String,java.lang.String)[pri:0, instance:com.gps.development.Naukri_Login@3c73951]" started-at="2026-04-09T23:40:57 IST" name="jsonLoginTest" data-provider="dynamicData" finished-at="2026-04-09T23:41:04 IST" duration-ms="6733" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -51,22 +52,74 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- jsonLoginTest -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.gps.development.Naukri_Login@41e1e210]" started-at="2026-04-09T09:02:24 IST" name="tearDown" finished-at="2026-04-09T09:02:25 IST" duration-ms="281" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.gps.development.Naukri_Login@3c73951]" started-at="2026-04-09T23:41:04 IST" name="tearDown" finished-at="2026-04-09T23:41:04 IST" duration-ms="276" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=jsonLoginTest status=SUCCESS method=Naukri_Login.jsonLoginTest(java.lang.String,java.lang.String)[pri:0, instance:com.gps.development.Naukri_Login@41e1e210] output={null}]]]>
+                <![CDATA[[TestResult name=jsonLoginTest status=SUCCESS method=Naukri_Login.jsonLoginTest(java.lang.String,java.lang.String)[pri:0, instance:com.gps.development.Naukri_Login@3c73951] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="endReport()[pri:0, instance:com.gps.development.Naukri_Login@41e1e210]" started-at="2026-04-09T09:02:25 IST" name="endReport" finished-at="2026-04-09T09:02:31 IST" duration-ms="6216" status="PASS">
+        <test-method is-config="true" signature="endReport()[pri:0, instance:com.gps.development.Naukri_Login@3c73951]" started-at="2026-04-09T23:41:06 IST" name="endReport" finished-at="2026-04-09T23:41:10 IST" duration-ms="3824" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- endReport -->
       </class> <!-- com.gps.development.Naukri_Login -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- EdgeTest -->
+    <test started-at="2026-04-09T23:40:53 IST" name="ChromeTest" finished-at="2026-04-09T23:41:06 IST" duration-ms="13006">
+      <class name="com.gps.development.Naukri_Login">
+        <test-method is-config="true" signature="setUp(java.lang.String,java.lang.String,java.lang.reflect.Method)[pri:0, instance:com.gps.development.Naukri_Login@72cde7cc]" started-at="2026-04-09T23:40:53 IST" name="setUp" finished-at="2026-04-09T23:40:57 IST" duration-ms="3937" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[https://www.naukri.com/]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[public void com.gps.development.Naukri_Login.jsonLoginTest(java.lang.String,java.lang.String)]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="jsonLoginTest(java.lang.String,java.lang.String)[pri:0, instance:com.gps.development.Naukri_Login@72cde7cc]" started-at="2026-04-09T23:40:57 IST" name="jsonLoginTest" data-provider="dynamicData" finished-at="2026-04-09T23:41:06 IST" duration-ms="8865" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[raghavendrad234@gmail.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[raghavendrad234@gmail.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- jsonLoginTest -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.gps.development.Naukri_Login@72cde7cc]" started-at="2026-04-09T23:41:06 IST" name="tearDown" finished-at="2026-04-09T23:41:06 IST" duration-ms="166" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=jsonLoginTest status=SUCCESS method=Naukri_Login.jsonLoginTest(java.lang.String,java.lang.String)[pri:0, instance:com.gps.development.Naukri_Login@72cde7cc] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.gps.development.Naukri_Login -->
+    </test> <!-- ChromeTest -->
+  </suite> <!-- ParallelCrossBrowserSuite -->
 </testng-results>
