@@ -91,7 +91,8 @@ String resumeheader="";
         
         
         NaukriResumeHeadingPage resumeheading = new NaukriResumeHeadingPage();
-       
+        waitForElementVisible(resumeheading.textResumeheader, 350,
+                "waiting for textResumeheader button", "Unable to wait");   
         verifyElementDisplayed(resumeheading.textResumeheader,
                 "Update resume header displayed",
                 "Unable to display update resume header");

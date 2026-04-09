@@ -3,25 +3,39 @@
        thread-count="2">
 
     <!-- ================= CHROME ================= -->
-
     <test name="ChromeTest">
+
+        <parameter name="browser" value="chrome"/>
+        <parameter name="url" value="https://www.naukri.com/"/>
+
+        <groups>
+            <run>
+                <include name="json"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="com.gps.development.Naukri_Login"/>
+        </classes>
+
+    </test>
+
+    <!-- ================= EDGE ================= -->
+    <test name="EdgeTest">
 
         <parameter name="browser" value="edge"/>
         <parameter name="url" value="https://www.naukri.com/"/>
 
         <groups>
             <run>
-          
                 <include name="json"/>
             </run>
         </groups>
 
         <classes>
-    <class name="com.gps.development.Naukri_Login"/>
-            </classes>
+            <class name="com.gps.development.Naukri_Login"/>
+        </classes>
 
     </test>
-
-
 
 </suite>

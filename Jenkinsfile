@@ -18,19 +18,19 @@ pipeline {
             }
         }
 
-        // ✅ NEW (from API pipeline)
+        // 🔥 CLEAN DASHBOARD ONLY
         stage('Clean Old Reports') {
             steps {
-                echo "Cleaning old reports..."
+                echo "Cleaning old dashboard..."
                 bat '''
-                if exist reports (
-                    del /q reports\\*.html
+                if exist dashboard (
+                    del /q dashboard\\*.html
                 )
                 '''
             }
         }
 
-        // ✅ SAME UI EXECUTION
+        // 🚀 RUN TESTS
         stage('Run Selenium Tests') {
             steps {
                 echo "🚀 Running Selenium UI automation"
@@ -44,67 +44,35 @@ pipeline {
             }
         }
 
-        // ✅ NEW (important validation)
-        stage('Validate Report') {
+        // 🔥 VALIDATE DASHBOARD
+        stage('Validate Dashboard') {
             steps {
                 bat '''
-                if not exist reports\\*.html (
-                    echo ❌ No report generated!
+                if not exist dashboard\\AutomationDashboard.html (
+                    echo ❌ Dashboard not generated!
                     exit 1
                 )
                 '''
             }
         }
 
-        // ✅ IMPROVED (generic + cleaner)
-        stage('Keep Only Latest Report') {
-            steps {
-                bat '''
-                cd reports
-                setlocal enabledelayedexpansion
-
-                for /f "delims=" %%i in ('dir /b /o-d *.html') do (
-                    set latest=%%i
-                    goto done
-                )
-
-                :done
-
-                for %%f in (*.html) do (
-                    if not "%%f"=="!latest!" del %%f
-                )
-                '''
-            }
-        }
-
-        // ✅ FIXED (SAFE - NO SANDBOX ISSUE)
-        stage('Extract Extent Summary') {
+        // 🔥 EXTRACT SUMMARY (OPTIONAL SAFE DEFAULT)
+        stage('Extract Summary') {
             steps {
                 script {
 
-                    def reportFile = bat(
-                        script: '@dir /b reports\\*.html',
-                        returnStdout: true
-                    ).trim().split("\\r?\\n")[-1]
+                    // If your framework sets env variables → use them
+                    env.PASSED = env.PASSED ?: "0"
+                    env.FAILED = env.FAILED ?: "0"
+                    env.SKIPPED = env.SKIPPED ?: "0"
 
-                    echo "Using Report: ${reportFile}"
+                    def total = env.PASSED.toInteger() +
+                                env.FAILED.toInteger() +
+                                env.SKIPPED.toInteger()
 
-                    def reportPath = "reports/${reportFile}"
-                    def content = readFile(reportPath)
-
-                    // ✅ SAFE COUNTING (no regex sandbox issue)
-                    def passed = content.split("status pass").length - 1
-                    def failed = content.split("status fail").length - 1
-                    def skipped = content.split("status skip").length - 1
-
-                    def total = passed + failed + skipped
-
-                    env.PASSED = passed.toString()
-                    env.FAILED = failed.toString()
-                    env.SKIPPED = skipped.toString()
                     env.TOTAL = total.toString()
 
-                    echo "Total: ${total}, Passed: ${passed}, Failed: ${failed}, Skipped: ${skipped}"
+                    echo "Total: ${env.TOTAL}, Passed: ${env.PASSED}, Failed: ${env.FAILED}, Skipped: ${env.SKIPPED}"
                 }
             }
         }
@@ -118,7 +86,7 @@ pipeline {
                 subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
 
                 body: """
-                <h2>Selenium UI Automation - ${currentBuild.currentResult}</h2>
+                <h2>Selenium Automation - ${currentBuild.currentResult}</h2>
 
                 <p><b>Job:</b> ${env.JOB_NAME}</p>
                 <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
@@ -142,14 +110,16 @@ pipeline {
                 <p><b>Build URL:</b><br>
                 <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
 
-                <p>📎 Latest Extent Report attached</p>
+                <p>📎 Dashboard attached</p>
 
                 Regards,<br>
                 Jenkins
                 """,
 
                 to: "raghavendra2119818@gmail.com",
-                attachmentsPattern: "reports/*.html"
+
+                // 🔥 ATTACH DASHBOARD ONLY
+                attachmentsPattern: "dashboard/AutomationDashboard.html"
             )
         }
     }
