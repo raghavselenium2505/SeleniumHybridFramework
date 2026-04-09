@@ -982,7 +982,7 @@ public class TestBase implements baseMethods {
 
 	    	  String path = System.getProperty("user.dir")
 		                + "/src/test/resources/Reports/DashBoard/DashboardReport_"
-		                + ".html";
+		                + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
 
 	        int total = pass + fail + skip;
 
