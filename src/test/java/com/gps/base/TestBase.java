@@ -980,10 +980,15 @@ public class TestBase implements baseMethods {
 
 	    try {
 
-	    	  String path = System.getProperty("user.dir")
-		                + "/src/test/resources/Reports/DashBoard/DashboardReport_"
-		                + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
+	    	String baseDir = System.getProperty("user.dir") + "/dashboard";
 
+	    	File folder = new File(baseDir);
+	    	if (!folder.exists()) {
+	    	    folder.mkdirs();
+	    	}
+
+	    	String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+	    	String path = baseDir + "/AutomationDashboard_" + timeStamp + ".html";
 	        int total = pass + fail + skip;
 
 	        int passPer = total == 0 ? 0 : (pass * 100 / total);
