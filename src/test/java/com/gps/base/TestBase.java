@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.io.FileReader;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
@@ -110,6 +111,11 @@ public class TestBase implements baseMethods {
 	protected static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 	private static String reportPath;
 
+	public static AtomicInteger passCount = new AtomicInteger(0);
+	public static AtomicInteger failCount = new AtomicInteger(0);
+	public static AtomicInteger skipCount = new AtomicInteger(0);
+	
+	public static long suiteStartTime;
 	/* ================= CONFIG & UTILITIES ================= */
 
 	public static Properties config = new Properties();
@@ -127,28 +133,30 @@ public class TestBase implements baseMethods {
 	/* ================= START EXTENT REPORT ================= */
 
 	@BeforeSuite(alwaysRun = true)
-	public void startReport() {
+	public synchronized void startReport() {
 
-		if (extent == null) {
+	    if (extent == null) {
 
-			String path = System.getProperty("user.dir") + "/src/test/resources/Reports/Extentreport/AutomationReport_"
-					+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
-System.out.println(path);
-			
-			ExtentSparkReporter spark = new ExtentSparkReporter(path);
-			spark.config().setTheme(Theme.DARK);
-			spark.config().setReportName("Automation Execution Report");
-			spark.config().setDocumentTitle("Execution Report");
+	        String path = System.getProperty("user.dir")
+	                + "/src/test/resources/Reports/Extentreport/AutomationReport_"
+	                + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
 
-			extent = new ExtentReports();
-			extent.attachReporter(spark);
+	        System.out.println("🔥 Report Path: " + path);
 
-			extent.setSystemInfo("User", System.getProperty("user.name"));
-			extent.setSystemInfo("Environment", "QA");
-			extent.setSystemInfo("OS", System.getProperty("os.name"));
+	        ExtentSparkReporter spark = new ExtentSparkReporter(path);
+	        spark.config().setTheme(Theme.DARK);
+	        spark.config().setReportName("Automation Execution Report");
+	        spark.config().setDocumentTitle("Execution Report");
 
-			reportPath = path;
-		}
+	        extent = new ExtentReports();
+	        extent.attachReporter(spark);
+
+	        extent.setSystemInfo("User", System.getProperty("user.name"));
+	        extent.setSystemInfo("Environment", "QA");
+	        extent.setSystemInfo("OS", System.getProperty("os.name"));
+
+	        reportPath = path;
+	    }
 	}
 	/* ================= BROWSER SETUP ================= */
 
@@ -234,37 +242,38 @@ System.out.println(path);
 	@AfterMethod(alwaysRun = true)
 	public void tearDown(ITestResult result) {
 
-		if (test.get() != null) {
+	    try {
 
-			if (result.getStatus() == ITestResult.SUCCESS) {
+	        if (test.get() != null) {
 
-				logger.info("testcases completed sucesfully");
+	            if (result.getStatus() == ITestResult.SUCCESS) {
 
-			} else if (result.getStatus() == ITestResult.FAILURE) {
+	                passCount.incrementAndGet();  // ✅ FIX
+	                test.get().pass("Test Passed");
 
-				test.get().fail(result.getThrowable());
+	            } else if (result.getStatus() == ITestResult.FAILURE) {
 
-			} else if (result.getStatus() == ITestResult.SKIP) {
+	                failCount.incrementAndGet();  // ✅ FIX
+	                test.get().fail(result.getThrowable());
 
-				if (result.getThrowable() != null) {
+	            } else if (result.getStatus() == ITestResult.SKIP) {
 
-					test.get().skip(result.getThrowable().getMessage());
+	                skipCount.incrementAndGet();  // ✅ FIX
+	                test.get().skip("Test Skipped");
+	            }
+	        }
 
-				} else {
+	    } catch (Exception e) {
+	        logger.error("Error in tearDown()", e);
+	    } finally {
 
-					test.get().skip("Test Skipped");
-				}
-			}
-		}
+	        if (getDriver() != null) {
+	            getDriver().quit();
+	        }
 
-		if (getDriver() != null) {
-
-			getDriver().quit();
-		}
-
-		removeDriver();
+	        removeDriver();
+	    }
 	}
-
 	private void uploadFolderToS3(File folder, String s3BasePath) {
 
 	    if (folder == null || !folder.exists()) return;
@@ -381,85 +390,97 @@ System.out.println(path);
 	
 	/* ================= EXTENT REPORT END ================= */
 	public static String s3BaseUrl = "";
-
 	@AfterSuite(alwaysRun = true)
 	public void endReport() {
 
 	    try {
 
-	        if (extent != null) {
+	        if (extent == null) {
+	            logger.error("Extent is NULL");
+	            return;
+	        }
 
-	            extent.flush();
-	            waitForReportToBeReady(reportPath);
+	        // ==============================
+	        // ✅ FINALIZE EXTENT REPORT
+	        // ==============================
+	        extent.flush();
+	        waitForReportToBeReady(reportPath);
 
-	            String finalUrl = "";
+	        String finalUrl = "";
 
-	            if (isAwsUploadEnabled()) {
+	        // ==============================
+	        // ✅ AWS UPLOAD
+	        // ==============================
+	        if (isAwsUploadEnabled()) {
 
-	                try {
-
-	                    String bucketName = config.getProperty("aws.bucketName");
-	                    String region = config.getProperty("aws.region");
-
-	                    // 🔥 TIMESTAMP FILE NAME
-	                    String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss")
-	                            .format(new java.util.Date());
-
-	                    String fileName = "AutomationReport_" + timeStamp + ".html";
-	                    String s3Key = "reports/latest/" + fileName;
-
-	                    // 🔥 ONLY REPORT UPLOAD (NO SCREENSHOTS)
-	                    uploadSingleFileToS3(reportPath, s3Key);
-
-	                    finalUrl = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + s3Key;
-
-	                    logger.info("AWS Report URL: " + finalUrl);
-
-	                } catch (Exception ex) {
-	                    logger.error("S3 upload failed", ex);
-	                }
-
-	                extent.setSystemInfo("AWS Report URL", finalUrl);
-
-	                if (test.get() != null && finalUrl != null) {
-	                    test.get().info(
-	                            "<b>AWS Report URL:</b> <a href='" + finalUrl + "'>" + finalUrl + "</a>"
-	                    );
-	                }
-
-	                // 🔥 EMAIL (OPTIONAL)
-	                if (isEmailEnabled() && finalUrl != null) {
-
-	                    String emailBody =
-	                            "<h3>Automation Execution Report</h3>" +
-	                            "<p>Execution completed.</p>" +
-	                            "<p><b>Report:</b> <a href='" + finalUrl + "'>" + finalUrl + "</a></p>";
-
-	                    sendEmailViaSES(
-	                            config.getProperty("aws.toEmail"),
-	                            "Automation Report",
-	                            emailBody
-	                    );
-	                }
-	            }
-
-	            extent.flush();
-
-	            // 🔥 OPEN LOCAL REPORT
 	            try {
-	                if (Desktop.isDesktopSupported()) {
-	                    Desktop.getDesktop().browse(new File(reportPath).toURI());
-	                }
-	            } catch (Exception e) {
-	                logger.warn("Unable to open local report");
+
+	                String bucketName = config.getProperty("aws.bucketName");
+	                String region = config.getProperty("aws.region");
+
+	                String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss")
+	                        .format(new java.util.Date());
+
+	                String fileName = "DashboardReport_" + timeStamp + ".html";
+	                String s3Key = "reports/latest/" + fileName;
+
+	                logger.info("Uploading report to S3...");
+
+	                uploadSingleFileToS3(reportPath, s3Key);
+
+	                finalUrl = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + s3Key;
+
+	                logger.info("AWS URL: " + finalUrl);
+
+	            } catch (Exception ex) {
+	                logger.error("S3 upload failed", ex);
 	            }
+	        }
+
+	        // ==============================
+	        // ✅ FETCH COUNTS (THREAD SAFE)
+	        // ==============================
+	        int pass = passCount.get();
+	        int fail = failCount.get();
+	        int skip = skipCount.get();
+
+	        int total = pass + fail + skip;
+
+	        logger.info("Execution Summary -> Total: " + total +
+	                " Pass: " + pass +
+	                " Fail: " + fail +
+	                " Skip: " + skip);
+
+	        // ==============================
+	        // ✅ EXECUTION TIME
+	        // ==============================
+	        long duration = System.currentTimeMillis() - suiteStartTime;
+
+	        // ==============================
+	        // 🚀 GENERATE EXTERNAL DASHBOARD (BEST APPROACH)
+	        // ==============================
+	        generateDashboardHtml(pass, fail, skip, finalUrl, duration);
+
+	        // ==============================
+	        // ✅ OPEN EXTENT REPORT
+	        // ==============================
+	        try {
+
+	            File reportFile = new File(reportPath);
+
+	            if (reportFile.exists() && Desktop.isDesktopSupported()) {
+	                Desktop.getDesktop().browse(reportFile.toURI());
+	                logger.info("Opened Extent report");
+	            }
+
+	        } catch (Exception e) {
+	            logger.warn("Unable to open report");
 	        }
 
 	    } catch (Exception e) {
 	        logger.error("Error in endReport()", e);
 	    }
 	}
-	
 	private void uploadSingleFileToS3(String filePath, String s3Key) {
 
 	    try {
@@ -516,7 +537,7 @@ System.out.println(path);
 	        lastSize = currentSize;
 
 	        try {
-	            Thread.sleep(1000);
+	           Thread.sleep(500);
 	        } catch (InterruptedException e) {
 	            Thread.currentThread().interrupt();
 	        }
@@ -954,4 +975,149 @@ System.out.println(path);
 	        logger.error("❌ SES EMAIL FAILED: " + e.getMessage(), e);
 	    }
 	}
+	
+	public void generateDashboardHtml(int pass, int fail, int skip, String finalUrl, long durationMillis) {
+
+	    try {
+
+	    	  String path = System.getProperty("user.dir")
+		                + "/src/test/resources/Reports/DashBoard/DashboardReport_"
+		                + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
+
+	        int total = pass + fail + skip;
+
+	        int passPer = total == 0 ? 0 : (pass * 100 / total);
+	        int failPer = total == 0 ? 0 : (fail * 100 / total);
+	        int skipPer = total == 0 ? 0 : (skip * 100 / total);
+
+	        long seconds = durationMillis / 1000;
+	        long minutes = seconds / 60;
+	        seconds = seconds % 60;
+
+	        String status = (fail > 0) ? "FAILED ❌" : "PASSED ✅";
+	        String statusColor = (fail > 0) ? "#ff6b6b" : "#4ade80";
+
+	        String html =
+	        "<html><head><title>Automation Dashboard</title>" +
+
+	        "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>" +
+
+	        "<style>" +
+
+	        "body{font-family:Segoe UI;background:#0f172a;color:white;padding:20px;text-align:center}" +
+
+	        ".tabs{margin-bottom:20px}" +
+	        ".tab{cursor:pointer;padding:10px 20px;background:#1e293b;border-radius:8px;margin-right:10px;display:inline-block}" +
+	        ".tab:hover{background:#334155}" +
+
+	        ".card{background:#1e293b;padding:20px;border-radius:10px;margin-top:20px}" +
+
+	        ".chart-row{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}" +
+
+	        ".chart-container{" +
+	        "width:300px;" +
+	        "height:300px;" +
+	        "}" +
+
+	        ".hidden{display:none}" +
+
+	        "</style>" +
+
+	        "<script>" +
+	        "function showTab(tab){" +
+	        "document.getElementById('summary').style.display='none';" +
+	        "document.getElementById('charts').style.display='none';" +
+	        "document.getElementById(tab).style.display='block';" +
+	        "}" +
+	        "</script>" +
+
+	        "</head><body>" +
+
+	        "<h1>🚀 Automation Dashboard</h1>" +
+
+	        "<div class='tabs'>" +
+	        "<span class='tab' onclick=\"showTab('summary')\">Summary</span>" +
+	        "<span class='tab' onclick=\"showTab('charts')\">Charts</span>" +
+	        "</div>" +
+
+	        // ================= SUMMARY =================
+	        "<div id='summary' class='card'>" +
+
+	        "<h2 style='color:" + statusColor + "'>Build Status: " + status + "</h2>" +
+	        "<p>Total Tests: " + total + "</p>" +
+	        "<p>Execution Time: " + minutes + "m " + seconds + "s</p>" +
+
+	        "<p>✔ Passed: " + pass + " (" + passPer + "%)</p>" +
+	        "<p>❌ Failed: " + fail + " (" + failPer + "%)</p>" +
+	        "<p>⚠ Skipped: " + skip + " (" + skipPer + "%)</p>" +
+
+	        "<br>" +
+	        "<a href='" + finalUrl + "' target='_blank' " +
+	        "style='background:#22c55e;color:black;padding:10px 20px;border-radius:8px;text-decoration:none'>" +
+	        "Open Full Report</a>" +
+
+	        "</div>" +
+
+	        // ================= CHARTS =================
+	        "<div id='charts' class='card hidden'>" +
+
+	        "<div class='chart-row'>" +
+
+	        "<div class='chart-container'><canvas id='pieChart'></canvas></div>" +
+	        "<div class='chart-container'><canvas id='barChart'></canvas></div>" +
+	        "<div class='chart-container'><canvas id='horizontalChart'></canvas></div>" +
+
+	        "</div>" +
+
+	        "</div>" +
+
+	        "<script>" +
+
+	        "document.getElementById('summary').style.display='block';" +
+
+	        // DOUGHNUT (BEST LOOK)
+	        "new Chart(document.getElementById('pieChart'), {" +
+	        "type:'doughnut'," +
+	        "data:{labels:['Passed','Failed','Skipped']," +
+	        "datasets:[{data:[" + pass + "," + fail + "," + skip + "]," +
+	        "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," +
+	        "options:{responsive:true,maintainAspectRatio:false}" +
+	        "});" +
+
+	        // BAR
+	        "new Chart(document.getElementById('barChart'), {" +
+	        "type:'bar'," +
+	        "data:{labels:['Passed','Failed','Skipped']," +
+	        "datasets:[{data:[" + pass + "," + fail + "," + skip + "]," +
+	        "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," +
+	        "options:{responsive:true,maintainAspectRatio:false}" +
+	        "});" +
+
+	        // HORIZONTAL BAR
+	        "new Chart(document.getElementById('horizontalChart'), {" +
+	        "type:'bar'," +
+	        "data:{labels:['Passed','Failed','Skipped']," +
+	        "datasets:[{data:[" + pass + "," + fail + "," + skip + "]," +
+	        "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," +
+	        "options:{indexAxis:'y',responsive:true,maintainAspectRatio:false}" +
+	        "});" +
+
+	        "</script>" +
+
+	        "</body></html>";
+
+	        java.nio.file.Files.write(java.nio.file.Paths.get(path), html.getBytes());
+
+	        logger.info("Dashboard generated: " + path);
+
+	        if (Desktop.isDesktopSupported()) {
+	            Desktop.getDesktop().browse(new File(path).toURI());
+	        }
+
+	    } catch (Exception e) {
+	        logger.error("Dashboard generation failed", e);
+	    }
+	}
+	
+	
 }
