@@ -976,7 +976,7 @@ public class TestBase implements baseMethods {
 	    }
 	}
 	
-	public void generateDashboardHtml(int pass, int fail, int skip, String finalUrl, long durationMillis) {
+	public String generateDashboardHtml(int pass, int fail, int skip, String finalUrl, long durationMillis) {
 
 	    try {
 
@@ -1008,24 +1008,13 @@ public class TestBase implements baseMethods {
 	        "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>" +
 
 	        "<style>" +
-
 	        "body{font-family:Segoe UI;background:#0f172a;color:white;padding:20px;text-align:center}" +
-
 	        ".tabs{margin-bottom:20px}" +
 	        ".tab{cursor:pointer;padding:10px 20px;background:#1e293b;border-radius:8px;margin-right:10px;display:inline-block}" +
-	        ".tab:hover{background:#334155}" +
-
 	        ".card{background:#1e293b;padding:20px;border-radius:10px;margin-top:20px}" +
-
 	        ".chart-row{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}" +
-
-	        ".chart-container{" +
-	        "width:300px;" +
-	        "height:300px;" +
-	        "}" +
-
+	        ".chart-container{width:280px;height:280px}" +
 	        ".hidden{display:none}" +
-
 	        "</style>" +
 
 	        "<script>" +
@@ -1045,42 +1034,28 @@ public class TestBase implements baseMethods {
 	        "<span class='tab' onclick=\"showTab('charts')\">Charts</span>" +
 	        "</div>" +
 
-	        // ================= SUMMARY =================
 	        "<div id='summary' class='card'>" +
-
 	        "<h2 style='color:" + statusColor + "'>Build Status: " + status + "</h2>" +
 	        "<p>Total Tests: " + total + "</p>" +
 	        "<p>Execution Time: " + minutes + "m " + seconds + "s</p>" +
-
 	        "<p>✔ Passed: " + pass + " (" + passPer + "%)</p>" +
 	        "<p>❌ Failed: " + fail + " (" + failPer + "%)</p>" +
 	        "<p>⚠ Skipped: " + skip + " (" + skipPer + "%)</p>" +
-
 	        "<br>" +
-	        "<a href='" + finalUrl + "' target='_blank' " +
-	        "style='background:#22c55e;color:black;padding:10px 20px;border-radius:8px;text-decoration:none'>" +
+	        "<a href='" + finalUrl + "' target='_blank' style='background:#22c55e;color:black;padding:10px 20px;border-radius:8px;text-decoration:none'>" +
 	        "Open Full Report</a>" +
-
 	        "</div>" +
 
-	        // ================= CHARTS =================
 	        "<div id='charts' class='card hidden'>" +
-
 	        "<div class='chart-row'>" +
-
 	        "<div class='chart-container'><canvas id='pieChart'></canvas></div>" +
 	        "<div class='chart-container'><canvas id='barChart'></canvas></div>" +
 	        "<div class='chart-container'><canvas id='horizontalChart'></canvas></div>" +
-
-	        "</div>" +
-
-	        "</div>" +
+	        "</div></div>" +
 
 	        "<script>" +
-
 	        "document.getElementById('summary').style.display='block';" +
 
-	        // DOUGHNUT (BEST LOOK)
 	        "new Chart(document.getElementById('pieChart'), {" +
 	        "type:'doughnut'," +
 	        "data:{labels:['Passed','Failed','Skipped']," +
@@ -1089,7 +1064,6 @@ public class TestBase implements baseMethods {
 	        "options:{responsive:true,maintainAspectRatio:false}" +
 	        "});" +
 
-	        // BAR
 	        "new Chart(document.getElementById('barChart'), {" +
 	        "type:'bar'," +
 	        "data:{labels:['Passed','Failed','Skipped']," +
@@ -1098,7 +1072,6 @@ public class TestBase implements baseMethods {
 	        "options:{responsive:true,maintainAspectRatio:false}" +
 	        "});" +
 
-	        // HORIZONTAL BAR
 	        "new Chart(document.getElementById('horizontalChart'), {" +
 	        "type:'bar'," +
 	        "data:{labels:['Passed','Failed','Skipped']," +
@@ -1107,20 +1080,17 @@ public class TestBase implements baseMethods {
 	        "options:{indexAxis:'y',responsive:true,maintainAspectRatio:false}" +
 	        "});" +
 
-	        "</script>" +
-
-	        "</body></html>";
+	        "</script></body></html>";
 
 	        java.nio.file.Files.write(java.nio.file.Paths.get(path), html.getBytes());
 
-	        logger.info("Dashboard generated: " + path);
+	        logger.info("Dashboard generated successfully");
 
-	        if (Desktop.isDesktopSupported()) {
-	            Desktop.getDesktop().browse(new File(path).toURI());
-	        }
+	        return path;
 
 	    } catch (Exception e) {
 	        logger.error("Dashboard generation failed", e);
+	        return null;
 	    }
 	}
 	
