@@ -980,21 +980,15 @@ public class TestBase implements baseMethods {
 
 	    try {
 
-	        // ==============================
-	        // ✅ FIXED PATH (JENKINS SAFE)
-	        // ==============================
-	        String baseDir = System.getProperty("user.dir") + "/DashBoard";
+	    	String baseDir = System.getProperty("user.dir") + "/dashboard";
 
-	        File folder = new File(baseDir);
-	        if (!folder.exists()) {
-	            folder.mkdirs();
-	        }
+	    	File folder = new File(baseDir);
+	    	if (!folder.exists()) {
+	    	    folder.mkdirs();
+	    	}
 
-	        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-	        String path = baseDir + "/AutomationDashboard_" + timeStamp + ".html";
-
-	        logger.info("Dashboard Path: " + path);
-
+	    	String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+	    	String path = baseDir + "/AutomationDashboard_" + timeStamp + ".html";
 	        int total = pass + fail + skip;
 
 	        int passPer = total == 0 ? 0 : (pass * 100 / total);
