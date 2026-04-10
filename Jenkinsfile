@@ -46,35 +46,37 @@ pipeline {
             }
         }
 
-        // 🔥 VALIDATE DASHBOARD
-        stage('Validate Dashboard') {
-            steps {
-                script {
-                    def files = findFiles(glob: 'dashboard/*.html')
-
-                    if (files.length == 0) {
-                        error "❌ Dashboard not generated!"
-                    } else {
-                        echo "✅ Dashboard found"
-                    }
-                }
-            }
-        }
-
-        // 🔥 GET LATEST REPORT
+        // 🔥 GET LATEST DASHBOARD (NO findFiles USED)
         stage('Get Latest Report') {
             steps {
                 script {
-                    def files = findFiles(glob: 'dashboard/*.html')
-                    files.sort { -it.lastModified }
 
-                    env.REPORT_FILE = files[0].path
-                    echo "Latest Report: ${env.REPORT_FILE}"
+                    def output = bat(
+                        script: '''
+                        if not exist dashboard (
+                            echo NO_FOLDER
+                        ) else (
+                            dir /b /o-d dashboard\\*.html
+                        )
+                        ''',
+                        returnStdout: true
+                    ).trim()
+
+                    if (output.contains("NO_FOLDER") || output == "") {
+                        error "❌ Dashboard folder or report not found!"
+                    }
+
+                    def files = output.split("\\r?\\n")
+                    def latestFile = files[0]
+
+                    env.REPORT_FILE = "dashboard\\" + latestFile
+
+                    echo "✅ Latest Report: ${env.REPORT_FILE}"
                 }
             }
         }
 
-        // 🔥 EXTRACT SUMMARY (SAFE DEFAULTS)
+        // 🔥 EXTRACT SUMMARY
         stage('Extract Summary') {
             steps {
                 script {
@@ -90,7 +92,7 @@ pipeline {
                     int total = passed + failed + skipped
                     env.TOTAL = total.toString()
 
-                    // ✅ PASS PERCENTAGE
+                    // ✅ PASS %
                     def passPercent = total > 0 ? (passed * 100 / total) : 0
                     env.PASS_PERCENT = passPercent.toString()
 
