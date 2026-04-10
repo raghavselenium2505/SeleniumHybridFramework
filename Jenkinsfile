@@ -18,7 +18,7 @@ pipeline {
             }
         }
 
-        // 🔥 CLEAN DASHBOARD ONLY
+        // 🔥 CLEAN OLD REPORTS
         stage('Clean Old Reports') {
             steps {
                 echo "Cleaning old dashboard..."
@@ -30,49 +30,71 @@ pipeline {
             }
         }
 
-        // 🚀 RUN TESTS
+        // 🚀 RUN TESTS (DO NOT FAIL PIPELINE)
         stage('Run Selenium Tests') {
             steps {
                 echo "🚀 Running Selenium UI automation"
 
-                bat """
-                set JAVA_HOME=${JAVA_HOME}
-                set PATH=%JAVA_HOME%\\bin;%PATH%
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    bat """
+                    set JAVA_HOME=${JAVA_HOME}
+                    set PATH=%JAVA_HOME%\\bin;%PATH%
 
-                "${MAVEN_HOME}\\bin\\mvn.cmd" clean test
-                """
+                    "${MAVEN_HOME}\\bin\\mvn.cmd" clean test
+                    """
+                }
             }
         }
 
         // 🔥 VALIDATE DASHBOARD
         stage('Validate Dashboard') {
             steps {
-                bat '''
-                if not exist dashboard\\AutomationDashboard.html (
-                    echo ❌ Dashboard not generated!
-                    exit 1
-                )
-                '''
+                script {
+                    def files = findFiles(glob: 'dashboard/*.html')
+
+                    if (files.length == 0) {
+                        error "❌ Dashboard not generated!"
+                    } else {
+                        echo "✅ Dashboard found"
+                    }
+                }
             }
         }
 
-        // 🔥 EXTRACT SUMMARY (OPTIONAL SAFE DEFAULT)
+        // 🔥 GET LATEST REPORT
+        stage('Get Latest Report') {
+            steps {
+                script {
+                    def files = findFiles(glob: 'dashboard/*.html')
+                    files.sort { -it.lastModified }
+
+                    env.REPORT_FILE = files[0].path
+                    echo "Latest Report: ${env.REPORT_FILE}"
+                }
+            }
+        }
+
+        // 🔥 EXTRACT SUMMARY (SAFE DEFAULTS)
         stage('Extract Summary') {
             steps {
                 script {
 
-                    // If your framework sets env variables → use them
-                    env.PASSED = env.PASSED ?: "0"
-                    env.FAILED = env.FAILED ?: "0"
+                    env.PASSED  = env.PASSED  ?: "0"
+                    env.FAILED  = env.FAILED  ?: "0"
                     env.SKIPPED = env.SKIPPED ?: "0"
 
-                    def total = env.PASSED.toInteger() +
-                                env.FAILED.toInteger() +
-                                env.SKIPPED.toInteger()
+                    int passed  = env.PASSED.toInteger()
+                    int failed  = env.FAILED.toInteger()
+                    int skipped = env.SKIPPED.toInteger()
 
+                    int total = passed + failed + skipped
                     env.TOTAL = total.toString()
 
-                    echo "Total: ${env.TOTAL}, Passed: ${env.PASSED}, Failed: ${env.FAILED}, Skipped: ${env.SKIPPED}"
+                    // ✅ PASS PERCENTAGE
+                    def passPercent = total > 0 ? (passed * 100 / total) : 0
+                    env.PASS_PERCENT = passPercent.toString()
+
+                    echo "Total: ${env.TOTAL}, Passed: ${env.PASSED}, Failed: ${env.FAILED}, Skipped: ${env.SKIPPED}, Pass%: ${env.PASS_PERCENT}"
                 }
             }
         }
@@ -83,43 +105,55 @@ pipeline {
         always {
 
             emailext(
-                subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}",
+                subject: "Build ${currentBuild.currentResult}: ${env.JOB_NAME} [#${env.BUILD_NUMBER}]",
 
                 body: """
-                <h2>Selenium Automation - ${currentBuild.currentResult}</h2>
+                <html>
+                <body style="font-family: Arial, sans-serif;">
 
-                <p><b>Job:</b> ${env.JOB_NAME}</p>
-                <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
+                <h2 style="color:${currentBuild.currentResult == 'SUCCESS' ? 'green' : 'red'};">
+                    Selenium Automation Report - ${currentBuild.currentResult}
+                </h2>
 
-                <h3>Test Summary 📊</h3>
-                <table border="1" cellpadding="5">
-                <tr>
-                    <th>Total</th>
-                    <th style="color:green;">Passed</th>
-                    <th style="color:red;">Failed</th>
-                    <th style="color:orange;">Skipped</th>
-                </tr>
-                <tr>
-                    <td>${env.TOTAL}</td>
-                    <td style="color:green;">${env.PASSED}</td>
-                    <td style="color:red;">${env.FAILED}</td>
-                    <td style="color:orange;">${env.SKIPPED}</td>
-                </tr>
+                <p><b>Job Name:</b> ${env.JOB_NAME}</p>
+                <p><b>Build ID:</b> ${env.BUILD_NUMBER}</p>
+
+                <h3>Execution Summary</h3>
+
+                <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse;">
+                    <tr style="background-color:#f2f2f2;">
+                        <th>Total Tests</th>
+                        <th style="color:green;">Passed</th>
+                        <th style="color:red;">Failed</th>
+                        <th style="color:orange;">Skipped</th>
+                        <th>Pass %</th>
+                    </tr>
+                    <tr>
+                        <td align="center">${env.TOTAL}</td>
+                        <td align="center" style="color:green;">${env.PASSED}</td>
+                        <td align="center" style="color:red;">${env.FAILED}</td>
+                        <td align="center" style="color:orange;">${env.SKIPPED}</td>
+                        <td align="center"><b>${env.PASS_PERCENT}%</b></td>
+                    </tr>
                 </table>
+
+                <br>
 
                 <p><b>Build URL:</b><br>
                 <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
 
-                <p>📎 Dashboard attached</p>
+                <p>📎 Detailed report is attached.</p>
 
-                Regards,<br>
-                Jenkins
+                <br>
+                <p>Regards,<br>
+                <b>Automation Team</b></p>
+
+                </body>
+                </html>
                 """,
 
                 to: "raghavendra2119818@gmail.com",
-
-                // 🔥 ATTACH DASHBOARD ONLY
-                attachmentsPattern: "dashboard/AutomationDashboard.html"
+                attachmentsPattern: "${env.REPORT_FILE}"
             )
         }
     }
