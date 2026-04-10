@@ -7,6 +7,10 @@ pipeline {
 
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-25.0.2"
         MAVEN_HOME = "D:\\apache-maven-3.9.14"
+
+        // 🔥 S3 CONFIG
+        S3_BUCKET = "your-bucket-name"
+        AWS_REGION = "ap-south-1"
     }
 
     stages {
@@ -18,7 +22,7 @@ pipeline {
             }
         }
 
-        // 🚀 RUN TESTS (DO NOT FAIL PIPELINE)
+        // 🚀 RUN TESTS
         stage('Run Selenium Tests') {
             steps {
                 echo "🚀 Running Selenium UI automation"
@@ -34,50 +38,58 @@ pipeline {
             }
         }
 
-        // 🔍 DEBUG (OPTIONAL BUT HELPFUL)
-        stage('Debug HTML Files') {
-            steps {
-                bat '''
-                echo ===== WORKSPACE =====
-                cd
-
-                echo ===== ALL HTML FILES =====
-                dir /s /b *.html
-                '''
-            }
-        }
-
-        // 🔥 FIND LATEST REPORT ANYWHERE
+        // 🔥 GET LATEST REPORT
         stage('Get Latest Report') {
             steps {
                 script {
 
+                    def reportDir = "src\\test\\resources\\Reports\\DashBoard"
+
                     def output = bat(
-                        script: '''
-                        dir /s /b /o-d *.html
-                        ''',
+                        script: """
+                        if not exist "${reportDir}" (
+                            echo NO_FOLDER
+                        ) else (
+                            dir /b /o-d "${reportDir}\\*.html"
+                        )
+                        """,
                         returnStdout: true
                     ).trim()
 
-                    if (!output) {
-                        error "❌ No HTML report found in workspace!"
+                    if (output.contains("NO_FOLDER") || output == "") {
+                        error "❌ No report found!"
                     }
 
                     def files = output.split("\\r?\\n")
                     def latestFile = files[0]
 
-                    // Convert to relative path
-                    def workspace = env.WORKSPACE.replace("\\", "/")
-                    latestFile = latestFile.replace("\\", "/").replace(workspace + "/", "")
+                    env.REPORT_FILE = "${reportDir}\\" + latestFile
+                    env.REPORT_NAME = latestFile
 
-                    env.REPORT_FILE = latestFile
-
-                    echo "✅ Latest Report: ${env.REPORT_FILE}"
+                    echo "✅ Report: ${env.REPORT_FILE}"
                 }
             }
         }
 
-        // 📊 EXTRACT SUMMARY
+        // ☁️ UPLOAD TO S3
+        stage('Upload to S3') {
+            steps {
+                script {
+
+                    def s3Path = "reports/${env.JOB_NAME}/${env.BUILD_NUMBER}/${env.REPORT_NAME}"
+
+                    bat """
+                    aws s3 cp "${env.REPORT_FILE}" s3://${S3_BUCKET}/${s3Path} --region ${AWS_REGION}
+                    """
+
+                    env.S3_URL = "https://${S3_BUCKET}.s3.${AWS_REGION}.amazonaws.com/${s3Path}"
+
+                    echo "✅ S3 URL: ${env.S3_URL}"
+                }
+            }
+        }
+
+        // 📊 SUMMARY
         stage('Extract Summary') {
             steps {
                 script {
@@ -95,8 +107,6 @@ pipeline {
 
                     def passPercent = total > 0 ? (passed * 100 / total) : 0
                     env.PASS_PERCENT = passPercent.toString()
-
-                    echo "Total: ${env.TOTAL}, Passed: ${env.PASSED}, Failed: ${env.FAILED}, Skipped: ${env.SKIPPED}, Pass%: ${env.PASS_PERCENT}"
                 }
             }
         }
@@ -111,7 +121,7 @@ pipeline {
 
                 body: """
                 <html>
-                <body style="font-family: Arial, sans-serif;">
+                <body style="font-family: Arial;">
 
                 <h2 style="color:${currentBuild.currentResult == 'SUCCESS' ? 'green' : 'red'};">
                     Selenium Automation Report - ${currentBuild.currentResult}
@@ -122,33 +132,30 @@ pipeline {
 
                 <h3>Execution Summary</h3>
 
-                <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse;">
-                    <tr style="background-color:#f2f2f2;">
-                        <th>Total Tests</th>
+                <table border="1" cellpadding="8">
+                    <tr>
+                        <th>Total</th>
                         <th style="color:green;">Passed</th>
                         <th style="color:red;">Failed</th>
                         <th style="color:orange;">Skipped</th>
                         <th>Pass %</th>
                     </tr>
                     <tr>
-                        <td align="center">${env.TOTAL}</td>
-                        <td align="center" style="color:green;">${env.PASSED}</td>
-                        <td align="center" style="color:red;">${env.FAILED}</td>
-                        <td align="center" style="color:orange;">${env.SKIPPED}</td>
-                        <td align="center"><b>${env.PASS_PERCENT}%</b></td>
+                        <td>${env.TOTAL}</td>
+                        <td style="color:green;">${env.PASSED}</td>
+                        <td style="color:red;">${env.FAILED}</td>
+                        <td style="color:orange;">${env.SKIPPED}</td>
+                        <td><b>${env.PASS_PERCENT}%</b></td>
                     </tr>
                 </table>
 
                 <br>
 
-                <p><b>Build URL:</b><br>
-                <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-
-                <p>📎 Detailed report is attached.</p>
+                <p><b>📊 View Report:</b><br>
+                <a href="${env.S3_URL}">${env.S3_URL}</a></p>
 
                 <br>
-                <p>Regards,<br>
-                <b>Automation Team</b></p>
+                <p>Regards,<br><b>Automation Team</b></p>
 
                 </body>
                 </html>
