@@ -18,19 +18,19 @@ pipeline {
             }
         }
 
-        // 🔥 CLEAN OLD REPORTS
+        // 🔥 CLEAN OLD REPORTS (CORRECT PATH)
         stage('Clean Old Reports') {
             steps {
                 echo "Cleaning old dashboard..."
                 bat '''
-                if exist dashboard (
-                    del /q dashboard\\*.html
+                if exist src\\test\\resources\\Reports\\DashBoard (
+                    del /q src\\test\\resources\\Reports\\DashBoard\\*.html
                 )
                 '''
             }
         }
 
-        // 🚀 RUN TESTS (DO NOT FAIL PIPELINE)
+        // 🚀 RUN TESTS
         stage('Run Selenium Tests') {
             steps {
                 echo "🚀 Running Selenium UI automation"
@@ -46,30 +46,30 @@ pipeline {
             }
         }
 
-        // 🔥 GET LATEST DASHBOARD (NO findFiles USED)
+        // 🔥 GET LATEST REPORT FROM CORRECT LOCATION
         stage('Get Latest Report') {
             steps {
                 script {
 
                     def output = bat(
                         script: '''
-                        if not exist dashboard (
+                        if not exist src\\test\\resources\\Reports\\DashBoard (
                             echo NO_FOLDER
                         ) else (
-                            dir /b /o-d dashboard\\*.html
+                            dir /b /o-d src\\test\\resources\\Reports\\DashBoard\\*.html
                         )
                         ''',
                         returnStdout: true
                     ).trim()
 
                     if (output.contains("NO_FOLDER") || output == "") {
-                        error "❌ Dashboard folder or report not found!"
+                        error "❌ Dashboard not found in correct path!"
                     }
 
                     def files = output.split("\\r?\\n")
                     def latestFile = files[0]
 
-                    env.REPORT_FILE = "dashboard\\" + latestFile
+                    env.REPORT_FILE = "src/test/resources/Reports/DashBoard/" + latestFile
 
                     echo "✅ Latest Report: ${env.REPORT_FILE}"
                 }
@@ -92,7 +92,6 @@ pipeline {
                     int total = passed + failed + skipped
                     env.TOTAL = total.toString()
 
-                    // ✅ PASS %
                     def passPercent = total > 0 ? (passed * 100 / total) : 0
                     env.PASS_PERCENT = passPercent.toString()
 
@@ -111,7 +110,7 @@ pipeline {
 
                 body: """
                 <html>
-                <body style="font-family: Arial, sans-serif;">
+                <body style="font-family: Arial;">
 
                 <h2 style="color:${currentBuild.currentResult == 'SUCCESS' ? 'green' : 'red'};">
                     Selenium Automation Report - ${currentBuild.currentResult}
@@ -122,20 +121,20 @@ pipeline {
 
                 <h3>Execution Summary</h3>
 
-                <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse;">
-                    <tr style="background-color:#f2f2f2;">
-                        <th>Total Tests</th>
+                <table border="1" cellpadding="8" cellspacing="0">
+                    <tr>
+                        <th>Total</th>
                         <th style="color:green;">Passed</th>
                         <th style="color:red;">Failed</th>
                         <th style="color:orange;">Skipped</th>
                         <th>Pass %</th>
                     </tr>
                     <tr>
-                        <td align="center">${env.TOTAL}</td>
-                        <td align="center" style="color:green;">${env.PASSED}</td>
-                        <td align="center" style="color:red;">${env.FAILED}</td>
-                        <td align="center" style="color:orange;">${env.SKIPPED}</td>
-                        <td align="center"><b>${env.PASS_PERCENT}%</b></td>
+                        <td>${env.TOTAL}</td>
+                        <td style="color:green;">${env.PASSED}</td>
+                        <td style="color:red;">${env.FAILED}</td>
+                        <td style="color:orange;">${env.SKIPPED}</td>
+                        <td><b>${env.PASS_PERCENT}%</b></td>
                     </tr>
                 </table>
 
@@ -144,11 +143,7 @@ pipeline {
                 <p><b>Build URL:</b><br>
                 <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
 
-                <p>📎 Detailed report is attached.</p>
-
-                <br>
-                <p>Regards,<br>
-                <b>Automation Team</b></p>
+                <p>📎 Report attached</p>
 
                 </body>
                 </html>
