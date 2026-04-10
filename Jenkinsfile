@@ -7,10 +7,6 @@ pipeline {
 
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-25.0.2"
         MAVEN_HOME = "D:\\apache-maven-3.9.14"
-
-        // 🔥 S3 CONFIG
-        S3_BUCKET = "your-bucket-name"
-        AWS_REGION = "ap-south-1"
     }
 
     stages {
@@ -22,10 +18,9 @@ pipeline {
             }
         }
 
-        // 🚀 RUN TESTS
         stage('Run Selenium Tests') {
             steps {
-                echo "🚀 Running Selenium UI automation"
+                echo "Running Selenium Tests..."
 
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     bat """
@@ -38,58 +33,51 @@ pipeline {
             }
         }
 
-        // 🔥 GET LATEST REPORT
+        // 🔍 DEBUG - VERY IMPORTANT
+        stage('DEBUG - Find HTML Reports') {
+            steps {
+                bat '''
+                echo ===============================
+                echo WORKSPACE LOCATION
+                cd
+
+                echo ===============================
+                echo ALL HTML FILES IN WORKSPACE
+                dir /s /b *.html
+                echo ===============================
+                '''
+            }
+        }
+
+        // 🔥 GET LATEST REPORT (SAFE)
         stage('Get Latest Report') {
             steps {
                 script {
 
-                    def reportDir = "src\\test\\resources\\Reports\\DashBoard"
-
                     def output = bat(
-                        script: """
-                        if not exist "${reportDir}" (
-                            echo NO_FOLDER
-                        ) else (
-                            dir /b /o-d "${reportDir}\\*.html"
-                        )
-                        """,
+                        script: 'dir /s /b /o-d *.html',
                         returnStdout: true
                     ).trim()
 
-                    if (output.contains("NO_FOLDER") || output == "") {
-                        error "❌ No report found!"
+                    if (!output) {
+                        echo "⚠️ No report found in workspace"
+                        env.REPORT_FILE = ""
+                    } else {
+                        def files = output.split("\\r?\\n")
+                        def latestFile = files[0]
+
+                        def workspace = env.WORKSPACE.replace("\\", "/")
+                        latestFile = latestFile.replace("\\", "/").replace(workspace + "/", "")
+
+                        env.REPORT_FILE = latestFile
+
+                        echo "✅ Latest Report Found: ${env.REPORT_FILE}"
                     }
-
-                    def files = output.split("\\r?\\n")
-                    def latestFile = files[0]
-
-                    env.REPORT_FILE = "${reportDir}\\" + latestFile
-                    env.REPORT_NAME = latestFile
-
-                    echo "✅ Report: ${env.REPORT_FILE}"
                 }
             }
         }
 
-        // ☁️ UPLOAD TO S3
-        stage('Upload to S3') {
-            steps {
-                script {
-
-                    def s3Path = "reports/${env.JOB_NAME}/${env.BUILD_NUMBER}/${env.REPORT_NAME}"
-
-                    bat """
-                    aws s3 cp "${env.REPORT_FILE}" s3://${S3_BUCKET}/${s3Path} --region ${AWS_REGION}
-                    """
-
-                    env.S3_URL = "https://${S3_BUCKET}.s3.${AWS_REGION}.amazonaws.com/${s3Path}"
-
-                    echo "✅ S3 URL: ${env.S3_URL}"
-                }
-            }
-        }
-
-        // 📊 SUMMARY
+        // 📊 SUMMARY (SAFE DEFAULTS)
         stage('Extract Summary') {
             steps {
                 script {
@@ -107,6 +95,8 @@ pipeline {
 
                     def passPercent = total > 0 ? (passed * 100 / total) : 0
                     env.PASS_PERCENT = passPercent.toString()
+
+                    echo "SUMMARY → Total: ${env.TOTAL}, Passed: ${env.PASSED}, Failed: ${env.FAILED}, Skipped: ${env.SKIPPED}, Pass%: ${env.PASS_PERCENT}"
                 }
             }
         }
@@ -117,51 +107,55 @@ pipeline {
         always {
 
             emailext(
-                subject: "Build ${currentBuild.currentResult}: ${env.JOB_NAME} [#${env.BUILD_NUMBER}]",
+                subject: "Automation Report | ${currentBuild.currentResult} | ${env.JOB_NAME} #${env.BUILD_NUMBER}",
 
                 body: """
                 <html>
-                <body style="font-family: Arial;">
+                <body style="font-family:Segoe UI, Arial;">
 
-                <h2 style="color:${currentBuild.currentResult == 'SUCCESS' ? 'green' : 'red'};">
-                    Selenium Automation Report - ${currentBuild.currentResult}
+                <h2 style="color:${currentBuild.currentResult == 'SUCCESS' ? '#2e7d32' : '#c62828'};">
+                    Automation Execution Report - ${currentBuild.currentResult}
                 </h2>
 
-                <p><b>Job Name:</b> ${env.JOB_NAME}</p>
-                <p><b>Build ID:</b> ${env.BUILD_NUMBER}</p>
+                <p><b>Project:</b> ${env.JOB_NAME}</p>
+                <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
 
-                <h3>Execution Summary</h3>
+                <h3>Test Summary</h3>
 
-                <table border="1" cellpadding="8">
-                    <tr>
+                <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;">
+                    <tr style="background-color:#f2f2f2;">
                         <th>Total</th>
-                        <th style="color:green;">Passed</th>
-                        <th style="color:red;">Failed</th>
-                        <th style="color:orange;">Skipped</th>
+                        <th>Passed</th>
+                        <th>Failed</th>
+                        <th>Skipped</th>
                         <th>Pass %</th>
                     </tr>
                     <tr>
-                        <td>${env.TOTAL}</td>
-                        <td style="color:green;">${env.PASSED}</td>
-                        <td style="color:red;">${env.FAILED}</td>
-                        <td style="color:orange;">${env.SKIPPED}</td>
-                        <td><b>${env.PASS_PERCENT}%</b></td>
+                        <td align="center">${env.TOTAL}</td>
+                        <td align="center" style="color:green;">${env.PASSED}</td>
+                        <td align="center" style="color:red;">${env.FAILED}</td>
+                        <td align="center" style="color:orange;">${env.SKIPPED}</td>
+                        <td align="center"><b>${env.PASS_PERCENT}%</b></td>
                     </tr>
                 </table>
 
                 <br>
 
-                <p><b>📊 View Report:</b><br>
-                <a href="${env.S3_URL}">${env.S3_URL}</a></p>
+                <p><b>Build URL:</b><br>
+                <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+
+                <p><b>Report:</b><br>
+                ${env.REPORT_FILE ? "Attached in email" : "⚠️ Report not generated"}</p>
 
                 <br>
-                <p>Regards,<br><b>Automation Team</b></p>
+                <p>Regards,<br><b>QA Automation Team</b></p>
 
                 </body>
                 </html>
                 """,
 
                 to: "raghavendra2119818@gmail.com",
+
                 attachmentsPattern: "${env.REPORT_FILE}"
             )
         }
