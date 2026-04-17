@@ -1,6 +1,8 @@
 package com.gps.base;
 
 import java.awt.Desktop;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
@@ -10,6 +12,7 @@ import java.time.Duration;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
@@ -135,6 +138,10 @@ public class TestBase implements baseMethods {
 	@BeforeSuite(alwaysRun = true)
 	public synchronized void startReport() {
 
+	    // ✅ FIX: Start time initialized correctly
+	    suiteStartTime = System.currentTimeMillis();
+	    logger.info("Suite Start Time: " + suiteStartTime);
+
 	    if (extent == null) {
 
 	        String path = System.getProperty("user.dir")
@@ -164,7 +171,7 @@ public class TestBase implements baseMethods {
 	@Parameters({ "browser", "url" })
 	public void setUp(@Optional("") String browserFromXml, @Optional("") String urlFromXml, Method method)
 			throws Exception {
-
+try {
 		config.load(new FileInputStream(CONFIG_PATH));
 
 		// ===== Browser Selection =====
@@ -235,8 +242,12 @@ public class TestBase implements baseMethods {
 		// ===== Create Extent Test =====
 		ExtentTest extentTest = extent.createTest(method.getName());
 		test.set(extentTest);
+	
+	}catch(Exception e)
+	{
+		logAIFailure(e,getDriver().getCurrentUrl());
 	}
-
+	}
 	/* ================= TEST RESULT CAPTURE ================= */
 
 	@AfterMethod(alwaysRun = true)
@@ -391,7 +402,7 @@ public class TestBase implements baseMethods {
 	/* ================= EXTENT REPORT END ================= */
 	public static String s3BaseUrl = "";
 	@AfterSuite(alwaysRun = true)
-	public void endReport() {
+	public synchronized void endReport() {
 
 	    try {
 
@@ -409,7 +420,7 @@ public class TestBase implements baseMethods {
 	        String finalUrl = "";
 
 	        // ==============================
-	        // ✅ AWS UPLOAD
+	        // ✅ AWS UPLOAD (Optional)
 	        // ==============================
 	        if (isAwsUploadEnabled()) {
 
@@ -438,7 +449,7 @@ public class TestBase implements baseMethods {
 	        }
 
 	        // ==============================
-	        // ✅ FETCH COUNTS (THREAD SAFE)
+	        // ✅ FETCH COUNTS
 	        // ==============================
 	        int pass = passCount.get();
 	        int fail = failCount.get();
@@ -452,12 +463,20 @@ public class TestBase implements baseMethods {
 	                " Skip: " + skip);
 
 	        // ==============================
-	        // ✅ EXECUTION TIME
+	        // ✅ EXECUTION TIME (FIXED)
 	        // ==============================
 	        long duration = System.currentTimeMillis() - suiteStartTime;
 
+	        // 👉 Better formatting
+	        long totalSeconds = duration / 1000;
+	        long hours = totalSeconds / 3600;
+	        long minutes = (totalSeconds % 3600) / 60;
+	        long seconds = totalSeconds % 60;
+
+	        logger.info("Execution Time: " + hours + "h " + minutes + "m " + seconds + "s");
+
 	        // ==============================
-	        // 🚀 GENERATE EXTERNAL DASHBOARD (BEST APPROACH)
+	        // 🚀 GENERATE DASHBOARD
 	        // ==============================
 	        generateDashboardHtml(pass, fail, skip, finalUrl, duration);
 
@@ -649,6 +668,8 @@ public class TestBase implements baseMethods {
 	        }
 	    }
 	}
+	
+	
 	/* ================= BASE METHODS ================= */
 
 	@Override
@@ -717,43 +738,35 @@ public class TestBase implements baseMethods {
 
 	@Override
 	public void sendkeys(By element, String value, String passValue, String failValue) {
-		try {
-			WebElement ele = getDriver().findElement(element);
+	    try {
+	        WebElement ele = getDriver().findElement(element);
 
-			// Highlight
-			elementhighlight(ele);
+	        // Highlight
+	        elementhighlight(ele);
 
-			// Assertions
-			Assert.assertTrue(ele.isDisplayed(), "Element is not displayed");
-			Assert.assertTrue(ele.isEnabled(), "Element is not enabled");
+	        // Assertions
+	        Assert.assertTrue(ele.isDisplayed(), "Element is not displayed");
+	        Assert.assertTrue(ele.isEnabled(), "Element is not enabled");
 
-			// Action
-			ele.clear();
-			ele.sendKeys(value);
+	        // Action
+	        ele.clear();
+	        ele.sendKeys(value);
 
-			// Validation
-			String enteredText = ele.getAttribute("value");
-			Assert.assertEquals(enteredText, value, "Entered value mismatch");
+	        // Validation
+	        String enteredText = ele.getAttribute("value");
+	        Assert.assertEquals(enteredText, value, "Entered value mismatch");
 
-			// 🔥 Mask value (applies to EVERYTHING)
-			String logValue;
-			if (value == null || value.length() <= 1) {
-				logValue = "*";
-			} else if (value.length() == 2) {
-				logValue = "**";
-			} else {
-				logValue = value.charAt(0) + "*".repeat(value.length() - 2) + value.charAt(value.length() - 1);
-			}
+	        // ✅ Log actual value (no masking)
+	        test.get().log(Status.PASS, passValue + " | Entered Value: " + value);
 
-			// Log
-			test.get().log(Status.PASS, passValue + " | Entered Value: " + logValue);
+	    } catch (Exception e) {
+	        test.get().log(Status.FAIL, failValue + " | Exception: " + e.getMessage());
 
-		} catch (Exception e) {
-			test.get().log(Status.FAIL, failValue + " | Exception: " + e.getMessage());
-			Assert.fail("SendKeys failed due to exception: " + e.getMessage());
-		}
+			logAIFailure(e, failValue);
+
+	    
+	    }
 	}
-
 	@Override
 	public void elementhighlight(WebElement element) {
 		try {
@@ -794,6 +807,7 @@ public class TestBase implements baseMethods {
 	@Override
 	public void waitForElementVisible(By element, int timeout, String passValue, String failValue) {
 		try {
+			elementhighlight(getDriver().findElement(element));
 			new WebDriverWait(getDriver(), Duration.ofMillis(timeout))
 					.until(ExpectedConditions.visibilityOfElementLocated(element));
 		} catch (Exception e) {
@@ -805,6 +819,8 @@ public class TestBase implements baseMethods {
 	@Override
 	public void waitForElementClickable(By element, int timeout, String passValue, String failValue) {
 		try {
+			elementhighlight(getDriver().findElement(element));
+
 			new WebDriverWait(getDriver(), Duration.ofSeconds(timeout))
 					.until(ExpectedConditions.elementToBeClickable(element));
 		} catch (Exception e) {
@@ -896,8 +912,11 @@ public class TestBase implements baseMethods {
 			}
 
 		} catch (Exception e) {
-			test.get().log(Status.FAIL, failMsg + " Exception: " + e.getMessage());
-			org.testng.Assert.fail(failMsg);
+			/*
+			 * test.get().log(Status.FAIL, failMsg + " Exception: " + e.getMessage());
+			 * org.testng.Assert.fail(failMsg);
+			 */
+			logAIFailure(e, failMsg);
 		}
 	}
 
@@ -975,6 +994,10 @@ public class TestBase implements baseMethods {
 	        logger.error("❌ SES EMAIL FAILED: " + e.getMessage(), e);
 	    }
 	}
+	
+
+	
+	
 	
 	public void generateDashboardHtml(int pass, int fail, int skip, String finalUrl, long durationMillis) {
 
@@ -1118,6 +1141,24 @@ public class TestBase implements baseMethods {
 	        logger.error("Dashboard generation failed", e);
 	    }
 	}
+	//Need to add to @override
 	
+	public void switchToFrame(By locator, String frameName) {
+
+	    WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
+
+	    try {
+	        logger.info("Switching to frame: " + frameName);
+
+	        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(locator));
+
+	        test.get().log(Status.PASS, "Switched to frame: " + frameName);
+
+	    } catch (Exception e) {
+
+	    	logAIFailure(e, frameName);
+	    }
+	 
+	}
 	
 }

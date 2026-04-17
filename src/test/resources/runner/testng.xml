@@ -3,39 +3,26 @@
        thread-count="2">
 
     <!-- ================= CHROME ================= -->
-    <test name="ChromeTest">
+    <test name="MOnthly user Signup">
 
         <parameter name="browser" value="chrome"/>
-        <parameter name="url" value="https://www.naukri.com/"/>
+        <parameter name="url" value="https://staging-uk.modernmilkman.dev/"/>
 
         <groups>
             <run>
-                <include name="json"/>
+                <include name="MilkManSignupTests"/>
             </run>
         </groups>
 
         <classes>
-            <class name="com.gps.development.Naukri_Login"/>
+            <class name="com.gps.development.MilkManLoginWithMontlyTest"/>
+            <class name="com.gps.development.MilkManSignupAnnuallyTest"/>
+             <class name="com.gps.development.MilkManLoginWithWeeklyTest"/>
+
         </classes>
 
     </test>
 
-    <!-- ================= EDGE ================= -->
-    <test name="EdgeTest">
-
-        <parameter name="browser" value="edge"/>
-        <parameter name="url" value="https://www.naukri.com/"/>
-
-        <groups>
-            <run>
-                <include name="json"/>
-            </run>
-        </groups>
-
-        <classes>
-            <class name="com.gps.development.Naukri_Login"/>
-        </classes>
-
-    </test>
-
+  
+  
 </suite>

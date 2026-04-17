@@ -1,87 +1,95 @@
 package com.gps.utilities;
 
-import org.testng.Reporter;
-import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.aventstack.extentreports.Status;
 import com.gps.base.TestBase;
-import com.gps.utilities.ExcelUtil;
-import com.web.utilities.AITestAnalyzer;
 
 import java.io.FileReader;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class DynamicDataProvider extends TestBase {
 
-	// ================= MAIN DATAPROVIDER =================
+    @DataProvider(name = "dynamicData")
+    public Object[][] getData(Method method) throws Exception {
 
-	@DataProvider(name = "dynamicData")
-	public Object[][] getData(Method method) throws Exception {
+        Test testAnnotation = method.getAnnotation(Test.class);
+        String[] groups = testAnnotation.groups();
 
-		Test testAnnotation = method.getAnnotation(Test.class);
-		String[] groups = testAnnotation.groups();
+        for (String group : groups) {
 
-		for (String group : groups) {
+            if (group.equalsIgnoreCase("MilkManSignupTests")) {
+                return getJsonData(method.getName());
+            }
 
-			if (group.equalsIgnoreCase("json")) {
-				return getJsonData(method.getName());
-			}
+            if (group.equalsIgnoreCase("excel")) {
+                return getExcelData(method.getName());
+            }
+        }
 
-			if (group.equalsIgnoreCase("excel")) {
-				return getExcelData(method.getName());
-			}
-		}
+        throw new RuntimeException("No valid group defined for test: " + method.getName());
+    }
 
-		throw new RuntimeException("No valid group defined for test: " + method.getName());
-	}
+    // ================= JSON =================
 
-	// ================= JSON =================
+    private Object[][] getJsonData(String testName) throws Exception {
 
-	private Object[][] getJsonData(String testName) throws Exception {
-		String filePath = System.getProperty("user.dir") + "/src/test/resources/excel/testdata.json";
+        String filePath = System.getProperty("user.dir") + "/src/test/resources/excel/MilkManData.json";
 
-		JSONParser parser = new JSONParser();
-		JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(filePath));
+        JSONParser parser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(filePath));
 
-		List<Object[]> dataList = new ArrayList<>();
+        List<Object[]> dataList = new ArrayList<>();
 
-		for (Object obj : jsonArray) {
+        for (Object obj : jsonArray) {
 
-			JSONObject jsonObject = (JSONObject) obj;
+            JSONObject jsonObject = (JSONObject) obj;
 
-			String testCase = jsonObject.get("testCase").toString();
+            String testCase = jsonObject.get("testCase").toString();
 
-			if (testCase.equalsIgnoreCase(testName)) {
+            if (testCase.equalsIgnoreCase(testName)) {
 
-				dataList.add(
-						new Object[] { jsonObject.get("username").toString(), jsonObject.get("password").toString() });
-			}
-		}
+                Map<String, String> map = new HashMap<>();
 
-		return dataList.toArray(new Object[0][]);
-	}
-	// ================= EXCEL =================
+                for (Object key : jsonObject.keySet()) {
+                    map.put(key.toString(),
+                            jsonObject.get(key) != null ? jsonObject.get(key).toString() : "");
+                }
 
-	private Object[][] getExcelData(String testName) {
+                dataList.add(new Object[] { map });
 
-		String filePath = System.getProperty("user.dir") + "/src/test/resources/excel/Gps_Rules.xls";
+                break; // 🔥 IMPORTANT
+            }
+        }
 
-		ExcelUtil excelUtil = new ExcelUtil(filePath);
+        if (dataList.isEmpty()) {
+            throw new RuntimeException("No JSON data found for: " + testName);
+        }
 
-		Object[][] data = excelUtil.getSheetDataByTestCaseName("Signin", testName);
+        return dataList.toArray(new Object[0][]);
+    }
 
-		if (data.length == 0) {
+    // ================= EXCEL =================
 
-			throw new RuntimeException("No Excel data found for: " + testName);
-		}
+    private Object[][] getExcelData(String testName) {
 
-		return data;
-	}
+        String filePath = System.getProperty("user.dir") + "/src/test/resources/excel/Gps_Rules.xls";
+
+        ExcelUtil excelUtil = new ExcelUtil(filePath);
+
+        Object[][] data = excelUtil.getSheetDataByTestCaseName("Signin", testName);
+
+        if (data.length == 0) {
+            throw new RuntimeException("No Excel data found for: " + testName);
+        }
+
+        return data;
+    }
 }
