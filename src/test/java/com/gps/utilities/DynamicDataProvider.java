@@ -1,18 +1,10 @@
 package com.gps.utilities;
-
-import org.testng.Reporter;
-import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
-import com.aventstack.extentreports.Status;
 import com.gps.base.TestBase;
-import com.gps.utilities.ExcelUtil;
-import com.web.utilities.AITestAnalyzer;
-
 import java.io.FileReader;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
