@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="tests" name="Failed suite [ParallelCrossBrowserSuite]">
+  <test thread-count="2" parallel="tests" name="MOnthly user Signup(failed)">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="url" value="https://staging-uk.modernmilkman.dev/"/>
+    <groups>
+      <run>
+        <include name="MilkManSignupTests"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.gps.development.MilkManLoginWithWeeklyTest">
+        <methods>
+          <include name="endReport"/>
+          <include name="startReport"/>
+          <include name="tearDown"/>
+          <include name="MilkManSignupMontly" invocation-numbers="0"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- com.gps.development.MilkManLoginWithWeeklyTest -->
+      <class name="com.gps.development.MilkManLoginWithMontlyTest">
+        <methods>
+          <include name="MilkManSignupMontly" invocation-numbers="0"/>
+          <include name="endReport"/>
+          <include name="startReport"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- com.gps.development.MilkManLoginWithMontlyTest -->
+      <class name="com.gps.development.MilkManSignupAnnuallyTest">
+        <methods>
+          <include name="MilkManSignupMontly" invocation-numbers="0"/>
+          <include name="endReport"/>
+          <include name="startReport"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- com.gps.development.MilkManSignupAnnuallyTest -->
+    </classes>
+  </test> <!-- MOnthly user Signup(failed) -->
+</suite> <!-- Failed suite [ParallelCrossBrowserSuite] -->
