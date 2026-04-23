@@ -9,17 +9,24 @@ import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.io.FileReader;
+import java.io.FileWriter;
+
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -112,12 +119,13 @@ public class TestBase implements baseMethods {
 
 	protected static ExtentReports extent;
 	protected static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+	public static ThreadLocal<Map<String, String>> currentTestData = new ThreadLocal<>();
 	private static String reportPath;
 
 	public static AtomicInteger passCount = new AtomicInteger(0);
 	public static AtomicInteger failCount = new AtomicInteger(0);
 	public static AtomicInteger skipCount = new AtomicInteger(0);
-	
+
 	public static long suiteStartTime;
 	/* ================= CONFIG & UTILITIES ================= */
 
@@ -127,9 +135,12 @@ public class TestBase implements baseMethods {
 	static String filePath = System.getProperty("user.dir") + "/src/test/resources/excel/Gps_Rules.xls";
 
 	public static ExcelUtil excelUtil;
-
+	// public static int totalManualTime = 0;
 	public static Logger logger = Logger.getLogger("devpinoyLogger");
-
+	// ================= ADD THESE VARIABLES =================
+	public static AtomicLong totalExecutionTime = new AtomicLong(0);
+	public static AtomicInteger totalManualTime = new AtomicInteger(0);
+	private ThreadLocal<Long> testStartTime = new ThreadLocal<>();
 	private static final String CONFIG_PATH = System.getProperty("user.dir")
 			+ "/src/test/resources/properties/Config.properties";
 
@@ -138,480 +149,507 @@ public class TestBase implements baseMethods {
 	@BeforeSuite(alwaysRun = true)
 	public synchronized void startReport() {
 
-	    // ✅ FIX: Start time initialized correctly
-	    suiteStartTime = System.currentTimeMillis();
-	    logger.info("Suite Start Time: " + suiteStartTime);
+		// ✅ FIX: Start time initialized correctly
+		suiteStartTime = System.currentTimeMillis();
+		logger.info("Suite Start Time: " + suiteStartTime);
 
-	    if (extent == null) {
+		if (extent == null) {
 
-	        String path = System.getProperty("user.dir")
-	                + "/src/test/resources/Reports/Extentreport/AutomationReport_"
-	                + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
+			String path = System.getProperty("user.dir") + "/src/test/resources/Reports/Extentreport/AutomationReport_"
+					+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
 
-	        System.out.println("🔥 Report Path: " + path);
+			System.out.println("🔥 Report Path: " + path);
 
-	        ExtentSparkReporter spark = new ExtentSparkReporter(path);
-	        spark.config().setTheme(Theme.DARK);
-	        spark.config().setReportName("Automation Execution Report");
-	        spark.config().setDocumentTitle("Execution Report");
+			ExtentSparkReporter spark = new ExtentSparkReporter(path);
+			spark.config().setTheme(Theme.DARK);
+			spark.config().setReportName("Automation Execution Report");
+			spark.config().setDocumentTitle("Execution Report");
 
-	        extent = new ExtentReports();
-	        extent.attachReporter(spark);
+			extent = new ExtentReports();
+			extent.attachReporter(spark);
 
-	        extent.setSystemInfo("User", System.getProperty("user.name"));
-	        extent.setSystemInfo("Environment", "QA");
-	        extent.setSystemInfo("OS", System.getProperty("os.name"));
+			extent.setSystemInfo("User", System.getProperty("user.name"));
+			extent.setSystemInfo("Environment", "QA");
+			extent.setSystemInfo("OS", System.getProperty("os.name"));
 
-	        reportPath = path;
-	    }
+			reportPath = path;
+		}
 	}
-	/* ================= BROWSER SETUP ================= */
 
+	/* ================= BROWSER SETUP ================= */
 	@BeforeMethod(alwaysRun = true)
 	@Parameters({ "browser", "url" })
 	public void setUp(@Optional("") String browserFromXml, @Optional("") String urlFromXml, Method method)
 			throws Exception {
-try {
-		config.load(new FileInputStream(CONFIG_PATH));
 
-		// ===== Browser Selection =====
-		String browser;
+		try {
 
-		if (browserFromXml != null && !browserFromXml.trim().isEmpty()) {
-			browser = browserFromXml.trim();
-		} else {
-			browser = config.getProperty("browser");
+			// 🔥 START TIMER
+			testStartTime.set(System.currentTimeMillis());
+
+			config.load(new FileInputStream(CONFIG_PATH));
+
+			// ================= ROI MANUAL TIME =================
+			Map<String, String> data = currentTestData.get();
+
+			if (data != null) {
+
+			    String runMode = data.get("runMode");
+
+			    if (runMode != null && runMode.equalsIgnoreCase("no")) {
+
+			        throw new SkipException(
+			            "RunMode set to NO for test: " + method.getName()
+			        );
+			    }
+			}
+			if (data != null) {
+
+				String manualTime = data.get("manualTime");
+
+				if (manualTime != null && !manualTime.trim().isEmpty()) {
+
+					try {
+
+						int minutes = 0;
+						int seconds = 0;
+
+						// ✅ FIX: handle "3:50"
+						if (manualTime.contains(":")) {
+
+							String[] parts = manualTime.split(":");
+
+							minutes = Integer.parseInt(parts[0].trim());
+							seconds = Integer.parseInt(parts[1].trim());
+
+						}
+						// optional fallback (if someone uses 3.50)
+						else if (manualTime.contains(".")) {
+
+							String[] parts = manualTime.split("\\.");
+
+							minutes = Integer.parseInt(parts[0].trim());
+							seconds = Integer.parseInt(parts[1].trim());
+						}
+
+						int totalSeconds = (minutes * 60) + seconds;
+
+						totalManualTime.addAndGet(totalSeconds);
+
+						System.out.println("Manual time added: " + manualTime + " → " + totalSeconds + " sec");
+
+					} catch (Exception ex) {
+						System.out.println("Invalid manualTime format: " + manualTime);
+					}
+				}
+			}
+
+			// ===== BROWSER =====
+			String browser = (browserFromXml != null && !browserFromXml.isEmpty()) ? browserFromXml
+					: config.getProperty("browser");
+
+			WebDriver localDriver;
+
+			if (browser.equalsIgnoreCase("Chrome")) {
+				WebDriverManager.chromedriver().setup();
+				localDriver = new ChromeDriver();
+
+			} else if (browser.equalsIgnoreCase("Edge")) {
+				localDriver = new EdgeDriver();
+
+			} else if (browser.equalsIgnoreCase("firefox")) {
+				WebDriverManager.firefoxdriver().setup();
+				localDriver = new FirefoxDriver();
+
+			} else {
+				throw new RuntimeException("Unsupported browser: " + browser);
+			}
+
+			setDriver(localDriver);
+
+			getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			getDriver().manage().window().maximize();
+
+			String url = (urlFromXml != null && !urlFromXml.isEmpty()) ? urlFromXml : config.getProperty("testsiteurl");
+
+			getDriver().get(url);
+
+			ExtentTest extentTest = extent.createTest(method.getName());
+			test.set(extentTest);
+
+		} catch (Exception e) {
+			logAIFailure(e, "Setup failed");
+			throw e;
 		}
-
-		System.out.println("Launching Browser : " + browser);
-
-		WebDriver localDriver;
-
-		if (browser.equalsIgnoreCase("Chrome")) {
-
-			WebDriverManager.chromedriver().setup();
-			localDriver = new ChromeDriver();
-
-		} else if (browser.equalsIgnoreCase("Edge")) {
-
-			System.setProperty("webdriver.edge.driver",
-					"D:\\Raghavendra's documents\\edgedriver_win64\\msedgedriver.exe");
-			localDriver = new EdgeDriver();
-
-		} else if (browser.equalsIgnoreCase("firefox")) {
-
-			WebDriverManager.firefoxdriver().setup();
-			localDriver = new FirefoxDriver();
-
-		} else if (browser.equalsIgnoreCase("ie")) {
-
-			WebDriverManager.iedriver().setup();
-			localDriver = new InternetExplorerDriver();
-
-		} else {
-
-			throw new RuntimeException("Unsupported browser: " + browser);
-		}
-
-		// ===== Set Driver =====
-		setDriver(localDriver);
-
-		getDriver().manage().deleteAllCookies();
-		getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		getDriver().manage().window().maximize();
-
-		// ===== Capture Browser Info for Report =====
-		Capabilities caps = ((RemoteWebDriver) getDriver()).getCapabilities();
-		browsers.add(caps.getBrowserName());
-
-		// ===== URL Selection =====
-		String url;
-
-		if (urlFromXml != null && !urlFromXml.trim().isEmpty()) {
-			url = urlFromXml.trim();
-		} else {
-			url = config.getProperty("testsiteurl");
-		}
-
-		System.out.println("Opening URL : " + url);
-
-		appUrls.add(url);
-
-		getDriver().get(url);
-
-		// ===== Create Extent Test =====
-		ExtentTest extentTest = extent.createTest(method.getName());
-		test.set(extentTest);
-	
-	}catch(Exception e)
-	{
-		logAIFailure(e,getDriver().getCurrentUrl());
 	}
-	}
+
 	/* ================= TEST RESULT CAPTURE ================= */
-
 	@AfterMethod(alwaysRun = true)
 	public void tearDown(ITestResult result) {
 
-	    try {
+		try {
 
-	        if (test.get() != null) {
+			// 🔥 CAPTURE EXECUTION TIME
+			if (testStartTime.get() != null) {
 
-	            if (result.getStatus() == ITestResult.SUCCESS) {
+				long duration = result.getEndMillis() - result.getStartMillis();
+				totalExecutionTime.addAndGet(duration);
 
-	                passCount.incrementAndGet();  // ✅ FIX
-	                test.get().pass("Test Passed");
+				logger.info("Test Execution Time(ms): " + duration);
+			}
 
-	            } else if (result.getStatus() == ITestResult.FAILURE) {
+			if (test.get() != null) {
 
-	                failCount.incrementAndGet();  // ✅ FIX
-	                test.get().fail(result.getThrowable());
+				if (result.getStatus() == ITestResult.SUCCESS) {
+					passCount.incrementAndGet();
+					test.get().pass("Test Passed");
 
-	            } else if (result.getStatus() == ITestResult.SKIP) {
+				} else if (result.getStatus() == ITestResult.FAILURE) {
+					failCount.incrementAndGet();
+					test.get().fail(result.getThrowable());
 
-	                skipCount.incrementAndGet();  // ✅ FIX
-	                test.get().skip("Test Skipped");
-	            }
-	        }
+				} else if (result.getStatus() == ITestResult.SKIP) {
+					skipCount.incrementAndGet();
+					test.get().skip("Test Skipped");
+				}
+			}
 
-	    } catch (Exception e) {
-	        logger.error("Error in tearDown()", e);
-	    } finally {
+		} catch (Exception e) {
+			logger.error("Error in tearDown()", e);
+		} finally {
 
-	        if (getDriver() != null) {
-	            getDriver().quit();
-	        }
+			if (getDriver() != null) {
+				getDriver().quit();
+			}
 
-	        removeDriver();
-	    }
+			removeDriver();
+		}
 	}
+
 	private void uploadFolderToS3(File folder, String s3BasePath) {
 
-	    if (folder == null || !folder.exists()) return;
+		if (folder == null || !folder.exists())
+			return;
 
-	    String bucketName = config.getProperty("aws.bucketName");
-	    String region = config.getProperty("aws.region");
+		String bucketName = config.getProperty("aws.bucketName");
+		String region = config.getProperty("aws.region");
 
-	    AwsBasicCredentials credentials = AwsBasicCredentials.create(
-	            System.getenv("AWS_ACCESS_KEY_ID"),
-	            System.getenv("AWS_SECRET_ACCESS_KEY"));
+		AwsBasicCredentials credentials = AwsBasicCredentials.create(System.getenv("AWS_ACCESS_KEY_ID"),
+				System.getenv("AWS_SECRET_ACCESS_KEY"));
 
-	    S3Client s3Client = S3Client.builder()
-	            .region(Region.of(region))
-	            .credentialsProvider(StaticCredentialsProvider.create(credentials))
-	            .build();
+		S3Client s3Client = S3Client.builder().region(Region.of(region))
+				.credentialsProvider(StaticCredentialsProvider.create(credentials)).build();
 
-	    File[] files = folder.listFiles();
-	    if (files == null) return;
+		File[] files = folder.listFiles();
+		if (files == null)
+			return;
 
-	    for (File file : files) {
+		for (File file : files) {
 
-	        if (file.isDirectory()) {
-	            uploadFolderToS3(file, s3BasePath + "/" + file.getName());
-	        } else {
-	            try {
+			if (file.isDirectory()) {
+				uploadFolderToS3(file, s3BasePath + "/" + file.getName());
+			} else {
+				try {
 
-	                String key = s3BasePath + "/" + file.getName();
+					String key = s3BasePath + "/" + file.getName();
 
-	                PutObjectRequest request = PutObjectRequest.builder()
-	                        .bucket(bucketName)
-	                        .key(key)
-	                        .contentType(getContentType(file.getName()))
-	                        .build();
+					PutObjectRequest request = PutObjectRequest.builder().bucket(bucketName).key(key)
+							.contentType(getContentType(file.getName())).build();
 
-	                s3Client.putObject(request, file.toPath());
+					s3Client.putObject(request, file.toPath());
 
-	                logger.info("Uploaded screenshot: " + key);
+					logger.info("Uploaded screenshot: " + key);
 
-	            } catch (Exception e) {
-	                logger.error("Screenshot upload failed", e);
-	            }
-	        }
-	    }
+				} catch (Exception e) {
+					logger.error("Screenshot upload failed", e);
+				}
+			}
+		}
 	}
+
 	// ================= ONLY CHANGED PART BELOW =================
-	private void uploadRecursive(File folder, String s3BasePath,
-	        software.amazon.awssdk.services.s3.S3Client s3Client,
-	        String bucketName) {
+	private void uploadRecursive(File folder, String s3BasePath, software.amazon.awssdk.services.s3.S3Client s3Client,
+			String bucketName) {
 
-	    File[] files = folder.listFiles();
-	    if (files == null)
-	        return;
+		File[] files = folder.listFiles();
+		if (files == null)
+			return;
 
-	    for (File file : files) {
+		for (File file : files) {
 
-	        if (file.isDirectory()) {
+			if (file.isDirectory()) {
 
-	            uploadRecursive(file, s3BasePath + "/" + file.getName(), s3Client, bucketName);
+				uploadRecursive(file, s3BasePath + "/" + file.getName(), s3Client, bucketName);
 
-	        } else {
+			} else {
 
-	            try {
+				try {
 
-	                if (!(file.getName().endsWith(".html") || file.getPath().contains("screenshots"))) {
-	                    continue;
-	                }
+					if (!(file.getName().endsWith(".html") || file.getPath().contains("screenshots"))) {
+						continue;
+					}
 
-	                String key = s3BasePath + "/" + file.getName();
-	                
+					String key = s3BasePath + "/" + file.getName();
 
-	                // 🔥 CLEAN FIX (BREAK INTO STEPS)
-	                software.amazon.awssdk.services.s3.model.PutObjectRequest.Builder builder =
-	                        software.amazon.awssdk.services.s3.model.PutObjectRequest.builder()
-	                                .bucket(bucketName)
-	                                .key(key);
+					// 🔥 CLEAN FIX (BREAK INTO STEPS)
+					software.amazon.awssdk.services.s3.model.PutObjectRequest.Builder builder = software.amazon.awssdk.services.s3.model.PutObjectRequest
+							.builder().bucket(bucketName).key(key);
 
-	                // 🔥 Add content type safely
-	                builder.contentType(getContentType(file.getName()));
+					// 🔥 Add content type safely
+					builder.contentType(getContentType(file.getName()));
 
-	                software.amazon.awssdk.services.s3.model.PutObjectRequest request = builder.build();
+					software.amazon.awssdk.services.s3.model.PutObjectRequest request = builder.build();
 
-	                s3Client.putObject(request, file.toPath());
+					s3Client.putObject(request, file.toPath());
 
-	                logger.info("Uploaded: " + key);
+					logger.info("Uploaded: " + key);
 
-	            } catch (Exception e) {
-	                logger.error("Upload failed: " + file.getName(), e);
-	            }
-	        }
-	    }
+				} catch (Exception e) {
+					logger.error("Upload failed: " + file.getName(), e);
+				}
+			}
+		}
 	}
+
 	private String getContentType(String fileName) {
 
-	    fileName = fileName.toLowerCase();
+		fileName = fileName.toLowerCase();
 
-	    if (fileName.endsWith(".html")) return "text/html";
-	    if (fileName.endsWith(".png")) return "image/png";
-	    if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) return "image/jpeg";
-	    if (fileName.endsWith(".gif")) return "image/gif";
+		if (fileName.endsWith(".html"))
+			return "text/html";
+		if (fileName.endsWith(".png"))
+			return "image/png";
+		if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg"))
+			return "image/jpeg";
+		if (fileName.endsWith(".gif"))
+			return "image/gif";
 
-	    return "application/octet-stream";
+		return "application/octet-stream";
 	}
-	
-	
-	
+
 	private boolean isAwsUploadEnabled() {
-	    return Boolean.parseBoolean(config.getProperty("aws.upload.enabled", "false"));
+		return Boolean.parseBoolean(config.getProperty("aws.upload.enabled", "false"));
 	}
 
 	private boolean isEmailEnabled() {
-	    return Boolean.parseBoolean(config.getProperty("aws.email.enabled", "false"));
+		return Boolean.parseBoolean(config.getProperty("aws.email.enabled", "false"));
 	}
-	
-	
+
 	/* ================= EXTENT REPORT END ================= */
 	public static String s3BaseUrl = "";
+
 	@AfterSuite(alwaysRun = true)
 	public synchronized void endReport() {
 
-	    try {
+		try {
 
-	        if (extent == null) {
-	            logger.error("Extent is NULL");
-	            return;
-	        }
+			if (extent == null) {
+				logger.error("Extent is NULL");
+				return;
+			}
 
-	        // ==============================
-	        // ✅ FINALIZE EXTENT REPORT
-	        // ==============================
-	        extent.flush();
-	        waitForReportToBeReady(reportPath);
+			extent.flush();
+			waitForReportToBeReady(reportPath);
 
-	        String finalUrl = "";
+			String finalUrl = "";
 
-	        // ==============================
-	        // ✅ AWS UPLOAD (Optional)
-	        // ==============================
-	        if (isAwsUploadEnabled()) {
+			// ================= AWS =================
+			if (isAwsUploadEnabled()) {
 
-	            try {
+				try {
 
-	                String bucketName = config.getProperty("aws.bucketName");
-	                String region = config.getProperty("aws.region");
+					String bucketName = config.getProperty("aws.bucketName");
+					String region = config.getProperty("aws.region");
 
-	                String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss")
-	                        .format(new java.util.Date());
+					String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
 
-	                String fileName = "DashboardReport_" + timeStamp + ".html";
-	                String s3Key = "reports/latest/" + fileName;
+					String fileName = "DashboardReport_" + timeStamp + ".html";
+					String s3Key = "reports/latest/" + fileName;
 
-	                logger.info("Uploading report to S3...");
+					logger.info("Uploading report to S3...");
 
-	                uploadSingleFileToS3(reportPath, s3Key);
+					uploadSingleFileToS3(reportPath, s3Key);
 
-	                finalUrl = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + s3Key;
+					finalUrl = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + s3Key;
 
-	                logger.info("AWS URL: " + finalUrl);
+					logger.info("AWS URL: " + finalUrl);
 
-	            } catch (Exception ex) {
-	                logger.error("S3 upload failed", ex);
-	            }
-	        }
+				} catch (Exception ex) {
+					logger.error("S3 upload failed", ex);
+				}
+			}
 
-	        // ==============================
-	        // ✅ FETCH COUNTS
-	        // ==============================
-	        int pass = passCount.get();
-	        int fail = failCount.get();
-	        int skip = skipCount.get();
+			// ================= COUNTS =================
+			int pass = passCount.get();
+			int fail = failCount.get();
+			int skip = skipCount.get();
+			int total = pass + fail + skip;
 
-	        int total = pass + fail + skip;
+			logger.info(
+					"Execution Summary -> Total: " + total + " Pass: " + pass + " Fail: " + fail + " Skip: " + skip);
 
-	        logger.info("Execution Summary -> Total: " + total +
-	                " Pass: " + pass +
-	                " Fail: " + fail +
-	                " Skip: " + skip);
+			// ================= EXECUTION TIME =================
+			long duration = System.currentTimeMillis() - suiteStartTime;
 
-	        // ==============================
-	        // ✅ EXECUTION TIME (FIXED)
-	        // ==============================
-	        long duration = System.currentTimeMillis() - suiteStartTime;
+			long totalSeconds = duration / 1000;
+			long hours = totalSeconds / 3600;
+			long minutes = (totalSeconds % 3600) / 60;
+			long seconds = totalSeconds % 60;
 
-	        // 👉 Better formatting
-	        long totalSeconds = duration / 1000;
-	        long hours = totalSeconds / 3600;
-	        long minutes = (totalSeconds % 3600) / 60;
-	        long seconds = totalSeconds % 60;
+			logger.info("Execution Time: " + hours + "h " + minutes + "m " + seconds + "s");
 
-	        logger.info("Execution Time: " + hours + "h " + minutes + "m " + seconds + "s");
+			// ================= 🔥 ROI CALCULATION (FIXED) =================
+			int manualSeconds = totalManualTime.get();
 
-	        // ==============================
-	        // 🚀 GENERATE DASHBOARD
-	        // ==============================
-	        generateDashboardHtml(pass, fail, skip, finalUrl, duration);
+			// ✅ USE ACTUAL TEST EXECUTION TIME
+			int automationSeconds = (int) (totalExecutionTime.get() / 1000);
 
-	        // ==============================
-	        // ✅ OPEN EXTENT REPORT
-	        // ==============================
-	        try {
+			int saved = Math.max(0, manualSeconds - automationSeconds);
 
-	            File reportFile = new File(reportPath);
+			double efficiency = manualSeconds > 0 ? (saved * 100.0) / manualSeconds : 0;
 
-	            if (reportFile.exists() && Desktop.isDesktopSupported()) {
-	                Desktop.getDesktop().browse(reportFile.toURI());
-	                logger.info("Opened Extent report");
-	            }
+			String manualTimeStr = (manualSeconds / 60) + "m " + (manualSeconds % 60) + "s";
+			String autoTimeStr = (automationSeconds / 60) + "m " + (automationSeconds % 60) + "s";
+			String savedTimeStr = (saved / 60) + "m " + (saved % 60) + "s";
+			saveROIHistory(manualSeconds, automationSeconds, saved, efficiency);
+			// ================= LOGGER =================
+			logger.info("========= AUTOMATION ROI =========");
+			logger.info("Manual Time: " + manualTimeStr);
+			logger.info("Automation Time: " + autoTimeStr);
+			logger.info("Time Saved: " + savedTimeStr);
+			logger.info("Efficiency: " + String.format("%.2f", efficiency) + "%");
+			logger.info("=================================");
 
-	        } catch (Exception e) {
-	            logger.warn("Unable to open report");
-	        }
+			// ================= CONSOLE =================
+			System.out.println("\n========= AUTOMATION ROI =========");
+			System.out.println("Manual Time: " + manualTimeStr);
+			System.out.println("Automation Time: " + autoTimeStr);
+			System.out.println("Time Saved: " + savedTimeStr);
+			System.out.println("Efficiency: " + String.format("%.2f", efficiency) + "%");
+			System.out.println("=================================\n");
 
-	    } catch (Exception e) {
-	        logger.error("Error in endReport()", e);
-	    }
+			// ================= DASHBOARD =================
+			generateDashboardHtml(pass, fail, skip, finalUrl, totalExecutionTime.get());
+
+			// ================= OPEN REPORT =================
+			try {
+
+				File reportFile = new File(reportPath);
+
+				if (reportFile.exists() && Desktop.isDesktopSupported()) {
+					Desktop.getDesktop().browse(reportFile.toURI());
+					logger.info("Opened Extent report");
+				}
+
+			} catch (Exception e) {
+				logger.warn("Unable to open report");
+			}
+
+		} catch (Exception e) {
+			logger.error("Error in endReport()", e);
+		}
 	}
+
 	private void uploadSingleFileToS3(String filePath, String s3Key) {
 
-	    try {
+		try {
 
-	        File file = new File(filePath);
+			File file = new File(filePath);
 
-	        if (!file.exists()) {
-	            throw new RuntimeException("File not found: " + filePath);
-	        }
+			if (!file.exists()) {
+				throw new RuntimeException("File not found: " + filePath);
+			}
 
-	        String bucketName = config.getProperty("aws.bucketName");
-	        String region = config.getProperty("aws.region");
+			String bucketName = config.getProperty("aws.bucketName");
+			String region = config.getProperty("aws.region");
 
-	        AwsBasicCredentials credentials = AwsBasicCredentials.create(
-	                System.getenv("AWS_ACCESS_KEY_ID"),
-	                System.getenv("AWS_SECRET_ACCESS_KEY"));
+			AwsBasicCredentials credentials = AwsBasicCredentials.create(System.getenv("AWS_ACCESS_KEY_ID"),
+					System.getenv("AWS_SECRET_ACCESS_KEY"));
 
-	        S3Client s3Client = S3Client.builder()
-	                .region(Region.of(region))
-	                .credentialsProvider(StaticCredentialsProvider.create(credentials))
-	                .build();
+			S3Client s3Client = S3Client.builder().region(Region.of(region))
+					.credentialsProvider(StaticCredentialsProvider.create(credentials)).build();
 
-	        PutObjectRequest request = PutObjectRequest.builder()
-	                .bucket(bucketName)
-	                .key(s3Key)
-	                .contentType(getContentType(file.getName()))
-	                .build();
+			PutObjectRequest request = PutObjectRequest.builder().bucket(bucketName).key(s3Key)
+					.contentType(getContentType(file.getName())).build();
 
-	        s3Client.putObject(request, file.toPath());
+			s3Client.putObject(request, file.toPath());
 
-	        logger.info("Uploaded: " + s3Key);
+			logger.info("Uploaded: " + s3Key);
 
-	    } catch (Exception e) {
-	        logger.error("Upload failed", e);
-	    }
+		} catch (Exception e) {
+			logger.error("Upload failed", e);
+		}
 	}
+
 	private void waitForReportToBeReady(String reportPath) {
 
-	    File file = new File(reportPath);
+		File file = new File(reportPath);
 
-	    long lastSize = -1;
-	    int stableCount = 0;
+		long lastSize = -1;
+		int stableCount = 0;
 
-	    while (stableCount < 3) {
+		while (stableCount < 3) {
 
-	        long currentSize = file.length();
+			long currentSize = file.length();
 
-	        if (currentSize == lastSize && currentSize > 0) {
-	            stableCount++;
-	        } else {
-	            stableCount = 0;
-	        }
+			if (currentSize == lastSize && currentSize > 0) {
+				stableCount++;
+			} else {
+				stableCount = 0;
+			}
 
-	        lastSize = currentSize;
+			lastSize = currentSize;
 
-	        try {
-	           Thread.sleep(500);
-	        } catch (InterruptedException e) {
-	            Thread.currentThread().interrupt();
-	        }
-	    }
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
+		}
 
-	    logger.info("Report file is stable and ready for upload");
+		logger.info("Report file is stable and ready for upload");
 	}
 
 	private void deleteS3Folder(String prefix) {
 
-	    try {
+		try {
 
-	        String bucketName = config.getProperty("aws.bucketName");
-	        String region = config.getProperty("aws.region");
+			String bucketName = config.getProperty("aws.bucketName");
+			String region = config.getProperty("aws.region");
 
-	        AwsBasicCredentials credentials = AwsBasicCredentials.create(
-	                System.getenv("AWS_ACCESS_KEY_ID"),
-	                System.getenv("AWS_SECRET_ACCESS_KEY"));
+			AwsBasicCredentials credentials = AwsBasicCredentials.create(System.getenv("AWS_ACCESS_KEY_ID"),
+					System.getenv("AWS_SECRET_ACCESS_KEY"));
 
-	        S3Client s3Client = S3Client.builder()
-	                .region(Region.of(region))
-	                .credentialsProvider(StaticCredentialsProvider.create(credentials))
-	                .build();
+			S3Client s3Client = S3Client.builder().region(Region.of(region))
+					.credentialsProvider(StaticCredentialsProvider.create(credentials)).build();
 
-	        String continuationToken = null;
+			String continuationToken = null;
 
-	        do {
+			do {
 
-	            ListObjectsV2Request.Builder requestBuilder = ListObjectsV2Request.builder()
-	                    .bucket(bucketName)
-	                    .prefix(prefix);
+				ListObjectsV2Request.Builder requestBuilder = ListObjectsV2Request.builder().bucket(bucketName)
+						.prefix(prefix);
 
-	            if (continuationToken != null) {
-	                requestBuilder.continuationToken(continuationToken);
-	            }
+				if (continuationToken != null) {
+					requestBuilder.continuationToken(continuationToken);
+				}
 
-	            ListObjectsV2Response response = s3Client.listObjectsV2(requestBuilder.build());
+				ListObjectsV2Response response = s3Client.listObjectsV2(requestBuilder.build());
 
-	            for (S3Object obj : response.contents()) {
+				for (S3Object obj : response.contents()) {
 
-	                s3Client.deleteObject(DeleteObjectRequest.builder()
-	                        .bucket(bucketName)
-	                        .key(obj.key())
-	                        .build());
+					s3Client.deleteObject(DeleteObjectRequest.builder().bucket(bucketName).key(obj.key()).build());
 
-	                System.out.println("Deleted: " + obj.key());
-	            }
+					System.out.println("Deleted: " + obj.key());
+				}
 
-	            continuationToken = response.nextContinuationToken();
+				continuationToken = response.nextContinuationToken();
 
-	        } while (continuationToken != null);
+			} while (continuationToken != null);
 
-	    } catch (Exception e) {
-	        logger.error("Delete failed", e);
-	    }
+		} catch (Exception e) {
+			logger.error("Delete failed", e);
+		}
 	}
 	/* ================= AI FAILURE LOGGER ================= */
 
@@ -619,57 +657,53 @@ try {
 
 	protected void logAIFailure(Exception e, String failValue) {
 
-	    String aiSuggestion = AITestAnalyzer.analyze(e);
-	    String screenshotPath = null;
+		String aiSuggestion = AITestAnalyzer.analyze(e);
+		String screenshotPath = null;
 
-	    try {
-	        screenshotPath = screenshotutil.takeScreenshot(getDriver());
-	    } catch (Exception ex) {
-	        logger.warn("Screenshot capture failed");
-	    }
+		try {
+			screenshotPath = screenshotutil.takeScreenshot(getDriver());
+		} catch (Exception ex) {
+			logger.warn("Screenshot capture failed");
+		}
 
-	    if (test.get() != null) {
+		if (test.get() != null) {
 
-	        test.get().log(Status.FAIL, failValue);
+			test.get().log(Status.FAIL, failValue);
 
-	        if (screenshotPath != null && isAwsUploadEnabled()) {
+			if (screenshotPath != null && isAwsUploadEnabled()) {
 
-	            try {
+				try {
 
-	                String bucketName = config.getProperty("aws.bucketName");
-	                String region = config.getProperty("aws.region");
+					String bucketName = config.getProperty("aws.bucketName");
+					String region = config.getProperty("aws.region");
 
-	                String fileName = new File(screenshotPath).getName();
-	                String s3Key = "reports/latest/screenshots/" + fileName;
+					String fileName = new File(screenshotPath).getName();
+					String s3Key = "reports/latest/screenshots/" + fileName;
 
-	                // 🔥 TRY UPLOAD
-	                uploadSingleFileToS3(screenshotPath, s3Key);
+					// 🔥 TRY UPLOAD
+					uploadSingleFileToS3(screenshotPath, s3Key);
 
-	                String s3Url = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + s3Key;
+					String s3Url = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + s3Key;
 
-	                // 🔥 ONLY LINK (NO IMAGE)
-	                test.get().log(Status.FAIL,
-	                        aiSuggestion + "<br><br>" +
-	                        "<a href='" + s3Url + "' target='_blank' " +
-	                        "style='color:red;font-weight:bold;'>👉 View Screenshot</a>");
+					// 🔥 ONLY LINK (NO IMAGE)
+					test.get().log(Status.FAIL, aiSuggestion + "<br><br>" + "<a href='" + s3Url + "' target='_blank' "
+							+ "style='color:red;font-weight:bold;'>👉 View Screenshot</a>");
 
-	            } catch (Exception ex) {
+				} catch (Exception ex) {
 
-	                // 🔥 IF UPLOAD FAILS
-	                test.get().log(Status.FAIL,
-	                        aiSuggestion + "<br><br>" +
-	                        "<b style='color:red;'>Screenshot upload failed</b>");
+					// 🔥 IF UPLOAD FAILS
+					test.get().log(Status.FAIL,
+							aiSuggestion + "<br><br>" + "<b style='color:red;'>Screenshot upload failed</b>");
 
-	                logger.error("Screenshot upload failed", ex);
-	            }
+					logger.error("Screenshot upload failed", ex);
+				}
 
-	        } else {
-	            test.get().log(Status.FAIL, aiSuggestion);
-	        }
-	    }
+			} else {
+				test.get().log(Status.FAIL, aiSuggestion);
+			}
+		}
 	}
-	
-	
+
 	/* ================= BASE METHODS ================= */
 
 	@Override
@@ -738,35 +772,35 @@ try {
 
 	@Override
 	public void sendkeys(By element, String value, String passValue, String failValue) {
-	    try {
-	        WebElement ele = getDriver().findElement(element);
+		try {
+			WebElement ele = getDriver().findElement(element);
 
-	        // Highlight
-	        elementhighlight(ele);
+			// Highlight
+			elementhighlight(ele);
 
-	        // Assertions
-	        Assert.assertTrue(ele.isDisplayed(), "Element is not displayed");
-	        Assert.assertTrue(ele.isEnabled(), "Element is not enabled");
+			// Assertions
+			Assert.assertTrue(ele.isDisplayed(), "Element is not displayed");
+			Assert.assertTrue(ele.isEnabled(), "Element is not enabled");
 
-	        // Action
-	        ele.clear();
-	        ele.sendKeys(value);
+			// Action
+			ele.clear();
+			ele.sendKeys(value);
 
-	        // Validation
-	        String enteredText = ele.getAttribute("value");
-	        Assert.assertEquals(enteredText, value, "Entered value mismatch");
+			// Validation
+			String enteredText = ele.getAttribute("value");
+			Assert.assertEquals(enteredText, value, "Entered value mismatch");
 
-	        // ✅ Log actual value (no masking)
-	        test.get().log(Status.PASS, passValue + " | Entered Value: " + value);
+			// ✅ Log actual value (no masking)
+			test.get().log(Status.PASS, passValue + " | Entered Value: " + value);
 
-	    } catch (Exception e) {
-	        test.get().log(Status.FAIL, failValue + " | Exception: " + e.getMessage());
+		} catch (Exception e) {
+			test.get().log(Status.FAIL, failValue + " | Exception: " + e.getMessage());
 
 			logAIFailure(e, failValue);
 
-	    
-	    }
+		}
 	}
+
 	@Override
 	public void elementhighlight(WebElement element) {
 		try {
@@ -938,227 +972,334 @@ try {
 
 	private void sendEmailViaSES(String toEmail, String subject, String body) {
 
-	    try {
+		try {
 
-	        String accessKey = config.getProperty("aws.accessKey");
-	        String secretKey = config.getProperty("aws.secretKey");
-	        String region = config.getProperty("aws.region");
-	        String fromEmail = config.getProperty("aws.fromEmail");
+			String accessKey = config.getProperty("aws.accessKey");
+			String secretKey = config.getProperty("aws.secretKey");
+			String region = config.getProperty("aws.region");
+			String fromEmail = config.getProperty("aws.fromEmail");
 
-	        logger.info("Sending email via SES...");
-	        logger.info("From: " + fromEmail + " | To: " + toEmail + " | Region: " + region);
+			logger.info("Sending email via SES...");
+			logger.info("From: " + fromEmail + " | To: " + toEmail + " | Region: " + region);
 
-	        software.amazon.awssdk.services.ses.SesClient sesClient =
-	                software.amazon.awssdk.services.ses.SesClient.builder()
-	                        .region(software.amazon.awssdk.regions.Region.of(region))
-	                        .credentialsProvider(
-	                                software.amazon.awssdk.auth.credentials.StaticCredentialsProvider.create(
-	                                        software.amazon.awssdk.auth.credentials.AwsBasicCredentials.create(
-	                                                accessKey, secretKey)))
-	                        .build();
+			software.amazon.awssdk.services.ses.SesClient sesClient = software.amazon.awssdk.services.ses.SesClient
+					.builder().region(software.amazon.awssdk.regions.Region.of(region))
+					.credentialsProvider(software.amazon.awssdk.auth.credentials.StaticCredentialsProvider.create(
+							software.amazon.awssdk.auth.credentials.AwsBasicCredentials.create(accessKey, secretKey)))
+					.build();
 
-	        software.amazon.awssdk.services.ses.model.SendEmailRequest request =
-	                software.amazon.awssdk.services.ses.model.SendEmailRequest.builder()
-	                        .source(fromEmail)
-	                        .destination(
-	                                software.amazon.awssdk.services.ses.model.Destination.builder()
-	                                        .toAddresses(toEmail)
-	                                        .build()
-	                        )
-	                        .message(
-	                                software.amazon.awssdk.services.ses.model.Message.builder()
-	                                        .subject(
-	                                                software.amazon.awssdk.services.ses.model.Content.builder()
-	                                                        .data(subject)
-	                                                        .build()
-	                                        )
-	                                        .body(
-	                                                software.amazon.awssdk.services.ses.model.Body.builder()
-	                                                        .html(
-	                                                                software.amazon.awssdk.services.ses.model.Content.builder()
-	                                                                        .data(body)
-	                                                                        .build()
-	                                                        )
-	                                                        .build()
-	                                        )
-	                                        .build()
-	                        )
-	                        .build();
+			software.amazon.awssdk.services.ses.model.SendEmailRequest request = software.amazon.awssdk.services.ses.model.SendEmailRequest
+					.builder().source(fromEmail)
+					.destination(software.amazon.awssdk.services.ses.model.Destination.builder().toAddresses(toEmail)
+							.build())
+					.message(software.amazon.awssdk.services.ses.model.Message.builder()
+							.subject(software.amazon.awssdk.services.ses.model.Content.builder().data(subject).build())
+							.body(software.amazon.awssdk.services.ses.model.Body.builder().html(
+									software.amazon.awssdk.services.ses.model.Content.builder().data(body).build())
+									.build())
+							.build())
+					.build();
 
-	        sesClient.sendEmail(request);
+			sesClient.sendEmail(request);
 
-	        logger.info("Email sent successfully");
+			logger.info("Email sent successfully");
 
-	    } catch (Exception e) {
+		} catch (Exception e) {
 
-	        logger.error("❌ SES EMAIL FAILED: " + e.getMessage(), e);
-	    }
+			logger.error("❌ SES EMAIL FAILED: " + e.getMessage(), e);
+		}
 	}
-	
 
-	
-	
-	
 	public void generateDashboardHtml(int pass, int fail, int skip, String finalUrl, long durationMillis) {
 
-	    try {
+		try {
 
-	    	  String path = System.getProperty("user.dir")
-		                + "/src/test/resources/Reports/DashBoard/DashboardReport_"
-		                + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
+			String path = System.getProperty("user.dir") + "/src/test/resources/Reports/DashBoard/DashboardReport_"
+					+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
 
-	        int total = pass + fail + skip;
+			int total = pass + fail + skip;
 
-	        int passPer = total == 0 ? 0 : (pass * 100 / total);
-	        int failPer = total == 0 ? 0 : (fail * 100 / total);
-	        int skipPer = total == 0 ? 0 : (skip * 100 / total);
+			int passPer = total == 0 ? 0 : (pass * 100 / total);
+			int failPer = total == 0 ? 0 : (fail * 100 / total);
+			int skipPer = total == 0 ? 0 : (skip * 100 / total);
 
-	        long seconds = durationMillis / 1000;
-	        long minutes = seconds / 60;
-	        seconds = seconds % 60;
+			long seconds = durationMillis / 1000;
+			long minutes = seconds / 60;
+			seconds = seconds % 60;
 
-	        String status = (fail > 0) ? "FAILED ❌" : "PASSED ✅";
-	        String statusColor = (fail > 0) ? "#ff6b6b" : "#4ade80";
+			// ================= 🔥 ROI CALCULATION =================
+			int manualSeconds = totalManualTime.get();
+			int automationSeconds = (int) Math.round(durationMillis / 1000.0);
+			int saved = Math.max(0, manualSeconds - automationSeconds);
 
-	        String html =
-	        "<html><head><title>Automation Dashboard</title>" +
+			double efficiency = manualSeconds > 0 ? (saved * 100.0) / manualSeconds : 0;
 
-	        "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>" +
+			String manualTimeStr = (manualSeconds / 60) + "m " + (manualSeconds % 60) + "s";
+			String autoTimeStr = (automationSeconds / 60) + "m " + (automationSeconds % 60) + "s";
+			String savedTimeStr = (saved / 60) + "m " + (saved % 60) + "s";
 
-	        "<style>" +
+			// ================= 🔥 ROI CATEGORY =================
+			String roiLabel;
+			String roiColor;
 
-	        "body{font-family:Segoe UI;background:#0f172a;color:white;padding:20px;text-align:center}" +
+			if (efficiency < 20) {
+				roiLabel = "Low ROI 🔴";
+				roiColor = "#ef4444";
+			} else if (efficiency < 50) {
+				roiLabel = "Moderate ROI 🟡";
+				roiColor = "#facc15";
+			} else {
+				roiLabel = "High ROI 🟢";
+				roiColor = "#22c55e";
+			}
+			// ====================================================
 
-	        ".tabs{margin-bottom:20px}" +
-	        ".tab{cursor:pointer;padding:10px 20px;background:#1e293b;border-radius:8px;margin-right:10px;display:inline-block}" +
-	        ".tab:hover{background:#334155}" +
+			String status = (fail > 0) ? "FAILED ❌" : "PASSED ✅";
+			String statusColor = (fail > 0) ? "#ff6b6b" : "#4ade80";
 
-	        ".card{background:#1e293b;padding:20px;border-radius:10px;margin-top:20px}" +
+			// ADD THIS BEFORE String html
+			Map<String, Object> weekly = getWeeklyROI();
 
-	        ".chart-row{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}" +
+			double weeklyROI = (double) weekly.get("weeklyROI");
+			int weeklyRuns = (int) weekly.get("runs");
+			int weeklySaved = (int) weekly.get("savedSeconds");
 
-	        ".chart-container{" +
-	        "width:300px;" +
-	        "height:300px;" +
-	        "}" +
+			String weeklySavedStr = (weeklySaved / 60) + "m " + (weeklySaved % 60) + "s";
 
-	        ".hidden{display:none}" +
+			String html = "<html><head><title>Automation Dashboard</title>" +
 
-	        "</style>" +
+			        "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>" +
 
-	        "<script>" +
-	        "function showTab(tab){" +
-	        "document.getElementById('summary').style.display='none';" +
-	        "document.getElementById('charts').style.display='none';" +
-	        "document.getElementById(tab).style.display='block';" +
-	        "}" +
-	        "</script>" +
+			        "<style>"
+			        + "body{font-family:Segoe UI;background:#0f172a;color:white;padding:20px;text-align:center}"
+			        + ".tabs{margin-bottom:20px}"
+			        + ".tab{cursor:pointer;padding:10px 20px;background:#1e293b;border-radius:8px;margin-right:10px;display:inline-block}"
+			        + ".tab:hover{background:#334155}"
+			        + ".card{background:#1e293b;padding:20px;border-radius:10px;margin-top:20px}"
+			        + ".chart-row{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}"
+			        + ".chart-container{width:300px;height:300px;}"
+			        + ".hidden{display:none}"
+			        + "</style>" +
 
-	        "</head><body>" +
+			        "<script>"
+			        + "function showTab(tab){"
+			        + "document.getElementById('summary').style.display='none';"
+			        + "document.getElementById('charts').style.display='none';"
+			        + "document.getElementById(tab).style.display='block';"
+			        + "}"
+			        + "</script>" +
 
-	        "<h1>🚀 Automation Dashboard</h1>" +
+			        "</head><body>" +
 
-	        "<div class='tabs'>" +
-	        "<span class='tab' onclick=\"showTab('summary')\">Summary</span>" +
-	        "<span class='tab' onclick=\"showTab('charts')\">Charts</span>" +
-	        "</div>" +
+			        "<h1>🚀 Automation Dashboard</h1>" +
 
-	        // ================= SUMMARY =================
-	        "<div id='summary' class='card'>" +
+			        "<div class='tabs'>"
+			        + "<span class='tab' onclick=\"showTab('summary')\">Summary</span>"
+			        + "<span class='tab' onclick=\"showTab('charts')\">Charts</span>"
+			        + "</div>" +
 
-	        "<h2 style='color:" + statusColor + "'>Build Status: " + status + "</h2>" +
-	        "<p>Total Tests: " + total + "</p>" +
-	        "<p>Execution Time: " + minutes + "m " + seconds + "s</p>" +
+			        // ================= SUMMARY =================
+			        "<div id='summary' class='card'>" +
 
-	        "<p>✔ Passed: " + pass + " (" + passPer + "%)</p>" +
-	        "<p>❌ Failed: " + fail + " (" + failPer + "%)</p>" +
-	        "<p>⚠ Skipped: " + skip + " (" + skipPer + "%)</p>" +
+			        "<h2 style='color:" + statusColor + "'>Build Status: " + status + "</h2>"
+			        + "<p>Total Tests: " + total + "</p>"
+			        + "<p>Execution Time: " + minutes + "m " + seconds + "s</p>"
 
-	        "<br>" +
-	        "<a href='" + finalUrl + "' target='_blank' " +
-	        "style='background:#22c55e;color:black;padding:10px 20px;border-radius:8px;text-decoration:none'>" +
-	        "Open Full Report</a>" +
+			        + "<p>✔ Passed: " + pass + " (" + passPer + "%)</p>"
+			        + "<p>❌ Failed: " + fail + " (" + failPer + "%)</p>"
+			        + "<p>⚠ Skipped: " + skip + " (" + skipPer + "%)</p>"
 
-	        "</div>" +
+			        // ================= ROI =================
+			        + "<hr style='margin:20px 0;border:1px solid #334155'>"
+			        + "<h2>⚡ Automation ROI</h2>"
+			        + "<p>Manual Time: " + manualTimeStr + "</p>"
+			        + "<p>Automation Time: " + autoTimeStr + "</p>"
+			        + "<p>Time Saved: " + savedTimeStr + "</p>"
+			        + "<p>Efficiency: " + String.format("%.2f", efficiency) + "%</p>"
 
-	        // ================= CHARTS =================
-	        "<div id='charts' class='card hidden'>" +
+			        + "<span style='background:" + roiColor
+			        + ";padding:6px 14px;border-radius:10px;color:black;font-weight:bold'>"
+			        + roiLabel
+			        + "</span>"
 
-	        "<div class='chart-row'>" +
+			        // ================= WEEKLY ROI =================
+			        + "<hr style='margin:20px 0;border:1px solid #334155'>"
+			        + "<h2>📈 Weekly ROI</h2>"
+			        + "<p>Weekly ROI: " + String.format("%.2f", weeklyROI) + "%</p>"
+			        + "<p>Runs This Week: " + weeklyRuns + "</p>"
+			        + "<p>Weekly Time Saved: " + weeklySavedStr + "</p>"
 
-	        "<div class='chart-container'><canvas id='pieChart'></canvas></div>" +
-	        "<div class='chart-container'><canvas id='barChart'></canvas></div>" +
-	        "<div class='chart-container'><canvas id='horizontalChart'></canvas></div>" +
+			        + "<br><br>"
+			        + "<a href='" + finalUrl + "' target='_blank' "
+			        + "style='background:#22c55e;color:black;padding:10px 20px;border-radius:8px;text-decoration:none'>"
+			        + "Open Full Report</a>"
 
-	        "</div>" +
+			        + "</div>"
 
-	        "</div>" +
+			        // ================= CHARTS =================
+			        + "<div id='charts' class='card hidden'>"
+			        + "<div class='chart-row'>"
+			        + "<div class='chart-container'><canvas id='pieChart'></canvas></div>"
+			        + "<div class='chart-container'><canvas id='barChart'></canvas></div>"
+			        + "<div class='chart-container'><canvas id='horizontalChart'></canvas></div>"
+			        + "</div>"
+			        + "</div>"
 
-	        "<script>" +
+			        + "<script>"
 
-	        "document.getElementById('summary').style.display='block';" +
+			        + "document.getElementById('summary').style.display='block';"
 
-	        // DOUGHNUT (BEST LOOK)
-	        "new Chart(document.getElementById('pieChart'), {" +
-	        "type:'doughnut'," +
-	        "data:{labels:['Passed','Failed','Skipped']," +
-	        "datasets:[{data:[" + pass + "," + fail + "," + skip + "]," +
-	        "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," +
-	        "options:{responsive:true,maintainAspectRatio:false}" +
-	        "});" +
+			        + "new Chart(document.getElementById('pieChart'), {"
+			        + "type:'doughnut',"
+			        + "data:{labels:['Passed','Failed','Skipped'],"
+			        + "datasets:[{data:[" + pass + "," + fail + "," + skip + "],"
+			        + "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," 
+			        + "options:{responsive:true,maintainAspectRatio:false}"
+			        + "});"
 
-	        // BAR
-	        "new Chart(document.getElementById('barChart'), {" +
-	        "type:'bar'," +
-	        "data:{labels:['Passed','Failed','Skipped']," +
-	        "datasets:[{data:[" + pass + "," + fail + "," + skip + "]," +
-	        "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," +
-	        "options:{responsive:true,maintainAspectRatio:false}" +
-	        "});" +
+			        + "new Chart(document.getElementById('barChart'), {"
+			        + "type:'bar',"
+			        + "data:{labels:['Passed','Failed','Skipped'],"
+			        + "datasets:[{data:[" + pass + "," + fail + "," + skip + "],"
+			        + "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," 
+			        + "options:{responsive:true,maintainAspectRatio:false}"
+			        + "});"
 
-	        // HORIZONTAL BAR
-	        "new Chart(document.getElementById('horizontalChart'), {" +
-	        "type:'bar'," +
-	        "data:{labels:['Passed','Failed','Skipped']," +
-	        "datasets:[{data:[" + pass + "," + fail + "," + skip + "]," +
-	        "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," +
-	        "options:{indexAxis:'y',responsive:true,maintainAspectRatio:false}" +
-	        "});" +
+			        + "new Chart(document.getElementById('horizontalChart'), {"
+			        + "type:'bar',"
+			        + "data:{labels:['Passed','Failed','Skipped'],"
+			        + "datasets:[{data:[" + pass + "," + fail + "," + skip + "],"
+			        + "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," 
+			        + "options:{indexAxis:'y',responsive:true,maintainAspectRatio:false}"
+			        + "});"
 
-	        "</script>" +
+			        + "</script>"
 
-	        "</body></html>";
+			        + "</body></html>";
 
-	        java.nio.file.Files.write(java.nio.file.Paths.get(path), html.getBytes());
+			java.nio.file.Files.write(java.nio.file.Paths.get(path), html.getBytes());
 
-	        logger.info("Dashboard generated: " + path);
+			logger.info("Dashboard generated: " + path);
 
-	        if (Desktop.isDesktopSupported()) {
-	            Desktop.getDesktop().browse(new File(path).toURI());
-	        }
+			if (Desktop.isDesktopSupported()) {
+				Desktop.getDesktop().browse(new File(path).toURI());
+			}
 
-	    } catch (Exception e) {
-	        logger.error("Dashboard generation failed", e);
-	    }
+		} catch (Exception e) {
+			logger.error("Dashboard generation failed", e);
+		}
 	}
-	//Need to add to @override
-	
+	// Need to add to @override
+
 	public void switchToFrame(By locator, String frameName) {
 
-	    WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
 
-	    try {
-	        logger.info("Switching to frame: " + frameName);
+		try {
+			logger.info("Switching to frame: " + frameName);
 
-	        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(locator));
+			wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(locator));
 
-	        test.get().log(Status.PASS, "Switched to frame: " + frameName);
+			test.get().log(Status.PASS, "Switched to frame: " + frameName);
 
-	    } catch (Exception e) {
+		} catch (Exception e) {
 
-	    	logAIFailure(e, frameName);
-	    }
-	 
+			logAIFailure(e, frameName);
+		}
+
+	}
+
+	public void saveROIHistory(int manualSeconds, int automationSeconds, int savedSeconds, double roi) {
+
+		try {
+
+			String roiPath = config.getProperty("roiHistoryPath");
+
+			File file = new File(roiPath);
+
+			JSONArray history = new JSONArray();
+
+			if (file.exists() && file.length() > 0) {
+
+				JSONParser parser = new JSONParser();
+				history = (JSONArray) parser.parse(new FileReader(file));
+			}
+
+			JSONObject obj = new JSONObject();
+
+			obj.put("date", java.time.LocalDate.now().toString());
+			obj.put("manualSeconds", manualSeconds);
+			obj.put("automationSeconds", automationSeconds);
+			obj.put("savedSeconds", savedSeconds);
+			obj.put("roi", roi);
+
+			history.add(obj);
+
+			FileWriter fw = new FileWriter(file);
+			fw.write(history.toJSONString());
+			fw.flush();
+			fw.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
+	public Map<String, Object> getWeeklyROI() {
+
+	    Map<String, Object> result = new HashMap<>();
+
+	    try {
+
+	        String roiPath = System.getProperty("user.dir") + "/"
+	                + config.getProperty("roiHistoryPath");
+
+	        File file = new File(roiPath);
+
+	        if (!file.exists()) {
+	            result.put("weeklyROI", 0.0);
+	            result.put("runs", 0);
+	            result.put("savedSeconds", 0);
+	            return result;
+	        }
+
+	        JSONParser parser = new JSONParser();
+	        JSONArray history = (JSONArray) parser.parse(new FileReader(file));
+
+	        int totalManual = 0;
+	        int totalSaved = 0;
+	        int runs = 0;
+
+	        LocalDate today = LocalDate.now();
+	        LocalDate weekStart = today.minusDays(6);
+
+	        for (Object obj : history) {
+
+	            JSONObject row = (JSONObject) obj;
+
+	            LocalDate runDate = LocalDate.parse(row.get("date").toString());
+
+	            if (!runDate.isBefore(weekStart)) {
+
+	                totalManual += Integer.parseInt(row.get("manualSeconds").toString());
+	                totalSaved += Integer.parseInt(row.get("savedSeconds").toString());
+	                runs++;
+	            }
+	        }
+
+	        double weeklyROI = totalManual > 0
+	                ? (totalSaved * 100.0) / totalManual
+	                : 0;
+
+	        result.put("weeklyROI", weeklyROI);
+	        result.put("runs", runs);
+	        result.put("savedSeconds", totalSaved);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return result;
+	}
+
 }

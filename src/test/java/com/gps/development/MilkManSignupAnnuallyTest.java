@@ -31,12 +31,32 @@ public class MilkManSignupAnnuallyTest extends TestBase {
 		    public void MilkManSignupAnnually(Map<String, String> data) {
 
 			try {
-				   String runMode = data.get("runMode");
+				 
 
-		            if (runMode.equalsIgnoreCase("no")) {
-		                throw new SkipException("RunMode NO");
-		            }
+		        
+		            // ================= 🔥 MANUAL TIME CAPTURE =================
+                    String manualTime = data.get("manualTime");
 
+                    System.out.println("DEBUG manualTime: " + manualTime);
+
+                    if (manualTime != null && !manualTime.trim().isEmpty()) {
+
+                        try {
+                            String[] parts = manualTime.split(":");
+
+                            int minutes = Integer.parseInt(parts[0]);
+                            int seconds = Integer.parseInt(parts[1]);
+
+                            int totalSeconds = (minutes * 60) + seconds;
+
+                            totalManualTime.addAndGet(totalSeconds);
+
+                            System.out.println("Manual time added: " + manualTime);
+
+                        } catch (Exception ex) {
+                            System.out.println("Invalid manualTime format: " + manualTime);
+                        }
+                    }
 		            String fName = data.get("FirstName");
 		            String lastName = data.get("LastName");
 		            String email = data.get("Email");
@@ -49,7 +69,7 @@ public class MilkManSignupAnnuallyTest extends TestBase {
 
 		            String dropdownSelect = data.get("dropdownSelect");
 		            String dropDownDate = data.get("dropDownDate");
-		            String frameName = data.get("frameName");
+		         //   String frameName = data.get("frameName");
 
 		            String mainItem_1 = data.get("mainItem_1");
 		            String subItem_1_1 = data.get("subItem_1_1");
@@ -163,6 +183,12 @@ public class MilkManSignupAnnuallyTest extends TestBase {
 				waitforelement(1000);
 				deliveryPage.selectFromDropdownValue(element2, dropDownDate);
 				waitforelement(1000);
+				String frameName = java.time.LocalDate.now().plusDays(2).format(java.time.format.DateTimeFormatter.ofPattern("EEE, d"))
+				        + ((java.time.LocalDate.now().plusDays(2).getDayOfMonth() >= 11 && java.time.LocalDate.now().plusDays(2).getDayOfMonth() <= 13) ? "th" :
+				        (java.time.LocalDate.now().plusDays(2).getDayOfMonth() % 10 == 1 ? "st" :
+				        java.time.LocalDate.now().plusDays(2).getDayOfMonth() % 10 == 2 ? "nd" :
+				        java.time.LocalDate.now().plusDays(2).getDayOfMonth() % 10 == 3 ? "rd" : "th"))
+				        + java.time.LocalDate.now().plusDays(2).format(java.time.format.DateTimeFormatter.ofPattern(" MMMM"));
 				deliveryPage.selectFromDropdownValue(element2, frameName);
 				waitforelement(1000);
 				deliveryPage.selectFromDropdownValue(element1, mainItem_1);// main

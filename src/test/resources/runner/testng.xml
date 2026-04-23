@@ -1,9 +1,11 @@
 <suite name="ParallelCrossBrowserSuite"
        parallel="tests"
-       thread-count="2">
+       thread-count="3">
 
-    <!-- ================= CHROME ================= -->
-    <test name="MOnthly user Signup">
+    <test name="Monthly user Signup">
+
+        <!-- 🔥 ADD THIS -->
+        <parameter name="testDataPath" value="src/test/resources/excel/MilkManData.json"/>
 
         <parameter name="browser" value="chrome"/>
         <parameter name="url" value="https://staging-uk.modernmilkman.dev/"/>
@@ -17,12 +19,9 @@
         <classes>
             <class name="com.gps.development.MilkManLoginWithMontlyTest"/>
             <class name="com.gps.development.MilkManSignupAnnuallyTest"/>
-             <class name="com.gps.development.MilkManLoginWithWeeklyTest"/>
-
+            <class name="com.gps.development.MilkManLoginWithWeeklyTest"/>
         </classes>
 
     </test>
 
-  
-  
 </suite>

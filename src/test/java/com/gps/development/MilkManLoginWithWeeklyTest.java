@@ -30,11 +30,32 @@ public class MilkManLoginWithWeeklyTest extends TestBase {
 	    public void MilkManSignupWeekly(Map<String, String> data) {
 
 		try {
-			   String runMode = data.get("runMode");
+			 
 
-	            if (runMode.equalsIgnoreCase("no")) {
-	                throw new SkipException("RunMode NO");
-	            }
+	        
+            // ================= 🔥 MANUAL TIME CAPTURE =================
+            String manualTime = data.get("manualTime");
+
+            System.out.println("DEBUG manualTime: " + manualTime);
+
+            if (manualTime != null && !manualTime.trim().isEmpty()) {
+
+                try {
+                    String[] parts = manualTime.split(":");
+
+                    int minutes = Integer.parseInt(parts[0]);
+                    int seconds = Integer.parseInt(parts[1]);
+
+                    int totalSeconds = (minutes * 60) + seconds;
+
+                    totalManualTime.addAndGet(totalSeconds);
+
+                    System.out.println("Manual time added: " + manualTime);
+
+                } catch (Exception ex) {
+                    System.out.println("Invalid manualTime format: " + manualTime);
+                }
+            }
 
 	            String fName = data.get("FirstName");
 	            String lastName = data.get("LastName");
@@ -48,7 +69,7 @@ public class MilkManLoginWithWeeklyTest extends TestBase {
 
 	            String dropdownSelect = data.get("dropdownSelect");
 	            String dropDownDate = data.get("dropDownDate");
-	            String frameName = data.get("frameName");
+	       //     String frameName = data.get("frameName");
 
 	            String mainItem_1 = data.get("mainItem_1");
 	            String subItem_1_1 = data.get("subItem_1_1");
@@ -86,7 +107,7 @@ public class MilkManLoginWithWeeklyTest extends TestBase {
 					"Check for the title in the signup page and enter the mandatory fields to navigate to the next page ");
 
 			MilkMan_SignUpPage signup = new MilkMan_SignUpPage();
-			waitForElementVisible(signup.titleModernMilk, 500, "Able to display title modern milk",
+			waitForElementVisible(signup.titleModernMilk, 10, "Able to display title modern milk",
 					"Unable to display title modern milk");
 			verifyElementDisplayed(signup.titleModernMilk, "Able to display the ModernMilkMan title",
 					"Unable to display the ModernMilkMan title");
@@ -126,25 +147,26 @@ public class MilkManLoginWithWeeklyTest extends TestBase {
 
 			MilkMan_DeliveryDetailPage deliveryPage = new MilkMan_DeliveryDetailPage();
 
-			WaitUtils.waitInvisibleSpinner(signup.buttonCreateAccount);
 			test.get().log(Status.INFO,
 					"Navigate to the delivery Detail page and enter the address which need to be delivered");
-			waitForElementVisible(deliveryPage.titleDeliveryDetail, 3000, "Able to display title modern milk",
+			WaitUtils.waitInvisibleSpinner(signup.buttonCreateAccount,10);
+		
+			waitForElementVisible(deliveryPage.titleDeliveryDetail, 5, "Able to display title modern milk",
 					"Unable to display title modern milk");
 			verifyElementDisplayed(deliveryPage.titleDeliveryDetail, "Able to display the CreateAccount ",
 					"Unable to display the CreateAccount");
-			waitForElementVisible(deliveryPage.textStartWith, 30, "Able to display text Address field",
+			waitForElementVisible(deliveryPage.textStartWith, 5, "Able to display text Address field",
 					"Unable to display text Address field");
 
 			sendkeys(deliveryPage.textStartWith, address, "Able to enter the address", "Unable to enter the address");
-			waitForElementVisible(deliveryPage.textStartWith, 30, "Able to display text Address field",
+			waitForElementVisible(deliveryPage.textStartWith, 5, "Able to display text Address field",
 					"Unable to display text Address field");
 
 			click(deliveryPage.textStartWith, "Able to click on textbox", "Unable to click on textbox");
 			String shortAddress = address.split(",")[0];
 			deliveryPage.selectFromDropdown(element3, shortAddress);
 
-			waitForElementVisible(deliveryPage.buttonConfirmAddress, 10, "Able to display buttonConfirmAddress",
+			waitForElementVisible(deliveryPage.buttonConfirmAddress, 5, "Able to display buttonConfirmAddress",
 					"Unable to display buttonConfirmAddress");
 
 			click(deliveryPage.buttonConfirmAddress, "Able to click on COnfirmAddress",
@@ -152,16 +174,25 @@ public class MilkManLoginWithWeeklyTest extends TestBase {
 			test.get().log(Status.INFO,
 					"Navigate to the Confirm address and select the item required to deliver");
 
-			waitForElementVisible(deliveryPage.buttonConfirmPin, 10, "Able to display buttonConfirmPin",
+			waitForElementVisible(deliveryPage.buttonConfirmPin, 5, "Able to display buttonConfirmPin",
 					"Unable to display buttonConfirmPin");
 			click(deliveryPage.buttonConfirmPin, "Able to click on buttonConfirmPin",
 					"Unable to click on buttonConfirmPin");
 
-			waitforelement(3000);
+		//	waitforelement(3000);
+		
+			
 			deliveryPage.selectFromDropdownValue(element1, dropdownSelect);
-			waitforelement(1000);
+			WaitUtils.waitInvisibleSpinner(By.xpath(element2),10);
+			//waitforelement(1000);
 			deliveryPage.selectFromDropdownValue(element2, dropDownDate);
 			waitforelement(1000);
+			String frameName = java.time.LocalDate.now().plusDays(2).format(java.time.format.DateTimeFormatter.ofPattern("EEE, d"))
+			        + ((java.time.LocalDate.now().plusDays(2).getDayOfMonth() >= 11 && java.time.LocalDate.now().plusDays(2).getDayOfMonth() <= 13) ? "th" :
+			        (java.time.LocalDate.now().plusDays(2).getDayOfMonth() % 10 == 1 ? "st" :
+			        java.time.LocalDate.now().plusDays(2).getDayOfMonth() % 10 == 2 ? "nd" :
+			        java.time.LocalDate.now().plusDays(2).getDayOfMonth() % 10 == 3 ? "rd" : "th"))
+			        + java.time.LocalDate.now().plusDays(2).format(java.time.format.DateTimeFormatter.ofPattern(" MMMM"));	
 			deliveryPage.selectFromDropdownValue(element2, frameName);
 			waitforelement(1000);
 			deliveryPage.selectFromDropdownValue(element1, mainItem_1);// main
@@ -182,7 +213,9 @@ public class MilkManLoginWithWeeklyTest extends TestBase {
 			waitforelement(1000);
 			click(deliveryPage.buttonContinue, "Able to click on continue", "Unable to click on continue");
 			MilkMan_YourBasketPage yourbasket = new MilkMan_YourBasketPage();
-			waitforelement(5000);
+			waitforelement(100);
+
+			
 			yourbasket.openDayDropdown("6 Large Free Range Eggs", "Mon");
 
 			yourbasket.selectDropdownValue("2");
