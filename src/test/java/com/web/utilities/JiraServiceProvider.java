@@ -1,86 +1,72 @@
 /*
  * // JiraServiceProvider.java
  * 
- * package com.web.utilities; import com.base.web.TestBase;
+ * package com.web.utilities;
+ * 
+ * import com.gps.base.TestBase;
  * 
  * import net.rcarz.jiraclient.BasicCredentials; import
  * net.rcarz.jiraclient.Field; import net.rcarz.jiraclient.Issue; import
- * net.rcarz.jiraclient.Issue.FluentCreate; import
  * net.rcarz.jiraclient.JiraClient; import net.rcarz.jiraclient.JiraException;
  * 
- * public class JiraServiceProvider extends TestBase { private JiraClient Jira;
- * private String project; private String JiraUrl; public static String
- * userName; public static String passWord;
+ * public class JiraServiceProvider extends TestBase {
  * 
+ * private JiraClient jira; private String project; private String jiraUrl;
  * 
- * 
+ * public static String userName; public static String passWord;
  * 
  * public JiraServiceProvider() {
- * if(JiraProp.getProperty("jiraEnabled").equals("Y")) {
- * 
- * this. JiraUrl=JiraProp.getProperty("jiraUrl");
- * userName=JiraProp.getProperty("userName");
- * passWord=JiraProp.getProperty("passWord"); BasicCredentials creds = new
- * BasicCredentials(userName, passWord); Jira = new JiraClient(JiraUrl, creds);
- * 
- * this.project = JiraProp.getProperty("projectCode");
- * logger.info("ProjectName logged"+JiraProp.getProperty("projectCode")); } else
- * { logger.info("Jira Bug is not raised since jira Enabled is "+JiraProp.
- * getProperty("jiraEnabled")); } }
- * 
- * 
- * public void createJiraIssue(String issueType, String summary, String
- * description, String reporterName) throws JiraException {
- * 
- * 
- * if(JiraProp.getProperty("jiraEnabled").equals("Y")) {
- * 
- * 
- * FluentCreate fleuntCreate = Jira.createIssue(project, issueType);
- * 
  * 
  * try {
  * 
- * //Avoid Creating Duplicate Issue
+ * if ("Y".equalsIgnoreCase( JiraProp.getProperty("jiraEnabled"))) {
  * 
- * Issue.SearchResult sr = Jira.searchIssues("summary ~ \""+summary+"\"");
+ * jiraUrl = JiraProp.getProperty("jiraUrl");
  * 
+ * userName = JiraProp.getProperty("userName");
  * 
- * if(sr.total!=0) {
+ * passWord = JiraProp.getProperty("passWord");
  * 
- * // System.out.println("Same Issue Already Exists on Jira");
- * logger.info("same issue already exists on jira");
- * fleuntCreate.field(Field.STATUS,"BACKLOG"); return; }
+ * BasicCredentials creds = new BasicCredentials( userName, passWord);
  * 
- * //Create issue if not exists
+ * jira = new JiraClient( jiraUrl, creds);
  * 
- * // FluentCreate fleuntCreate = Jira.createIssue(project, issueType);
+ * project = JiraProp.getProperty( "projectCode");
  * 
+ * logger.info( "Connected Jira Project : " + project);
  * 
- * fleuntCreate.field(Field.SUMMARY, summary); logger.info("Summary"+summary);
+ * } else {
  * 
- * fleuntCreate.field(Field.DESCRIPTION, description);
- * logger.info("Description"+description);
+ * logger.info( "Jira Integration Disabled"); }
  * 
- * Issue newIssue = fleuntCreate.execute();
+ * } catch (Exception e) {
  * 
- * logger.info("New issue created in Jira with ID: " + newIssue);
- * logger.info("New issue URL is :"+JiraUrl+"/browse/"+newIssue);
+ * logger.error( "Jira Initialization Failed", e); } }
  * 
+ * public void createJiraIssue( String issueType, String summary, String
+ * description, String reporterName) throws JiraException {
  * 
- * System.out.println("*******************************************");
+ * if (!"Y".equalsIgnoreCase( JiraProp.getProperty( "jiraEnabled"))) {
  * 
- * }
+ * logger.info("Jira Disabled"); return; }
  * 
- * catch (JiraException e) {
+ * try {
  * 
- * e.printStackTrace();
+ * Issue.SearchResult sr = jira.searchIssues( "project=" + project +
+ * " AND summary ~ \"" + summary + "\"");
  * 
- * }
+ * if (sr.total != 0) {
  * 
- * } else { logger.info("No jira is created"); }
+ * logger.info( "Duplicate bug already exists"); return; }
  * 
- * }
+ * Issue newIssue = jira.createIssue( project, issueType) .field( Field.SUMMARY,
+ * summary) .field( Field.DESCRIPTION, description) .execute();
  * 
- * }
+ * logger.info( "Bug Created : " + newIssue.getKey());
+ * 
+ * logger.info( "Bug URL : " + jiraUrl + "/browse/" + newIssue.getKey());
+ * 
+ * } catch (Exception e) {
+ * 
+ * logger.error( "Jira Creation Failed", e); } } }
  */

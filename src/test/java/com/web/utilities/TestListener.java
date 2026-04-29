@@ -1,99 +1,88 @@
 /*
- * //TestListener.java
+ * // TestListener.java
  * 
  * package com.web.utilities;
  * 
- * 
  * import org.apache.commons.lang.exception.ExceptionUtils; import
- * org.openqa.selenium.WebDriver; import org.testng.ITestContext;
+ * org.openqa.selenium.WebDriver; import org.testng.ITestContext; import
+ * org.testng.ITestListener; import org.testng.ITestResult;
  * 
- * import org.testng.ITestListener;
+ * import com.aventstack.extentreports.ExtentTest; import
+ * com.aventstack.extentreports.Status; import com.base.web.JiraCreateIssue;
+ * import com.gps.base.TestBase;
  * 
- * import org.testng.ITestResult;
- * 
- * import com.relevantcodes.extentreports.ExtentTest; import
- * com.relevantcodes.extentreports.LogStatus; import
- * com.base.web.JiraCreateIssue;
- * 
- * import net.rcarz.jiraclient.JiraException;
- * 
- * public class TestListener implements ITestListener {
+ * public class TestListener extends TestBase implements ITestListener {
  * 
  * public static WebDriver driver; public static ExtentTest test;
  * 
- * @Override
+ * @Override public void onTestFailure(ITestResult result) {
  * 
- * public void onTestFailure(ITestResult result) {
+ * try {
  * 
- * boolean islogIssue = result.getMethod().getConstructorOrMethod().getMethod()
- * .getAnnotation(JiraCreateIssue.class).isCreateIssue(); System.out.println(
- * "result" + result.getMethod() + "testName" + result.getClass() + "className"
- * + result.getTestClass()); if (islogIssue) { JiraServiceProvider
- * JiraServiceProvider = new JiraServiceProvider(); String issueDescription =
- * "Failure Reason from Automation Testing second time\n\n" +
- * result.getThrowable().getMessage()
+ * boolean isLogIssue = false;
  * 
- * + "\n";
+ * JiraCreateIssue jiraAnnotation = result.getMethod() .getConstructorOrMethod()
+ * .getMethod() .getAnnotation(JiraCreateIssue.class);
  * 
- * issueDescription.concat(ExceptionUtils.getFullStackTrace(result.getThrowable(
- * )));
+ * if (jiraAnnotation != null) { isLogIssue = jiraAnnotation.isCreateIssue(); }
  * 
- * String issueSummary =
- * result.getMethod().getConstructorOrMethod().getMethod().getName()
+ * if (isLogIssue) {
  * 
- * + " Failed in Automation Testing"; try {
- * JiraServiceProvider.createJiraIssue("Task", issueSummary, issueDescription,
- * "d raghavendra"); } catch (JiraException e) { // TODO Auto-generated catch
- * block e.printStackTrace(); }
+ * JiraServiceProvider jiraServiceProvider = new JiraServiceProvider();
  * 
- * }
+ * String testName = result.getMethod() .getConstructorOrMethod() .getMethod()
+ * .getName();
  * 
- * }
+ * String errorMessage = "";
  * 
- * @Override
+ * if (result.getThrowable() != null) { errorMessage =
+ * result.getThrowable().getMessage(); }
  * 
- * public void onTestSkipped(ITestResult result) { test.log(LogStatus.SKIP,
- * "test execution Completed");
+ * String fullStackTrace = "";
  * 
- * }
+ * if (result.getThrowable() != null) { fullStackTrace =
+ * ExceptionUtils.getFullStackTrace( result.getThrowable()); }
  * 
- * @Override
+ * String issueSummary = testName + " Failed in Automation Testing";
  * 
- * public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
- * if(driver!=null) { driver.quit(); }
+ * String issueDescription = "Failure Reason from Automation Testing\n\n" +
+ * "Test Case : " + testName + "\nError Message : " + errorMessage +
+ * "\n\nStack Trace :\n" + fullStackTrace + "\nEnvironment : QA";
  * 
+ * jiraServiceProvider.createJiraIssue( "Bug", issueSummary, issueDescription,
+ * "d raghavendra");
  * 
- * }
+ * System.out.println( "Jira Bug Created Successfully"); }
  * 
- * @Override
+ * } catch (Exception e) { e.printStackTrace(); }
  * 
- * public void onStart(ITestContext context) {
+ * if (test != null) { test.log(Status.FAIL, result.getName() + " Test Failed");
+ * } }
  * 
- * }
+ * @Override public void onTestSkipped(ITestResult result) {
  * 
- * @Override
+ * if (test != null) { test.log(Status.SKIP, result.getName() +
+ * " Test Skipped"); } }
  * 
- * public void onFinish(ITestContext context) { if(driver!=null) {
- * driver.quit(); }
- * 
+ * @Override public void onTestFailedButWithinSuccessPercentage( ITestResult
+ * result) {
  * 
  * }
  * 
- * @Override
- * 
- * public void onTestStart(ITestResult result) { if(driver!=null) {
- * driver.quit(); }
- * 
+ * @Override public void onStart(ITestContext context) {
  * 
  * }
  * 
- * @Override
+ * @Override public void onFinish(ITestContext context) {
  * 
- * public void onTestSuccess(ITestResult result) { if(driver!=null) {
- * driver.quit(); }
+ * if (driver != null) { driver.quit(); } }
  * 
- * 
- * }
+ * @Override public void onTestStart(ITestResult result) {
  * 
  * }
+ * 
+ * @Override public void onTestSuccess(ITestResult result) {
+ * 
+ * if (test != null) { test.log(Status.PASS, result.getName() + " Test Passed");
+ * } } }
  */

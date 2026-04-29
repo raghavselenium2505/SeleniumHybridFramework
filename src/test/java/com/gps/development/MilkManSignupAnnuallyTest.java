@@ -175,7 +175,7 @@ public class MilkManSignupAnnuallyTest extends TestBase {
 
 				waitForElementVisible(deliveryPage.buttonConfirmPin, 10, "Able to display buttonConfirmPin",
 						"Unable to display buttonConfirmPin");
-				click(deliveryPage.buttonConfirmPin, "Able to click on buttonConfirmPin",
+				actionclick(getDriver().findElement(deliveryPage.buttonConfirmPin), "Able to click on buttonConfirmPin",
 						"Unable to click on buttonConfirmPin");
 
 				waitforelement(3000);
@@ -282,7 +282,7 @@ public class MilkManSignupAnnuallyTest extends TestBase {
 
 				actionclick(getDriver().findElement(paymentpage.buttonPayment), "Able to click on payment button",
 						"Unable to click on payment button");
-						WaitUtils.waitInvisibleSpinner(paymentpage.spinerLoading, 100);
+						WaitUtils.waitInvisibleSpinner(paymentpage.spinerLoading, 300);
 						
 						test.get().log(Status.INFO,
 								"Navigate to Thank you page ");

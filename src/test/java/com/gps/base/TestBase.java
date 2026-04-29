@@ -6,14 +6,20 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -32,9 +38,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -194,14 +198,12 @@ public class TestBase implements baseMethods {
 
 			if (data != null) {
 
-			    String runMode = data.get("runMode");
+				String runMode = data.get("runMode");
 
-			    if (runMode != null && runMode.equalsIgnoreCase("no")) {
+				if (runMode != null && runMode.equalsIgnoreCase("no")) {
 
-			        throw new SkipException(
-			            "RunMode set to NO for test: " + method.getName()
-			        );
-			    }
+					throw new SkipException("RunMode set to NO for test: " + method.getName());
+				}
 			}
 			if (data != null) {
 
@@ -511,8 +513,9 @@ public class TestBase implements baseMethods {
 			String manualTimeStr = (manualSeconds / 60) + "m " + (manualSeconds % 60) + "s";
 			String autoTimeStr = (automationSeconds / 60) + "m " + (automationSeconds % 60) + "s";
 			String savedTimeStr = (saved / 60) + "m " + (saved % 60) + "s";
-			saveROIHistory(manualSeconds, automationSeconds, saved, efficiency);
-			// ================= LOGGER =================
+			saveROIHistory(manualSeconds, automationSeconds, saved, efficiency, pass, fail, skip); // =================
+																									// LOGGER
+																									// =================
 			logger.info("========= AUTOMATION ROI =========");
 			logger.info("Manual Time: " + manualTimeStr);
 			logger.info("Automation Time: " + autoTimeStr);
@@ -1014,8 +1017,16 @@ public class TestBase implements baseMethods {
 
 		try {
 
-			String path = System.getProperty("user.dir") + "/src/test/resources/Reports/DashBoard/DashboardReport_"
-					+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
+			String folderPath = System.getProperty("user.dir") + "/src/test/resources/Reports/DashBoard";
+
+			File folder = new File(folderPath);
+
+			if (!folder.exists()) {
+				folder.mkdirs();
+			}
+
+			String path = folderPath + "/DashboardReport_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())
+					+ ".html";
 
 			int total = pass + fail + skip;
 
@@ -1027,157 +1038,366 @@ public class TestBase implements baseMethods {
 			long minutes = seconds / 60;
 			seconds = seconds % 60;
 
-			// ================= 🔥 ROI CALCULATION =================
 			int manualSeconds = totalManualTime.get();
-			int automationSeconds = (int) Math.round(durationMillis / 1000.0);
+
+			int automationSeconds = (int) (durationMillis / 1000);
+
 			int saved = Math.max(0, manualSeconds - automationSeconds);
 
-			double efficiency = manualSeconds > 0 ? (saved * 100.0) / manualSeconds : 0;
+			double efficiency = manualSeconds > 0 ? (saved * 100.0) / manualSeconds : 0.0;
 
 			String manualTimeStr = (manualSeconds / 60) + "m " + (manualSeconds % 60) + "s";
 			String autoTimeStr = (automationSeconds / 60) + "m " + (automationSeconds % 60) + "s";
 			String savedTimeStr = (saved / 60) + "m " + (saved % 60) + "s";
 
-			// ================= 🔥 ROI CATEGORY =================
 			String roiLabel;
 			String roiColor;
 
-			if (efficiency < 20) {
-				roiLabel = "Low ROI 🔴";
-				roiColor = "#ef4444";
-			} else if (efficiency < 50) {
-				roiLabel = "Moderate ROI 🟡";
-				roiColor = "#facc15";
-			} else {
-				roiLabel = "High ROI 🟢";
+			if (efficiency >= 70) {
+
+				roiLabel = "High ROI";
 				roiColor = "#22c55e";
+
+			} else if (efficiency >= 40) {
+
+				roiLabel = "Moderate ROI";
+				roiColor = "#facc15";
+
+			} else {
+
+				roiLabel = "Low ROI";
+				roiColor = "#ef4444";
 			}
-			// ====================================================
 
-			String status = (fail > 0) ? "FAILED ❌" : "PASSED ✅";
-			String statusColor = (fail > 0) ? "#ff6b6b" : "#4ade80";
+			String status = fail > 0 ? "FAILED ❌" : "PASSED ✅";
+			String statusColor = fail > 0 ? "#ef4444" : "#22c55e";
 
-			// ADD THIS BEFORE String html
 			Map<String, Object> weekly = getWeeklyROI();
 
 			double weeklyROI = (double) weekly.get("weeklyROI");
-			int weeklyRuns = (int) weekly.get("runs");
-			int weeklySaved = (int) weekly.get("savedSeconds");
+			double avgROI = (double) weekly.get("avgROI");
+			double manualHours = (double) weekly.get("manualHours");
+			double automationHours = (double) weekly.get("automationHours");
+			double savedHours = (double) weekly.get("savedHours");
 
-			String weeklySavedStr = (weeklySaved / 60) + "m " + (weeklySaved % 60) + "s";
+			Map<String, Object> health = getWeeklyTestHealth();
 
-			String html = "<html><head><title>Automation Dashboard</title>" +
+			int weeklyPass = (int) health.get("pass");
+			int weeklyFail = (int) health.get("fail");
+			int weeklySkip = (int) health.get("skip");
+			int weeklyTotal = (int) health.get("totalTests");
+			double weeklyPassPercent = (double) health.get("passPercent");
 
-			        "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>" +
+			Map<String, Object> monthlyHealth = getMonthlyTestHealth();
 
-			        "<style>"
-			        + "body{font-family:Segoe UI;background:#0f172a;color:white;padding:20px;text-align:center}"
-			        + ".tabs{margin-bottom:20px}"
-			        + ".tab{cursor:pointer;padding:10px 20px;background:#1e293b;border-radius:8px;margin-right:10px;display:inline-block}"
-			        + ".tab:hover{background:#334155}"
-			        + ".card{background:#1e293b;padding:20px;border-radius:10px;margin-top:20px}"
-			        + ".chart-row{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}"
-			        + ".chart-container{width:300px;height:300px;}"
-			        + ".hidden{display:none}"
-			        + "</style>" +
+			int monthlyPass = (int) monthlyHealth.get("pass");
+			int monthlyFail = (int) monthlyHealth.get("fail");
+			int monthlySkip = (int) monthlyHealth.get("skip");
+			int monthlyTotal = (int) monthlyHealth.get("totalTests");
+			double monthlyPassPercent = (double) monthlyHealth.get("passPercent");
 
-			        "<script>"
-			        + "function showTab(tab){"
-			        + "document.getElementById('summary').style.display='none';"
-			        + "document.getElementById('charts').style.display='none';"
-			        + "document.getElementById(tab).style.display='block';"
-			        + "}"
-			        + "</script>" +
+			Map<String, Object> monthlyROIData = getMonthlyROI();
 
-			        "</head><body>" +
+			double monthlyAvgROI = (double) monthlyROIData.get("avgROI");
+			double monthlyROI = (double) monthlyROIData.get("monthlyROI");
+			double monthlyManualHours = (double) monthlyROIData.get("manualHours");
+			double monthlyAutomationHours = (double) monthlyROIData.get("automationHours");
+			double monthlySavedHours = (double) monthlyROIData.get("savedHours");
 
-			        "<h1>🚀 Automation Dashboard</h1>" +
+			String healthLabel;
+			String healthColor;
 
-			        "<div class='tabs'>"
-			        + "<span class='tab' onclick=\"showTab('summary')\">Summary</span>"
-			        + "<span class='tab' onclick=\"showTab('charts')\">Charts</span>"
-			        + "</div>" +
+			if (weeklyPassPercent >= 80) {
 
-			        // ================= SUMMARY =================
-			        "<div id='summary' class='card'>" +
+				healthLabel = "Excellent";
+				healthColor = "#22c55e";
 
-			        "<h2 style='color:" + statusColor + "'>Build Status: " + status + "</h2>"
-			        + "<p>Total Tests: " + total + "</p>"
-			        + "<p>Execution Time: " + minutes + "m " + seconds + "s</p>"
+			} else if (weeklyPassPercent >= 60 && weeklyPassPercent <= 80) {
 
-			        + "<p>✔ Passed: " + pass + " (" + passPer + "%)</p>"
-			        + "<p>❌ Failed: " + fail + " (" + failPer + "%)</p>"
-			        + "<p>⚠ Skipped: " + skip + " (" + skipPer + "%)</p>"
+				healthLabel = "Moderate";
+				healthColor = "#facc15";
 
-			        // ================= ROI =================
-			        + "<hr style='margin:20px 0;border:1px solid #334155'>"
-			        + "<h2>⚡ Automation ROI</h2>"
-			        + "<p>Manual Time: " + manualTimeStr + "</p>"
-			        + "<p>Automation Time: " + autoTimeStr + "</p>"
-			        + "<p>Time Saved: " + savedTimeStr + "</p>"
-			        + "<p>Efficiency: " + String.format("%.2f", efficiency) + "%</p>"
+			} else if (weeklyPassPercent >= 30 && weeklyPassPercent <= 60) {
 
-			        + "<span style='background:" + roiColor
-			        + ";padding:6px 14px;border-radius:10px;color:black;font-weight:bold'>"
-			        + roiLabel
-			        + "</span>"
+				healthLabel = "Low";
+				healthColor = "#facc15";
 
-			        // ================= WEEKLY ROI =================
-			        + "<hr style='margin:20px 0;border:1px solid #334155'>"
-			        + "<h2>📈 Weekly ROI</h2>"
-			        + "<p>Weekly ROI: " + String.format("%.2f", weeklyROI) + "%</p>"
-			        + "<p>Runs This Week: " + weeklyRuns + "</p>"
-			        + "<p>Weekly Time Saved: " + weeklySavedStr + "</p>"
+			} else {
 
-			        + "<br><br>"
-			        + "<a href='" + finalUrl + "' target='_blank' "
-			        + "style='background:#22c55e;color:black;padding:10px 20px;border-radius:8px;text-decoration:none'>"
-			        + "Open Full Report</a>"
+				healthLabel = "Needs Attention";
+				healthColor = "#ef4444";
+			}
 
-			        + "</div>"
+			// ================= CHART DATA =================
+			Map<String, Double> manualMap = new LinkedHashMap<>();
+			Map<String, Double> autoMap = new LinkedHashMap<>();
+			Map<String, Double> savedMap = new LinkedHashMap<>();
+			Map<String, Double> roiMap = new LinkedHashMap<>();
+			Map<String, Integer> countMap = new LinkedHashMap<>();
 
-			        // ================= CHARTS =================
-			        + "<div id='charts' class='card hidden'>"
-			        + "<div class='chart-row'>"
-			        + "<div class='chart-container'><canvas id='pieChart'></canvas></div>"
-			        + "<div class='chart-container'><canvas id='barChart'></canvas></div>"
-			        + "<div class='chart-container'><canvas id='horizontalChart'></canvas></div>"
-			        + "</div>"
-			        + "</div>"
+			String roiPath = System.getProperty("user.dir") + "/" + config.getProperty("roiHistoryPath");
 
-			        + "<script>"
+			File roiFile = new File(roiPath);
 
-			        + "document.getElementById('summary').style.display='block';"
+			if (roiFile.exists()) {
 
-			        + "new Chart(document.getElementById('pieChart'), {"
-			        + "type:'doughnut',"
-			        + "data:{labels:['Passed','Failed','Skipped'],"
-			        + "datasets:[{data:[" + pass + "," + fail + "," + skip + "],"
-			        + "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," 
-			        + "options:{responsive:true,maintainAspectRatio:false}"
-			        + "});"
+				JSONParser parser = new JSONParser();
 
-			        + "new Chart(document.getElementById('barChart'), {"
-			        + "type:'bar',"
-			        + "data:{labels:['Passed','Failed','Skipped'],"
-			        + "datasets:[{data:[" + pass + "," + fail + "," + skip + "],"
-			        + "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," 
-			        + "options:{responsive:true,maintainAspectRatio:false}"
-			        + "});"
+				JSONArray historyJson = (JSONArray) parser.parse(new FileReader(roiFile));
 
-			        + "new Chart(document.getElementById('horizontalChart'), {"
-			        + "type:'bar',"
-			        + "data:{labels:['Passed','Failed','Skipped'],"
-			        + "datasets:[{data:[" + pass + "," + fail + "," + skip + "],"
-			        + "backgroundColor:['#22c55e','#ef4444','#facc15']}]}," 
-			        + "options:{indexAxis:'y',responsive:true,maintainAspectRatio:false}"
-			        + "});"
+				LocalDate today = LocalDate.now();
 
-			        + "</script>"
+				LocalDate weekStart = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
 
-			        + "</body></html>";
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM");
 
-			java.nio.file.Files.write(java.nio.file.Paths.get(path), html.getBytes());
+				for (Object obj : historyJson) {
+
+					JSONObject row = (JSONObject) obj;
+
+					LocalDate runDate = LocalDate.parse(row.get("date").toString());
+
+					if (runDate.isBefore(weekStart) || runDate.isAfter(today)) {
+						continue;
+					}
+
+					String key = runDate.format(formatter);
+
+					double manual = Double.parseDouble(row.get("manualSeconds").toString()) / 3600.0;
+					double auto = Double.parseDouble(row.get("automationSeconds").toString()) / 3600.0;
+					double savedValue = Double.parseDouble(row.get("savedSeconds").toString()) / 3600.0;
+					double roiValue = Double.parseDouble(row.get("roi").toString());
+
+					manualMap.put(key, manualMap.getOrDefault(key, 0.0) + manual);
+					autoMap.put(key, autoMap.getOrDefault(key, 0.0) + auto);
+					savedMap.put(key, savedMap.getOrDefault(key, 0.0) + savedValue);
+					roiMap.put(key, roiMap.getOrDefault(key, 0.0) + roiValue);
+					countMap.put(key, countMap.getOrDefault(key, 0) + 1);
+				}
+			}
+
+			StringBuilder labels = new StringBuilder("[");
+			StringBuilder manualBuilder = new StringBuilder("[");
+			StringBuilder autoBuilder = new StringBuilder("[");
+			StringBuilder savedBuilder = new StringBuilder("[");
+			StringBuilder roiBuilder = new StringBuilder("[");
+
+			int index = 0;
+			int size = manualMap.size();
+
+			for (String key : manualMap.keySet()) {
+
+				labels.append("'").append(key).append("'");
+
+				manualBuilder.append(String.format("%.2f", manualMap.get(key)));
+				autoBuilder.append(String.format("%.2f", autoMap.get(key)));
+				savedBuilder.append(String.format("%.2f", savedMap.get(key)));
+
+				double dailyAvgROI = roiMap.get(key) / countMap.get(key);
+
+				roiBuilder.append(String.format("%.2f", dailyAvgROI));
+
+				if (index < size - 1) {
+
+					labels.append(",");
+					manualBuilder.append(",");
+					autoBuilder.append(",");
+					savedBuilder.append(",");
+					roiBuilder.append(",");
+				}
+
+				index++;
+			}
+
+			labels.append("]");
+			manualBuilder.append("]");
+			autoBuilder.append("]");
+			savedBuilder.append("]");
+			roiBuilder.append("]");
+
+			String weekLabels = manualMap.isEmpty() ? "['No Data']" : labels.toString();
+			String manualData = manualMap.isEmpty() ? "[0]" : manualBuilder.toString();
+			String autoData = manualMap.isEmpty() ? "[0]" : autoBuilder.toString();
+			String savedData = manualMap.isEmpty() ? "[0]" : savedBuilder.toString();
+			String roiData = manualMap.isEmpty() ? "[0]" : roiBuilder.toString();
+
+			String pieData = "[" + pass + "," + fail + "," + skip + "]";
+
+			String reportLink = (finalUrl != null && !finalUrl.isEmpty()) ? finalUrl : "#";
+
+			// ================= HTML =================
+			String html = "<html><head>"
+
+			+ "<meta charset='UTF-8'>"
+			+ "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+			+ "<title>Automation Dashboard</title>"
+
+			+ "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>"
+
+			+ "<style>"
+			+ "body{font-family:Segoe UI,Arial,sans-serif;background:#0f172a;color:white;padding:20px;margin:0;text-align:center}"
+			+ ".tabs{margin-bottom:20px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}"
+			+ ".tab{cursor:pointer;padding:12px 24px;border-radius:10px;display:inline-block;font-weight:bold;color:white;transition:0.3s;box-shadow:0 4px 10px rgba(0,0,0,0.25)}"
+			+ ".tab:hover{transform:translateY(-2px);opacity:0.9}"
+			+ ".summary-tab{background:#3b82f6}"
+			+ ".charts-tab{background:#22c55e}"
+			+ ".health-tab{background:#f59e0b}"
+			+ ".card{background:#1e293b;padding:20px;border-radius:12px;margin-top:20px}"
+			+ ".hidden{display:none}"
+			+ ".chart-row{display:flex;justify-content:center;gap:25px;flex-wrap:wrap}"
+			+ ".chart-container{width:100%;max-width:380px;height:auto}"
+			+ "canvas{max-width:100%!important;height:auto!important}"
+			+ "p{margin:8px 0}"
+			+ "h2{color:#38bdf8}"
+			+ "hr{border:1px solid #334155;margin:20px 0}"
+			+ "@media(max-width:768px){body{padding:12px}.tab{width:100%;max-width:220px}.chart-container{max-width:100%}}"
+			+ "</style>"
+
+			+ "<script>"
+			+ "function showTab(tab){"
+			+ "document.getElementById('summary').style.display='none';"
+			+ "document.getElementById('charts').style.display='none';"
+			+ "document.getElementById('health').style.display='none';"
+			+ "document.getElementById(tab).style.display='block';"
+			+ "}"
+			+ "</script>"
+
+			+ "</head><body>"
+
+			+ "<h1>&#128640; Automation Dashboard</h1>"
+
+			+ "<div class='tabs'>"
+			+ "<span class='tab summary-tab' onclick=\"showTab('summary')\">Summary</span>"
+			+ "<span class='tab charts-tab' onclick=\"showTab('charts')\">Charts</span>"
+			+ "<span class='tab health-tab' onclick=\"showTab('health')\">Health Report</span>"
+			+ "</div>"
+
+			/* ================= SUMMARY ================= */
+
+			+ "<div id='summary' class='card'>"
+
+			+ "<h2 style='color:" + statusColor + "'>" + status + "</h2>"
+
+			+ "<p>Total Tests: " + total + "</p>"
+			+ "<p>Execution Time: " + minutes + "m " + seconds + "s</p>"
+
+			+ "<p>Passed: " + pass + " (" + passPer + "%)</p>"
+			+ "<p>Failed: " + fail + " (" + failPer + "%)</p>"
+			+ "<p>Skipped: " + skip + " (" + skipPer + "%)</p>"
+
+			+ "<hr>"
+
+			+ "<h2>Current Run ROI</h2>"
+
+			+ "<p>Manual Time: " + manualTimeStr + "</p>"
+			+ "<p>Automation Time: " + autoTimeStr + "</p>"
+			+ "<p>Saved Time: " + savedTimeStr + "</p>"
+			+ "<p>Efficiency: " + String.format("%.2f", efficiency) + "%</p>"
+
+			+ "<div style='margin-top:10px;'>"
+			+ "<span style='background:" + roiColor + ";padding:8px 18px;border-radius:20px;color:black;font-weight:bold;'>"
+			+ roiLabel
+			+ "</span></div>"
+
+			+ "<hr>"
+
+			+ "<h2>Weekly ROI</h2>"
+			+ "<p>Manual Hours: " + String.format("%.2f", manualHours) + " hrs</p>"
+			+ "<p>Automation Hours: " + String.format("%.2f", automationHours) + " hrs</p>"
+			+ "<p>Hours Saved: " + String.format("%.2f", savedHours) + " hrs</p>"
+			+ "<p>Efficiency Gain: " + String.format("%.2f", weeklyROI) + "%</p>"
+
+			+ "<hr>"
+
+			+ "<h2>Monthly ROI</h2>"
+			+ "<p>Manual Hours: " + String.format("%.2f", monthlyManualHours) + " hrs</p>"
+			+ "<p>Automation Hours: " + String.format("%.2f", monthlyAutomationHours) + " hrs</p>"
+			+ "<p>Hours Saved: " + String.format("%.2f", monthlySavedHours) + " hrs</p>"
+			+ "<p>Efficiency Gain: " + String.format("%.2f", monthlyROI) + "%</p>"
+
+			+ "</div>"
+
+			/* ================= CHARTS ================= */
+
+			+ "<div id='charts' class='card hidden'>"
+
+			+ "<h2>Execution Analytics</h2>"
+
+			+ "<div class='chart-row'>"
+			+ "<div class='chart-container'><canvas id='pieChart'></canvas></div>"
+			+ "<div class='chart-container'><canvas id='weekChart'></canvas></div>"
+			+ "<div class='chart-container'><canvas id='roiChart'></canvas></div>"
+			+ "</div>"
+
+			+ "</div>"
+
+			/* ================= HEALTH ================= */
+
+			+ "<div id='health' class='card hidden'>"
+
+			+ "<h2>Weekly Health Report</h2>"
+
+			+ "<p>Passed This Week: " + weeklyPass + "</p>"
+			+ "<p>Failed This Week: " + weeklyFail + "</p>"
+			+ "<p>Skipped This Week: " + weeklySkip + "</p>"
+			+ "<p>Total Test Cases: " + weeklyTotal + "</p>"
+			+ "<p>Pass %: " + String.format("%.2f", weeklyPassPercent) + "%</p>"
+			+ "<p>Average ROI This Week: " + String.format("%.2f", avgROI) + "%</p>"
+
+
+			+ "<hr>"
+
+			+ "<h2>Monthly Health Report</h2>"
+
+			+ "<p>Passed This Month: " + monthlyPass + "</p>"
+			+ "<p>Failed This Month: " + monthlyFail + "</p>"
+			+ "<p>Skipped This Month: " + monthlySkip + "</p>"
+			+ "<p>Total Test Cases: " + monthlyTotal + "</p>"
+			+ "<p>Pass %: " + String.format("%.2f", monthlyPassPercent) + "%</p>"
+			+ "<p>Average ROI: " + String.format("%.2f", monthlyAvgROI) + "%</p>"
+			+ "<div style='margin-top:15px;'>"
+			+ "<span style='background:" + healthColor + ";padding:8px 18px;border-radius:20px;color:black;font-weight:bold;'>"
+			+ healthLabel
+			+ "</span></div>"
+
+			+ "<br><br>"
+
+			+ (reportLink.equals("#")
+			? "<span style='background:#64748b;padding:10px 20px;border-radius:8px;'>Report Link Not Available</span>"
+			: "<a href='" + reportLink + "' target='_blank' style='background:#22c55e;color:black;padding:10px 20px;border-radius:8px;text-decoration:none'>Open Full Report</a>")
+
+			+ "</div>"
+
+			/* ================= JS ================= */
+
+			+ "<script>"
+
+			+ "document.getElementById('summary').style.display='block';"
+
+			+ "new Chart(document.getElementById('pieChart'),{responsive:true,type:'doughnut',data:{labels:['Pass','Fail','Skip'],datasets:[{data:"
+			+ pieData
+			+ ",backgroundColor:['#22c55e','#ef4444','#facc15']}]}});"
+
+			+ "new Chart(document.getElementById('weekChart'),{responsive:true,type:'bar',data:{labels:"
+			+ weekLabels
+			+ ",datasets:[{label:'Manual',data:"
+			+ manualData
+			+ ",backgroundColor:'#22c55e'},{label:'Automation',data:"
+			+ autoData
+			+ ",backgroundColor:'#f59e0b'},{label:'Saved',data:"
+			+ savedData
+			+ ",backgroundColor:'#3b82f6'}]}});"
+
+			+ "new Chart(document.getElementById('roiChart'),{responsive:true,type:'line',data:{labels:"
+			+ weekLabels
+			+ ",datasets:[{label:'ROI %',data:"
+			+ roiData
+			+ ",borderColor:'#22c55e',fill:false,tension:0.4}]}});"
+
+			+ "</script>"
+
+			+ "</body></html>";
+			Files.write(Paths.get(path), html.getBytes(StandardCharsets.UTF_8));
 
 			logger.info("Dashboard generated: " + path);
 
@@ -1186,7 +1406,8 @@ public class TestBase implements baseMethods {
 			}
 
 		} catch (Exception e) {
-			logger.error("Dashboard generation failed", e);
+			e.printStackTrace();
+			logger.error("Dashboard failed", e);
 		}
 	}
 	// Need to add to @override
@@ -1209,97 +1430,454 @@ public class TestBase implements baseMethods {
 
 	}
 
-	public void saveROIHistory(int manualSeconds, int automationSeconds, int savedSeconds, double roi) {
+	public Map<String, Object> getWeeklyTestHealth() {
+
+		Map<String, Object> result = new HashMap<>();
 
 		try {
 
-			String roiPath = config.getProperty("roiHistoryPath");
+			String roiPath = System.getProperty("user.dir") + "/" + config.getProperty("roiHistoryPath");
 
 			File file = new File(roiPath);
+
+			// ================= FILE NOT FOUND =================
+			if (!file.exists()) {
+
+				result.put("pass", 0);
+				result.put("fail", 0);
+				result.put("skip", 0);
+				result.put("totalTests", 0);
+				result.put("passPercent", 0.0);
+
+				return result;
+			}
+
+			JSONParser parser = new JSONParser();
+
+			JSONArray history = (JSONArray) parser.parse(new FileReader(file));
+
+			// ================= CURRENT WEEK =================
+			// Last Sunday to Today
+
+			LocalDate today = LocalDate.now();
+
+			LocalDate weekStart = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
+
+			LocalDate weekEnd = today;
+
+			System.out.println("Today      : " + today);
+			System.out.println("Week Start : " + weekStart);
+			System.out.println("Week End   : " + weekEnd);
+
+			int totalPass = 0;
+			int totalFail = 0;
+			int totalSkip = 0;
+
+			// ================= CURRENT WEEK DATA =================
+			for (Object obj : history) {
+
+				JSONObject row = (JSONObject) obj;
+
+				LocalDate runDate = LocalDate.parse(row.get("date").toString());
+
+				// ONLY CURRENT WEEK
+				if (runDate.isBefore(weekStart) || runDate.isAfter(weekEnd)) {
+					continue;
+				}
+
+				int passCount = row.get("passCount") == null ? 0 : Integer.parseInt(row.get("passCount").toString());
+
+				int failCount = row.get("failCount") == null ? 0 : Integer.parseInt(row.get("failCount").toString());
+
+				int skipCount = row.get("skipCount") == null ? 0 : Integer.parseInt(row.get("skipCount").toString());
+
+				System.out.println("Counting -> " + runDate + " | Pass:" + passCount + " Fail:" + failCount + " Skip:"
+						+ skipCount);
+
+				totalPass += passCount;
+				totalFail += failCount;
+				totalSkip += skipCount;
+			}
+
+			int totalRuns = totalPass + totalFail + totalSkip;
+
+			double passPercent = totalRuns > 0 ? (totalPass * 100.0) / totalRuns : 0.0;
+
+			System.out.println("TOTAL PASS : " + totalPass);
+
+			System.out.println("TOTAL FAIL : " + totalFail);
+
+			System.out.println("TOTAL SKIP : " + totalSkip);
+
+			System.out.println("TOTAL TEST : " + totalRuns);
+
+			System.out.println("PASS %     : " + String.format("%.2f", passPercent));
+
+			result.put("pass", totalPass);
+			result.put("fail", totalFail);
+			result.put("skip", totalSkip);
+			result.put("totalTests", totalRuns);
+			result.put("passPercent", passPercent);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			result.put("pass", 0);
+			result.put("fail", 0);
+			result.put("skip", 0);
+			result.put("totalTests", 0);
+			result.put("passPercent", 0.0);
+		}
+
+		return result;
+	}
+
+	public void saveROIHistory(int manualSeconds, int automationSeconds, int savedSeconds, double roi, int passCount,
+			int failCount, int skipCount) {
+
+		try {
+
+			String roiPath = System.getProperty("user.dir") + "/" + config.getProperty("roiHistoryPath");
+
+			File file = new File(roiPath);
+
+			File parent = file.getParentFile();
+
+			if (parent != null && !parent.exists()) {
+				parent.mkdirs();
+			}
 
 			JSONArray history = new JSONArray();
 
 			if (file.exists() && file.length() > 0) {
 
 				JSONParser parser = new JSONParser();
-				history = (JSONArray) parser.parse(new FileReader(file));
+
+				try (FileReader fr = new FileReader(file)) {
+
+					history = (JSONArray) parser.parse(fr);
+				}
 			}
 
 			JSONObject obj = new JSONObject();
 
-			obj.put("date", java.time.LocalDate.now().toString());
+			obj.put("date", LocalDate.now().toString());
+
 			obj.put("manualSeconds", manualSeconds);
+
 			obj.put("automationSeconds", automationSeconds);
+
 			obj.put("savedSeconds", savedSeconds);
+
 			obj.put("roi", roi);
+
+			obj.put("passCount", passCount);
+
+			obj.put("failCount", failCount);
+
+			obj.put("skipCount", skipCount);
+
+			obj.put("status", failCount > 0 ? "FAIL" : "PASS");
 
 			history.add(obj);
 
-			FileWriter fw = new FileWriter(file);
-			fw.write(history.toJSONString());
-			fw.flush();
-			fw.close();
+			try (FileWriter fw = new FileWriter(file)) {
+
+				fw.write(history.toJSONString());
+
+				fw.flush();
+			}
+
+			logger.info("ROI History updated successfully");
 
 		} catch (Exception e) {
-			e.printStackTrace();
+
+			logger.error("Failed to save ROI history", e);
 		}
 	}
-	
+
 	public Map<String, Object> getWeeklyROI() {
 
-	    Map<String, Object> result = new HashMap<>();
+		Map<String, Object> result = new HashMap<>();
 
-	    try {
+		try {
 
-	        String roiPath = System.getProperty("user.dir") + "/"
-	                + config.getProperty("roiHistoryPath");
+			String roiPath = System.getProperty("user.dir") + "/" + config.getProperty("roiHistoryPath");
 
-	        File file = new File(roiPath);
+			File file = new File(roiPath);
 
-	        if (!file.exists()) {
-	            result.put("weeklyROI", 0.0);
-	            result.put("runs", 0);
-	            result.put("savedSeconds", 0);
-	            return result;
-	        }
+			if (!file.exists()) {
 
-	        JSONParser parser = new JSONParser();
-	        JSONArray history = (JSONArray) parser.parse(new FileReader(file));
+				result.put("manualHours", 0.0);
+				result.put("automationHours", 0.0);
+				result.put("savedHours", 0.0);
+				result.put("weeklyROI", 0.0);
+				result.put("avgROI", 0.0);
 
-	        int totalManual = 0;
-	        int totalSaved = 0;
-	        int runs = 0;
+				return result;
+			}
 
-	        LocalDate today = LocalDate.now();
-	        LocalDate weekStart = today.minusDays(6);
+			JSONParser parser = new JSONParser();
 
-	        for (Object obj : history) {
+			JSONArray history = (JSONArray) parser.parse(new FileReader(file));
 
-	            JSONObject row = (JSONObject) obj;
+			// ================= CURRENT WEEK =================
+			// Sunday to Saturday
 
-	            LocalDate runDate = LocalDate.parse(row.get("date").toString());
+			LocalDate today = LocalDate.now();
 
-	            if (!runDate.isBefore(weekStart)) {
+			LocalDate weekStart = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
 
-	                totalManual += Integer.parseInt(row.get("manualSeconds").toString());
-	                totalSaved += Integer.parseInt(row.get("savedSeconds").toString());
-	                runs++;
-	            }
-	        }
+			LocalDate weekEnd = weekStart.plusDays(6);
 
-	        double weeklyROI = totalManual > 0
-	                ? (totalSaved * 100.0) / totalManual
-	                : 0;
+			int totalManual = 0;
+			int totalAutomation = 0;
 
-	        result.put("weeklyROI", weeklyROI);
-	        result.put("runs", runs);
-	        result.put("savedSeconds", totalSaved);
+			double roiTotal = 0.0;
+			int runCount = 0;
 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
+			for (Object obj : history) {
 
-	    return result;
+				JSONObject row = (JSONObject) obj;
+
+				LocalDate runDate = LocalDate.parse(row.get("date").toString());
+
+				// ONLY CURRENT WEEK
+				if (runDate.isBefore(weekStart) || runDate.isAfter(weekEnd)) {
+					continue;
+				}
+
+				int manualSeconds = Integer.parseInt(row.get("manualSeconds").toString());
+
+				int automationSeconds = Integer.parseInt(row.get("automationSeconds").toString());
+
+				double roi = Double.parseDouble(row.get("roi").toString());
+
+				totalManual += manualSeconds;
+				totalAutomation += automationSeconds;
+
+				roiTotal += roi;
+				runCount++;
+			}
+
+			int saved = Math.max(0, totalManual - totalAutomation);
+
+			double weeklyROI = totalManual > 0 ? (saved * 100.0) / totalManual : 0.0;
+
+			double avgROI = runCount > 0 ? roiTotal / runCount : 0.0;
+
+			result.put("manualHours", totalManual / 3600.0);
+
+			result.put("automationHours", totalAutomation / 3600.0);
+
+			result.put("savedHours", saved / 3600.0);
+
+			result.put("weeklyROI", weeklyROI);
+
+			result.put("avgROI", avgROI);
+
+		} catch (Exception e) {
+
+			result.put("manualHours", 0.0);
+			result.put("automationHours", 0.0);
+			result.put("savedHours", 0.0);
+			result.put("weeklyROI", 0.0);
+			result.put("avgROI", 0.0);
+		}
+
+		return result;
 	}
 
+	// ======================================================
+	// MONTHLY TEST HEALTH
+	// ======================================================
+	public Map<String, Object> getMonthlyTestHealth() {
+
+		Map<String, Object> result = new HashMap<>();
+
+		try {
+
+			String roiPath = System.getProperty("user.dir") + "/" + config.getProperty("roiHistoryPath");
+
+			File file = new File(roiPath);
+
+			if (!file.exists()) {
+
+				result.put("pass", 0);
+				result.put("fail", 0);
+				result.put("skip", 0);
+				result.put("totalTests", 0);
+				result.put("passPercent", 0.0);
+
+				return result;
+			}
+
+			JSONParser parser = new JSONParser();
+
+			JSONArray history = (JSONArray) parser.parse(new FileReader(file));
+
+			// ===== GET LATEST DATE FROM JSON =====
+			LocalDate today = LocalDate.MIN;
+
+			for (Object obj : history) {
+
+				JSONObject row = (JSONObject) obj;
+
+				LocalDate runDate = LocalDate.parse(row.get("date").toString());
+
+				if (runDate.isAfter(today)) {
+					today = runDate;
+				}
+			}
+
+			LocalDate monthStart = today.withDayOfMonth(1);
+
+			int totalPass = 0;
+			int totalFail = 0;
+			int totalSkip = 0;
+
+			for (Object obj : history) {
+
+				JSONObject row = (JSONObject) obj;
+
+				LocalDate runDate = LocalDate.parse(row.get("date").toString());
+
+				if (runDate.isBefore(monthStart) || runDate.isAfter(today)) {
+					continue;
+				}
+
+				int passCount = row.get("passCount") == null ? 0 : Integer.parseInt(row.get("passCount").toString());
+
+				int failCount = row.get("failCount") == null ? 0 : Integer.parseInt(row.get("failCount").toString());
+
+				int skipCount = row.get("skipCount") == null ? 0 : Integer.parseInt(row.get("skipCount").toString());
+
+				totalPass += passCount;
+				totalFail += failCount;
+				totalSkip += skipCount;
+			}
+
+			int totalTests = totalPass + totalFail + totalSkip;
+
+			double passPercent = totalTests > 0 ? (totalPass * 100.0) / totalTests : 0.0;
+
+			result.put("pass", totalPass);
+			result.put("fail", totalFail);
+			result.put("skip", totalSkip);
+			result.put("totalTests", totalTests);
+			result.put("passPercent", passPercent);
+
+		} catch (Exception e) {
+
+			result.put("pass", 0);
+			result.put("fail", 0);
+			result.put("skip", 0);
+			result.put("totalTests", 0);
+			result.put("passPercent", 0.0);
+		}
+
+		return result;
+	}
+
+	// ======================================================
+	// MONTHLY ROI
+	// ======================================================
+	public Map<String, Object> getMonthlyROI() {
+
+		Map<String, Object> result = new HashMap<>();
+
+		try {
+
+			String roiPath = System.getProperty("user.dir") + "/" + config.getProperty("roiHistoryPath");
+
+			File file = new File(roiPath);
+
+			if (!file.exists()) {
+
+				result.put("manualHours", 0.0);
+				result.put("automationHours", 0.0);
+				result.put("savedHours", 0.0);
+				result.put("monthlyROI", 0.0);
+				result.put("avgROI", 0.0);
+
+				return result;
+			}
+
+			JSONParser parser = new JSONParser();
+
+			JSONArray history = (JSONArray) parser.parse(new FileReader(file));
+
+			// ===== GET LATEST DATE FROM JSON =====
+			LocalDate today = LocalDate.MIN;
+
+			for (Object obj : history) {
+
+				JSONObject row = (JSONObject) obj;
+
+				LocalDate runDate = LocalDate.parse(row.get("date").toString());
+
+				if (runDate.isAfter(today)) {
+					today = runDate;
+				}
+			}
+
+			LocalDate monthStart = today.withDayOfMonth(1);
+
+			int totalManual = 0;
+			int totalAutomation = 0;
+
+			double roiTotal = 0.0;
+			int runCount = 0;
+
+			for (Object obj : history) {
+
+				JSONObject row = (JSONObject) obj;
+
+				LocalDate runDate = LocalDate.parse(row.get("date").toString());
+
+				if (runDate.isBefore(monthStart) || runDate.isAfter(today)) {
+					continue;
+				}
+
+				int manualSeconds = Integer.parseInt(row.get("manualSeconds").toString());
+
+				int automationSeconds = Integer.parseInt(row.get("automationSeconds").toString());
+
+				double roi = Double.parseDouble(row.get("roi").toString());
+
+				totalManual += manualSeconds;
+				totalAutomation += automationSeconds;
+
+				roiTotal += roi;
+				runCount++;
+			}
+
+			int saved = Math.max(0, totalManual - totalAutomation);
+
+			double monthlyROI = totalManual > 0 ? (saved * 100.0) / totalManual : 0.0;
+
+			double avgROI = runCount > 0 ? roiTotal / runCount : 0.0;
+
+			result.put("manualHours", totalManual / 3600.0);
+
+			result.put("automationHours", totalAutomation / 3600.0);
+
+			result.put("savedHours", saved / 3600.0);
+
+			result.put("monthlyROI", monthlyROI);
+
+			result.put("avgROI", avgROI);
+
+		} catch (Exception e) {
+
+			result.put("manualHours", 0.0);
+			result.put("automationHours", 0.0);
+			result.put("savedHours", 0.0);
+			result.put("monthlyROI", 0.0);
+			result.put("avgROI", 0.0);
+		}
+
+		return result;
+	}
 }

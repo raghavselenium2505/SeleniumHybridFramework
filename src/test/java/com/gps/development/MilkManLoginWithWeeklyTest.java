@@ -291,7 +291,7 @@ public class MilkManLoginWithWeeklyTest extends TestBase {
 
 			actionclick(getDriver().findElement(paymentpage.buttonPayment), "Able to click on payment button",
 					"Unable to click on payment button");
-					WaitUtils.waitInvisibleSpinner(paymentpage.spinerLoading, 100);
+					WaitUtils.waitInvisibleSpinner(paymentpage.spinerLoading, 200);
 					
 					test.get().log(Status.INFO,
 							"Navigate to Thank you page ");

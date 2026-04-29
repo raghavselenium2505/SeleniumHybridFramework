@@ -183,12 +183,52 @@ public class MilkManLoginWithMontlyTest extends TestBase {
 			waitforelement(1000);
 			deliveryPage.selectFromDropdownValue(element2, dropDownDate);
 			waitforelement(1000);
-			String frameName = java.time.LocalDate.now().plusDays(2).format(java.time.format.DateTimeFormatter.ofPattern("EEE, d"))
-			        + ((java.time.LocalDate.now().plusDays(2).getDayOfMonth() >= 11 && java.time.LocalDate.now().plusDays(2).getDayOfMonth() <= 13) ? "th" :
-			        (java.time.LocalDate.now().plusDays(2).getDayOfMonth() % 10 == 1 ? "st" :
-			        java.time.LocalDate.now().plusDays(2).getDayOfMonth() % 10 == 2 ? "nd" :
-			        java.time.LocalDate.now().plusDays(2).getDayOfMonth() % 10 == 3 ? "rd" : "th"))
-			        + java.time.LocalDate.now().plusDays(2).format(java.time.format.DateTimeFormatter.ofPattern(" MMMM"));
+			String frameName =
+					(
+					java.time.LocalDate.now().plusDays(2).getDayOfWeek() == java.time.DayOfWeek.SUNDAY
+					? java.time.LocalDate.now().plusDays(3)
+					: java.time.LocalDate.now().plusDays(2)
+					).format(java.time.format.DateTimeFormatter.ofPattern("EEE, d"))
+
+					+ (((
+					java.time.LocalDate.now().plusDays(2).getDayOfWeek() == java.time.DayOfWeek.SUNDAY
+					? java.time.LocalDate.now().plusDays(3)
+					: java.time.LocalDate.now().plusDays(2)
+					).getDayOfMonth() >= 11
+
+					&&
+
+					(
+					java.time.LocalDate.now().plusDays(2).getDayOfWeek() == java.time.DayOfWeek.SUNDAY
+					? java.time.LocalDate.now().plusDays(3)
+					: java.time.LocalDate.now().plusDays(2)
+					).getDayOfMonth() <= 13)
+
+					? "th"
+
+					: (((
+					java.time.LocalDate.now().plusDays(2).getDayOfWeek() == java.time.DayOfWeek.SUNDAY
+					? java.time.LocalDate.now().plusDays(3)
+					: java.time.LocalDate.now().plusDays(2)
+					).getDayOfMonth() % 10 == 1) ? "st"
+
+					: (((
+					java.time.LocalDate.now().plusDays(2).getDayOfWeek() == java.time.DayOfWeek.SUNDAY
+					? java.time.LocalDate.now().plusDays(3)
+					: java.time.LocalDate.now().plusDays(2)
+					).getDayOfMonth() % 10 == 2) ? "nd"
+
+					: (((
+					java.time.LocalDate.now().plusDays(2).getDayOfWeek() == java.time.DayOfWeek.SUNDAY
+					? java.time.LocalDate.now().plusDays(3)
+					: java.time.LocalDate.now().plusDays(2)
+					).getDayOfMonth() % 10 == 3) ? "rd" : "th")))
+
+					+ (
+					java.time.LocalDate.now().plusDays(2).getDayOfWeek() == java.time.DayOfWeek.SUNDAY
+					? java.time.LocalDate.now().plusDays(3)
+					: java.time.LocalDate.now().plusDays(2)
+					).format(java.time.format.DateTimeFormatter.ofPattern(" MMMM")));
 			deliveryPage.selectFromDropdownValue(element2, frameName);
 
 			waitforelement(1000);
@@ -210,10 +250,10 @@ public class MilkManLoginWithMontlyTest extends TestBase {
 			waitforelement(1000);
 			click(deliveryPage.buttonContinue, "Able to click on continue", "Unable to click on continue");
 			MilkMan_YourBasketPage yourbasket = new MilkMan_YourBasketPage();
-			waitforelement(5000);
+			waitforelement(2000);
 			yourbasket.openDayDropdown("6 Large Free Range Eggs", "Mon");
 
-			yourbasket.selectDropdownValue("2");
+			yourbasket.selectDropdownValue("1");
 
 			waitforelement(1000);
 			yourbasket.scrollUpAndClick(getDriver().findElement(yourbasket.buttonContinueToCheckOut),
