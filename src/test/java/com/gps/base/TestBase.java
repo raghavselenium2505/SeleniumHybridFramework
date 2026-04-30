@@ -31,6 +31,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -153,31 +154,49 @@ public class TestBase implements baseMethods {
 	@BeforeSuite(alwaysRun = true)
 	public synchronized void startReport() {
 
-		// ✅ FIX: Start time initialized correctly
-		suiteStartTime = System.currentTimeMillis();
-		logger.info("Suite Start Time: " + suiteStartTime);
+	    PropertyConfigurator.configure(System.getProperty("user.dir")+"/src/test/resources/properties/log4j.properties");
+	    
+	   // D:\Repos\src\test\resources\properties\log4j.properties
 
-		if (extent == null) {
+	    // Start time initialized correctly
+	    suiteStartTime = System.currentTimeMillis();
 
-			String path = System.getProperty("user.dir") + "/src/test/resources/Reports/Extentreport/AutomationReport_"
-					+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".html";
+	    logger.info("Suite Start Time: " + suiteStartTime);
 
-			System.out.println("🔥 Report Path: " + path);
+	    if (extent == null) {
 
-			ExtentSparkReporter spark = new ExtentSparkReporter(path);
-			spark.config().setTheme(Theme.DARK);
-			spark.config().setReportName("Automation Execution Report");
-			spark.config().setDocumentTitle("Execution Report");
+	        String path = System.getProperty("user.dir")
+	                + "/src/test/resources/Reports/Extentreport/AutomationReport_"
+	                + new SimpleDateFormat("yyyyMMdd_HHmmss")
+	                .format(new Date()) + ".html";
 
-			extent = new ExtentReports();
-			extent.attachReporter(spark);
+	        System.out.println("🔥 Report Path: " + path);
 
-			extent.setSystemInfo("User", System.getProperty("user.name"));
-			extent.setSystemInfo("Environment", "QA");
-			extent.setSystemInfo("OS", System.getProperty("os.name"));
+	        ExtentSparkReporter spark =
+	                new ExtentSparkReporter(path);
 
-			reportPath = path;
-		}
+	        spark.config().setTheme(Theme.DARK);
+	        spark.config().setReportName(
+	                "Automation Execution Report");
+
+	        spark.config().setDocumentTitle(
+	                "Execution Report");
+
+	        extent = new ExtentReports();
+	        extent.attachReporter(spark);
+
+	        extent.setSystemInfo(
+	                "User",
+	                System.getProperty("user.name"));
+
+	        extent.setSystemInfo("Environment", "QA");
+
+	        extent.setSystemInfo(
+	                "OS",
+	                System.getProperty("os.name"));
+
+	        reportPath = path;
+	    }
 	}
 
 	/* ================= BROWSER SETUP ================= */
