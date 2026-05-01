@@ -2,11 +2,14 @@
        parallel="tests"
        thread-count="3">
 
+    <!-- 🔥 Listener added -->
+    <listeners>
+        <listener class-name="listeners.TestListener"/>
+    </listeners>
+
     <test name="Monthly user Signup">
 
-        <!-- 🔥 ADD THIS -->
         <parameter name="testDataPath" value="src/test/resources/excel/MilkManData.json"/>
-
         <parameter name="browser" value="chrome"/>
         <parameter name="url" value="https://staging-uk.modernmilkman.dev/"/>
 

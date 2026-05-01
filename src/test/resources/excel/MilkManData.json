@@ -4,6 +4,17 @@
     "testType": "Smoke",
     "runMode": "yes",
     "dataKey": "signupData2",
+
+    "summary": "MilkManSignupMontly - Monthly signup flow failed",
+    "description": "User unable to complete monthly signup flow successfully",
+    "issueType": "Bug",
+    "labels": ["automation", "signup", "monthly", "smoke"],
+
+    "priority": "High",
+    "severity": "Critical",
+    "environment": "QA",
+    "component": "Signup",
+
     "username": "raghavendrad234@gmail.com",
     "password": "raghavendrad234@gmail.com",
     "FirstName": "Test",
@@ -11,13 +22,16 @@
     "Email": "test@yopmail.com",
     "Apppassword": "Abcd@1234",
     "Address": "Apartment 56, Ledgard Bridge Mill, Ledgard Wharf, Mirfield, WF14 8NZ",
+
     "tagName": "p",
     "tagName2": "span",
     "element3": "div",
     "dropdownSelect": "1-2",
     "dropDownDate": "Please select a date",
     "frameName": "Mon, 20th April",
+
     "manualTime": "3:50",
+
     "mainItem_1": "Milk & Alternatives",
     "subItem_1_1": "Semi-Skimmed (Red Top)",
     "mainItem_2": "Organic Milk",
@@ -26,6 +40,7 @@
     "subItem_3_1": "Pain Au Raisin (2 Pack)",
     "mainItem_4": "Eggs",
     "subItem_4_1": "6 Large Free Range Eggs",
+
     "frameName_1": "Stripe Frame",
     "cardNumber": "4242 4242 4242 4242"
   },
@@ -34,6 +49,17 @@
     "testType": "Regression",
     "runMode": "yes",
     "dataKey": "signupData2",
+
+    "summary": "MilkManSignupAnnually - Annual signup flow failed",
+    "description": "User unable to complete annual signup flow successfully",
+    "issueType": "Bug",
+    "labels": ["automation", "signup", "annual", "regression"],
+
+    "priority": "Medium",
+    "severity": "Major",
+    "environment": "QA",
+    "component": "Signup",
+
     "username": "raghavendrad234@gmail.com",
     "password": "raghavendrad234@gmail.com",
     "FirstName": "Test",
@@ -41,13 +67,16 @@
     "Email": "test@yopmail.com",
     "Apppassword": "Abcd@1234",
     "Address": "Apartment 56, Ledgard Bridge Mill, Ledgard Wharf, Mirfield, WF14 8NZ",
+
     "tagName": "p",
     "tagName2": "span",
     "element3": "div",
     "dropdownSelect": "1-2",
     "dropDownDate": "Please select a date",
     "frameName": "Mon, 20th April",
+
     "manualTime": "3:50",
+
     "mainItem_1": "Milk & Alternatives",
     "subItem_1_1": "Semi-Skimmed (Red Top)",
     "mainItem_2": "Organic Milk",
@@ -56,6 +85,7 @@
     "subItem_3_1": "Pain Au Raisin (2 Pack)",
     "mainItem_4": "Eggs",
     "subItem_4_1": "6 Large Free Range Eggs",
+
     "frameName_1": "Stripe Frame",
     "cardNumber": "4000 0566 5566 5556"
   },
@@ -64,6 +94,17 @@
     "testType": "Functional",
     "runMode": "yes",
     "dataKey": "signupData2",
+
+    "summary": "MilkManSignupWeekly - Weekly signup flow failed",
+    "description": "User unable to complete weekly signup flow successfully",
+    "issueType": "Bug",
+    "labels": ["automation", "signup", "weekly", "functional"],
+
+    "priority": "Low",
+    "severity": "Minor",
+    "environment": "QA",
+    "component": "Signup",
+
     "username": "raghavendrad234@gmail.com",
     "password": "raghavendrad234@gmail.com",
     "FirstName": "Test",
@@ -71,13 +112,16 @@
     "Email": "test@yopmail.com",
     "Apppassword": "Abcd@1234",
     "Address": "Apartment 56, Ledgard Bridge Mill, Ledgard Wharf, Mirfield, WF14 8NZ",
+
     "tagName": "p",
     "tagName2": "span",
     "element3": "div",
     "dropdownSelect": "1-2",
     "dropDownDate": "Please select a date",
     "frameName": "Mon, 20th April",
+
     "manualTime": "3:50",
+
     "mainItem_1": "Milk & Alternatives",
     "subItem_1_1": "Semi-Skimmed (Red Top)",
     "mainItem_2": "Organic Milk",
@@ -86,6 +130,7 @@
     "subItem_3_1": "Pain Au Raisin (2 Pack)",
     "mainItem_4": "Eggs",
     "subItem_4_1": "6 Large Free Range Eggs",
+
     "frameName_1": "Stripe Frame",
     "cardNumber": "5555 5555 5555 4444"
   }
