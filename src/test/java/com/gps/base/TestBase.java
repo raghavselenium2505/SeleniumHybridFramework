@@ -34,6 +34,11 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.json.simple.JSONArray;
@@ -2074,4 +2079,36 @@ public class TestBase implements baseMethods {
 
 	    return links.toString();
 	}
+	
+	public Map<String, Integer> getTestTypeCounts(String filePath) {
+
+	    Map<String, Integer> counts = new HashMap<>();
+
+	    counts.put("Smoke", 0);
+	    counts.put("Sanity", 0);
+	    counts.put("Regression", 0);
+	    counts.put("Functional", 0);
+
+	    try {
+	        JSONParser parser = new JSONParser();
+	        JSONArray arr = (JSONArray) parser.parse(new FileReader(filePath));
+
+	        for (Object o : arr) {
+	            JSONObject obj = (JSONObject) o;
+
+	            String type = (String) obj.get("type");
+
+	            if (counts.containsKey(type)) {
+	                counts.put(type, counts.get(type) + 1);
+	            }
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return counts;
+	}
+	
+
 }
