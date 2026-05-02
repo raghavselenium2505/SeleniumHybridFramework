@@ -8,7 +8,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
 import org.testng.SkipException;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
@@ -21,9 +20,7 @@ import com.gps.pages.MilkMan_PaymentPage;
 import com.gps.pages.MilkMan_SignUpPage;
 import com.gps.pages.MilkMan_YourBasketPage;
 import com.gps.utilities.WaitUtils;
-import com.web.utilities.TestListener;
 
-@Listeners(TestListener.class)
 public class MilkManLoginWithMontlyTest extends TestBase {
 
 	 @Test(groups = "MilkManSignupTests",

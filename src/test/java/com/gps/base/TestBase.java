@@ -3,7 +3,6 @@ package com.gps.base;
 import java.awt.Desktop;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
@@ -16,7 +15,6 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,8 +29,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -54,8 +50,7 @@ import org.testng.annotations.*;
 import com.gps.utilities.ExcelUtil;
 import com.gps.utilities.ScreenshotUtil;
 import com.web.utilities.AITestAnalyzer;
-import com.web.utilities.JiraService;
-import com.web.utilities.TestListener;
+
 import com.aventstack.extentreports.*;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
@@ -130,7 +125,7 @@ public class TestBase implements baseMethods {
 	protected static ExtentReports extent;
 	protected static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 	public static ThreadLocal<Map<String, String>> currentTestData = new ThreadLocal<>();
-	public static String reportPath;
+	private static String reportPath;
 
 	public static AtomicInteger passCount = new AtomicInteger(0);
 	public static AtomicInteger failCount = new AtomicInteger(0);
@@ -153,42 +148,56 @@ public class TestBase implements baseMethods {
 	private ThreadLocal<Long> testStartTime = new ThreadLocal<>();
 	private static final String CONFIG_PATH = System.getProperty("user.dir")
 			+ "/src/test/resources/properties/Config.properties";
-	public static List<String> FAILED_TESTS = new ArrayList<>();
-	public static Map<String, String> FAILURE_REASON_MAP = new HashMap<>();
-	public static List<String> CREATED_ISSUES = new ArrayList<>();
+
 	/* ================= START EXTENT REPORT ================= */
 
-	 @BeforeSuite(alwaysRun = true)
-	    public synchronized void startReport() {
+	@BeforeSuite(alwaysRun = true)
+	public synchronized void startReport() {
 
-	        PropertyConfigurator.configure(
-	                System.getProperty("user.dir")
-	                        + "/src/test/resources/properties/log4j.properties");
+	    PropertyConfigurator.configure(System.getProperty("user.dir")+"/src/test/resources/properties/log4j.properties");
+	    
+	   // D:\Repos\src\test\resources\properties\log4j.properties
 
-	        suiteStartTime = System.currentTimeMillis();
-	        logger.info("Suite Start Time: " + suiteStartTime);
+	    // Start time initialized correctly
+	    suiteStartTime = System.currentTimeMillis();
 
-	        if (extent == null) {
+	    logger.info("Suite Start Time: " + suiteStartTime);
 
-	            reportPath = System.getProperty("user.dir")
-	                    + "/src/test/resources/Reports/Extentreport/AutomationReport_"
-	                    + new SimpleDateFormat("yyyyMMdd_HHmmss")
-	                    .format(new Date()) + ".html";
+	    if (extent == null) {
 
-	            System.out.println("🔥 Report Path: " + reportPath);
+	        String path = System.getProperty("user.dir")
+	                + "/src/test/resources/Reports/Extentreport/AutomationReport_"
+	                + new SimpleDateFormat("yyyyMMdd_HHmmss")
+	                .format(new Date()) + ".html";
 
-	            ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
-	            spark.config().setReportName("Automation Execution Report");
-	            spark.config().setDocumentTitle("Execution Report");
+	        System.out.println("🔥 Report Path: " + path);
 
-	            extent = new ExtentReports();
-	            extent.attachReporter(spark);
+	        ExtentSparkReporter spark =
+	                new ExtentSparkReporter(path);
 
-	            extent.setSystemInfo("User", System.getProperty("user.name"));
-	            extent.setSystemInfo("Environment", "QA");
-	            extent.setSystemInfo("OS", System.getProperty("os.name"));
-	        }
+	        spark.config().setTheme(Theme.DARK);
+	        spark.config().setReportName(
+	                "Automation Execution Report");
+
+	        spark.config().setDocumentTitle(
+	                "Execution Report");
+
+	        extent = new ExtentReports();
+	        extent.attachReporter(spark);
+
+	        extent.setSystemInfo(
+	                "User",
+	                System.getProperty("user.name"));
+
+	        extent.setSystemInfo("Environment", "QA");
+
+	        extent.setSystemInfo(
+	                "OS",
+	                System.getProperty("os.name"));
+
+	        reportPath = path;
 	    }
+	}
 
 	/* ================= BROWSER SETUP ================= */
 	@BeforeMethod(alwaysRun = true)
@@ -299,74 +308,43 @@ public class TestBase implements baseMethods {
 	@AfterMethod(alwaysRun = true)
 	public void tearDown(ITestResult result) {
 
-	    try {
+		try {
 
-	        // 🔥 CAPTURE EXECUTION TIME
-	        if (testStartTime.get() != null) {
+			// 🔥 CAPTURE EXECUTION TIME
+			if (testStartTime.get() != null) {
 
-	            long duration = result.getEndMillis() - result.getStartMillis();
-	            totalExecutionTime.addAndGet(duration);
+				long duration = result.getEndMillis() - result.getStartMillis();
+				totalExecutionTime.addAndGet(duration);
 
-	            logger.info("Test Execution Time(ms): " + duration);
-	        }
+				logger.info("Test Execution Time(ms): " + duration);
+			}
 
-	        if (test.get() != null) {
+			if (test.get() != null) {
 
-	            if (result.getStatus() == ITestResult.SUCCESS) {
+				if (result.getStatus() == ITestResult.SUCCESS) {
+					passCount.incrementAndGet();
+					test.get().pass("Test Passed");
 
-	                passCount.incrementAndGet();
-	                test.get().pass("Test Passed");
+				} else if (result.getStatus() == ITestResult.FAILURE) {
+					failCount.incrementAndGet();
+					test.get().fail(result.getThrowable());
 
-	            } else if (result.getStatus() == ITestResult.FAILURE) {
+				} else if (result.getStatus() == ITestResult.SKIP) {
+					skipCount.incrementAndGet();
+					test.get().skip("Test Skipped");
+				}
+			}
 
-	                failCount.incrementAndGet();
-	                test.get().fail(result.getThrowable());
+		} catch (Exception e) {
+			logger.error("Error in tearDown()", e);
+		} finally {
 
-	                String testName = result.getMethod().getMethodName();
+			if (getDriver() != null) {
+				getDriver().quit();
+			}
 
-	                // ✅ STORE FAILED TEST
-	                FAILED_TESTS.add(testName);
-
-	                // 🔥 STORE EXCEPTION (IMPORTANT)
-	                String errorMessage = "No exception available";
-
-	                if (result.getThrowable() != null) {
-
-	                    StringWriter sw = new StringWriter();
-	                    PrintWriter pw = new PrintWriter(sw);
-
-	                    result.getThrowable().printStackTrace(pw);
-
-	                    errorMessage = sw.toString();
-	                }
-
-	                FAILURE_REASON_MAP.put(testName, errorMessage);
-
-	                logger.info("Captured failure: " + testName);
-
-	            } else if (result.getStatus() == ITestResult.SKIP) {
-
-	                skipCount.incrementAndGet();
-	                test.get().skip("Test Skipped");
-	            }
-	        }
-
-	    } catch (Exception e) {
-	        logger.error("Error in tearDown()", e);
-	    } finally {
-
-	        // 🔥 GUARANTEED DRIVER CLOSE
-	        try {
-	            if (getDriver() != null) {
-	                getDriver().quit();
-	                logger.info("Browser closed successfully");
-	            }
-	        } catch (Exception e) {
-	            logger.error("Error while closing browser", e);
-	        }
-
-	        removeDriver();
-	    }
+			removeDriver();
+		}
 	}
 
 	private void uploadFolderToS3(File folder, String s3BasePath) {
@@ -484,134 +462,114 @@ public class TestBase implements baseMethods {
 	@AfterSuite(alwaysRun = true)
 	public synchronized void endReport() {
 
-	    try {
+		try {
 
-	        if (extent == null) {
-	            logger.error("Extent is NULL");
-	            return;
-	        }
+			if (extent == null) {
+				logger.error("Extent is NULL");
+				return;
+			}
 
-	        extent.flush();
-	        waitForReportToBeReady(reportPath);
+			extent.flush();
+			waitForReportToBeReady(reportPath);
 
-	        String finalUrl = "";
+			String finalUrl = "";
 
-	        // ================= AWS =================
-	        if (isAwsUploadEnabled()) {
+			// ================= AWS =================
+			if (isAwsUploadEnabled()) {
 
-	            try {
+				try {
 
-	                String bucketName = config.getProperty("aws.bucketName");
-	                String region = config.getProperty("aws.region");
+					String bucketName = config.getProperty("aws.bucketName");
+					String region = config.getProperty("aws.region");
 
-	                String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
+					String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
 
-	                String fileName = "DashboardReport_" + timeStamp + ".html";
-	                String s3Key = "reports/latest/" + fileName;
+					String fileName = "DashboardReport_" + timeStamp + ".html";
+					String s3Key = "reports/latest/" + fileName;
 
-	                logger.info("Uploading report to S3...");
+					logger.info("Uploading report to S3...");
 
-	                uploadSingleFileToS3(reportPath, s3Key);
+					uploadSingleFileToS3(reportPath, s3Key);
 
-	                finalUrl = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + s3Key;
+					finalUrl = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + s3Key;
 
-	                logger.info("AWS URL: " + finalUrl);
+					logger.info("AWS URL: " + finalUrl);
 
-	            } catch (Exception ex) {
-	                logger.error("S3 upload failed", ex);
-	            }
-	        }
+				} catch (Exception ex) {
+					logger.error("S3 upload failed", ex);
+				}
+			}
 
-	        // ================= 🔥 JIRA (ONLY ADDITION) =================
-	        try {
+			// ================= COUNTS =================
+			int pass = passCount.get();
+			int fail = failCount.get();
+			int skip = skipCount.get();
+			int total = pass + fail + skip;
 
-	            logger.info("===== JIRA EXECUTION START =====");
-	            logger.info("Failed Tests Count: " + FAILED_TESTS.size());
+			logger.info(
+					"Execution Summary -> Total: " + total + " Pass: " + pass + " Fail: " + fail + " Skip: " + skip);
 
-	            for (String test : FAILED_TESTS) {
+			// ================= EXECUTION TIME =================
+			long duration = System.currentTimeMillis() - suiteStartTime;
 
-	                logger.info("Creating Jira for: " + test);
+			long totalSeconds = duration / 1000;
+			long hours = totalSeconds / 3600;
+			long minutes = (totalSeconds % 3600) / 60;
+			long seconds = totalSeconds % 60;
 
-	                JiraService.createJiraBug(test);
-	            }
+			logger.info("Execution Time: " + hours + "h " + minutes + "m " + seconds + "s");
 
-	            logger.info("===== JIRA EXECUTION END =====");
+			// ================= 🔥 ROI CALCULATION (FIXED) =================
+			int manualSeconds = totalManualTime.get();
 
-	        } catch (Exception e) {
-	            logger.error("Error while creating Jira issues", e);
-	        }
-	        // ===========================================================
+			// ✅ USE ACTUAL TEST EXECUTION TIME
+			int automationSeconds = (int) (totalExecutionTime.get() / 1000);
 
-	        // ================= COUNTS =================
-	        int pass = passCount.get();
-	        int fail = failCount.get();
-	        int skip = skipCount.get();
-	        int total = pass + fail + skip;
+			int saved = Math.max(0, manualSeconds - automationSeconds);
 
-	        logger.info(
-	                "Execution Summary -> Total: " + total + " Pass: " + pass + " Fail: " + fail + " Skip: " + skip);
+			double efficiency = manualSeconds > 0 ? (saved * 100.0) / manualSeconds : 0;
 
-	        // ================= EXECUTION TIME =================
-	        long duration = System.currentTimeMillis() - suiteStartTime;
+			String manualTimeStr = (manualSeconds / 60) + "m " + (manualSeconds % 60) + "s";
+			String autoTimeStr = (automationSeconds / 60) + "m " + (automationSeconds % 60) + "s";
+			String savedTimeStr = (saved / 60) + "m " + (saved % 60) + "s";
+			saveROIHistory(manualSeconds, automationSeconds, saved, efficiency, pass, fail, skip); // =================
+																									// LOGGER
+																									// =================
+			logger.info("========= AUTOMATION ROI =========");
+			logger.info("Manual Time: " + manualTimeStr);
+			logger.info("Automation Time: " + autoTimeStr);
+			logger.info("Time Saved: " + savedTimeStr);
+			logger.info("Efficiency: " + String.format("%.2f", efficiency) + "%");
+			logger.info("=================================");
 
-	        long totalSeconds = duration / 1000;
-	        long hours = totalSeconds / 3600;
-	        long minutes = (totalSeconds % 3600) / 60;
-	        long seconds = totalSeconds % 60;
+			// ================= CONSOLE =================
+			System.out.println("\n========= AUTOMATION ROI =========");
+			System.out.println("Manual Time: " + manualTimeStr);
+			System.out.println("Automation Time: " + autoTimeStr);
+			System.out.println("Time Saved: " + savedTimeStr);
+			System.out.println("Efficiency: " + String.format("%.2f", efficiency) + "%");
+			System.out.println("=================================\n");
 
-	        logger.info("Execution Time: " + hours + "h " + minutes + "m " + seconds + "s");
+			// ================= DASHBOARD =================
+			generateDashboardHtml(pass, fail, skip, finalUrl, totalExecutionTime.get());
 
-	        // ================= ROI =================
-	        int manualSeconds = totalManualTime.get();
-	        int automationSeconds = (int) (totalExecutionTime.get() / 1000);
+			// ================= OPEN REPORT =================
+			try {
 
-	        int saved = Math.max(0, manualSeconds - automationSeconds);
+				File reportFile = new File(reportPath);
 
-	        double efficiency = manualSeconds > 0 ? (saved * 100.0) / manualSeconds : 0;
+				if (reportFile.exists() && Desktop.isDesktopSupported()) {
+					Desktop.getDesktop().browse(reportFile.toURI());
+					logger.info("Opened Extent report");
+				}
 
-	        String manualTimeStr = (manualSeconds / 60) + "m " + (manualSeconds % 60) + "s";
-	        String autoTimeStr = (automationSeconds / 60) + "m " + (automationSeconds % 60) + "s";
-	        String savedTimeStr = (saved / 60) + "m " + (saved % 60) + "s";
+			} catch (Exception e) {
+				logger.warn("Unable to open report");
+			}
 
-	        int jiraBugs = JiraService.CREATED_ISSUES.size();
-
-	        saveROIHistory(manualSeconds, automationSeconds, saved, efficiency,
-	                pass, fail, skip, jiraBugs);
-	        logger.info("========= AUTOMATION ROI =========");
-	        logger.info("Manual Time: " + manualTimeStr);
-	        logger.info("Automation Time: " + autoTimeStr);
-	        logger.info("Time Saved: " + savedTimeStr);
-	        logger.info("Efficiency: " + String.format("%.2f", efficiency) + "%");
-	        logger.info("=================================");
-
-	        // ================= CONSOLE =================
-	        System.out.println("\n========= AUTOMATION ROI =========");
-	        System.out.println("Manual Time: " + manualTimeStr);
-	        System.out.println("Automation Time: " + autoTimeStr);
-	        System.out.println("Time Saved: " + savedTimeStr);
-	        System.out.println("Efficiency: " + String.format("%.2f", efficiency) + "%");
-	        System.out.println("=================================\n");
-
-	        // ================= DASHBOARD =================
-	        generateDashboardHtml(pass, fail, skip, finalUrl, totalExecutionTime.get());
-
-	        // ================= OPEN REPORT =================
-	        try {
-
-	            File reportFile = new File(reportPath);
-
-	            if (reportFile.exists() && Desktop.isDesktopSupported()) {
-	                Desktop.getDesktop().browse(reportFile.toURI());
-	                logger.info("Opened Extent report");
-	            }
-
-	        } catch (Exception e) {
-	            logger.warn("Unable to open report");
-	        }
-
-	    } catch (Exception e) {
-	        logger.error("Error in endReport()", e);
-	    }
+		} catch (Exception e) {
+			logger.error("Error in endReport()", e);
+		}
 	}
 
 	private void uploadSingleFileToS3(String filePath, String s3Key) {
@@ -1110,24 +1068,7 @@ public class TestBase implements baseMethods {
 			String manualTimeStr = (manualSeconds / 60) + "m " + (manualSeconds % 60) + "s";
 			String autoTimeStr = (automationSeconds / 60) + "m " + (automationSeconds % 60) + "s";
 			String savedTimeStr = (saved / 60) + "m " + (saved % 60) + "s";
-			// ================= JIRA DATA =================
-			Map<String, Integer> jiraCounts = JiraService.getJiraCounts();
 
-			int currentBugs = JiraService.CREATED_ISSUES.size();
-			int weeklyBugs = jiraCounts.getOrDefault("weekly", 0);
-			int monthlyBugs = jiraCounts.getOrDefault("monthly", 0);
-
-			String jiraBaseUrl = config.getProperty("jira.baseUrl");
-
-			StringBuilder jiraLinks = new StringBuilder();
-
-			for (String key : JiraService.CREATED_ISSUES) {
-			    jiraLinks.append("<a href='")
-			             .append(jiraBaseUrl).append("/browse/").append(key)
-			             .append("' target='_blank'>")
-			             .append(key)
-			             .append("</a><br>");
-			}
 			String roiLabel;
 			String roiColor;
 
@@ -1611,71 +1552,68 @@ public class TestBase implements baseMethods {
 		return result;
 	}
 
-	public void saveROIHistory(int manualSeconds, int automationSeconds, int savedSeconds, double roi,
-	        int passCount, int failCount, int skipCount, int jiraBugs) {
+	public void saveROIHistory(int manualSeconds, int automationSeconds, int savedSeconds, double roi, int passCount,
+			int failCount, int skipCount) {
 
-	    try {
+		try {
 
-	        String roiPath = System.getProperty("user.dir") + "/" + config.getProperty("roiHistoryPath");
+			String roiPath = System.getProperty("user.dir") + "/" + config.getProperty("roiHistoryPath");
 
-	        File file = new File(roiPath);
+			File file = new File(roiPath);
 
-	        File parent = file.getParentFile();
+			File parent = file.getParentFile();
 
-	        if (parent != null && !parent.exists()) {
-	            parent.mkdirs();
-	        }
+			if (parent != null && !parent.exists()) {
+				parent.mkdirs();
+			}
 
-	        JSONArray history = new JSONArray();
+			JSONArray history = new JSONArray();
 
-	        if (file.exists() && file.length() > 0) {
+			if (file.exists() && file.length() > 0) {
 
-	            JSONParser parser = new JSONParser();
+				JSONParser parser = new JSONParser();
 
-	            try (FileReader fr = new FileReader(file)) {
+				try (FileReader fr = new FileReader(file)) {
 
-	                history = (JSONArray) parser.parse(fr);
-	            }
-	        }
+					history = (JSONArray) parser.parse(fr);
+				}
+			}
 
-	        JSONObject obj = new JSONObject();
+			JSONObject obj = new JSONObject();
 
-	        obj.put("date", LocalDate.now().toString());
+			obj.put("date", LocalDate.now().toString());
 
-	        obj.put("manualSeconds", manualSeconds);
+			obj.put("manualSeconds", manualSeconds);
 
-	        obj.put("automationSeconds", automationSeconds);
+			obj.put("automationSeconds", automationSeconds);
 
-	        obj.put("savedSeconds", savedSeconds);
+			obj.put("savedSeconds", savedSeconds);
 
-	        obj.put("roi", roi);
+			obj.put("roi", roi);
 
-	        obj.put("passCount", passCount);
+			obj.put("passCount", passCount);
 
-	        obj.put("failCount", failCount);
+			obj.put("failCount", failCount);
 
-	        obj.put("skipCount", skipCount);
+			obj.put("skipCount", skipCount);
 
-	        obj.put("status", failCount > 0 ? "FAIL" : "PASS");
+			obj.put("status", failCount > 0 ? "FAIL" : "PASS");
 
-	        // ================= 🔥 NEW FIELD (JIRA BUG COUNT) =================
-	        obj.put("jiraBugs", jiraBugs);
+			history.add(obj);
 
-	        history.add(obj);
+			try (FileWriter fw = new FileWriter(file)) {
 
-	        try (FileWriter fw = new FileWriter(file)) {
+				fw.write(history.toJSONString());
 
-	            fw.write(history.toJSONString());
+				fw.flush();
+			}
 
-	            fw.flush();
-	        }
+			logger.info("ROI History updated successfully");
 
-	        logger.info("ROI History updated successfully");
+		} catch (Exception e) {
 
-	    } catch (Exception e) {
-
-	        logger.error("Failed to save ROI history", e);
-	    }
+			logger.error("Failed to save ROI history", e);
+		}
 	}
 
 	public Map<String, Object> getWeeklyROI() {
@@ -1960,118 +1898,5 @@ public class TestBase implements baseMethods {
 		}
 
 		return result;
-	}
-	
-	public static Map<String, Integer> getJiraCounts() {
-
-	    Map<String, Integer> counts = new HashMap<>();
-
-	    int weekly = 0;
-	    int monthly = 0;
-
-	    try {
-
-	        File file = new File("jira_history.csv");
-
-	        if (!file.exists()) {
-	            counts.put("weekly", 0);
-	            counts.put("monthly", 0);
-	            return counts;
-	        }
-
-	        BufferedReader br = new BufferedReader(new FileReader(file));
-	        String line;
-
-	        java.time.LocalDate now = java.time.LocalDate.now();
-
-	        while ((line = br.readLine()) != null) {
-
-	            String[] parts = line.split(",");
-	            java.time.LocalDate date = java.time.LocalDate.parse(parts[0]);
-
-	            if (date.isAfter(now.minusDays(7))) weekly++;
-
-	            if (date.getMonth() == now.getMonth()) monthly++;
-	        }
-
-	        br.close();
-
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-
-	    counts.put("weekly", weekly);
-	    counts.put("monthly", monthly);
-
-	    return counts;
-	}
-	
-	private static void saveJiraHistory(String issueKey) {
-	    try {
-	        FileWriter fw = new FileWriter("jira_history.csv", true);
-
-	        String date = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
-
-	        fw.write(date + "," + issueKey + "\n");
-	        fw.close();
-
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	}
-	private String getJiraHistoryLinks() {
-
-	    StringBuilder links = new StringBuilder();
-
-	    try {
-
-	        String roiPath = System.getProperty("user.dir") + "/" + config.getProperty("roiHistoryPath");
-
-	        File file = new File(roiPath);
-
-	        if (!file.exists()) return "";
-
-	        JSONParser parser = new JSONParser();
-
-	        JSONArray arr;
-
-	        try (FileReader reader = new FileReader(file)) {
-	            arr = (JSONArray) parser.parse(reader);
-	        }
-
-	        String baseUrl = config.getProperty("jira.baseUrl");
-
-	        for (int i = arr.size() - 1; i >= 0; i--) {
-
-	            JSONObject obj = (JSONObject) arr.get(i);
-
-	            String date = (String) obj.get("date");
-
-	            JSONArray keys = (JSONArray) obj.get("jiraKeys");
-
-	            if (keys != null && keys.size() > 0) {
-
-	                links.append("<p><b>").append(date).append("</b><br>");
-
-	                for (Object k : keys) {
-
-	                    String key = (String) k;
-
-	                    links.append("<a href='")
-	                         .append(baseUrl).append("/browse/").append(key)
-	                         .append("' target='_blank'>")
-	                         .append(key)
-	                         .append("</a><br>");
-	                }
-
-	                links.append("</p>");
-	            }
-	        }
-
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-
-	    return links.toString();
 	}
 }
