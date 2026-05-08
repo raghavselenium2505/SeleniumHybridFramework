@@ -1,6 +1,6 @@
 [
   {
-    "testCase": "MilkManSignupMontly",
+    "testCase": "MilkManLoginWithMontly",
     "testType": "Smoke",
     "runMode": "yes",
     "dataKey": "signupData2",
@@ -45,7 +45,7 @@
     "cardNumber": "4242 4242 4242 4242"
   },
   {
-    "testCase": "MilkManSignupAnnually",
+    "testCase": "MilkManLoginWithAnnually",
     "testType": "Regression",
     "runMode": "yes",
     "dataKey": "signupData2",
@@ -90,7 +90,7 @@
     "cardNumber": "4000 0566 5566 5556"
   },
   {
-    "testCase": "MilkManSignupWeekly",
+    "testCase": "MilkManLoginWithWeekly",
     "testType": "Functional",
     "runMode": "yes",
     "dataKey": "signupData2",

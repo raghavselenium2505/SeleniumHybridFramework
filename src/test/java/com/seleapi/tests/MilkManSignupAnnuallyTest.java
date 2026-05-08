@@ -1,5 +1,6 @@
 package com.seleapi.tests;
 
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class MilkManSignupAnnuallyTest extends TestBase {
 		    dataProviderClass = DynamicDataProvider.class,
 		    retryAnalyzer = AIRetryAnalyzer.class
 		)
-		    public void MilkManSignupAnnually(Map<String, String> data) {
+		    public void MilkManLoginWithAnnually(Map<String, String> data) {
 
 			try {
 				 
@@ -327,4 +328,60 @@ public class MilkManSignupAnnuallyTest extends TestBase {
 		
 
 }
+	public void executeBotTest(
+	        Map<String, String> data) {
+
+	    try {
+
+	        logger.info(
+	            "Bot Started Annual Test");
+
+	        currentTestData.set(data);
+
+	        Method method =
+	                this.getClass()
+	                .getMethod(
+	                "MilkManLoginWithAnnually",
+	                Map.class);
+
+	        setUp("", "", method);
+
+	        MilkManLoginWithAnnually(data);
+
+	        logger.info(
+	            "Annual Test Passed");
+	    }
+
+	    catch (Exception e) {
+
+	        logger.error(
+	            "Annual Test Failed");
+
+	        logger.error(
+	            e.getMessage(), e);
+
+	        throw new RuntimeException(e);
+	    }
+
+	    finally {
+
+	        try {
+
+	            if(getDriver() != null) {
+
+	                getDriver().quit();
+
+	                logger.info(
+	                    "Browser Closed");
+	            }
+
+	        }
+
+	        catch (Exception e) {
+
+	            logger.error(
+	                "Error while closing browser", e);
+	        }
+	    }
+	}
 }
