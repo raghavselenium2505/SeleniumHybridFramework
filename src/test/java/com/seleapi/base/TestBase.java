@@ -55,6 +55,7 @@ import com.seleapi.ai.AITestAnalyzer;
 import com.seleapi.services.JiraService;
 import com.seleapi.utils.ExcelUtil;
 import com.seleapi.utils.ScreenshotUtil;
+import com.seleapi.utils.VideoRecorderUtil;
 import com.aventstack.extentreports.*;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
@@ -155,6 +156,8 @@ public class TestBase implements baseMethods {
 	public static List<String> FAILED_TESTS = new ArrayList<>();
 	public static Map<String, String> FAILURE_REASON_MAP = new HashMap<>();
 	public static List<String> CREATED_ISSUES = new ArrayList<>();
+	String videoCards = "";
+	public static String s3VideoUrl = "";
 	/* ================= START EXTENT REPORT ================= */
 
 	 @BeforeSuite(alwaysRun = true)
@@ -196,6 +199,8 @@ logger.info("🔥 Report Path: " + reportPath);
 			throws Exception {
 
 		try {
+			
+		
 
 			// 🔥 START TIMER
 			testStartTime.set(System.currentTimeMillis());
@@ -254,7 +259,12 @@ logger.info("🔥 Report Path: " + reportPath);
 					}
 				}
 			}
+			VideoRecorderUtil
+	        .startRecording(method.getName());
 
+	logger.info(
+	        "🎥 Video recording started : {}"+
+	        method.getName());
 			// ===== BROWSER =====
 			String browser = (browserFromXml != null && !browserFromXml.isEmpty()) ? browserFromXml
 					: config.getProperty("browser");
@@ -299,7 +309,38 @@ logger.info("🔥 Report Path: " + reportPath);
 	public void tearDown(ITestResult result) {
 
 	    try {
+	    	VideoRecorderUtil.stopRecording();
 
+	    	logger.info(
+	    	        "🛑 Video recording stopped");
+
+	    	String videoPath =
+	    	        VideoRecorderUtil
+	    	        .getVideoPath();
+
+	    	logger.info(
+	    	        "📹 Video Path : {}"+
+	    	        videoPath);
+
+	    	File videoFile =
+	    	        new File(videoPath);
+
+	    	if (videoFile.exists()) {
+
+	    	    s3VideoUrl =
+	    	            uploadVideoToS3(
+	    	                    videoFile,
+	    	                    "executions/videos");
+
+	    	    logger.info(
+	    	            "☁️ Video uploaded to S3 : {}"+
+	    	            s3VideoUrl);
+
+	    	} else {
+
+	    	    logger.warn(
+	    	            "⚠️ Video file not found");
+	    	}
 	        // 🔥 CAPTURE EXECUTION TIME
 	        if (testStartTime.get() != null) {
 
@@ -367,7 +408,71 @@ logger.info("🔥 Report Path: " + reportPath);
 	        removeDriver();
 	    }
 	}
+	private String uploadVideoToS3(File videoFile, String s3BasePath) {
 
+		if (videoFile == null || !videoFile.exists())
+			return null;
+
+		String bucketName =
+				config.getProperty("aws.bucketName");
+
+		String region =
+				config.getProperty("aws.region");
+
+		AwsBasicCredentials credentials =
+				AwsBasicCredentials.create(
+						System.getenv("AWS_ACCESS_KEY_ID"),
+						System.getenv("AWS_SECRET_ACCESS_KEY"));
+
+		S3Client s3Client =
+				S3Client.builder()
+						.region(Region.of(region))
+						.credentialsProvider(
+								StaticCredentialsProvider.create(credentials))
+						.build();
+
+		try {
+
+			String key =
+					s3BasePath
+					+ "/"
+					+ videoFile.getName();
+
+			PutObjectRequest request =
+					PutObjectRequest.builder()
+							.bucket(bucketName)
+							.key(key)
+							.contentType("video/mp4")
+							.build();
+
+			s3Client.putObject(
+					request,
+					videoFile.toPath());
+
+			String videoUrl =
+					"https://"
+					+ bucketName
+					+ ".s3."
+					+ region
+					+ ".amazonaws.com/"
+					+ key;
+
+			logger.info(
+					"Video uploaded successfully : "
+					+ videoUrl);
+
+			return videoUrl;
+
+		} catch (Exception e) {
+
+			logger.error(
+					"Video upload failed",
+					e);
+
+			return null;
+		}
+	}
+	
 	private void uploadFolderToS3(File folder, String s3BasePath) {
 
 		if (folder == null || !folder.exists())
@@ -1301,8 +1406,71 @@ logger.info("🔥 Report Path: " + reportPath);
 			String pieData = "[" + pass + "," + fail + "," + skip + "]";
 
 			String reportLink = (finalUrl != null && !finalUrl.isEmpty()) ? finalUrl : "#";
+			String videoCards = "";
 
-			// ================= HTML =================
+			if (s3VideoUrl != null
+			        && !s3VideoUrl.isEmpty()) {
+
+			    videoCards +=
+
+			        "<div style='background:#334155;"
+			        + "padding:15px;"
+			        + "border-radius:12px;"
+			        + "width:340px;"
+			        + "box-shadow:0 4px 12px rgba(0,0,0,0.3)'>"
+
+			        + "<h3 style='color:#38bdf8'>"
+			        + "Execution Video"
+			        + "</h3>"
+
+			        + "<video width='300' controls "
+			        + "style='border-radius:10px'>"
+
+			        + "<source src='"
+			        + s3VideoUrl
+			        + "' type='video/mp4'>"
+
+			        + "</video>"
+
+			        + "<br><br>"
+
+			        + "<a href='"
+			        + s3VideoUrl
+			        + "' target='_blank' "
+
+			        + "style='background:#22c55e;"
+			        + "padding:10px 16px;"
+			        + "border-radius:8px;"
+			        + "text-decoration:none;"
+			        + "color:black;"
+			        + "font-weight:bold'>"
+
+			        + "Open Video"
+			     
+								/*
+								 * + (reportLink.equals("#")
+								 * 
+								 * ? "<span style='background:#64748b;" + "padding:10px 16px;" +
+								 * "border-radius:8px;" + "display:inline-block'>"
+								 * 
+								 * + "Report Not Available"
+								 * 
+								 * + "</span>"
+								 * 
+								 * : "<a href='" + reportLink + "' target='_blank' "
+								 * 
+								 * + "style='background:#38bdf8;" + "padding:10px 16px;" + "border-radius:8px;"
+								 * + "text-decoration:none;" + "color:black;" + "font-weight:bold;" +
+								 * "margin-left:10px'>"
+								 * 
+								 * + "Open Extent Report"
+								 * 
+								 * + "</a>") + "</a>"
+								 */
+
+			        + "</div>";
+			}
+
 			String html = "<html><head>"
 
 			+ "<meta charset='UTF-8'>"
@@ -1335,6 +1503,7 @@ logger.info("🔥 Report Path: " + reportPath);
 			+ "document.getElementById('summary').style.display='none';"
 			+ "document.getElementById('charts').style.display='none';"
 			+ "document.getElementById('health').style.display='none';"
+			+ "document.getElementById('videos').style.display='none';"
 			+ "document.getElementById(tab).style.display='block';"
 			+ "}"
 			+ "</script>"
@@ -1344,9 +1513,16 @@ logger.info("🔥 Report Path: " + reportPath);
 			+ "<h1>&#128640; Automation Dashboard</h1>"
 
 			+ "<div class='tabs'>"
+
 			+ "<span class='tab summary-tab' onclick=\"showTab('summary')\">Summary</span>"
+
 			+ "<span class='tab charts-tab' onclick=\"showTab('charts')\">Charts</span>"
+
 			+ "<span class='tab health-tab' onclick=\"showTab('health')\">Health Report</span>"
+
+			+ "<span class='tab' style='background:#8b5cf6' onclick=\"showTab('videos')\">Execution Videos</span>"
+			+ "<span class='tab' style='background:#8b5cf9' onclick=\"showTab('videos')\">JiraIssues</span>"
+
 			+ "</div>"
 
 			/* ================= SUMMARY ================= */
@@ -1356,10 +1532,13 @@ logger.info("🔥 Report Path: " + reportPath);
 			+ "<h2 style='color:" + statusColor + "'>" + status + "</h2>"
 
 			+ "<p>Total Tests: " + total + "</p>"
+
 			+ "<p>Execution Time: " + minutes + "m " + seconds + "s</p>"
 
 			+ "<p>Passed: " + pass + " (" + passPer + "%)</p>"
+
 			+ "<p>Failed: " + fail + " (" + failPer + "%)</p>"
+
 			+ "<p>Skipped: " + skip + " (" + skipPer + "%)</p>"
 
 			+ "<hr>"
@@ -1367,29 +1546,43 @@ logger.info("🔥 Report Path: " + reportPath);
 			+ "<h2>Current Run ROI</h2>"
 
 			+ "<p>Manual Time: " + manualTimeStr + "</p>"
+
 			+ "<p>Automation Time: " + autoTimeStr + "</p>"
+
 			+ "<p>Saved Time: " + savedTimeStr + "</p>"
+
 			+ "<p>Efficiency: " + String.format("%.2f", efficiency) + "%</p>"
 
 			+ "<div style='margin-top:10px;'>"
+
 			+ "<span style='background:" + roiColor + ";padding:8px 18px;border-radius:20px;color:black;font-weight:bold;'>"
+
 			+ roiLabel
+
 			+ "</span></div>"
 
 			+ "<hr>"
 
 			+ "<h2>Weekly ROI</h2>"
+
 			+ "<p>Manual Hours: " + String.format("%.2f", manualHours) + " hrs</p>"
+
 			+ "<p>Automation Hours: " + String.format("%.2f", automationHours) + " hrs</p>"
+
 			+ "<p>Hours Saved: " + String.format("%.2f", savedHours) + " hrs</p>"
+
 			+ "<p>Efficiency Gain: " + String.format("%.2f", weeklyROI) + "%</p>"
 
 			+ "<hr>"
 
 			+ "<h2>Monthly ROI</h2>"
+
 			+ "<p>Manual Hours: " + String.format("%.2f", monthlyManualHours) + " hrs</p>"
+
 			+ "<p>Automation Hours: " + String.format("%.2f", monthlyAutomationHours) + " hrs</p>"
+
 			+ "<p>Hours Saved: " + String.format("%.2f", monthlySavedHours) + " hrs</p>"
+
 			+ "<p>Efficiency Gain: " + String.format("%.2f", monthlyROI) + "%</p>"
 
 			+ "</div>"
@@ -1401,9 +1594,13 @@ logger.info("🔥 Report Path: " + reportPath);
 			+ "<h2>Execution Analytics</h2>"
 
 			+ "<div class='chart-row'>"
+
 			+ "<div class='chart-container'><canvas id='pieChart'></canvas></div>"
+
 			+ "<div class='chart-container'><canvas id='weekChart'></canvas></div>"
+
 			+ "<div class='chart-container'><canvas id='roiChart'></canvas></div>"
+
 			+ "</div>"
 
 			+ "</div>"
@@ -1415,33 +1612,62 @@ logger.info("🔥 Report Path: " + reportPath);
 			+ "<h2>Weekly Health Report</h2>"
 
 			+ "<p>Passed This Week: " + weeklyPass + "</p>"
-			+ "<p>Failed This Week: " + weeklyFail + "</p>"
-			+ "<p>Skipped This Week: " + weeklySkip + "</p>"
-			+ "<p>Total Test Cases: " + weeklyTotal + "</p>"
-			+ "<p>Pass %: " + String.format("%.2f", weeklyPassPercent) + "%</p>"
-			+ "<p>Average ROI This Week: " + String.format("%.2f", avgROI) + "%</p>"
 
+			+ "<p>Failed This Week: " + weeklyFail + "</p>"
+
+			+ "<p>Skipped This Week: " + weeklySkip + "</p>"
+
+			+ "<p>Total Test Cases: " + weeklyTotal + "</p>"
+
+			+ "<p>Pass %: " + String.format("%.2f", weeklyPassPercent) + "%</p>"
+
+			+ "<p>Average ROI This Week: " + String.format("%.2f", avgROI) + "%</p>"
 
 			+ "<hr>"
 
 			+ "<h2>Monthly Health Report</h2>"
 
 			+ "<p>Passed This Month: " + monthlyPass + "</p>"
+
 			+ "<p>Failed This Month: " + monthlyFail + "</p>"
+
 			+ "<p>Skipped This Month: " + monthlySkip + "</p>"
+
 			+ "<p>Total Test Cases: " + monthlyTotal + "</p>"
+
 			+ "<p>Pass %: " + String.format("%.2f", monthlyPassPercent) + "%</p>"
+
 			+ "<p>Average ROI: " + String.format("%.2f", monthlyAvgROI) + "%</p>"
+
 			+ "<div style='margin-top:15px;'>"
+
 			+ "<span style='background:" + healthColor + ";padding:8px 18px;border-radius:20px;color:black;font-weight:bold;'>"
+
 			+ healthLabel
+
 			+ "</span></div>"
 
 			+ "<br><br>"
 
 			+ (reportLink.equals("#")
+
 			? "<span style='background:#64748b;padding:10px 20px;border-radius:8px;'>Report Link Not Available</span>"
+
 			: "<a href='" + reportLink + "' target='_blank' style='background:#22c55e;color:black;padding:10px 20px;border-radius:8px;text-decoration:none'>Open Full Report</a>")
+
+			+ "</div>"
+
+			/* ================= VIDEOS ================= */
+
+			+ "<div id='videos' class='card hidden'>"
+
+			+ "<h2>Execution Videos</h2>"
+
+			+ "<div style='display:flex;flex-wrap:wrap;gap:20px;justify-content:center'>"
+
+			+ videoCards
+
+			+ "</div>"
 
 			+ "</div>"
 

@@ -11,7 +11,7 @@ public class BotEngine {
 
     private static final Logger logger =
             LoggerFactory.getLogger(BotEngine.class);
-
+    public static String currentCommand = "";
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
