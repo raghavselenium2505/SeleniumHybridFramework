@@ -21,7 +21,11 @@
 			<artifactId>selenium-java</artifactId>
 			<version>4.17.0</version>
 		</dependency>
-
+<dependency>
+    <groupId>com.microsoft.playwright</groupId>
+    <artifactId>playwright</artifactId>
+    <version>1.53.0</version>
+</dependency>
 		<!-- WebDriverManager -->
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
@@ -45,7 +49,7 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>7.9.0</version>
+			<version>7.10.2</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -55,7 +59,11 @@
 			<artifactId>extentreports</artifactId>
 			<version>5.1.1</version>
 		</dependency>
-
+<dependency>
+    <groupId>org.reflections</groupId>
+    <artifactId>reflections</artifactId>
+    <version>0.10.2</version>
+</dependency>
 		<!-- Gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

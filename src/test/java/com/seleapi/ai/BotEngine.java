@@ -39,7 +39,7 @@ public class BotEngine {
             while (true) {
 
                 logger.info("Enter Command:");
-
+                
                 String input =
                         sc.nextLine();
 
