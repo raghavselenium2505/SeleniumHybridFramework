@@ -1,9 +1,6 @@
 package com.seleapi.ai;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.lang.reflect.Method;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -21,79 +18,67 @@ public class CommandProcessor {
     private static final Logger logger =
             LoggerFactory.getLogger(CommandProcessor.class);
 
-    Properties prop = new Properties();
-
-    // =========================================
-    // MAIN COMMAND PROCESSOR
-    // =========================================
-
     public String processCommand(String input) {
 
         try {
+
+            String command = input.trim();
+
+            logger.info("Command Received: {}", command);
+
+            // =========================================
+            // LOAD CONFIG
+            // =========================================
+
+            Properties prop = new Properties();
 
             prop.load(
                     new FileInputStream(
                             "src/test/resources/properties/config.properties"));
 
-            String command = input.trim();
+            String suitePath =
+                    prop.getProperty("testngSuitePath");
 
-            logger.info(
-                    "Command Received : {}",
-                    command);
+            // =========================================
+            // PARSE COMMAND
+            // =========================================
 
-            if(command.startsWith("run ")) {
+            if (command.startsWith("run ")) {
 
                 String value =
-                        command.replace("run ", "")
-                               .trim();
+                        command.replace("run ", "").trim();
 
                 // =========================================
-                // RUN FULL SUITE
+                // 🔥 CASE 1 — RUN SUITE
                 // =========================================
 
-                if(value.equalsIgnoreCase("suite")) {
+                if (value.equalsIgnoreCase("suite")) {
 
-                    return runSuite();
+                    logger.info("Running Full Suite");
+
+                    TestNG testng = new TestNG();
+
+                    testng.setTestSuites(
+                            List.of(suitePath));
+
+                    testng.run();
+
+                    return "Suite Execution Completed";
                 }
 
                 // =========================================
-                // MULTIPLE EXECUTION
+                // 🔥 CASE 2 — MULTIPLE EXECUTION
                 // =========================================
 
-                else if(value.contains(",")) {
+                else if (value.contains(",")) {
 
-                    String[] values =
-                            value.split(",");
-
-                    boolean allClasses = true;
-
-                    for(String item : values) {
-
-                        Class<?> clazz =
-                                findClassByName(
-                                        item.trim());
-
-                        if(clazz == null) {
-
-                            allClasses = false;
-                            break;
-                        }
-                    }
-
-                    // =========================================
-                    // MULTIPLE CLASS EXECUTION
-                    // =========================================
-
-                    if(allClasses) {
+                    // 🔥 CHECK WHETHER CLASSES OR METHODS
+                    if (value.contains("Test")) {
 
                         runMultipleClasses(value);
 
                         return "Multiple Class Execution Completed";
                     }
-
-                    // =========================================
-                    // MULTIPLE METHOD EXECUTION
-                    // =========================================
 
                     else {
 
@@ -104,50 +89,53 @@ public class CommandProcessor {
                 }
 
                 // =========================================
-                // SINGLE CLASS EXECUTION
+                // 🔥 CASE 3 — SINGLE CLASS
+                // =========================================
+
+                else if (value.endsWith("Test")) {
+
+                    String className =
+                            "com.seleapi.tests." + value;
+
+                    logger.info(
+                            "Running Single Class: {}",
+                            className);
+
+                    TestNG testng = new TestNG();
+
+                    testng.setTestClasses(
+                            new Class[]{
+                                    Class.forName(className)
+                            });
+
+                    testng.run();
+
+                    return "Single Class Execution Completed";
+                }
+
+                // =========================================
+                // 🔥 CASE 4 — SINGLE METHOD
                 // =========================================
 
                 else {
 
-                    Class<?> clazz =
-                            findClassByName(value);
+                    runSingleMethodDynamic(value);
 
-                    if(clazz != null) {
-
-                        logger.info(
-                                "Class Found : {}",
-                                clazz.getName());
-
-                        runSingleClass(value);
-
-                        return "Single Class Execution Completed";
-                    }
-
-                    // =========================================
-                    // SINGLE METHOD EXECUTION
-                    // =========================================
-
-                    else {
-
-                        logger.info(
-                                "Trying Method Execution : {}",
-                                value);
-
-                        runSingleMethodDynamic(value);
-
-                        return "Single Method Execution Completed";
-                    }
+                    return "Single Method Execution Completed";
                 }
             }
 
-            return "Invalid Command";
+            else {
+
+                return "Invalid Command Format";
+            }
 
         }
 
-        catch(Exception e) {
+        catch (Exception e) {
 
             logger.error(
-                    "Execution Failed",
+                    "Bot Execution Failed",
                     e);
 
             return "Execution Failed";
@@ -155,145 +143,7 @@ public class CommandProcessor {
     }
 
     // =========================================
-    // RUN SUITE
-    // =========================================
-
-    private String runSuite() {
-
-        try {
-
-            String suitePath =
-                    prop.getProperty(
-                            "testngSuitePath");
-
-            logger.info(
-                    "Running Full Suite");
-
-            TestNG testng = new TestNG();
-
-            testng.setTestSuites(
-                    List.of(suitePath));
-
-            testng.run();
-
-            return "Suite Execution Completed";
-        }
-
-        catch(Exception e) {
-
-            logger.error(
-                    "Suite Execution Failed",
-                    e);
-
-            return "Suite Execution Failed";
-        }
-    }
-
-    // =========================================
-    // SINGLE CLASS EXECUTION
-    // =========================================
-
-    private void runSingleClass(
-            String className) {
-
-        try {
-
-            Class<?> clazz =
-                    findClassByName(className);
-
-            if(clazz == null) {
-
-                logger.error(
-                        "Class Not Found : {}",
-                        className);
-
-                return;
-            }
-
-            logger.info(
-                    "Executing Class : {}",
-                    clazz.getName());
-
-            TestNG testng = new TestNG();
-
-            testng.setTestClasses(
-                    new Class[] { clazz });
-
-            testng.run();
-
-            logger.info(
-                    "Class Execution Completed");
-        }
-
-        catch(Exception e) {
-
-            logger.error(
-                    "Single Class Execution Failed",
-                    e);
-        }
-    }
-
-    // =========================================
-    // MULTIPLE CLASS EXECUTION
-    // =========================================
-
-    private void runMultipleClasses(
-            String input) {
-
-        try {
-
-            String[] classNames =
-                    input.split(",");
-
-            List<Class<?>> classList =
-                    new ArrayList<>();
-
-            for(String className : classNames) {
-
-                Class<?> clazz =
-                        findClassByName(
-                                className.trim());
-
-                if(clazz != null) {
-
-                    classList.add(clazz);
-
-                    logger.info(
-                            "Added Class : {}",
-                            clazz.getName());
-                }
-            }
-
-            if(classList.isEmpty()) {
-
-                logger.error(
-                        "No Valid Classes Found");
-
-                return;
-            }
-
-            TestNG testng = new TestNG();
-
-            testng.setTestClasses(
-                    classList.toArray(
-                            new Class[0]));
-
-            testng.run();
-
-            logger.info(
-                    "Multiple Class Execution Completed");
-        }
-
-        catch(Exception e) {
-
-            logger.error(
-                    "Multiple Class Execution Failed",
-                    e);
-        }
-    }
-
-    // =========================================
-    // SINGLE METHOD EXECUTION
+    // 🔥 SINGLE METHOD EXECUTION
     // =========================================
 
     private void runSingleMethodDynamic(
@@ -304,46 +154,37 @@ public class CommandProcessor {
             Class<?> clazz =
                     findClassByMethod(methodName);
 
-            if(clazz == null) {
+            if (clazz == null) {
 
                 logger.error(
-                        "Method Not Found : {}",
+                        "Method not found: {}",
                         methodName);
 
                 return;
             }
 
             logger.info(
-                    "Executing Method : {} from {}",
+                    "Running Method '{}' from class '{}'",
                     methodName,
                     clazz.getName());
 
             TestNG testng = new TestNG();
 
-            XmlSuite suite =
-                    new XmlSuite();
+            XmlSuite suite = new XmlSuite();
 
-            suite.setName(
-                    "SingleMethodSuite");
+            suite.setName("SingleMethodSuite");
 
             XmlTest test =
                     new XmlTest(suite);
 
-            test.setName(
-                    "SingleMethodTest");
+            test.setName("SingleMethodTest");
 
             XmlClass xmlClass =
-                    new XmlClass(
-                            clazz.getName());
-
-            List<XmlInclude> methods =
-                    new ArrayList<>();
-
-            methods.add(
-                    new XmlInclude(methodName));
+                    new XmlClass(clazz.getName());
 
             xmlClass.setIncludedMethods(
-                    methods);
+                    List.of(
+                            new XmlInclude(methodName)));
 
             test.setXmlClasses(
                     List.of(xmlClass));
@@ -353,20 +194,18 @@ public class CommandProcessor {
 
             testng.run();
 
-            logger.info(
-                    "Single Method Execution Completed");
         }
 
-        catch(Exception e) {
+        catch (Exception e) {
 
             logger.error(
-                    "Single Method Execution Failed",
+                    "Error running single method",
                     e);
         }
     }
 
     // =========================================
-    // MULTIPLE METHOD EXECUTION
+    // 🔥 MULTIPLE METHODS EXECUTION
     // =========================================
 
     private void runMultipleMethods(
@@ -377,23 +216,17 @@ public class CommandProcessor {
             String[] methods =
                     input.split(",");
 
+            // 🔥 CHANGE THIS CLASS BASED ON YOUR NEED
             Class<?> clazz =
-                    findClassByMethod(
-                            methods[0].trim());
+                    com.seleapi.tests
+                    .MilkManLoginWithMontlyTest.class;
 
-            if(clazz == null) {
-
-                logger.error(
-                        "Method Class Not Found");
-
-                return;
-            }
+            TestNG testng = new TestNG();
 
             XmlSuite suite =
                     new XmlSuite();
 
-            suite.setName(
-                    "MultipleMethodSuite");
+            suite.setName("MultipleMethodSuite");
 
             suite.setParallel(
                     XmlSuite.ParallelMode.METHODS);
@@ -403,17 +236,15 @@ public class CommandProcessor {
             XmlTest test =
                     new XmlTest(suite);
 
-            test.setName(
-                    "MultipleMethodTest");
+            test.setName("MultipleMethodTest");
 
             XmlClass xmlClass =
-                    new XmlClass(
-                            clazz.getName());
+                    new XmlClass(clazz.getName());
 
             List<XmlInclude> includeMethods =
                     new ArrayList<>();
 
-            for(String method : methods) {
+            for (String method : methods) {
 
                 includeMethods.add(
                         new XmlInclude(
@@ -426,193 +257,180 @@ public class CommandProcessor {
             test.setXmlClasses(
                     List.of(xmlClass));
 
-            TestNG testng = new TestNG();
-
             testng.setXmlSuites(
                     List.of(suite));
 
+            logger.info(
+                    "Running Multiple Methods: {}",
+                    input);
+
             testng.run();
 
-            logger.info(
-                    "Multiple Method Execution Completed");
         }
 
-        catch(Exception e) {
+        catch (Exception e) {
 
             logger.error(
-                    "Multiple Method Execution Failed",
+                    "Error running multiple methods",
                     e);
         }
     }
 
     // =========================================
-    // DYNAMIC CLASS FINDER
+    // 🔥 MULTIPLE CLASS EXECUTION
     // =========================================
 
-    private Class<?> findClassByName(
-            String simpleClassName) {
+    private void runMultipleClasses(
+            String input) {
 
-        String[] packages = {
+        try {
 
-                "com.seleapi.tests",
-                "com.seleapi.tests.api",
-                "com.seleapi.tests.playwright"
-        };
+            Properties prop = new Properties();
 
-        for(String pkg : packages) {
+            prop.load(
+                    new FileInputStream(
+                            "src/test/resources/properties/config.properties"));
 
-            try {
+            String executionMode =
+                    prop.getProperty(
+                            "executionMode",
+                            "SEQUENTIAL");
+
+            int threadCount =
+                    Integer.parseInt(
+                            prop.getProperty(
+                                    "threadCount",
+                                    "2"));
+
+            String[] classes =
+                    input.split(",");
+
+            List<Class<?>> classList =
+                    new ArrayList<>();
+
+            for (String className : classes) {
 
                 String fullClassName =
-                        pkg + "." + simpleClassName;
+                        "com.seleapi.tests."
+                        + className.trim();
+
+                classList.add(
+                        Class.forName(fullClassName));
+            }
+
+            TestNG testng = new TestNG();
+
+            // =========================================
+            // 🔥 PARALLEL EXECUTION
+            // =========================================
+
+            if (executionMode
+                    .equalsIgnoreCase("PARALLEL")) {
+
+                XmlSuite suite =
+                        new XmlSuite();
+
+                suite.setName("ParallelSuite");
+
+                suite.setParallel(
+                        XmlSuite.ParallelMode.CLASSES);
+
+                suite.setThreadCount(threadCount);
+
+                XmlTest test =
+                        new XmlTest(suite);
+
+                test.setName("ParallelTest");
+
+                List<XmlClass> xmlClasses =
+                        new ArrayList<>();
+
+                for (Class<?> clazz : classList) {
+
+                    xmlClasses.add(
+                            new XmlClass(
+                                    clazz.getName()));
+                }
+
+                test.setXmlClasses(xmlClasses);
+
+                testng.setXmlSuites(
+                        List.of(suite));
 
                 logger.info(
-                        "Trying Class : {}",
-                        fullClassName);
-
-                return Class.forName(fullClassName);
+                        "Running classes in PARALLEL mode");
 
             }
 
-            catch(ClassNotFoundException e) {
+            // =========================================
+            // 🔥 SEQUENTIAL EXECUTION
+            // =========================================
 
-                // Continue searching
+            else {
+
+                testng.setTestClasses(
+                        classList.toArray(new Class[0]));
+
+                logger.info(
+                        "Running classes in SEQUENTIAL mode");
             }
+
+            testng.run();
+
         }
 
-        return null;
+        catch (Exception e) {
+
+            logger.error(
+                    "Error running multiple classes",
+                    e);
+        }
     }
 
     // =========================================
-    // DYNAMIC METHOD FINDER
+    // 🔥 CLASS FINDER
     // =========================================
 
     private Class<?> findClassByMethod(
             String methodName) {
 
-        String[] packages = {
-
-                "com.seleapi.tests",
-                "com.seleapi.tests.api",
-                "com.seleapi.tests.playwright"
-        };
-
-        for(String pkg : packages) {
-
-            try {
-
-                List<Class<?>> classes =
-                        getClassesFromPackage(pkg);
-
-                for(Class<?> clazz : classes) {
-
-                    Method[] methods =
-                            clazz.getDeclaredMethods();
-
-                    for(Method method : methods) {
-
-                        if(method.getName()
-                                .equalsIgnoreCase(methodName)) {
-
-                            logger.info(
-                                    "Matched Method : {} in {}",
-                                    methodName,
-                                    clazz.getName());
-
-                            return clazz;
-                        }
-                    }
-                }
-            }
-
-            catch(Exception e) {
-
-                logger.error(
-                        "Method Search Failed",
-                        e);
-            }
-        }
-
-        return null;
-    }
-
-    // =========================================
-    // PACKAGE CLASS SCANNER
-    // =========================================
-
-    private List<Class<?>> getClassesFromPackage(
-            String packageName) {
-
-        List<Class<?>> classes =
-                new ArrayList<>();
-
         try {
 
-            String path =
-                    packageName.replace('.', '/');
+            Class<?>[] classes =
+                    new Class[]{
 
-            ClassLoader classLoader =
-                    Thread.currentThread()
-                          .getContextClassLoader();
+                            com.seleapi.tests
+                            .MilkManSignupAnnuallyTest.class,
 
-            URL resource =
-                    classLoader.getResource(path);
+                            com.seleapi.tests
+                            .MilkManLoginWithMontlyTest.class,
 
-            if(resource == null) {
+                            com.seleapi.tests
+                            .MilkManLoginWithWeeklyTest.class
+                    };
 
-                return classes;
-            }
+            for (Class<?> clazz : classes) {
 
-            File directory =
-                    new File(resource.getFile());
+                for (java.lang.reflect.Method method :
+                        clazz.getDeclaredMethods()) {
 
-            if(directory.exists()) {
+                    if (method.getName()
+                            .equalsIgnoreCase(methodName)) {
 
-                String[] files =
-                        directory.list();
-
-                if(files != null) {
-
-                    for(String file : files) {
-
-                        if(file.endsWith(".class")) {
-
-                            String className =
-                                    packageName + "."
-                                    + file.replace(".class", "");
-
-                            try {
-
-                                Class<?> clazz =
-                                        Class.forName(className);
-
-                                classes.add(clazz);
-
-                                logger.info(
-                                        "Loaded Class : {}",
-                                        clazz.getName());
-
-                            }
-
-                            catch(Exception e) {
-
-                                logger.error(
-                                        "Unable To Load Class : {}",
-                                        className);
-                            }
-                        }
+                        return clazz;
                     }
                 }
             }
+
         }
 
-        catch(Exception e) {
+        catch (Exception e) {
 
             logger.error(
-                    "Package Scan Failed",
+                    "Error finding class",
                     e);
         }
 
-        return classes;
+        return null;
     }
 }

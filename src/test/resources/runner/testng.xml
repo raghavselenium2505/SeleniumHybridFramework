@@ -1,97 +1,28 @@
-
-<suite name="ParallelNewFeatureSuite"
-       parallel="tests"
+<suite name="ParallelCrossBrowserSuite"
+       parallel="classes"
        thread-count="3">
 
-    <!-- LISTENERS -->
+    <!-- 🔥 Listener added -->
+   <listeners>
+    <listener class-name="com.seleapi.listeners.TestListener"/>
+</listeners>
 
-    <listeners>
+    <test name="Monthly user Signup">
 
-        <listener class-name=
-        "com.seleapi.listeners.TestListener"/>
+        <parameter name="testDataPath" value="src/test/resources/excel/MilkManData.json"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="url" value="https://staging-uk.modernmilkman.dev/"/>
 
-        <listener class-name=
-        "com.seleapi.retry.RetryListener"/>
-
-    </listeners>
-
-    <!-- TEST 1 -->
-
-    <test name="NewFeature-Chrome-1">
-
-        <parameter name="testDataPath"
-                   value=
-                   "src/test/resources/excel/MilkManData.json"/>
-
-        <parameter name="browser"
-                   value="chrome"/>
-
-        <parameter name="engine"
-                   value="selenium"/>
-
-        <parameter name="url"
-                   value=
-                   "https://staging-uk.modernmilkman.dev/"/>
+        <groups>
+            <run>
+                <include name="MilkManSignupTests"/>
+            </run>
+        </groups>
 
         <classes>
-
-            <class name=
-            "com.seleapi.tests.NewFeature"/>
-
-        </classes>
-
-    </test>
-
-    <!-- TEST 2 -->
-
-    <test name="NewFeature-Chrome-2">
-
-        <parameter name="testDataPath"
-                   value=
-                   "src/test/resources/excel/MilkManData.json"/>
-
-        <parameter name="browser"
-                   value="chrome"/>
-
-        <parameter name="engine"
-                   value="selenium"/>
-
-        <parameter name="url"
-                   value=
-                   "https://staging-uk.modernmilkman.dev/"/>
-
-        <classes>
-
-            <class name=
-            "com.seleapi.tests.NewFeature"/>
-
-        </classes>
-
-    </test>
-
-    <!-- TEST 3 -->
-
-    <test name="NewFeature-Chrome-3">
-
-        <parameter name="testDataPath"
-                   value=
-                   "src/test/resources/excel/MilkManData.json"/>
-
-        <parameter name="browser"
-                   value="chrome"/>
-
-        <parameter name="engine"
-                   value="selenium"/>
-
-        <parameter name="url"
-                   value=
-                   "https://staging-uk.modernmilkman.dev/"/>
-
-        <classes>
-
-            <class name=
-            "com.seleapi.tests.NewFeature"/>
-
+            <class name="com.seleapi.tests.MilkManLoginWithMontlyTest"/>
+            <class name="com.seleapi.tests.MilkManSignupAnnuallyTest"/>
+            <class name="com.seleapi.tests.MilkManLoginWithWeeklyTest"/>
         </classes>
 
     </test>

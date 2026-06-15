@@ -52,7 +52,6 @@ import org.testng.SkipException;
 import org.testng.annotations.*;
 
 import com.seleapi.ai.AITestAnalyzer;
-import com.seleapi.reporting.ExtentManager;
 import com.seleapi.services.JiraService;
 import com.seleapi.utils.ExcelUtil;
 import com.seleapi.utils.ScreenshotUtil;
@@ -292,14 +291,8 @@ logger.info("🔥 Report Path: " + reportPath);
 			getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			getDriver().manage().window().maximize();
 
-			String env = config.getProperty("env");
+			String url = (urlFromXml != null && !urlFromXml.isEmpty()) ? urlFromXml : config.getProperty("testsiteurl");
 
-			String url = (urlFromXml != null
-			        && !urlFromXml.isEmpty())
-
-			        ? urlFromXml
-
-			        : config.getProperty(env + ".url");
 			getDriver().get(url);
 
 			ExtentTest extentTest = extent.createTest(method.getName());
@@ -882,78 +875,18 @@ logger.info("🔥 Report Path: " + reportPath);
 	/* ================= BASE METHODS ================= */
 
 	@Override
-	public void click(By element,
-	                  String passValue,
-	                  String failValue) {
+	public void click(By element, String passValue, String failValue) {
+		try {
+			elementhighlight(getDriver().findElement(element));
 
-	    try {
+			getDriver().findElement(element).click();
+			test.get().log(Status.PASS, passValue);
+		} catch (Exception e) {
 
-	        /*
-	         * HIGHLIGHT ELEMENT
-	         */
-
-	        elementhighlight(
-	                getDriver()
-	                .findElement(element));
-
-	        /*
-	         * CLICK ELEMENT
-	         */
-
-	        getDriver()
-	                .findElement(element)
-	                .click();
-
-	        /*
-	         * REPORTING
-	         */
-
-	        ExtentManager.pass(
-	                passValue);
-
-	        /*
-	         * LOGGING
-	         */
-
-	        logger.info(
-	                passValue);
-
-	    }
-
-	    catch (Exception e) {
-
-	        /*
-	         * REPORT FAILURE
-	         */
-
-	        ExtentManager.fail(
-	                failValue);
-
-	        /*
-	         * LOG FAILURE
-	         */
-
-	        logger.error(
-	                failValue,
-	                e);
-
-	        /*
-	         * AI FAILURE LOGGING
-	         */
-
-	        logAIFailure(
-	                e,
-	                failValue);
-
-	        /*
-	         * THROW EXCEPTION
-	         */
-
-	        throw new RuntimeException(
-	                failValue,
-	                e);
-	    }
+			logAIFailure(e, failValue);
+		}
 	}
+
 	@Override
 	public void actionclick(WebElement element, String passValue, String failValue) {
 		try {
@@ -1074,67 +1007,15 @@ logger.info("🔥 Report Path: " + reportPath);
 	}
 
 	@Override
-	public void waitForElementVisible(By element,
-	                                  int timeOut,
-	                                  String passValue,
-	                                  String failValue) {
-
-	    try {
-
-	        WebDriverWait wait =
-	                new WebDriverWait(
-	                        getDriver(),
-	                        Duration.ofSeconds(timeOut));
-
-	        wait.until(
-	                ExpectedConditions
-	                .visibilityOfElementLocated(element));
-
-	        /*
-	         * REPORTING
-	         */
-
-	        ExtentManager.pass(
-	                passValue);
-
-	        /*
-	         * LOGGING
-	         */
-
-	        logger.info(
-	                passValue);
-
-	    }
-
-	    catch (Exception e) {
-
-	        /*
-	         * REPORT FAILURE
-	         */
-
-	        ExtentManager.fail(
-	                failValue);
-
-	        /*
-	         * LOG FAILURE
-	         */
-
-	        logger.error(
-	                failValue,
-	                e);
-
-	        /*
-	         * AI FAILURE LOGGING
-	         */
-
-	        logAIFailure(
-	                e,
-	                failValue);
-
-	        throw new RuntimeException(
-	                failValue,
-	                e);
-	    }
+	public void waitForElementVisible(By element, int timeout, String passValue, String failValue) {
+		try {
+			elementhighlight(getDriver().findElement(element));
+			new WebDriverWait(getDriver(), Duration.ofMillis(timeout))
+					.until(ExpectedConditions.visibilityOfElementLocated(element));
+		} catch (Exception e) {
+			logAIFailure(e, failValue);
+			throw e;
+		}
 	}
 
 	@Override
@@ -1221,71 +1102,24 @@ logger.info("🔥 Report Path: " + reportPath);
 		}
 	}
 
-	public void verifyElementDisplayed(By element,
-	                                   String passValue,
-	                                   String failValue) {
+	public void verifyElementDisplayed(By element, String passMsg, String failMsg) {
+		try {
+			boolean status = getDriver().findElement(element).isDisplayed();
 
-	    try {
+			if (status) {
+				// test.get().log(Status.PASS, passMsg);
+			} else {
+				test.get().log(Status.FAIL, failMsg);
+				org.testng.Assert.fail(failMsg);
+			}
 
-	        boolean status =
-	                getDriver()
-	                .findElement(element)
-	                .isDisplayed();
-
-	        if (status) {
-
-	            /*
-	             * REPORTING
-	             */
-
-	            ExtentManager.pass(
-	                    passValue);
-
-	            /*
-	             * LOGGING
-	             */
-
-	            logger.info(
-	                    passValue);
-
-	        } else {
-
-	            throw new Exception(
-	                    "Element Not Displayed : "
-	                    + element);
-	        }
-
-	    }
-
-	    catch (Exception e) {
-
-	        /*
-	         * REPORT FAILURE
-	         */
-
-	        ExtentManager.fail(
-	                failValue);
-
-	        /*
-	         * LOG FAILURE
-	         */
-
-	        logger.error(
-	                failValue,
-	                e);
-
-	        /*
-	         * AI FAILURE LOGGING
-	         */
-
-	        logAIFailure(
-	                e,
-	                failValue);
-
-	        throw new RuntimeException(
-	                failValue,
-	                e);
-	    }
+		} catch (Exception e) {
+			/*
+			 * test.get().log(Status.FAIL, failMsg + " Exception: " + e.getMessage());
+			 * org.testng.Assert.fail(failMsg);
+			 */
+			logAIFailure(e, failMsg);
+		}
 	}
 
 	public void assertElementDisplayed(By element, String passMessage, String failMessage) {
